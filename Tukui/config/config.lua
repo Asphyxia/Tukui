@@ -170,16 +170,16 @@ C["databars"] = {
 	["height"] = 17,                                   -- enable Databars in the top left of the screen.
 	["point"] = {"TOPLEFT",UIParent,"TOPLEFT",8,-10},   -- where the bars will anchor
 	
-	["currency"] = true,                               -- show bars with currency
+["currency"] = true,                               -- show bars with currency
 	["reputation"] = true,                             -- show bars with reputation
 	
-	["WatchReps"] = {                                  -- 5 names to watch specifically
-		"GladHeAteHer",
-		"Orgrimmar",
-		"Undercity",
-		"The Defilers",
-		"Frostwolf Clan",
-	}
+	["reps"] = {                                       -- Show 5 factions of your choice, including your guild.
+		"Cenarion Expedition",
+		"Keepers of Time",
+		"The Consortium",
+		"The Mag'har",
+		"Systematic Chaos",
+	},
 }
 
 C["chat"] = {
