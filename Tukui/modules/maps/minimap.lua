@@ -257,7 +257,7 @@ m_coord:SetFrameStrata("LOW")
 m_coord:SetAlpha(0)
 
 local m_coord_text = m_coord:CreateFontString(nil,"Overlay")
-m_coord_text:SetFont(C["media"].font,12)
+m_coord_text:SetFont(C["media"].pixelfont,10)
 m_coord_text:Point("Center",-1,0)
 m_coord_text:SetAlpha(0)
 m_coord_text:SetText("00,00")
