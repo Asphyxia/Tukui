@@ -1,0 +1,10 @@
+## Interface: 40000
+## Title: |cffC495DDTukui DBM|r
+## Notes: Tukui DBM Skin
+## Author: Affli @ Howling Fjord (RU)
+## Version 3.4
+## X-Website: http://github.com/Affli/Tukui_DBM
+## RequiredDeps: DBM-Core
+## OptionalDeps: Tukui, ElvUI
+
+Tukui_DBM.lua

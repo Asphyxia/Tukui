@@ -1,0 +1,9 @@
+## Interface: 40100
+## Author: Tukz
+## Title: |cffC495DDTukui Raid|r
+## Notes: Raid layout for party and raid, DPS/Tank mode.
+## X-Email: tukz@tukui.org
+## X-Category: UnitFrame
+## RequiredDeps: Tukui
+
+oUF_Tukz_Raid40.lua
