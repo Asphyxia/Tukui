@@ -245,7 +245,7 @@ local tokens = {
 	{402, 10},	 -- Chef's Award 
 }
 
-if C["datatext"].currencydata == true then
+if C["databars"].currency == true then
 local function updateCurrency()
 	if CurrencyData[1] then
 		for i = 1, getn(CurrencyData) do
