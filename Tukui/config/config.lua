@@ -151,7 +151,6 @@ C["datatext"] = {
 	["regen"] = 0,                                      -- show mana regeneration
 	["specswitcher"] = 0,								-- show talents on panels
 	["profession"] = 0,									-- show profession
-	["currencydata"] = true,						-- currency data bars toggle
 	
 	-- Color Datatext
 	["classcolored"] = false,							-- classcolored datatext
