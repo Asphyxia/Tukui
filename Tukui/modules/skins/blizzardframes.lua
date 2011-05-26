@@ -141,7 +141,7 @@ local function SkinEditBox(frame)
 	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
 	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
 	if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	
 	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
 		frame.backdrop:Point("BOTTOMRIGHT", -12, -2)
@@ -165,14 +165,14 @@ local function SkinDropDownBox(frame, width)
 	
 	SkinNextPrevButton(button, true)
 	
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	frame.backdrop:Point("TOPLEFT", 20, -2)
 	frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
 
 local function SkinCheckBox(frame)
 	frame:StripTextures()
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	frame.backdrop:Point("TOPLEFT", 4, -4)
 	frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
 	
@@ -248,7 +248,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		TimeManagerStopwatchCheck:SetHighlightTexture(hover)
 		
 		StopwatchFrame:StripTextures()
-		StopwatchFrame:CreateBackdrop("Default")
+		StopwatchFrame:CreateBackdrop("Transparent")
 		StopwatchFrame.backdrop:Point("TOPLEFT", 0, -17)
 		StopwatchFrame.backdrop:Point("BOTTOMRIGHT", 0, 2)
 		
@@ -326,7 +326,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			SkinNextPrevButton(button, true)
 			
-			frame:CreateBackdrop("Default")
+			frame:CreateBackdrop("Transparent")
 			frame.backdrop:Point("TOPLEFT", 20, 2)
 			frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 		end
@@ -386,7 +386,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			for i, class in ipairs(CLASS_SORT_ORDER) do
 				local button = _G["CalendarClassButton"..i]
 				button:StripTextures()
-				button:CreateBackdrop("Default")
+				button:CreateBackdrop("Transparent")
 				
 				local tcoords = CLASS_ICON_TCOORDS[class]
 				local buttonIcon = button:GetNormalTexture()
@@ -397,7 +397,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 5, 0)
 			
 			CalendarClassTotalsButton:StripTextures()
-			CalendarClassTotalsButton:CreateBackdrop("Default")
+			CalendarClassTotalsButton:CreateBackdrop("Transparent")
 		end)
 		
 		--Texture Picker Frame
@@ -503,7 +503,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 		
-		AchievementFrame:CreateBackdrop("Default")
+		AchievementFrame:CreateBackdrop("Transparent")
 		AchievementFrame.backdrop:Point("TOPLEFT", 0, 6)
 		AchievementFrame.backdrop:SetPoint("BOTTOMRIGHT")
 		AchievementFrameHeaderTitle:ClearAllPoints()
@@ -512,10 +512,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		AchievementFrameHeaderPoints:Point("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
 		
 		--Backdrops
-		AchievementFrameCategoriesContainer:CreateBackdrop("Default")
+		AchievementFrameCategoriesContainer:CreateBackdrop("Transparent")
 		AchievementFrameCategoriesContainer.backdrop:Point("TOPLEFT", 0, 4)
 		AchievementFrameCategoriesContainer.backdrop:Point("BOTTOMRIGHT", -2, -3)
-		AchievementFrameAchievementsContainer:CreateBackdrop("Default")
+		AchievementFrameAchievementsContainer:CreateBackdrop("Transparent")
 		AchievementFrameAchievementsContainer.backdrop:Point("TOPLEFT", 0, 2)
 		AchievementFrameAchievementsContainer.backdrop:Point("BOTTOMRIGHT", -3, -3)
 		
@@ -540,7 +540,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			bar:StripTextures()
 			bar:SetStatusBarTexture(C["media"].normTex)
 			bar:SetStatusBarColor(4/255, 179/255, 30/255)
-			bar:CreateBackdrop("Default")
+			bar:CreateBackdrop("Transparent")
 			
 			if _G[bar:GetName().."Title"] then
 				_G[bar:GetName().."Title"]:SetPoint("LEFT", 4, 0)
@@ -881,7 +881,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		SkinButton(LookingForGuildBrowseButton)
 		SkinButton(LookingForGuildRequestButton)
 		SkinCloseButton(LookingForGuildFrameCloseButton)
-		LookingForGuildCommentInputFrame:CreateBackdrop("Default")
+		LookingForGuildCommentInputFrame:CreateBackdrop("Transparent")
 		LookingForGuildCommentInputFrame:StripTextures(false)
 		
 		-- skin container buttons on browse and request page
@@ -910,7 +910,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		InspectFrame:StripTextures(true)
 		InspectFrameInset:StripTextures(true)
 		InspectTalentFramePointsBar:StripTextures()
-		InspectFrame:CreateBackdrop("Default")
+		InspectFrame:CreateBackdrop("Transparent")
 		InspectFrame.backdrop:SetAllPoints()
 		SkinCloseButton(InspectFrameCloseButton)
 		
@@ -928,7 +928,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		InspectModelFrameBorderBottom:Kill()
 		InspectModelFrameBorderBottom2:Kill()
 		InspectModelFrameBackgroundOverlay:Kill()
-		InspectModelFrame:CreateBackdrop("Default")
+		InspectModelFrame:CreateBackdrop("Transparent")
 		
 			local slots = {
 				"HeadSlot",
@@ -962,7 +962,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				icon:Point("BOTTOMRIGHT", -2, 2)
 				
 				slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-				slot:CreateBackdrop("Default")
+				slot:CreateBackdrop("Transparent")
 				slot.backdrop:SetAllPoints()
 			end		
 		
@@ -1126,12 +1126,12 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		
 		ArchaeologyFrameRankBar:StripTextures()
 		ArchaeologyFrameRankBar:SetStatusBarTexture(C["media"].normTex)
-		ArchaeologyFrameRankBar:CreateBackdrop("Default")
+		ArchaeologyFrameRankBar:CreateBackdrop("Transparent")
 		
 		ArchaeologyFrameArtifactPageSolveFrameStatusBar:StripTextures()
 		ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarTexture(C["media"].normTex)
 		ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(0.7, 0.2, 0)
-		ArchaeologyFrameArtifactPageSolveFrameStatusBar:CreateBackdrop("Default")
+		ArchaeologyFrameArtifactPageSolveFrameStatusBar:CreateBackdrop("Transparent")
 		
 		for i=1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
 			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
@@ -1307,8 +1307,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			_G[frame]:StripTextures()
 		end
 		
-		GuildNewsBossModel:CreateBackdrop("Default")
-		GuildNewsBossModelTextFrame:CreateBackdrop("Default")
+		GuildNewsBossModel:CreateBackdrop("Transparent")
+		GuildNewsBossModelTextFrame:CreateBackdrop("Transparent")
 		GuildNewsBossModelTextFrame.backdrop:Point("TOPLEFT", GuildNewsBossModel.backdrop, "BOTTOMLEFT", 0, -1)
 		GuildNewsBossModel:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
 		
@@ -1364,7 +1364,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		
 		GuildFactionBar:StripTextures()
 		GuildFactionBar.progress:SetTexture(C["media"].normTex)
-		GuildFactionBar:CreateBackdrop("Default")
+		GuildFactionBar:CreateBackdrop("Transparent")
 		GuildFactionBar.backdrop:Point("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
 		GuildFactionBar.backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", -2, 0)
 		
@@ -1375,7 +1375,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		GuildXPBarShadow:Kill()
 		GuildXPBarCap:Kill()
 		GuildXPBar.progress:SetTexture(C["media"].normTex)
-		GuildXPBar:CreateBackdrop("Default")
+		GuildXPBar:CreateBackdrop("Transparent")
 		GuildXPBar.backdrop:Point("TOPLEFT", GuildXPBar.progress, "TOPLEFT", -2, 2)
 		GuildXPBar.backdrop:Point("BOTTOMRIGHT", GuildXPBar, "BOTTOMRIGHT", -2, 4)
 		
@@ -1383,7 +1383,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		GuildLatestPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 		GuildLatestPerkButtonIconTexture:ClearAllPoints()
 		GuildLatestPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-		GuildLatestPerkButton:CreateBackdrop("Default")
+		GuildLatestPerkButton:CreateBackdrop("Transparent")
 		GuildLatestPerkButton.backdrop:Point("TOPLEFT", GuildLatestPerkButtonIconTexture, "TOPLEFT", -2, 2)
 		GuildLatestPerkButton.backdrop:Point("BOTTOMRIGHT", GuildLatestPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 		
@@ -1391,7 +1391,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		GuildNextPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 		GuildNextPerkButtonIconTexture:ClearAllPoints()
 		GuildNextPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-		GuildNextPerkButton:CreateBackdrop("Default")
+		GuildNextPerkButton:CreateBackdrop("Transparent")
 		GuildNextPerkButton.backdrop:Point("TOPLEFT", GuildNextPerkButtonIconTexture, "TOPLEFT", -2, 2)
 		GuildNextPerkButton.backdrop:Point("BOTTOMRIGHT", GuildNextPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 		
@@ -1404,7 +1404,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button.icon:SetTexCoord(.08, .92, .08, .92)
 				button.icon:ClearAllPoints()
 				button.icon:Point("TOPLEFT", 2, -2)
-				button:CreateBackdrop("Default")
+				button:CreateBackdrop("Transparent")
 				button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 				button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 				button.icon:SetParent(button.backdrop)
@@ -1521,7 +1521,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button.icon:SetTexCoord(.08, .92, .08, .92)
 				button.icon:ClearAllPoints()
 				button.icon:Point("TOPLEFT", 2, -2)
-				button:CreateBackdrop("Default")
+				button:CreateBackdrop("Transparent")
 				button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 				button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 				button.icon:SetParent(button.backdrop)
@@ -1545,7 +1545,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		TradeSkillFrame:CreateShadow("Default")
 		TradeSkillFrame:Height(TradeSkillFrame:GetHeight() + 12)
 		TradeSkillRankFrame:StripTextures()
-		TradeSkillRankFrame:CreateBackdrop("Default")
+		TradeSkillRankFrame:CreateBackdrop("Transparent")
 		TradeSkillRankFrame:SetStatusBarTexture(C["media"].normTex)
 		
 		SkinButton(TradeSkillCreateButton, true)
@@ -1557,7 +1557,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		TradeSkillLinkButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
 		TradeSkillLinkButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
 		TradeSkillLinkButton:GetHighlightTexture():Kill()
-		TradeSkillLinkButton:CreateBackdrop("Default")
+		TradeSkillLinkButton:CreateBackdrop("Transparent")
 		TradeSkillLinkButton:Size(17, 14)
 		TradeSkillLinkButton:Point("LEFT", TradeSkillLinkFrame, "LEFT", 5, -1)
 		SkinEditBox(TradeSkillFrameSearchBox)
@@ -1739,13 +1739,13 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		
 
 		PlayerTalentFrame:SetTemplate("Transparent")
-		PlayerTalentFramePanel1:CreateBackdrop("Default")
+		PlayerTalentFramePanel1:CreateBackdrop("Transparent")
 		PlayerTalentFramePanel1.backdrop:Point( "TOPLEFT", PlayerTalentFramePanel1, "TOPLEFT", 3, -3 )
 		PlayerTalentFramePanel1.backdrop:Point( "BOTTOMRIGHT", PlayerTalentFramePanel1, "BOTTOMRIGHT", -3, 3 )
-		PlayerTalentFramePanel2:CreateBackdrop("Default")
+		PlayerTalentFramePanel2:CreateBackdrop("Transparent")
 		PlayerTalentFramePanel2.backdrop:Point( "TOPLEFT", PlayerTalentFramePanel2, "TOPLEFT", 3, -3 )
 		PlayerTalentFramePanel2.backdrop:Point( "BOTTOMRIGHT", PlayerTalentFramePanel2, "BOTTOMRIGHT", -3, 3 )
-		PlayerTalentFramePanel3:CreateBackdrop("Default")
+		PlayerTalentFramePanel3:CreateBackdrop("Transparent")
 		PlayerTalentFramePanel3.backdrop:Point( "TOPLEFT", PlayerTalentFramePanel3, "TOPLEFT", 3, -3 )
 		PlayerTalentFramePanel3.backdrop:Point( "BOTTOMRIGHT", PlayerTalentFramePanel3, "BOTTOMRIGHT", -3, 3 )
 		PlayerTalentFrame:CreateShadow("Default")
@@ -1834,7 +1834,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
 				tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 
-				tab:CreateBackdrop("Default")
+				tab:CreateBackdrop("Transparent")
 				tab.backdrop:SetAllPoints()
 				tab:StyleButton(true)
 			end
@@ -1848,7 +1848,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		local function TalentSummaryClean(i)
 			local frame = _G["PlayerTalentFramePanel"..i.."Summary"]
 			frame:SetFrameLevel(frame:GetFrameLevel() + 2)
-			frame:CreateBackdrop("Default")
+			frame:CreateBackdrop("Transparent")
 			frame:SetFrameLevel(frame:GetFrameLevel() +1)
 			local a,b,_,d,_,_,_,_,_,_,_,_,m,_ = frame:GetRegions()
 			a:Hide()
@@ -1909,10 +1909,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		SkinRotateButton(PlayerTalentFramePetModelRotateRightButton)
 		PlayerTalentFramePetModelRotateLeftButton:Point("BOTTOM", PlayerTalentFramePetModel, "BOTTOM", -4, 4)
 		PlayerTalentFramePetModelRotateRightButton:Point("TOPLEFT", PlayerTalentFramePetModelRotateLeftButton, "TOPRIGHT", 4, 0)
-		PlayerTalentFramePetPanel:CreateBackdrop("Default")
+		PlayerTalentFramePetPanel:CreateBackdrop("Transparent")
 		PlayerTalentFramePetPanel.backdrop:Point( "TOPLEFT", PlayerTalentFramePetPanel, "TOPLEFT", 3, -3 )
 		PlayerTalentFramePetPanel.backdrop:Point( "BOTTOMRIGHT", PlayerTalentFramePetPanel, "BOTTOMRIGHT", -3, 3 )
-		PlayerTalentFramePetModel:CreateBackdrop("Default")
+		PlayerTalentFramePetModel:CreateBackdrop("Transparent")
 		PlayerTalentFramePetModel.backdrop:Point( "TOPLEFT", PlayerTalentFramePetModel, "TOPLEFT")
 		PlayerTalentFramePetModel.backdrop:Point( "BOTTOMRIGHT", PlayerTalentFramePetModel, "BOTTOMRIGHT")
 		SkinButton(PlayerTalentFrameLearnButton, true)
@@ -2024,7 +2024,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_GlyphUI" then
 
 		--GLYPHS TAB
-		GlyphFrameSparkleFrame:CreateBackdrop("Default")
+		GlyphFrameSparkleFrame:CreateBackdrop("Transparent")
 		GlyphFrameSparkleFrame.backdrop:Point( "TOPLEFT", GlyphFrameSparkleFrame, "TOPLEFT", 3, -3 )
 		GlyphFrameSparkleFrame.backdrop:Point( "BOTTOMRIGHT", GlyphFrameSparkleFrame, "BOTTOMRIGHT", -3, 3 )
 		SkinEditBox(GlyphFrameSearchBox)
@@ -2144,7 +2144,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		AuctionProgressBarText:SetPoint("CENTER")
 		
 		AuctionProgressBar:StripTextures()
-		AuctionProgressBar:CreateBackdrop("Default")
+		AuctionProgressBar:CreateBackdrop("Transparent")
 		AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
 		AuctionProgressBar:SetStatusBarColor(1, 1, 0)
 		
@@ -2268,7 +2268,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 			
-			icon:CreateBackdrop("Default")
+			icon:CreateBackdrop("Transparent")
 			icon.backdrop:SetAllPoints()
 
 			button:StripTextures()
@@ -2294,7 +2294,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 			
-			icon:CreateBackdrop("Default")
+			icon:CreateBackdrop("Transparent")
 			icon.backdrop:SetAllPoints()
 
 			button:StripTextures()
@@ -2318,7 +2318,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			icon:StyleButton()
 			icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 			
-			icon:CreateBackdrop("Default")
+			icon:CreateBackdrop("Transparent")
 			icon.backdrop:SetAllPoints()
 
 			button:StripTextures()
@@ -2414,7 +2414,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		BarberShopAltFormFrameBorder:StripTextures()
 		BarberShopAltFormFrame:Point( "BOTTOM", BarberShopFrame, "TOP", 0, 5 )
 		BarberShopAltFormFrame:StripTextures()
-		BarberShopAltFormFrame:CreateBackdrop("Default")
+		BarberShopAltFormFrame:CreateBackdrop("Transparent")
 	end
 	
 	--Macro Frame
@@ -2630,19 +2630,19 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		
 		SkinDropDownBox(ClassTrainerFrameFilterDropDown, 155)
 
-		ClassTrainerFrame:CreateBackdrop("Default")
+		ClassTrainerFrame:CreateBackdrop("Transparent")
 		ClassTrainerFrame.backdrop:Point("TOPLEFT", ClassTrainerFrame, "TOPLEFT")
 		ClassTrainerFrame.backdrop:Point("BOTTOMRIGHT", ClassTrainerFrame, "BOTTOMRIGHT")
 		SkinCloseButton(ClassTrainerFrameCloseButton,ClassTrainerFrame)
 		ClassTrainerFrameSkillStepButton.icon:SetTexCoord(.08, .92, .08, .92)
-		ClassTrainerFrameSkillStepButton:CreateBackdrop("Default")
+		ClassTrainerFrameSkillStepButton:CreateBackdrop("Transparent")
 		ClassTrainerFrameSkillStepButton.backdrop:Point("TOPLEFT", ClassTrainerFrameSkillStepButton.icon, "TOPLEFT", -2, 2)
 		ClassTrainerFrameSkillStepButton.backdrop:Point("BOTTOMRIGHT", ClassTrainerFrameSkillStepButton.icon, "BOTTOMRIGHT", 2, -2)
 		ClassTrainerFrameSkillStepButton.icon:SetParent(ClassTrainerFrameSkillStepButton.backdrop)
 		
 		ClassTrainerStatusBar:StripTextures()
 		ClassTrainerStatusBar:SetStatusBarTexture(C["media"].normTex)
-		ClassTrainerStatusBar:CreateBackdrop("Default")
+		ClassTrainerStatusBar:CreateBackdrop("Transparent")
 	end
 
 	-- Socketing UI
@@ -2650,7 +2650,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		ItemSocketingFrame:StripTextures()
 		ItemSocketingFrame:SetTemplate("Transparent")
 		ItemSocketingScrollFrame:StripTextures()
-		ItemSocketingScrollFrame:CreateBackdrop("Default")
+		ItemSocketingScrollFrame:CreateBackdrop("Transparent")
 
 		for i = 1, MAX_NUM_SOCKETS  do
 			local button = _G["ItemSocketingSocket"..i]
@@ -2694,7 +2694,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						frame:SetAlpha(1)
 						frame.SetAlpha = T.dummy
 						if not frame.backdrop then
-							frame:CreateBackdrop("Default")
+							frame:CreateBackdrop("Transparent")
 							frame.backdrop:Point("TOPLEFT", _G[frame:GetName().."Background"], "TOPLEFT", -2, -6)
 							frame.backdrop:Point("BOTTOMRIGHT", _G[frame:GetName().."Background"], "BOTTOMRIGHT", -2, 6)		
 						end
@@ -2736,7 +2736,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						frame:SetAlpha(1)
 						frame.SetAlpha = T.dummy
 						if not frame.backdrop then
-							frame:CreateBackdrop("Default")
+							frame:CreateBackdrop("Transparent")
 							frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
 							frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)		
 						end
@@ -2807,7 +2807,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			-- skin main frames
 			for i = 1, #frames do
 				_G[frames[i]]:StripTextures(true)
-				_G[frames[i]]:CreateBackdrop("Default")
+				_G[frames[i]]:CreateBackdrop("Transparent")
 			end
 			MerchantBuyBackItem.backdrop:Point("TOPLEFT", -6, 6)
 			MerchantBuyBackItem.backdrop:Point("BOTTOMRIGHT", 6, -6)
@@ -2825,7 +2825,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				local t = _G["MerchantItem"..i.."ItemButtonIconTexture"]
 				local item_bar = _G["MerchantItem"..i]
 				item_bar:StripTextures(true)
-				item_bar:CreateBackdrop("Default")
+				item_bar:CreateBackdrop("Transparent")
 				
 				b:StripTextures()
 				b:StyleButton(false)
@@ -2887,7 +2887,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		-- mail frame
 		do
 			MailFrame:StripTextures(true)
-			MailFrame:CreateBackdrop("Default")
+			MailFrame:CreateBackdrop("Transparent")
 			MailFrame.backdrop:Point("TOPLEFT", 4, 0)
 			MailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
 			MailFrame.backdrop:CreateShadow("Default")
@@ -2896,7 +2896,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			for i = 1, INBOXITEMS_TO_DISPLAY do
 				local bg = _G["MailItem"..i]
 				bg:StripTextures()
-				bg:CreateBackdrop("Default")
+				bg:CreateBackdrop("Transparent")
 				bg.backdrop:Point("TOPLEFT", 2, 1)
 				bg.backdrop:Point("BOTTOMRIGHT", -2, 2)
 				
@@ -2962,7 +2962,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			-- open mail (cod)
 			OpenMailFrame:StripTextures(true)
-			OpenMailFrame:CreateBackdrop("Default")
+			OpenMailFrame:CreateBackdrop("Transparent")
 			OpenMailFrame.backdrop:Point("TOPLEFT", 4, 0)
 			OpenMailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
 			OpenMailFrame.backdrop:CreateShadow("Default")
@@ -3053,14 +3053,14 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			-- skin main frames
 			for i = 1, #frames do
 				_G[frames[i]]:StripTextures(true)
-				_G[frames[i]]:CreateBackdrop("Default")
+				_G[frames[i]]:CreateBackdrop("Transparent")
 			end
 			
 			HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)
 			HelpFrameKnowledgebaseErrorFrame:SetFrameLevel(HelpFrameKnowledgebaseErrorFrame:GetFrameLevel() + 2)
 			
 			HelpFrameTicketScrollFrame:StripTextures()
-			HelpFrameTicketScrollFrame:CreateBackdrop("Default")
+			HelpFrameTicketScrollFrame:CreateBackdrop("Transparent")
 			HelpFrameTicketScrollFrame.backdrop:Point("TOPLEFT", -4, 4)
 			HelpFrameTicketScrollFrame.backdrop:Point("BOTTOMRIGHT", 6, -4)
 			for i=1, HelpFrameTicket:GetNumChildren() do
@@ -3110,7 +3110,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end
 			
 			HelpFrame:StripTextures(true)
-			HelpFrame:CreateBackdrop("Default")
+			HelpFrame:CreateBackdrop("Transparent")
 			SkinEditBox(HelpFrameKnowledgebaseSearchBox)
 			SkinScrollBar(HelpFrameKnowledgebaseScrollFrameScrollBar)
 			SkinCloseButton(HelpFrameCloseButton, HelpFrame.backdrop)	
@@ -3154,7 +3154,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--Trade Frame
 		do
 			TradeFrame:StripTextures(true)
-			TradeFrame:CreateBackdrop("Default")
+			TradeFrame:CreateBackdrop("Transparent")
 			TradeFrame.backdrop:Point("TOPLEFT", 10, -4)
 			TradeFrame.backdrop:Point("BOTTOMRIGHT", -16, 35)
 			SkinButton(TradeFrameTradeButton, true)
@@ -3259,7 +3259,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--Tabard Frame
 		TabardFrame:StripTextures(true)
 		TabardFrame:SetTemplate("Transparent")
-		TabardModel:CreateBackdrop("Default")
+		TabardModel:CreateBackdrop("Transparent")
 		SkinButton(TabardFrameCancelButton)
 		SkinButton(TabardFrameAcceptButton)
 		SkinCloseButton(TabardFrameCloseButton)
@@ -3324,7 +3324,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end
 
 			GossipGreetingText:SetTextColor(1,1,1)
-			GossipFrame:CreateBackdrop("Default")
+			GossipFrame:CreateBackdrop("Transparent")
 			GossipFrame.backdrop:Point("TOPLEFT", GossipFrame, "TOPLEFT", 15, -20)
 			GossipFrame.backdrop:Point("BOTTOMRIGHT", GossipFrame, "BOTTOMRIGHT", -30, 65)
 			SkinCloseButton(GossipFrameCloseButton,GossipFrame.backdrop)
@@ -3408,7 +3408,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				EncounterJournalNavBar:StripTextures(true)
 				EncounterJournalNavBarOverlay:StripTextures(true)
 				
-				EncounterJournalNavBar:CreateBackdrop("Default")
+				EncounterJournalNavBar:CreateBackdrop("Transparent")
 				EncounterJournalNavBar.backdrop:Point("TOPLEFT", -2, 0)
 				EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT")
 				SkinButton(EncounterJournalNavBarHomeButton, true)
@@ -3485,7 +3485,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		
 		--WorldMap
 		do
-			WorldMapFrame:CreateBackdrop("Default")
+			WorldMapFrame:CreateBackdrop("Transparent")
 			WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
 			WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
 			WorldMapDetailFrame.backdrop:SetTemplate("Transparent")
@@ -3549,18 +3549,18 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235)  
 				
 				if not WorldMapQuestDetailScrollFrame.backdrop then
-					WorldMapQuestDetailScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestDetailScrollFrame:CreateBackdrop("Transparent")
 					WorldMapQuestDetailScrollFrame.backdrop:Point("TOPLEFT", -22, 2)
 					WorldMapQuestDetailScrollFrame.backdrop:Point("BOTTOMRIGHT", 23, -4)
 				end
 				
 				if not WorldMapQuestRewardScrollFrame.backdrop then
-					WorldMapQuestRewardScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestRewardScrollFrame:CreateBackdrop("Transparent")
 					WorldMapQuestRewardScrollFrame.backdrop:Point("BOTTOMRIGHT", 22, -4)				
 				end
 				
 				if not WorldMapQuestScrollFrame.backdrop then
-					WorldMapQuestScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestScrollFrame:CreateBackdrop("Transparent")
 					WorldMapQuestScrollFrame.backdrop:Point("TOPLEFT", 0, 2)
 					WorldMapQuestScrollFrame.backdrop:Point("BOTTOMRIGHT", 24, -3)				
 				end
@@ -3695,8 +3695,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--Taxi Frame
 		do
 			TaxiFrame:StripTextures()
-			TaxiFrame:CreateBackdrop("Default")
-			TaxiRouteMap:CreateBackdrop("Default")
+			TaxiFrame:CreateBackdrop("Transparent")
+			TaxiRouteMap:CreateBackdrop("Transparent")
 			TaxiRouteMap.backdrop:SetAllPoints()
 			SkinCloseButton(TaxiFrameCloseButton)
 		end
@@ -3745,7 +3745,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			  end
 			end
 
-			LFRQueueFrameCommentTextButton:CreateBackdrop("Default")
+			LFRQueueFrameCommentTextButton:CreateBackdrop("Transparent")
 			LFRQueueFrameCommentTextButton:Height(35)
 
 			for i=1, 7 do
@@ -3842,7 +3842,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						icon:SetDrawLayer("OVERLAY")
 						count:SetDrawLayer("OVERLAY")
 						if not button.backdrop then
-							button:CreateBackdrop("Default")
+							button:CreateBackdrop("Transparent")
 							button.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
 							button.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
 							icon:SetParent(button.backdrop)
@@ -3867,14 +3867,14 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			LFDQueueFrameSpecificListScrollFrame:StripTextures()
 			LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
-			LFDParentFrame:CreateBackdrop("Default")
+			LFDParentFrame:CreateBackdrop("Transparent")
 			LFDParentFrame.backdrop:Point( "TOPLEFT", LFDParentFrame, "TOPLEFT")
 			LFDParentFrame.backdrop:Point( "BOTTOMRIGHT", LFDParentFrame, "BOTTOMRIGHT")
 			SkinCloseButton(LFDParentFrameCloseButton,LFDParentFrame)
 			SkinCloseButton(LFDDungeonReadyDialogCloseButton,LFDDungeonReadyDialog)
 			SkinDropDownBox(LFDQueueFrameTypeDropDown, 300)
 			LFDQueueFrameTypeDropDown:Point("RIGHT",-10,0)
-			LFDQueueFrameCapBar:CreateBackdrop("Default")
+			LFDQueueFrameCapBar:CreateBackdrop("Transparent")
 			LFDQueueFrameCapBar.backdrop:Point( "TOPLEFT", LFDQueueFrameCapBar, "TOPLEFT", 1, -1)
 			LFDQueueFrameCapBar.backdrop:Point( "BOTTOMRIGHT", LFDQueueFrameCapBar, "BOTTOMRIGHT", -1, 1 )
 			LFDQueueFrameCapBarProgress:SetTexture(C["media"].normTex)
@@ -3893,7 +3893,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			QuestRewardScrollChildFrame:StripTextures(true)
 			QuestFrameProgressPanel:StripTextures(true)
 			QuestFrameRewardPanel:StripTextures(true)
-			QuestFrame:CreateBackdrop("Default")
+			QuestFrame:CreateBackdrop("Transparent")
 			QuestFrame.backdrop:Point("TOPLEFT", 6, -8)
 			QuestFrame.backdrop:Point("BOTTOMRIGHT", -20, 65)
 			QuestFrame.backdrop:CreateShadow("Default")
@@ -3927,10 +3927,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end)
 			
 			QuestNPCModel:StripTextures()
-			QuestNPCModel:CreateBackdrop("Default")
+			QuestNPCModel:CreateBackdrop("Transparent")
 			QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)
 			QuestNPCModelTextFrame:StripTextures()
-			QuestNPCModelTextFrame:CreateBackdrop("Default")
+			QuestNPCModelTextFrame:CreateBackdrop("Transparent")
 			QuestNPCModelTextFrame.backdrop:Point("TOPLEFT", QuestNPCModel.backdrop, "BOTTOMLEFT", 0, -2)
 			QuestLogDetailFrame:StripTextures()
 			QuestLogDetailFrame:SetTemplate("Transparent")
@@ -4107,7 +4107,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		--Dressing Room Frame
 		do
 			DressUpFrame:StripTextures(true)
-			DressUpFrame:CreateBackdrop("Default")
+			DressUpFrame:CreateBackdrop("Transparent")
 			DressUpFrame.backdrop:CreateShadow("Default")
 			DressUpFrame.backdrop:Point("TOPLEFT", 6, 0)
 			DressUpFrame.backdrop:Point("BOTTOMRIGHT", -32, 70)
@@ -4202,12 +4202,12 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				ArenaHeader(nil, true, i)
 			end	
 
-			PVPBannerFrameEditBox:CreateBackdrop("Default")
+			PVPBannerFrameEditBox:CreateBackdrop("Transparent")
 			PVPBannerFrameEditBox.backdrop:Point( "TOPLEFT", PVPBannerFrameEditBox, "TOPLEFT" ,-5,-5)
 			PVPBannerFrameEditBox.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrameEditBox, "BOTTOMRIGHT",5,5)
 			PVPHonorFrameInfoScrollFrameChildFrameDescription:SetTextColor(1,1,1)
 			PVPHonorFrameInfoScrollFrameChildFrameRewardsInfo.description:SetTextColor(1,1,1)
-			PVPTeamManagementFrameInvalidTeamFrame:CreateBackdrop("Default")
+			PVPTeamManagementFrameInvalidTeamFrame:CreateBackdrop("Transparent")
 			PVPTeamManagementFrameInvalidTeamFrame:SetFrameLevel(PVPTeamManagementFrameInvalidTeamFrame:GetFrameLevel()+1)
 			PVPTeamManagementFrameInvalidTeamFrame.backdrop:Point( "TOPLEFT", PVPTeamManagementFrameInvalidTeamFrame, "TOPLEFT")
 			PVPTeamManagementFrameInvalidTeamFrame.backdrop:Point( "BOTTOMRIGHT", PVPTeamManagementFrameInvalidTeamFrame, "BOTTOMRIGHT")
@@ -4216,7 +4216,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			if not T.IsPTRVersion() then
 				PVPFrameConquestBar:StripTextures()
 				PVPFrameConquestBar:SetStatusBarTexture(C["media"].normTex)
-				PVPFrameConquestBar:CreateBackdrop("Default")
+				PVPFrameConquestBar:CreateBackdrop("Transparent")
 			else
 				PVPFrameConquestBarLeft:Kill()
 				PVPFrameConquestBarRight:Kill()
@@ -4224,18 +4224,18 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				PVPFrameConquestBarBG:Kill()
 				PVPFrameConquestBarShadow:Kill()
 				PVPFrameConquestBar.progress:SetTexture(C["media"].normTex)
-				PVPFrameConquestBar:CreateBackdrop("Default")
+				PVPFrameConquestBar:CreateBackdrop("Transparent")
 				PVPFrameConquestBar.backdrop:Point("TOPLEFT", PVPFrameConquestBar.progress, "TOPLEFT", -2, 2)
 				PVPFrameConquestBar.backdrop:Point("BOTTOMRIGHT", PVPFrameConquestBar, "BOTTOMRIGHT", -2, 2) 
 			end
 			
-			PVPBannerFrame:CreateBackdrop("Default")
+			PVPBannerFrame:CreateBackdrop("Transparent")
 			PVPBannerFrame.backdrop:Point( "TOPLEFT", PVPBannerFrame, "TOPLEFT")
 			PVPBannerFrame.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrame, "BOTTOMRIGHT")
-			PVPBannerFrameCustomization1:CreateBackdrop("Default")
+			PVPBannerFrameCustomization1:CreateBackdrop("Transparent")
 			PVPBannerFrameCustomization1.backdrop:Point( "TOPLEFT", PVPBannerFrameCustomization1LeftButton, "TOPRIGHT" ,2,0)
 			PVPBannerFrameCustomization1.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrameCustomization1RightButton, "BOTTOMLEFT",-2,0)
-			PVPBannerFrameCustomization2:CreateBackdrop("Default")
+			PVPBannerFrameCustomization2:CreateBackdrop("Transparent")
 			PVPBannerFrameCustomization2.backdrop:Point( "TOPLEFT", PVPBannerFrameCustomization2LeftButton, "TOPRIGHT",2,0)
 			PVPBannerFrameCustomization2.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrameCustomization2RightButton, "BOTTOMLEFT",-2,0)
 			SkinCloseButton(PVPBannerFrameCloseButton,PVPBannerFrame)
@@ -4247,7 +4247,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			PVPBannerFrameCustomization2LeftButton:Height(PVPBannerFrameCustomization1:GetHeight())
 			SkinNextPrevButton(PVPBannerFrameCustomization2RightButton)
 			PVPBannerFrameCustomization2RightButton:Height(PVPBannerFrameCustomization1:GetHeight())
-			PVPFrame:CreateBackdrop("Default")
+			PVPFrame:CreateBackdrop("Transparent")
 			PVPFrame.backdrop:Point( "TOPLEFT", PVPFrame, "TOPLEFT")
 			PVPFrame.backdrop:Point( "BOTTOMRIGHT", PVPFrame, "BOTTOMRIGHT")
 			SkinCloseButton(PVPFrameCloseButton,PVPFrame)
@@ -4276,7 +4276,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			if l then l:SetAlpha(0) end
 			if m then m:SetAlpha(0) end
 			if r then r:SetAlpha(0) end
-			f:CreateBackdrop("Default")
+			f:CreateBackdrop("Transparent")
 			f:SetFrameLevel(PVPBannerFrameAcceptButton:GetFrameLevel()+1)
 			f.backdrop:Point( "TOPLEFT", PVPBannerFrameAcceptButton, "TOPLEFT", PVPBannerFrame:GetWidth()-PVPBannerFrameAcceptButton:GetWidth()-10,0)
 			f.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrameAcceptButton, "BOTTOMRIGHT", PVPBannerFrame:GetWidth()-PVPBannerFrameAcceptButton:GetWidth()-10, 0)
@@ -4328,7 +4328,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				SkinButton(_G[buttons[i]])
 			end
 			RaidInfoScrollFrame:StripTextures()
-			RaidInfoFrame:CreateBackdrop("Default")
+			RaidInfoFrame:CreateBackdrop("Transparent")
 			RaidInfoFrame.backdrop:Point( "TOPLEFT", RaidInfoFrame, "TOPLEFT")
 			RaidInfoFrame.backdrop:Point( "BOTTOMRIGHT", RaidInfoFrame, "BOTTOMRIGHT")
 			SkinCloseButton(RaidInfoCloseButton,RaidInfoFrame)
@@ -4449,9 +4449,9 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				ChannelRosterScrollFrame:StripTextures()
 			end
 			--BNet Frame
-			FriendsFrameBroadcastInput:CreateBackdrop("Default")
-			ChannelFrameDaughterFrameChannelName:CreateBackdrop("Default")
-			ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Default")			
+			FriendsFrameBroadcastInput:CreateBackdrop("Transparent")
+			ChannelFrameDaughterFrameChannelName:CreateBackdrop("Transparent")
+			ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Transparent")			
 
 			ChannelFrame:HookScript("OnShow", UpdateChannel)
 			hooksecurefunc("FriendsFrame_OnEvent", UpdateChannel)
@@ -4459,8 +4459,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			WhoFrame:HookScript("OnShow", UpdateWhoSkins)
 			hooksecurefunc("FriendsFrame_OnEvent", UpdateWhoSkins)
 
-			ChannelFrameDaughterFrame:CreateBackdrop("Default")
-			FriendsFrame:CreateBackdrop("Default")
+			ChannelFrameDaughterFrame:CreateBackdrop("Transparent")
+			FriendsFrame:CreateBackdrop("Transparent")
 			FriendsFrame.backdrop:Point( "TOPLEFT", FriendsFrame, "TOPLEFT", 11,-12)
 			FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
 			SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton,ChannelFrameDaughterFrame)
@@ -4583,7 +4583,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
 					tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 					
-					tab:CreateBackdrop("Default")
+					tab:CreateBackdrop("Transparent")
 					tab.backdrop:SetAllPoints()
 					tab:StyleButton(true)				
 					
@@ -4671,7 +4671,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				statusbar:StripTextures()
 				statusbar:SetStatusBarTexture(C["media"].normTex)
 				statusbar:SetStatusBarColor(0, 220/255, 0)
-				statusbar:CreateBackdrop("Default")
+				statusbar:CreateBackdrop("Transparent")
 				
 				statusbar.rankText:ClearAllPoints()
 				statusbar.rankText:SetPoint("CENTER")
@@ -4751,7 +4751,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				icon:Point("BOTTOMRIGHT", -2, 2)
 				
 				slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-				slot:CreateBackdrop("Default")
+				slot:CreateBackdrop("Transparent")
 				slot.backdrop:SetAllPoints()
 			end
 			
@@ -4793,7 +4793,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						icon:Point("BOTTOMRIGHT", -2, 2)	
 						button:SetFrameLevel(button:GetFrameLevel() + 2)
 						if not button.backdrop then
-							button:CreateBackdrop("Default")
+							button:CreateBackdrop("Transparent")
 							button.backdrop:SetAllPoints()			
 						end
 					end
@@ -4802,7 +4802,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			--Icon in upper right corner of character frame
 			CharacterFramePortrait:Kill()
-			CharacterModelFrame:CreateBackdrop("Default")
+			CharacterModelFrame:CreateBackdrop("Transparent")
 
 			local scrollbars = {
 				"PaperDollTitlesPaneScrollBar",
@@ -4848,7 +4848,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					object.icon:SetTexCoord(.08, .92, .08, .92)
 					
 					if not object.backdrop then
-						object:CreateBackdrop("Default")
+						object:CreateBackdrop("Transparent")
 					end
 					
 					object.backdrop:Point("TOPLEFT", object.icon, "TOPLEFT", -2, 2)
@@ -4886,7 +4886,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						icon:Point("BOTTOMRIGHT", -2, 2)	
 						button:SetFrameLevel(button:GetFrameLevel() + 2)
 						if not button.backdrop then
-							button:CreateBackdrop("Default")
+							button:CreateBackdrop("Transparent")
 							button.backdrop:SetAllPoints()			
 						end
 					end
@@ -4918,7 +4918,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 								region.SetTexCoord = T.dummy
 							end
 						end
-						tab:CreateBackdrop("Default")
+						tab:CreateBackdrop("Transparent")
 						tab.backdrop:Point("TOPLEFT", 1, -2)
 						tab.backdrop:Point("BOTTOMRIGHT", 1, -2)	
 					end
@@ -4942,7 +4942,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						statusbar:SetStatusBarTexture(C["media"].normTex)
 						
 						if not statusbar.backdrop then
-							statusbar:CreateBackdrop("Default")
+							statusbar:CreateBackdrop("Transparent")
 						end
 						
 						_G["ReputationBar"..i.."Background"]:SetTexture(nil)
@@ -4986,10 +4986,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end)
 			
 			--Pet
-			PetModelFrame:CreateBackdrop("Default")
+			PetModelFrame:CreateBackdrop("Transparent")
 			PetPaperDollFrameExpBar:StripTextures()
 			PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
-			PetPaperDollFrameExpBar:CreateBackdrop("Default")
+			PetPaperDollFrameExpBar:CreateBackdrop("Transparent")
 			SkinRotateButton(PetModelFrameRotateRightButton)
 			SkinRotateButton(PetModelFrameRotateLeftButton)
 			PetModelFrameRotateRightButton:ClearAllPoints()
@@ -4997,7 +4997,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			local xtex = PetPaperDollPetInfo:GetRegions()
 			xtex:SetTexCoord(.12, .63, .15, .55)
-			PetPaperDollPetInfo:CreateBackdrop("Default")
+			PetPaperDollPetInfo:CreateBackdrop("Transparent")
 			PetPaperDollPetInfo:Size(24, 24)
 		end
 		
