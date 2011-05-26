@@ -83,65 +83,10 @@ local function Point(obj, arg1, arg2, arg3, arg4, arg5)
 	obj:SetPoint(arg1, arg2, arg3, arg4, arg5)
 end
 
-local function ApplyBorder(f)
-	local b = CreateFrame("Frame", nil, f)
-	b:CreatePanel("Default", 1, 1, "TOPLEFT", f,"TOPLEFT", -2, 2)
-	b:Point("BOTTOMRIGHT", f, 2, -2)
-	b:SetFrameLevel(4)
-	b:SetFrameStrata("LOW")
-end
-
-function innerBorder(f)
-	if f.iborder then return end
-	f.iborder = CreateFrame("Frame", nil, f)
-	f.iborder:SetPoint("TOPLEFT", mult, -mult)
-	f.iborder:SetPoint("BOTTOMRIGHT", -mult, mult)
-	f.iborder:SetBackdrop({
-		edgeFile = C["media"].blank, 
-		edgeSize = mult, 
-		insets = { left = mult, right = mult, top = mult, bottom = mult }
-	})
-	f.iborder:SetBackdropBorderColor(0,0,0)
-	return f.iborder
-end
-
-function outerBorder(f)
-	if f.oborder then return end
-	f.oborder = CreateFrame("Frame", nil, f)
-	f.oborder:SetPoint("TOPLEFT", -mult, mult)
-	f.oborder:SetPoint("BOTTOMRIGHT", mult, -mult)
-	f.oborder:SetBackdrop({
-		edgeFile = C["media"].blank, 
-		edgeSize = mult, 
-		insets = { left = mult, right = mult, top = mult, bottom = mult }
-	})
-	f.oborder:SetBackdropBorderColor(0,0,0)
-	return f.oborder
-end
-
-local function CreateBackdrop(f, t, tex)
-	if not t then t = "Default" end
-
-	local b = CreateFrame("Frame", nil, f)
-	b:Point("TOPLEFT", -2, 2)
-	b:Point("BOTTOMRIGHT", 2, -2)
-	b:SetTemplate(t, tex)
-
-	if f:GetFrameLevel() - 1 >= 0 then
-		b:SetFrameLevel(f:GetFrameLevel() - 1)
-	else
-		b:SetFrameLevel(0)
-	end
-	
-	f.backdrop = b
-end
-
 local function SetTemplate(f, t, tex)
 	if tex then texture = C.media.normTex else texture = C.media.blank end
 	
 	GetTemplate(t)
-	--if f.oborder then f.oborder:Hide() end
-	if f.iborder then f.iborder:Hide() end
 	
 	if t == "Thin" then
 		f:SetBackdrop({
@@ -185,40 +130,7 @@ end
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	GetTemplate(t)
 	
-	if t == "Thin" then
-		f:SetBackdrop({
-			bgFile = texture, 
-			edgeFile = C.media.blank, 
-			tile = false, tileSize = 0, edgeSize = mult, 
-			insets = { left = 0, right = 0, top = 0, bottom = 0 }
-		})
-	else
-		f:SetBackdrop({
-			bgFile = texture, 
-			edgeFile = C.media.blank, 
-			tile = false, tileSize = 0, edgeSize = mult, 
-			insets = { left = -mult, right = -mult, top = -mult, bottom = -mult }
-		})
-	end
-	
-	if t == "ThickTransparent" then
-		outerBorder(f)
-		innerBorder(f)
-		backdropa = 0.8
-	elseif t == "Transparent" then
-		backdropa = 0.8
-	elseif t == "Invisible" then
-		backdropa = 0
-		bordera = 0
-	elseif t == "ThickBorder" then
-		outerBorder(f)
-		innerBorder(f)
-		bordera = 1
-		backdropa = 1
-	else
-		bordera = 1
-		backdropa = 1
-	end
+	if t == "Transparent" then backdropa = 0.8 else backdropa = 1 end
 	
 	local sh = Scale(h)
 	local sw = Scale(w)
@@ -235,7 +147,24 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	})
 	
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
-	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
+	f:SetBackdropBorderColor(borderr, borderg, borderb)
+end
+
+local function CreateBackdrop(f, t, tex)
+	if not t then t = "Default" end
+
+	local b = CreateFrame("Frame", nil, f)
+	b:Point("TOPLEFT", -2, 2)
+	b:Point("BOTTOMRIGHT", 2, -2)
+	b:SetTemplate(t, tex)
+
+	if f:GetFrameLevel() - 1 >= 0 then
+		b:SetFrameLevel(f:GetFrameLevel() - 1)
+	else
+		b:SetFrameLevel(0)
+	end
+	
+	f.backdrop = b
 end
 
 local function CreateShadow(f, t)
