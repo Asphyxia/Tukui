@@ -16,11 +16,7 @@ TukuiBar2:SetWidth((T.buttonsize * sbWidth) + (T.buttonspacing * (sbWidth-1)))
 TukuiBar2:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar2:SetFrameStrata("BACKGROUND")
 TukuiBar2:SetFrameLevel(2)
-if T.lowversion then
-	TukuiBar2:SetAlpha(0)
-else
-	TukuiBar2:SetAlpha(1)
-end
+TukuiBar2:SetAlpha(1)
 
 local TukuiBar3 = CreateFrame("Frame", "TukuiBar3", UIParent)
 TukuiBar3:CreatePanel("Invisible", 1, 1, "BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 5, 0)
@@ -28,11 +24,7 @@ TukuiBar3:SetWidth((T.buttonsize * sbWidth) + (T.buttonspacing * (sbWidth-1)))
 TukuiBar3:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar3:SetFrameStrata("BACKGROUND")
 TukuiBar3:SetFrameLevel(2)
-if T.lowversion then
-	TukuiBar3:SetAlpha(0)
-else
-	TukuiBar3:SetAlpha(1)
-end
+TukuiBar3:SetAlpha(1)
 
 local TukuiBar4 = CreateFrame("Frame", "TukuiBar4", UIParent)
 TukuiBar4:CreatePanel("Invisible", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 65)
@@ -76,11 +68,11 @@ ltpetbg1:SetAlpha(0)
 
 if C.actionbar.bgPanel then
 	for i = 1, 5 do
-		_G["TukuiBar"..i]:SetTemplate("Thin")
+		_G["TukuiBar"..i]:SetTemplate("Transparent")
 		_G["TukuiBar"..i]:CreateShadow("Default")
 	end
 	
-	petbg:SetTemplate("Thin")
+	petbg:SetTemplate("Transparent")
 	petbg:CreateShadow("Default")
 	petbg:SetWidth((T.petbuttonsize * 10) + (T.petbuttonspacing * 11))
 	petbg:SetHeight(T.petbuttonsize + (T.petbuttonspacing * 2))
@@ -110,15 +102,8 @@ end
 
 -- Default FRAME COVERING BOTTOM ACTIONBARS JUST TO PARENT UF CORRECTLY
 local invbarbg = CreateFrame("Frame", "InvTukuiActionBarBackground", UIParent)
-if T.lowversion then
-	invbarbg:SetPoint("TOPLEFT", TukuiBar1)
-	invbarbg:SetPoint("BOTTOMRIGHT", TukuiBar1)
-	TukuiBar2:Hide()
-	TukuiBar3:Hide()
-else
 	invbarbg:SetPoint("TOPLEFT", TukuiBar2)
 	invbarbg:SetPoint("BOTTOMRIGHT", TukuiBar3)
-end
 
 -- LEFT VERTICAL LINE
 local ileftlv = CreateFrame("Frame", "TukuiInfoLeftLineVertical", TukuiBar1)
@@ -465,3 +450,4 @@ end
 -- World Frame 
 WorldStateAlwaysUpFrame:ClearAllPoints()
 WorldStateAlwaysUpFrame:SetPoint("TOP", UIParent, "TOP", 0, T.Scale(-35))
+
