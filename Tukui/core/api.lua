@@ -140,7 +140,7 @@ local function SetTemplate(f, t, tex)
 	if tex then texture = C.media.normTex else texture = C.media.blank end
 	
 	GetTemplate(t)
-	if f.oborder then f.oborder:Hide() end
+	--if f.oborder then f.oborder:Hide() end
 	if f.iborder then f.iborder:Hide() end
 	
 	if t == "Thin" then
