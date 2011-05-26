@@ -394,12 +394,6 @@ function Stuffing:CreateBagFrame(w)
 	f:SetFrameStrata("HIGH")
 	f:SetFrameLevel(20)
 
-	--[[if w == "Bank" then
-		f:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 2)
-	else
-		f:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 2)
-	end--]]
-
 	local function bagUpdate(f, ...)
 		if w == "Bank" then
 			f:Point("BOTTOM", TukuiTabsLeftBackground, "TOP", 0, 3)
