@@ -264,6 +264,7 @@ local function updateCurrency()
 			frame:CreatePanel(nil, 120, 20, "CENTER", UIParent, "CENTER", 0, 0)
 			frame:EnableMouse(true)
 			frame:Animate(-140, 0, 0.4)
+			frame:Hide()
 
 			frame.Status = CreateFrame("StatusBar", "CurrencyDataStatus"..id, frame)
 			frame.Status:SetFrameLevel(12)
@@ -300,7 +301,7 @@ local function updateCurrency()
 	for key, frame in ipairs(CurrencyData) do
 		frame:ClearAllPoints()
 		if key == 1 then
-			frame:Point("LEFT", UIParent, "LEFT", 8, 500)
+			frame:Point("TOPLEFT", UIParent, "TOPLEFT", 8, -30)
 		else
 			frame:Point("TOP", CurrencyData[key-1], "BOTTOM", 0, -3)
 		end

@@ -92,6 +92,7 @@ L.datatext_gatesdestroyed = "Gates Destroyed:"
 L.datatext_totalmemusage = "Total Memory Usage:"
 L.datatext_control = "Controlled by:"
 L.datatext_notalents ="No Talents:"
+L.datatext_switch_layout = "Switch Layout"
 
 L.Slots = {
 	[1] = {1, "Head", 1000},

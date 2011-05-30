@@ -21,6 +21,34 @@ T.mult = mult
 -- TEMPLATES
 ---------------------------------------------------
 
+local function InnerBorder(f)
+	if f.iborder then return end
+	f.iborder = CreateFrame("Frame", nil, f)
+	f.iborder:SetPoint("TOPLEFT", mult, -mult)
+	f.iborder:SetPoint("BOTTOMRIGHT", -mult, mult)
+	f.iborder:SetBackdrop({
+		edgeFile = C["media"].blank, 
+		edgeSize = mult, 
+		insets = { left = mult, right = mult, top = mult, bottom = mult }
+	})
+	f.iborder:SetBackdropBorderColor(0,0,0)
+	return f.iborder
+end
+
+local function OuterBorder(f)
+	if f.oborder then return end
+	f.oborder = CreateFrame("Frame", nil, f)
+	f.oborder:SetPoint("TOPLEFT", -mult, mult)
+	f.oborder:SetPoint("BOTTOMRIGHT", mult, -mult)
+	f.oborder:SetBackdrop({
+		edgeFile = C["media"].blank, 
+		edgeSize = mult, 
+		insets = { left = mult, right = mult, top = mult, bottom = mult }
+	})
+	f.oborder:SetBackdropBorderColor(0,0,0)
+	return f.oborder
+end
+
 local function GetTemplate(t)
 	if t == "Tukui" then
 		borderr, borderg, borderb = .6, .6, .6

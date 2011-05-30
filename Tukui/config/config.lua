@@ -5,14 +5,14 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = { .115, .115, .115},         	-- default backdrop color of panels
-	["bordercolor"] = { 0, 0, 0, 1},                    	-- default border color of panels
+	["backdropcolor"] = { 0, 0, 0 },         	-- default backdrop color of panels
+	["bordercolor"] = { .125, .125, .125 },                    	-- default border color of panels
 }
 
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Flying",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Flying" or "Tukui")
+	["style"] = "Tukui",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Flying" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -43,9 +43,9 @@ C["unitframes"] = {
 	["showsolo"] = true,                        				-- show raid frames when solo (DPS only)
 	["gradienthealth"] = true,                          	-- change raid health color based on health percent.
 	["gradient"] = {                                    			-- health gradient color if unicolor is true.
-		1.0, 0.3, 0.3, -- R, G, B (low HP)
+		4.5, 0.1, 0.1, -- R, G, B (low HP)
 		0.6, 0.3, 0.3, -- R, G, B (medium HP)
-		0.3, 0.3, 0.3, -- R, G, B (high HP)
+		0.2, 0.2, 0.2, -- R, G, B (high HP)
 	},	
 	
 	-- raid layout (if one of them is enabled)
@@ -173,10 +173,10 @@ C["databars"] = {
 	["reputation"] = true,                             -- show bars with reputation
 	
 	["reps"] = {                                       -- Show 5 factions of your choice, including your guild.
-		"Cenarion Expedition",
-		"Keepers of Time",
-		"The Consortium",
-		"The Mag'har",
+		"Hellscream's Reach",
+		"Therazane",
+		"Dragonmaw Clan",
+		"Guardians of Hyjal",
 		"Systematic Chaos",
 	},
 }

@@ -2959,6 +2959,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			
 			SkinButton(SendMailMailButton)
 			SkinButton(SendMailCancelButton)
+			SkinButton(OpenAllButton)
+			SkinButton(OpenAllButton2)
 			
 			-- open mail (cod)
 			OpenMailFrame:StripTextures(true)

@@ -122,7 +122,7 @@ local function Shared(self, unit)
 			health.colorClass = true
 			health.colorReaction = true			
 		end
-
+		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(12)
@@ -136,7 +136,7 @@ local function Shared(self, unit)
 		end
 		power:SetStatusBarTexture(normTex)
 		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-		power:SetFrameStrata("BACKGROUND")
+		power:SetFrameStrata("MEDIUM")
 		
 		-- Border for Power
 		local PowerBorder = CreateFrame("Frame", nil, power)
@@ -473,7 +473,7 @@ local function Shared(self, unit)
 						bars[i].border:SetFrameLevel(2)
 					    bars[i].border:SetTemplate("Default")
 					    bars[i].border:CreateShadow("Default")
-					    bars[i].border:SetBackdropColor(.1,.1,.1,1)
+					   --bars[i].border:SetBackdropColor(.1,.1,.1,1)
 					end
 					
 					if T.myclass == "WARLOCK" then
@@ -521,7 +521,7 @@ local function Shared(self, unit)
 					Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					Runes[i].border:SetFrameStrata("MEDIUM")
                     Runes[i].border:SetFrameLevel(4)					
-					Runes[i].border:SetBackdropColor(.1,.1,.1,1 )
+					--Runes[i].border:SetBackdropColor(.1,.1,.1,1 )
 					Runes[i].border:SetTemplate("Default")
 					Runes[i].border:CreateShadow("Default")
                 end
@@ -559,7 +559,7 @@ local function Shared(self, unit)
 					TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					TotemBar[i].border:SetFrameStrata("MEDIUM")
 					TotemBar[i].border:SetFrameLevel(4)
-					TotemBar[i].border:SetBackdropColor(.1,.1,.1,1)
+					--TotemBar[i].border:SetBackdropColor(.1,.1,.1,1)
 					TotemBar[i].border:CreateShadow("Default")
 					TotemBar[i].border:SetTemplate("Default")
 				end
@@ -1748,7 +1748,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 600,300)
+			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 750,200)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1772,7 +1772,7 @@ end
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 600,300)
+			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700,200)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
 		end
@@ -1844,42 +1844,42 @@ end
 
 -- Unitframe Lines for Player Frame
 local line2 = CreateFrame("Frame", "Tukuiline2", TukuiPlayer)
-Tukuiline2:CreatePanel("Default", 269, 4, "CENTER", player, "CENTER", 0, 14)
-line2:SetFrameLevel(0)
-line2:SetFrameStrata("BACKGROUND")
+Tukuiline2:CreatePanel("Default", 269, 5, "CENTER", player, "CENTER", 0, 14)
+line2:SetFrameLevel(1)
+line2:SetFrameStrata("LOW")
 
 local line3 = CreateFrame("Frame", "Tukuiline3", TukuiPlayer)
-Tukuiline3:CreatePanel("Default", 270.5, 4, "BOTTOM", Tukuiline2, "BOTTOM", 0, -27)
-line3:SetFrameLevel(0)
-line3:SetFrameStrata("BACKGROUND")
+Tukuiline3:CreatePanel("Default", 269, 5, "BOTTOM", Tukuiline2, "BOTTOM", 0, -27)
+line3:SetFrameLevel(1)
+line3:SetFrameStrata("LOW")
 
 local line4 = CreateFrame("Frame", "Tukuiline4", TukuiPlayer)
-Tukuiline4:CreatePanel("Default", 4, 30, "RIGHT", Tukuiline2, "LEFT", 2, -13.5)
-line4:SetFrameLevel(0)
-line4:SetFrameStrata("BACKGROUND")
+Tukuiline4:CreatePanel("Default", 5, 32, "RIGHT", Tukuiline2, "LEFT", 1, -13)
+line4:SetFrameLevel(1)
+line4:SetFrameStrata("LOW")
 
 local line5 = CreateFrame("Frame", "Tukuiline5", TukuiPlayer)
-Tukuiline5:CreatePanel("Default", 4, 30, "LEFT", Tukuiline2, "RIGHT", -2, -13.5)
-line5:SetFrameLevel(0)
-line5:SetFrameStrata("BACKGROUND")
+Tukuiline5:CreatePanel("Default", 5, 32, "LEFT", Tukuiline2, "RIGHT", -1, -13)
+line5:SetFrameLevel(1)
+line5:SetFrameStrata("LOW")
 
 -- Unitframe Lines for Target Frame
 local line6 = CreateFrame("Frame", "Tukuiline6", TukuiTarget)
-Tukuiline6:CreatePanel("Default", 268, 4, "CENTER", target, "CENTER", 0, 14)
-line6:SetFrameLevel(0)
-line6:SetFrameStrata("BACKGROUND")
+Tukuiline6:CreatePanel("Default", 268, 5, "CENTER", target, "CENTER", 0, 14)
+line6:SetFrameLevel(1)
+line6:SetFrameStrata("LOW")
 
 local line7 = CreateFrame("Frame", "Tukuiline7", TukuiTarget)
-Tukuiline7:CreatePanel("Default", 270.5, 4, "BOTTOM", Tukuiline6, "BOTTOM", 0, -27)
-line7:SetFrameLevel(0)
-line7:SetFrameStrata("BACKGROUND")
+Tukuiline7:CreatePanel("Default", 268, 5, "BOTTOM", Tukuiline6, "BOTTOM", 0, -27)
+line7:SetFrameLevel(1)
+line7:SetFrameStrata("LOW")
 
 local line8 = CreateFrame("Frame", "Tukuiline8", TukuiTarget)
-Tukuiline8:CreatePanel("Default", 4, 30, "RIGHT", Tukuiline6, "LEFT", 2, -13.5)
-line8:SetFrameLevel(0)
-line8:SetFrameStrata("BACKGROUND")
+Tukuiline8:CreatePanel("Default", 5, 32, "RIGHT", Tukuiline6, "LEFT", 1, -13)
+line8:SetFrameLevel(1)
+line8:SetFrameStrata("LOW")
 
 local line9 = CreateFrame("Frame", "Tukuiline9", TukuiTarget)
-Tukuiline9:CreatePanel("Default", 4, 30, "LEFT", Tukuiline6, "RIGHT", -2, -13.5)
-line9:SetFrameLevel(0)
-line9:SetFrameStrata("BACKGROUND")
+Tukuiline9:CreatePanel("Default", 5, 32, "LEFT", Tukuiline6, "RIGHT", -1, -13)
+line9:SetFrameLevel(1)
+line9:SetFrameStrata("LOW")

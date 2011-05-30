@@ -68,11 +68,11 @@ ltpetbg1:SetAlpha(0)
 
 if C.actionbar.bgPanel then
 	for i = 1, 5 do
-		_G["TukuiBar"..i]:SetTemplate("Transparent")
+		_G["TukuiBar"..i]:SetTemplate("Default")
 		_G["TukuiBar"..i]:CreateShadow("Default")
 	end
 	
-	petbg:SetTemplate("Transparent")
+	petbg:SetTemplate("Default")
 	petbg:CreateShadow("Default")
 	petbg:SetWidth((T.petbuttonsize * 10) + (T.petbuttonspacing * 11))
 	petbg:SetHeight(T.petbuttonsize + (T.petbuttonspacing * 2))
@@ -170,14 +170,14 @@ if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0)
 
 -- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
-ileft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "LEFT", ltoabl, "LEFT", 2 - movechat, -10)
+ileft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "LEFT", ltoabl, "LEFT", 2 - movechat, -10)
 --ileft:SetFrameLevel(2)
 ileft:CreateShadow("Default")
 ileft:SetFrameStrata("MEDIUM")
 
 -- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "TukuiInfoRight", TukuiBar1)
-iright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "RIGHT", ltoabr, "RIGHT", -2 + movechat, -11)
+iright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "RIGHT", ltoabr, "RIGHT", -2 + movechat, -11)
 --iright:SetFrameLevel(2)
 iright:CreateShadow("Default")
 iright:SetFrameStrata("MEDIUM")
@@ -188,24 +188,24 @@ ltoabr:SetAlpha(0)
 
 -- CHAT BG LEFT
 local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 116, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 20)
+chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 112, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 25)
 chatleftbg:CreateShadow("")
 	
 -- CHAT BG RIGHT
 local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 116, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 20)
+chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 112, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 25)
 chatrightbg:CreateShadow("")
 	
 -- LEFT TAB PANEL
 local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
-tabsbgleft:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(3))
 tabsbgleft:SetFrameLevel(1)
 tabsbgleft:SetFrameStrata("BACKGROUND")
 tabsbgleft:CreateShadow("")
 
 -- RIGHT TAB PANEL
 local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiChatBackgroundRight)
-tabsbgright:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(3))
 tabsbgright:SetFrameLevel(1)
 tabsbgright:SetFrameStrata("BACKGROUND")
 tabsbgright:CreateShadow("")
@@ -282,6 +282,7 @@ TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOT
 
 --Reposition Petbar & Rightbar (if chat right is not visible)
 local function UpdateBar5()
+	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
 		TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 4)
 	else
@@ -292,6 +293,7 @@ end
 CreateFrame("Frame"):SetScript("OnUpdate", UpdateBar5)
 
 local function UpdatePetbar()
+	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
 		if TukuiBar5:IsVisible() then
 			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
@@ -366,7 +368,58 @@ watch:CreateShadow("Default")
 watch:SetFrameStrata("MEDIUM")
 watch:SetFrameLevel(2)
 
+-- SWITCH LAYOUT
+if C.chat.background then
+	local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", TukuiTabsRightBackground, "SecureActionButtonTemplate")
+	swl:Size(114, TukuiTabsRightBackground:GetHeight())
+	swl:Point("CENTER", TukuiTabsRightBackground, "CENTER", 0, 0)
+	swl:SetFrameStrata(TukuiTabsRightBackground:GetFrameStrata())
+	swl:SetFrameLevel(TukuiTabsRightBackground:GetFrameLevel())
+	swl:RegisterForClicks("AnyUp") swl:SetScript("OnClick", function()
+		if IsAddOnLoaded("Tukui_Raid") then
+			DisableAddOn("Tukui_Raid")
+			EnableAddOn("Tukui_Raid_Healing")
+			ReloadUI()
+		elseif IsAddOnLoaded("Tukui_Raid_Healing") then
+			DisableAddOn("Tukui_Raid_Healing")
+			EnableAddOn("Tukui_Raid")
+			ReloadUI()
+		elseif not IsAddOnLoaded("Tukui_Raid_Healing") and not IsAddOnLoaded("Tukui_Raid") then
+			EnableAddOn("Tukui_Raid")
+			ReloadUI()
+		end
+	end)
 
+	swl.Text = T.SetFontString(swl, C.media.pixelfont, 10)
+	swl.Text:Point("RIGHT", swl, "RIGHT", -5, 0.5)
+	swl.Text:SetText(T.StatColor..L.datatext_switch_layout)
+end
+
+-- VERSION BUTTON
+local verbutton = CreateFrame("Button", "TukuiVersionButton", TukuiMinimap, "SecureActionButtonTemplate")
+verbutton:CreatePanel("Default", 13, 17, "LEFT", Tukuiwatch, "RIGHT", 3, 0)
+verbutton:CreateShadow("Default")
+verbutton:SetAttribute("type", "macro")
+verbutton:SetAttribute("macrotext", "/version")
+verbutton:SetFrameStrata("MEDIUM")
+verbutton:SetFrameLevel(2)
+
+verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, 10)
+verbutton.Text:Point("CENTER", verbutton, "CENTER", 0.5, 0.5)
+verbutton.Text:SetText(T.StatColor.."V")
+
+-- HELP BUTTON
+local helpbutton = CreateFrame("Button", "TukuiHelpButton", TukuiMinimap, "SecureActionButtonTemplate")
+helpbutton:CreatePanel("Default", 13, 17, "RIGHT", Tukuiwatch, "LEFT", -3, 0)
+helpbutton:CreateShadow("Default")
+helpbutton:SetAttribute("type", "macro")
+helpbutton:SetAttribute("macrotext", "/help")
+helpbutton:SetFrameStrata("MEDIUM")
+helpbutton:SetFrameLevel(2)
+
+helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, 10)
+helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 0.5)
+helpbutton.Text:SetText(T.StatColor.."H")
 
 -- ADDONS BUTTON
 local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureActionButtonTemplate")

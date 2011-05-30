@@ -65,7 +65,7 @@ function Update(self)
 			bar:SetWidth(value.data.size);
 			bar:SetHeight(value.data.size);
 			bar:SetScale(1);
-			bar:SetTemplate("Thin", true)
+			bar:SetTemplate("Default", true)
 			bar:CreateShadow("Default")
 
 			if (index == 1) then

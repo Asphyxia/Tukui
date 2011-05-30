@@ -122,7 +122,7 @@ local function Shared(self, unit)
 			health.colorClass = true
 			health.colorReaction = true			
 		end
-
+		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(15)
@@ -449,7 +449,7 @@ local function Shared(self, unit)
 						bars[i].border:SetFrameLevel(2)
 					    bars[i].border:SetTemplate("Default")
 					    bars[i].border:CreateShadow("Default")
-					    bars[i].border:SetBackdropColor(.1,.1,.1,1)
+					    --bars[i].border:SetBackdropColor(.1,.1,.1,1)
 					end
 					
 					if T.myclass == "WARLOCK" then
@@ -497,7 +497,7 @@ local function Shared(self, unit)
 					Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					Runes[i].border:SetFrameStrata("MEDIUM")
                     Runes[i].border:SetFrameLevel(4)					
-					Runes[i].border:SetBackdropColor(.1,.1,.1,1 )
+					--Runes[i].border:SetBackdropColor(.1,.1,.1,1 )
 					Runes[i].border:SetTemplate("Default")
 					Runes[i].border:CreateShadow("Default")
                 end
@@ -535,7 +535,7 @@ local function Shared(self, unit)
 					TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					TotemBar[i].border:SetFrameStrata("MEDIUM")
 					TotemBar[i].border:SetFrameLevel(4)
-					TotemBar[i].border:SetBackdropColor(.1,.1,.1,1)
+					--TotemBar[i].border:SetBackdropColor(.1,.1,.1,1)
 					TotemBar[i].border:CreateShadow("Default")
 					TotemBar[i].border:SetTemplate("Default")
 				end
@@ -1724,7 +1724,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 600,300)
+			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 750,200)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1748,7 +1748,7 @@ end
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 600,300)
+			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700,200)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
 		end

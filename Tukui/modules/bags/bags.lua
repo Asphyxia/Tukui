@@ -449,7 +449,7 @@ function Stuffing:CreateBagFrame(w)
 	f.b_close:SetWidth(f.b_text:GetWidth() + 20)
 	
 	f.b_close:HookScript("OnEnter", function(self) f.b_close:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-	f.b_close:HookScript("OnLeave", function(self) f.b_close:SetBackdropBorderColor(unpack(C["media"].backdropcolor)) end)
+	f.b_close:HookScript("OnLeave", function(self) f.b_close:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 
 	if w == "Bags" then
 		-- keyring button
@@ -479,7 +479,7 @@ function Stuffing:CreateBagFrame(w)
 		f.b_key:SetWidth(f.b_ktext:GetWidth() + 20)
 		
 		f.b_key:HookScript("OnEnter", function(self) f.b_key:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-		f.b_key:HookScript("OnLeave", function(self) f.b_key:SetBackdropBorderColor(unpack(C["media"].backdropcolor)) end)
+		f.b_key:HookScript("OnLeave", function(self) f.b_key:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 	end
 	
 	-- create the bags frame

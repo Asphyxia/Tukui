@@ -6,6 +6,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local function ShowOrHideBar(bar, button)
 	local db = TukuiDataPerChar
 	
+	
 	if bar:IsShown() then
 		if bar == TukuiBar5 and T.lowversion then
 			if button == TukuiBar5ButtonTop then
@@ -163,7 +164,7 @@ if button == TukuiBar5ButtonTop then
 		local buttontop = TukuiBar5ButtonTop
 		buttontop:ClearAllPoints()
 		buttontop:Size(20, 17)
-		buttontop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, -1)
+		buttontop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, -3)
 		if bar:IsShown() then
 			db.hidebar5 = false
 			
@@ -234,7 +235,7 @@ TukuiBar4Button.text:SetText(T.StatColor.."Collapse")
 local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
 TukuiBar5ButtonTop:SetWidth(20)
 TukuiBar5ButtonTop:Height(17)
-TukuiBar5ButtonTop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, -1)
+TukuiBar5ButtonTop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, -3)
 TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
 TukuiBar5ButtonTop:SetAlpha(0)
 TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
