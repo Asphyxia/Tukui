@@ -41,6 +41,7 @@
 	<Script file="modules\blizzard\capturebar.lua"/>
 	<Script file="modules\blizzard\gm.lua"/>
 	<Script file="modules\blizzard\timertracker.lua"/>
+	<Script file="modules\blizzard\ghostframe.lua"/>
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\misc\invite.lua"/>
