@@ -1,20 +1,20 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 --------------------------------------------------------------------
 -- Tukui Minimap Script
 --------------------------------------------------------------------
 
 local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", UIParent)
 TukuiMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
+TukuiMinimap:CreateShadow("Default")
 TukuiMinimap:RegisterEvent("ADDON_LOADED")
 TukuiMinimap:RegisterEvent("CALENDAR_UPDATE_PENDING_INVITES")
 TukuiMinimap:RegisterEvent("UPDATE_PENDING_MAIL")
 TukuiMinimap:RegisterEvent("PLAYER_ENTERING_WORLD")
 TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -10, -10)
-TukuiMinimap:Size(144)
-TukuiMinimap:CreateShadow("Default")
+TukuiMinimap:Size(153)
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
-TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.pixelfont, 10)
+TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
 TukuiMinimap.text:SetPoint("CENTER")
 TukuiMinimap.text:SetText(L.move_minimap)
 
@@ -24,6 +24,7 @@ MinimapCluster:Kill()
 -- Parent Minimap into our Map frame.
 Minimap:SetParent(TukuiMinimap)
 Minimap:ClearAllPoints()
+Minimap:Size(153)
 Minimap:Point("TOPLEFT", 2, -2)
 Minimap:Point("BOTTOMRIGHT", -2, 2)
 
@@ -58,7 +59,7 @@ MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\mail")
 
 -- Move battleground icon
 MiniMapBattlefieldFrame:ClearAllPoints()
-MiniMapBattlefieldFrame:Point("BOTTOMRIGHT", Minimap, 3, 0)
+MiniMapBattlefieldFrame:Point("BOTTOMRIGHT", Minimap, 3, -3)
 MiniMapBattlefieldBorder:Hide()
 
 -- Hide world map button
@@ -67,17 +68,17 @@ MiniMapWorldMapButton:Hide()
 -- shitty 3.3 flag to move
 MiniMapInstanceDifficulty:ClearAllPoints()
 MiniMapInstanceDifficulty:SetParent(Minimap)
-MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 8)
 
 -- 4.0.6 Guild instance difficulty
 GuildInstanceDifficulty:ClearAllPoints()
 GuildInstanceDifficulty:SetParent(Minimap)
-GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 8)
 
 -- Reposition lfg icon at bottom-left
 local function UpdateLFG()
 	MiniMapLFGFrame:ClearAllPoints()
-	MiniMapLFGFrame:Point("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, 1)
+	MiniMapLFGFrame:Point("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
 	MiniMapLFGFrameBorder:Hide()
 end
 hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
@@ -128,35 +129,35 @@ TukuiMinimap:SetScript("OnEvent", function(self, event, addon)
 		local mail = HasNewMail()
 		if inv > 0 and mail then -- New invites and mail
 			TukuiMinimap:SetBackdropBorderColor(1, .5, 0)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, .5, 0)
+			if TukuiInfoLeftMinimap then
+				TukuiInfoLeftMinimap:SetBackdropBorderColor(1, .5, 0)
 			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, .5, 0)
+			if TukuiInfoRightMinimap then
+				TukuiInfoRightMinimap:SetBackdropBorderColor(1, .5, 0)
 			end
 		elseif inv > 0 and not mail then -- New invites and no mail
 			TukuiMinimap:SetBackdropBorderColor(1, 30/255, 60/255)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, 30/255, 60/255)
+			if TukuiInfoLeftMinimap then
+				TukuiInfoLeftMinimap:SetBackdropBorderColor(1, 30/255, 60/255)
 			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, 30/255, 60/255)
+			if TukuiInfoRightMinimap then
+				TukuiInfoRightMinimap:SetBackdropBorderColor(1, 30/255, 60/255)
 			end
 		elseif inv==0 and mail then -- No invites and new mail
 			TukuiMinimap:SetBackdropBorderColor(0, 1, 0)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(0, 1, 0)
+			if TukuiInfoLeftMinimap then
+				TukuiInfoLeftMinimap:SetBackdropBorderColor(0, 1, 0)
 			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(0, 1, 0)
+			if TukuiInfoRightMinimap then
+				TukuiInfoRightMinimap:SetBackdropBorderColor(0, 1, 0)
 			end
 		else -- None of the above
 			TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			if TukuiInfoLeftMinimap then
+				TukuiInfoLeftMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
 			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			if TukuiInfoRightMinimap then
+				TukuiInfoRightMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
 			end
 		end
 	end
@@ -168,7 +169,7 @@ end)
 
 local menuFrame = CreateFrame("Frame", "TukuiMinimapMiddleClickMenu", TukuiMinimap, "UIDropDownMenuTemplate")
 local menuList = {
-	{text = CHARACTER_BUTTON,
+    {text = CHARACTER_BUTTON,
 	func = function() ToggleCharacter("PaperDollFrame") end},
 	{text = SPELLBOOK_ABILITIES_BUTTON,
 	func = function() ToggleFrame(SpellBookFrame) end},
@@ -205,13 +206,15 @@ local menuList = {
 	func = function() ToggleFrame(LFDParentFrame) end},
 	{text = LOOKING_FOR_RAID,
 	func = function() ToggleFrame(LFRParentFrame) end},
-	{text = HELP_BUTTON,
-	func = function() ToggleHelpFrame() end},
+	{text = ENCOUNTER_JOURNAL, 
+	func = function() ToggleFrame(EncounterJournal) end},
 	{text = CALENDAR_VIEW_EVENT,
 	func = function()
 	if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
 		Calendar_Toggle()
 	end},
+	{text = HELP_BUTTON,
+	func = function() ToggleHelpFrame() end},
 }
 
 Minimap:SetScript("OnMouseUp", function(self, btn)
@@ -235,92 +238,93 @@ end)
 ----------------------------------------------------------------------------------------
 -- Mouseover map, displaying zone and coords
 ----------------------------------------------------------------------------------------
-
-local m_zone = CreateFrame("Frame",nil,UIParent)
-m_zone:CreatePanel("Transparent", 0, 20, "TOPLEFT", Minimap, "TOPLEFT", 2,-2)
-m_zone:SetFrameLevel(5)
-m_zone:SetFrameStrata("LOW")
-m_zone:Point("TOPRIGHT",Minimap,-2,-2)
-m_zone:SetAlpha(0)
-
-local m_zone_text = m_zone:CreateFontString(nil,"Overlay")
-m_zone_text:SetFont(C["media"].pixelfont,10)
-m_zone_text:Point("TOP", 0, -1)
-m_zone_text:SetPoint("BOTTOM")
-m_zone_text:Height(12)
-m_zone_text:Width(m_zone:GetWidth()-6)
-m_zone_text:SetAlpha(0)
-
-local m_coord = CreateFrame("Frame",nil,UIParent)
-m_coord:CreatePanel("Transparent", 40, 20, "BOTTOMLEFT", Minimap, "BOTTOMLEFT", 2,2)
-m_coord:SetFrameStrata("LOW")
-m_coord:SetAlpha(0)
-
-local m_coord_text = m_coord:CreateFontString(nil,"Overlay")
-m_coord_text:SetFont(C["media"].pixelfont,10)
-m_coord_text:Point("Center",-1,0)
-m_coord_text:SetAlpha(0)
-m_coord_text:SetText("00,00")
-
-Minimap:SetScript("OnEnter",function()
-	m_zone:SetAlpha(1)
-	m_zone_text:SetAlpha(1)
-	m_coord:SetAlpha(1)
-	m_coord_text:SetAlpha(1)
-end)
-
-Minimap:SetScript("OnLeave",function()
+if not C.map.location_panel then
+	local m_zone = CreateFrame("Frame",nil,UIParent)
+	m_zone:CreatePanel("Default", 0, 20, "TOPLEFT", Minimap, "TOPLEFT", 2,-2)
+	m_zone:SetFrameLevel(5)
+	m_zone:SetFrameStrata("LOW")
+	m_zone:Point("TOPRIGHT",Minimap,-2,-2)
 	m_zone:SetAlpha(0)
+
+	local m_zone_text = m_zone:CreateFontString(nil,"Overlay")
+	m_zone_text:SetFont(C["media"].pixelfont, 10)
+	m_zone_text:Point("TOP", 0, 0)
+	m_zone_text:SetPoint("BOTTOM")
+	m_zone_text:Height(12)
+	m_zone_text:Width(m_zone:GetWidth()-6)
 	m_zone_text:SetAlpha(0)
+
+	local m_coord = CreateFrame("Frame",nil,UIParent)
+	m_coord:CreatePanel("Default", 40, 20, "BOTTOMLEFT", Minimap, "BOTTOMLEFT", 2,13)
+	m_coord:SetFrameStrata("LOW")
 	m_coord:SetAlpha(0)
+
+	local m_coord_text = m_coord:CreateFontString(nil,"Overlay")
+	m_coord_text:SetFont(C["media"].pixelfont, 10)
+	m_coord_text:Point("Center",1,0)
 	m_coord_text:SetAlpha(0)
-end)
- 
-local ela = 0
-local coord_Update = function(self,t)
-	ela = ela - t
-	if ela > 0 then return end
-	local x,y = GetPlayerMapPosition("player")
-	local xt,yt
-	x = math.floor(100 * x)
-	y = math.floor(100 * y)
-	if x == 0 and y == 0 then
-		m_coord_text:SetText("X _ X")
-	else
-		if x < 10 then
-			xt = "0"..x
+	m_coord_text:SetText("00,00")
+
+	Minimap:SetScript("OnEnter",function()
+		m_zone:SetAlpha(1)
+		m_zone_text:SetAlpha(1)
+		m_coord:SetAlpha(1)
+		m_coord_text:SetAlpha(1)
+	end)
+
+	Minimap:SetScript("OnLeave",function()
+		m_zone:SetAlpha(0)
+		m_zone_text:SetAlpha(0)
+		m_coord:SetAlpha(0)
+		m_coord_text:SetAlpha(0)
+	end)
+	 
+	local ela = 0
+	local coord_Update = function(self,t)
+		ela = ela - t
+		if ela > 0 then return end
+		local x,y = GetPlayerMapPosition("player")
+		local xt,yt
+		x = math.floor(100 * x)
+		y = math.floor(100 * y)
+		if x == 0 and y == 0 then
+			m_coord_text:SetText("X _ X")
 		else
-			xt = x
+			if x < 10 then
+				xt = "0"..x
+			else
+				xt = x
+			end
+			if y < 10 then
+				yt = "0"..y
+			else
+				yt = y
+			end
+			m_coord_text:SetText(xt..","..yt)
 		end
-		if y < 10 then
-			yt = "0"..y
+		ela = .2
+	end
+	m_coord:SetScript("OnUpdate",coord_Update)
+	 
+	local zone_Update = function()
+		local pvp = GetZonePVPInfo()
+		m_zone_text:SetText(GetMinimapZoneText())
+		if pvp == "friendly" then
+			m_zone_text:SetTextColor(0.1, 1.0, 0.1)
+		elseif pvp == "sanctuary" then
+			m_zone_text:SetTextColor(0.41, 0.8, 0.94)
+		elseif pvp == "arena" or pvp == "hostile" then
+			m_zone_text:SetTextColor(1.0, 0.1, 0.1)
+		elseif pvp == "contested" then
+			m_zone_text:SetTextColor(1.0, 0.7, 0.0)
 		else
-			yt = y
+			m_zone_text:SetTextColor(1.0, 1.0, 1.0)
 		end
-		m_coord_text:SetText(xt..","..yt)
 	end
-	ela = .2
+	 
+	m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
+	m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	m_zone:RegisterEvent("ZONE_CHANGED")
+	m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
+	m_zone:SetScript("OnEvent",zone_Update) 
 end
-m_coord:SetScript("OnUpdate",coord_Update)
- 
-local zone_Update = function()
-	local pvp = GetZonePVPInfo()
-	m_zone_text:SetText(GetMinimapZoneText())
-	if pvp == "friendly" then
-		m_zone_text:SetTextColor(0.1, 1.0, 0.1)
-	elseif pvp == "sanctuary" then
-		m_zone_text:SetTextColor(0.41, 0.8, 0.94)
-	elseif pvp == "arena" or pvp == "hostile" then
-		m_zone_text:SetTextColor(1.0, 0.1, 0.1)
-	elseif pvp == "contested" then
-		m_zone_text:SetTextColor(1.0, 0.7, 0.0)
-	else
-		m_zone_text:SetTextColor(1.0, 1.0, 1.0)
-	end
-end
- 
-m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
-m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-m_zone:RegisterEvent("ZONE_CHANGED")
-m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
-m_zone:SetScript("OnEvent",zone_Update) 
