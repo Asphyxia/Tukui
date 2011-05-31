@@ -39,7 +39,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 				if not PlayerTalentFrame then 
 					LoadAddOn("Blizzard_TalentUI") 
 				end 
-				
+
 				if not GlyphFrame then 
 					LoadAddOn("Blizzard_GlyphUI") 
 				end 
@@ -67,13 +67,15 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 			func = function() ToggleFrame(LFDParentFrame) end},
 			{text = LOOKING_FOR_RAID,
 			func = function() ToggleFrame(LFRParentFrame) end},
-			{text = HELP_BUTTON,
-			func = function() ToggleHelpFrame() end},
+			{text = ENCOUNTER_JOURNAL, 
+			func = function() ToggleFrame(EncounterJournal) end},
 			{text = CALENDAR_VIEW_EVENT,
 			func = function()
 			if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
 				Calendar_Toggle()
 			end},
+			{text = HELP_BUTTON,
+			func = function() ToggleHelpFrame() end},
 		}
 
 		EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
