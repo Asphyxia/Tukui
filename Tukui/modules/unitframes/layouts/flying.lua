@@ -88,8 +88,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 				
@@ -675,7 +674,7 @@ local function Shared(self, unit)
 					castbar:SetWidth(TukuiBar1:GetWidth() - 4)
 				end
 				castbar:SetHeight(17)
-				castbar:Point("TOP", self, "BOTTOM", 0, 5)
+				castbar:Point("TOP", self, "BOTTOM", 0, 10)
 			end
 			castbar:SetFrameLevel(6)
 
@@ -791,7 +790,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 		
@@ -930,7 +929,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 		
@@ -1035,8 +1034,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1138,7 +1136,7 @@ local function Shared(self, unit)
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", 0, 0)
 		castbar:SetPoint("RIGHT", -23, 0)
-		castbar:SetPoint("BOTTOM", 0, -20)
+		castbar:SetPoint("BOTTOM", 0, -5)
 		
 		castbar:SetHeight(16)
 		castbar:SetStatusBarTexture(normTex)
@@ -1201,8 +1199,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 
@@ -1304,7 +1301,7 @@ local function Shared(self, unit)
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", 0, 0)
 		castbar:SetPoint("RIGHT", -23, 0)
-		castbar:SetPoint("BOTTOM", 0, -20)
+		castbar:SetPoint("BOTTOM", 0, -5)
 		
 		castbar:SetHeight(16)
 		castbar:SetStatusBarTexture(normTex)
@@ -1370,7 +1367,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 				
@@ -1527,7 +1524,7 @@ local function Shared(self, unit)
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", 23, -1)
 		castbar:SetPoint("RIGHT", 0, -1)
-		castbar:SetPoint("BOTTOM", 0, -21)
+		castbar:SetPoint("BOTTOM", 0, -5)
 
 		castbar:SetHeight(16)
 		castbar:SetStatusBarTexture(normTex)
@@ -1598,8 +1595,7 @@ local function Shared(self, unit)
 		local HealthBorder = CreateFrame("Frame", nil, health)
 		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		HealthBorder:SetTemplate("Default")
-		HealthBorder:CreateShadow("Default")
+		HealthBorder:SetTemplate("Thin")
 		HealthBorder:SetFrameLevel(2)
 		self.HealthBorder = HealthBorder
 				
@@ -1688,7 +1684,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 750,200)
+			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700, 250)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1712,7 +1708,7 @@ end
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700,200)
+			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700, 250)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
 		end
