@@ -667,7 +667,7 @@ local function Shared(self, unit)
 					castbar:SetWidth(TukuiBar1:GetWidth() - 4)
 				end
 				castbar:SetHeight(17)
-				castbar:Point("BOTTOM", TukuiBar1, "TOP", 0, 22)
+				castbar:Point("BOTTOM", TukuiBar1, "TOP", 0, 15)
 			elseif unit == "target" then
 				if C["unitframes"].cbicons == true then
 					castbar:SetWidth(205)
