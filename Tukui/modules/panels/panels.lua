@@ -4,7 +4,7 @@ local sbWidth = C.actionbar.sidebarWidth
 local mbWidth = C.actionbar.mainbarWidth
 
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
-TukuiBar1:CreatePanel("Invisible", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 65)
+TukuiBar1:CreatePanel("Invisible", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 45)
 TukuiBar1:SetWidth((T.buttonsize * mbWidth) + (T.buttonspacing * (mbWidth-1)))
 TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar1:SetFrameStrata("BACKGROUND")
@@ -27,7 +27,7 @@ TukuiBar3:SetFrameLevel(2)
 TukuiBar3:SetAlpha(1)
 
 local TukuiBar4 = CreateFrame("Frame", "TukuiBar4", UIParent)
-TukuiBar4:CreatePanel("Invisible", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 65)
+TukuiBar4:CreatePanel("Invisible", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 45)
 TukuiBar4:SetWidth((T.buttonsize * mbWidth) + (T.buttonspacing * (mbWidth-1)))
 TukuiBar4:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar4:SetFrameStrata("BACKGROUND")
