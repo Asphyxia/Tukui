@@ -69,12 +69,11 @@ local function Update(self, event, ...)
 		for i = 1, GetNumGuildMembers() do
 			local connected = select(9, GetGuildRosterInfo(i))
 			if connected then totalOnline = totalOnline + 1 end
-		end	
-		Text:SetFormattedText(displayString, L.datatext_guild, totalOnline)
+		end
+		Text:SetFormattedText(displayString, GUILD, totalOnline)
 	else
 		Text:SetText(T.panelcolor..L.datatext_noguild)
 	end
-	
 	self:SetAllPoints(Text)
 end
 	
@@ -139,7 +138,9 @@ end)
 
 Stat:SetScript("OnEnter", function(self)
 	if InCombatLockdown() or not IsInGuild() then return end
+	if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end
 	
+	GuildRoster()
 	UpdateGuildMessage()
 	BuildGuildTable()
 		
@@ -150,7 +151,7 @@ Stat:SetScript("OnEnter", function(self)
 	local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
-	GameTooltip:AddDoubleLine(string.format(guildInfoString, GetGuildInfo('player'), GetGuildLevel()), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+	GameTooltip:AddDoubleLine(string.format(guildInfoString, GetGuildInfo('player'), GetGuildLevel()), string.format(guildInfoString2, FRIENDS_LIST_ONLINE, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
@@ -158,11 +159,11 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:AddLine' '
 	if GetGuildLevel() ~= 25 then
 		UpdateGuildXP()
-		
+
 		if guildXP[0] and guildXP[1] then
 			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
 			local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
-			
+
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
 		end
@@ -180,7 +181,7 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:AddLine(' ')
 		for i = 1, #guildTable do
 			if online <= 1 then
-				if online > 1 then GameTooltip:AddLine(format("+ %d More...", online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
+				if online > 1 then GameTooltip:AddLine(format("+ %d ???...", online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
 				break
 			end
 
