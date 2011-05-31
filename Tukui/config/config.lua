@@ -113,7 +113,6 @@ C["bags"] = {
 }
 
 C["map"] = {
-	["enable"] = true,                                  -- reskin the map to fit tukui
 	["location_panel"] = true,							-- show location panel at top of the screen
 }
 

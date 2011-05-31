@@ -14,7 +14,7 @@ TukuiMinimap:Size(144)
 TukuiMinimap:CreateShadow("Default")
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
-TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
+TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.pixelfont, 10)
 TukuiMinimap.text:SetPoint("CENTER")
 TukuiMinimap.text:SetText(L.move_minimap)
 
