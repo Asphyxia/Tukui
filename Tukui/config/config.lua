@@ -12,7 +12,7 @@ C["general"] = {
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Tukui",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Flying" or "Tukui")
+	["style"] = "Tukui",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -225,4 +225,5 @@ C["invite"] = {
 C["buffreminder"] = {
 	["enable"] = true,                                  -- this is now the new innerfire warning script for all armor/aspect class.
 	["sound"] = true,                                   -- enable warning sound notification for reminder.
+	["raidbuffreminder"] = true,					-- enable panel with missing raid buffs next to the minimap
 }

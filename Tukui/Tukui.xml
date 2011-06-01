@@ -88,6 +88,7 @@
 	<Script file="modules\extras\mail.lua"/>
 	<Script file="modules\extras\tooltipicon.lua"/>
 	<Script file="modules\extras\raidutility.lua"/>
+	<Script file="modules\buffs\raidbuffsreminder.lua"/>
 	<Script file="modules\actionbars\Bind.lua"/>
 	<Script file="modules\actionbars\Hide.lua"/>
 	<Script file="modules\actionbars\Bar1.lua"/>
@@ -134,7 +135,7 @@
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia2.lua"/>
-	<Script file="modules\unitframes\layouts\flying.lua"/>
+	<Script file="modules\unitframes\layouts\asphyxia3.lua"/>
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
