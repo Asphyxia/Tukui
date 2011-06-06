@@ -108,6 +108,11 @@ C["DBM_Skin"] = {
 	["iconsize"] = 20,									-- Change spell icon size.
 }
 
+C["sCombo"] = {
+	["enable"] = true,									-- Enable sCombo-Addon for combopoints instead of default cp-display
+	["energybar"] = false,								-- show energy-Bar below cp bar
+}
+
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
 }

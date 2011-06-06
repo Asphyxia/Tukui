@@ -13,15 +13,13 @@ local Update = function(self, event, unit)
 	else
 		cp = GetComboPoints('player', 'target')
 	end
-
-	local cpoints = self.CPoints
-	for i=1, MAX_COMBO_POINTS do
-		if(i <= cp) then
-			cpoints[i]:Show()
-		else
-			cpoints[i]:Hide()
-		end
-	end
+	self.CPoints:SetText(cp)
+	if cp == 0 then self.CPoints:SetText("") end
+	if cp == 1 then self.CPoints:SetTextColor(.9,0,.2) end
+	if cp == 2 then self.CPoints:SetTextColor(217/255, 65/255, .2) end
+	if cp == 3 then self.CPoints:SetTextColor(159/255, 130/255, .2) end
+	if cp == 4 then self.CPoints:SetTextColor(39/255, 200/255, .2) end
+	if cp == 5 then self.CPoints:SetTextColor(0,1,0) end
 end
 
 local Path = function(self, ...)
@@ -40,14 +38,6 @@ local Enable = function(self)
 
 		self:RegisterEvent('UNIT_COMBO_POINTS', Path)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path)
-
-		for index = 1, MAX_COMBO_POINTS do
-			local cpoint = cpoints[index]
-			if(cpoint:IsObjectType'Texture' and not cpoint:GetTexture()) then
-				cpoint:SetTexture[[Interface\ComboFrame\ComboPoint]]
-				cpoint:SetTexCoord(0, 0.375, 0, 1)
-			end
-		end
 
 		return true
 	end
