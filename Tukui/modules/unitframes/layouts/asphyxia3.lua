@@ -174,6 +174,22 @@ local function Shared(self, unit)
 		else
 			power.colorPower = true
 		end
+		
+		---Leaving this here, If anyone wants Health Portrait.
+		
+		-- name and level
+		--[[
+		if (unit == "player") then
+			local Name = health:CreateFontString(nil, "OVERLAY")
+			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
+			Name:SetPoint("CENTER", health, "CENTER", 0, 1)
+			Name:SetJustifyH("CENTER")
+			Name:SetFont(font, 10, "THINOUTLINE")
+			Name:SetShadowColor(0, 0, 0)
+			Name:SetShadowOffset(1.25, -1.25)
+			self.Name = Name
+		end
+		--]]
 
 			-- portraits
 		if (C["unitframes"].charportrait == true) then
@@ -198,18 +214,6 @@ local function Shared(self, unit)
 			PFrame:CreateShadow("Default")
 			PFrame:SetFrameLevel(2)
 			self.PFrame = PFrame
-		end
-		
-		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
-			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
-			ws:SetAllPoints(power)
-			ws:SetStatusBarTexture(C.media.normTex)
-			ws:GetStatusBarTexture():SetHorizTile(false)
-			ws:SetBackdrop(backdrop)
-			ws:SetBackdropColor(unpack(C.media.backdropcolor))
-			ws:SetStatusBarColor(191/255, 10/255, 10/255)
-			
-			self.WeakenedSoul = ws
 		end
 		
 		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
@@ -256,7 +260,7 @@ local function Shared(self, unit)
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(19)
 			Combat:Width(19)
-			Combat:SetPoint("LEFT",0,1)
+			Combat:SetPoint("CENTER",0,1)
 			Combat:SetVertexColor(0.69, 0.31, 0.31)
 			self.Combat = Combat
 
@@ -314,7 +318,7 @@ local function Shared(self, unit)
 
 				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
 				Experience.Text:SetFont(font, 10, "THINOUTLINE")
-				Experience.Text:SetPoint('CENTER', self.Experience)
+				Experience.Text:SetPoint('CENTER', 0, 1, self.Experience)
 				Experience.Text:SetShadowOffset(T.mult, -T.mult)
 				self.Experience.Text = Experience.Text
 				self.Experience.PostUpdate = T.ExperienceText
@@ -354,7 +358,7 @@ local function Shared(self, unit)
 
 				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
 				Reputation.Text:SetFont(font, 10, "THINOUTLINE")
-				Reputation.Text:SetPoint('CENTER', Reputation)
+				Reputation.Text:SetPoint('CENTER', 0, 1, Reputation)
 				Reputation.Text:SetShadowOffset(T.mult, -T.mult)
 				Reputation.Text:Show()
 				Reputation.PostUpdate = T.UpdateReputation
@@ -585,33 +589,15 @@ local function Shared(self, unit)
 
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
-			
-			-- combo points on target
-			local CPoints = {}
-			CPoints.unit = PlayerFrame.unit
-			for i = 1, 5 do
-				CPoints[i] = self:CreateTexture(nil, "OVERLAY")
-				CPoints[i]:Height(12)
-				CPoints[i]:Width(12)
-				CPoints[i]:SetTexture(bubbleTex)
-				if i == 1 then
-					if T.lowversion then
-						CPoints[i]:Point("TOPRIGHT", 15, 1.5)
-					else
-						CPoints[i]:Point("TOPLEFT", -15, 1.5)
-					end
-					CPoints[i]:SetVertexColor(0.69, 0.31, 0.31)
-				else
-					CPoints[i]:Point("TOP", CPoints[i-1], "BOTTOM", 1)
-				end
-			end
-			CPoints[2]:SetVertexColor(0.69, 0.31, 0.31)
-			CPoints[3]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[4]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[5]:SetVertexColor(0.33, 0.59, 0.33)
-			self.CPoints = CPoints
-		end
 
+			-- combo points on target
+			
+			local cp = T.SetFontString(self, font2, 15, "THINOUTLINE")
+			cp:SetPoint("RIGHT", health.border, "LEFT", -5, 0)
+			
+			self.CPoints = cp
+		end
+				
 		if (unit == "target" and C["unitframes"].targetauras) or (unit == "player" and C["unitframes"].playerauras) then
 			local buffs = CreateFrame("Frame", nil, self)
 			local debuffs = CreateFrame("Frame", nil, self)
