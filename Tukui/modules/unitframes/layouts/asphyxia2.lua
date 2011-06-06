@@ -229,7 +229,7 @@ local function Shared(self, unit)
 			self.WeakenedSoul = ws
 		end
 		
-		--leaving here just in case someone want to use it, we now use our own Alt Power Bar.
+		--[[--leaving here just in case someone want to use it, we now use our own Alt Power Bar.
 		-- alt power bar
 		local AltPowerBar = CreateFrame("StatusBar", self:GetName().."_AltPowerBar", self.Health)
 		AltPowerBar:SetFrameLevel(0)
@@ -254,6 +254,7 @@ local function Shared(self, unit)
 		AltPowerBar:SetBackdropColor(0, 0, 0)
 
 		self.AltPowerBar = AltPowerBar
+		--]]
 			
 		if (unit == "player") then
 			-- combat icon
@@ -588,29 +589,11 @@ local function Shared(self, unit)
 			self.Name = Name
 			
 			-- combo points on target
-			local CPoints = {}
-			CPoints.unit = PlayerFrame.unit
-			for i = 1, 5 do
-				CPoints[i] = self:CreateTexture(nil, "OVERLAY")
-				CPoints[i]:Height(12)
-				CPoints[i]:Width(12)
-				CPoints[i]:SetTexture(bubbleTex)
-				if i == 1 then
-					if T.lowversion then
-						CPoints[i]:Point("TOPRIGHT", 15, 1.5)
-					else
-						CPoints[i]:Point("TOPLEFT", -15, 1.5)
-					end
-					CPoints[i]:SetVertexColor(0.69, 0.31, 0.31)
-				else
-					CPoints[i]:Point("TOP", CPoints[i-1], "BOTTOM", 1)
-				end
-			end
-			CPoints[2]:SetVertexColor(0.69, 0.31, 0.31)
-			CPoints[3]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[4]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[5]:SetVertexColor(0.33, 0.59, 0.33)
-			self.CPoints = CPoints
+			
+			local cp = T.SetFontString(self, font2, 15, "THINOUTLINE")
+			cp:SetPoint("RIGHT", health.border, "LEFT", -5, 0)
+			
+			self.CPoints = cp
 		end
 
 		if (unit == "target" and C["unitframes"].targetauras) or (unit == "player" and C["unitframes"].playerauras) then
