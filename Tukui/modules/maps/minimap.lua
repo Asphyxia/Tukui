@@ -206,15 +206,15 @@ local menuList = {
 	func = function() ToggleFrame(LFDParentFrame) end},
 	{text = LOOKING_FOR_RAID,
 	func = function() ToggleFrame(LFRParentFrame) end},
-	{text = ENCOUNTER_JOURNAL, 
-	func = function() ToggleFrame(EncounterJournal) end},
+	{text = HELP_BUTTON,
+	func = function() ToggleHelpFrame() end},
 	{text = CALENDAR_VIEW_EVENT,
 	func = function()
 	if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
 		Calendar_Toggle()
 	end},
-	{text = HELP_BUTTON,
-	func = function() ToggleHelpFrame() end},
+	{text = ENCOUNTER_JOURNAL,
+	func = function() if T.toc >= 40200 then ToggleFrame(EncounterJournal) end end}, 
 }
 
 Minimap:SetScript("OnMouseUp", function(self, btn)

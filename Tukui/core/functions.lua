@@ -1,9 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
--- ptr version
 T.IsPTRVersion = function()
-	local _, version = GetBuildInfo()
-	if tonumber(version) > 14007 then
+	if T.toc > 40200 then
 		return true
 	else
 		return false

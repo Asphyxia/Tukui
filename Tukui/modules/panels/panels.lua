@@ -140,7 +140,7 @@ if not C.chat.background then
 	if C["bags"].enable then
 		cuberight:EnableMouse(true)
 		cuberight:SetScript("OnMouseDown", function(self)
-			ToggleKeyRing()
+		if T.toc < 40200 then ToggleKeyRing() else ToggleAllBags() end
 		end)
 	end
 end
@@ -170,14 +170,14 @@ if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0)
 
 -- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
-ileft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "LEFT", ltoabl, "LEFT", 2 - movechat, -10)
+ileft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "LEFT", ltoabl, "LEFT", 2 - movechat, -10)
 --ileft:SetFrameLevel(2)
 ileft:CreateShadow("Default")
 ileft:SetFrameStrata("MEDIUM")
 
 -- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "TukuiInfoRight", TukuiBar1)
-iright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "RIGHT", ltoabr, "RIGHT", -2 + movechat, -11)
+iright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "RIGHT", ltoabr, "RIGHT", -2 + movechat, -11)
 --iright:SetFrameLevel(2)
 iright:CreateShadow("Default")
 iright:SetFrameStrata("MEDIUM")
@@ -188,24 +188,24 @@ ltoabr:SetAlpha(0)
 
 -- CHAT BG LEFT
 local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 112, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 25)
+chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 20)
 chatleftbg:CreateShadow("")
 	
 -- CHAT BG RIGHT
 local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 112, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 25)
+chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 20)
 chatrightbg:CreateShadow("")
 	
 -- LEFT TAB PANEL
 local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
-tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(3))
 tabsbgleft:SetFrameLevel(1)
 tabsbgleft:SetFrameStrata("BACKGROUND")
 tabsbgleft:CreateShadow("")
 
 -- RIGHT TAB PANEL
 local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiChatBackgroundRight)
-tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 22, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(3))
 tabsbgright:SetFrameLevel(1)
 tabsbgright:SetFrameStrata("BACKGROUND")
 tabsbgright:CreateShadow("")
@@ -392,7 +392,7 @@ if C.chat.background then
 
 	swl.Text = T.SetFontString(swl, C.media.pixelfont, 10)
 	swl.Text:Point("RIGHT", swl, "RIGHT", -5, 0.5)
-	swl.Text:SetText(T.StatColor..L.datatext_switch_layout)
+	swl.Text:SetText(T.panelcolor..L.datatext_switch_layout)
 end
 
 -- VERSION BUTTON
