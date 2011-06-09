@@ -107,7 +107,7 @@ local function ChatCopyButtons()
 			button:SetAlpha(10)
 			button:SetScript("OnLeave", function() button:SetAlpha(10) buttontext:SetText("Copy") end)
 			button:ClearAllPoints()
-			button:SetPoint("TOPRIGHT", 0, 21)
+			button:SetPoint("TOPRIGHT", 0, 22)
 		end
 		
 		-- check chat position
