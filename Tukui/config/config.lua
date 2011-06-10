@@ -185,6 +185,13 @@ C["databars"] = {
 	},
 }
 
+C["panels"] = {
+	["toppanel"] = true, 							-- enable or disable top dummy panel.
+	["bottompanel"] = true, 					-- enable or disable bottom dummy panel.
+	
+	}
+
+
 C["chat"] = {
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper

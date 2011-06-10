@@ -325,18 +325,22 @@ end
 ---------------------------------------------------------
 
 --TOP DUMMY FRAME DOES NOTHING 
+if C["panels"].toppanel == true then 
 local toppanel = CreateFrame("Frame", "TukuiTopPanel", UIParent)
 toppanel:CreatePanel("Transparent", 2000, 20, "TOP", UIParent, "TOP", 0, 0)
 toppanel:SetFrameStrata("BACKGROUND")
 toppanel:SetFrameLevel(0)
 toppanel:CreateShadow("Default")
+end
 
 --BOTTOM DUMMY FRAME DOES NOTHING 
+if C["panels"].bottompanel == true then 
 local bottompanel = CreateFrame("Frame", "TukuiBottomPanel", UIParent)
 bottompanel:CreatePanel("Transparent", 2000, 20, "BOTTOM", UIParent, "BOTTOM", 0, 0)
 bottompanel:SetFrameStrata("BACKGROUND")
 bottompanel:SetFrameLevel(0)
 bottompanel:CreateShadow("Default")
+end
 
 --[[
 -- INFO CENTER (FOR STATS)
