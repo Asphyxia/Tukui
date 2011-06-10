@@ -72,20 +72,31 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
-
-	if not C.chat.background and not frame.temp then
-		-- hide text when setting chat
-		_G[chat.."TabText"]:Hide()
-		
-		-- now show text if mouse is found over tab.
-		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
-		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
+	tab:GetFontString():SetFont(C.media.pixelfont, 10)
+	
+	-- color chat tabs, original by Elv, edited by Hydra
+	local classcolortab = RAID_CLASS_COLORS[T.myclass]
+	if C["datatext"].classcolored then
+		Ctabcolor = {classcolortab.r,classcolortab.g,classcolortab.b, 1}
+	else
+		Ctabcolor = {0.3, 0.2, 1}
 	end
 	
-	-- Tab font
-	_G[chat.."TabText"]:SetTextColor(unpack(C["media"].statcolor))
-	_G[chat.."TabText"]:SetFont(C.media.pixelfont,10,"THINOUTLINE")
-	_G[chat.."TabText"].SetTextColor = T.dummy
+	hooksecurefunc("FCFTab_UpdateColors", function(chatTab, isSelected) 
+		chatTab:GetFontString():SetTextColor(unpack(Ctabcolor))
+		if ( chatTab.conversationIcon ) then
+			chatTab.conversationIcon:SetVertexColor(1, 1, 1)
+		end
+		if isSelected then
+			FCFTab_UpdateColors(chatTab, false) 
+		end
+	end)
+	
+	ChatFrame4Tab:GetFontString():SetTextColor(unpack(Ctabcolor))
+	
+	-- mouse-over color tabs
+	_G[chat.."Tab"]:HookScript("OnEnter", function(self) self:GetFontString():SetTextColor(1,1,1) end)
+	_G[chat.."Tab"]:HookScript("OnLeave", function(self) self:GetFontString():SetTextColor(unpack(Ctabcolor)) end)
 	
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
