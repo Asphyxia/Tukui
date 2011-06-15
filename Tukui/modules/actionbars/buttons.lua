@@ -127,12 +127,12 @@ local function MoveButtonBar(button, bar)
 			db.hidebar2 = false
 			button:ClearAllPoints()
 			button:Point("BOTTOMRIGHT", TukuiBar2, "BOTTOMLEFT", -3, 0)
-			button.text:SetText(T.StatColor..">")
+			button.text:SetText(T.panelcolor..">")
 		else
 			db.hidebar2 = true
 			button:ClearAllPoints()
 			button:Point("BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -3, 0)
-			button.text:SetText(T.StatColor.."<")
+			button.text:SetText(T.panelcolor.."<")
 		end
 	end
 	
@@ -141,22 +141,22 @@ local function MoveButtonBar(button, bar)
 			db.hidebar3 = false
 			button:ClearAllPoints()
 			button:Point("BOTTOMLEFT", TukuiBar3, "BOTTOMRIGHT", 3, 0)
-			button.text:SetText(T.StatColor.."<")
+			button.text:SetText(T.panelcolor.."<")
 		else
 			db.hidebar3 = true
 			button:ClearAllPoints()
 			button:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 3, 0)
-			button.text:SetText(T.StatColor..">")
+			button.text:SetText(T.panelcolor..">")
 		end
 	end
 
 	if button == TukuiBar4Button then
 		if bar:IsShown() then
 			db.hidebar4 = false
-			button.text:SetText(T.StatColor.."Collapse")
+			button.text:SetText(T.panelcolor.."Collapse")
 		else
 			db.hidebar4 = true
-			button.text:SetText(T.StatColor.."Expand")
+			button.text:SetText(T.panelcolor.."Expand")
 		end
 	end
 
@@ -168,11 +168,11 @@ if button == TukuiBar5ButtonTop then
 		if bar:IsShown() then
 			db.hidebar5 = false
 			
-			if not T.lowversion then buttontop.text:SetText(T.StatColor.."Hide") end		
+			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."Hide") end		
 		else
 			db.hidebar5 = true
 			
-			if not T.lowversion then buttontop.text:SetText(T.StatColor.."Show") end
+			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."Show") end
 		end	
 	end
 end
@@ -200,7 +200,7 @@ TukuiBar2Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar2Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar2Button.text = T.SetFontString(TukuiBar2Button, C.media.pixelfont, 10)
 TukuiBar2Button.text:Point("CENTER", 1, 1)
-TukuiBar2Button.text:SetText(T.StatColor..">")
+TukuiBar2Button.text:SetText(T.panelcolor..">")
 
 local TukuiBar3Button = CreateFrame("Button", "TukuiBar3Button", UIParent)
 TukuiBar3Button:Width(17)
@@ -215,7 +215,7 @@ TukuiBar3Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar3Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar3Button.text = T.SetFontString(TukuiBar3Button, C.media.pixelfont, 10)
 TukuiBar3Button.text:Point("CENTER", 1, 1)
-TukuiBar3Button.text:SetText(T.StatColor.."<")
+TukuiBar3Button.text:SetText(T.panelcolor.."<")
 
 local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:SetWidth(TukuiBar1:GetWidth())
@@ -230,7 +230,7 @@ TukuiBar4Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar4Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.pixelfont, 10)
 TukuiBar4Button.text:SetPoint("CENTER", 0, 1)
-TukuiBar4Button.text:SetText(T.StatColor.."Collapse")
+TukuiBar4Button.text:SetText(T.panelcolor.."Collapse")
 
 local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
 TukuiBar5ButtonTop:SetWidth(20)
@@ -243,7 +243,7 @@ TukuiBar5ButtonTop:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar5ButtonTop:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.pixelfont, 10, "OUTLINE")
 TukuiBar5ButtonTop.text:Point("CENTER", 1, 1)
-TukuiBar5ButtonTop.text:SetText(T.StatColor.."Hide")
+TukuiBar5ButtonTop.text:SetText(T.panelcolor.."Hide")
 TukuiBar5ButtonTop:SetBackdropBorderColor(unpack(C["media"].bordercolor))				
 
 -- exit vehicle button on left side of bottom action bar
@@ -258,7 +258,7 @@ vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
 vehicleleft.text = T.SetFontString(vehicleleft, C.media.pixelfont, 10)
 vehicleleft.text:SetPoint("CENTER", T.Scale(1), T.Scale(1))
-vehicleleft.text:SetText(T.StatColor.."V")
+vehicleleft.text:SetText(T.panelcolor.."V")
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 
 -- exit vehicle button on right side of bottom action bar
@@ -273,7 +273,7 @@ vehicleright:RegisterForClicks("AnyUp")
 vehicleright:SetScript("OnClick", function() VehicleExit() end)
 vehicleright.text = T.SetFontString(vehicleright, C.media.pixelfont, 10)
 vehicleright.text:SetPoint("CENTER", T.Scale(1), T.Scale(1))
-vehicleright.text:SetText(T.StatColor.."V")
+vehicleright.text:SetText(T.panelcolor.."V")
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
 --------------------------------------------------------------

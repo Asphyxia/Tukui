@@ -56,13 +56,13 @@ end
 local function xUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posX = math.floor(100 * posX)
-	xFS:SetText(T.StatColor..posX)
+	xFS:SetText(T.panelcolor..posX)
 	xFS:SetPoint("CENTER", xcoords, "CENTER", 1, 0.5)
 end
 local function yUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posY = math.floor(100 * posY)
-	yFS:SetText(T.StatColor..posY)
+	yFS:SetText(T.panelcolor..posY)
 	yFS:SetPoint("CENTER", ycoords, "CENTER", 1, 0.5)
 end
 locpanel:SetScript("OnMouseDown", function()
@@ -72,6 +72,7 @@ locpanel:SetScript("OnMouseDown", function()
 			WorldMapFrame:Show()
 	end
 end)
+
 locpanel:SetScript("OnEnter", function()
 	locFS:SetTextColor(1, 1, 1)
 end)

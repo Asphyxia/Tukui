@@ -100,11 +100,11 @@ local function ChatCopyButtons()
 				Copy(cf)
 			end
 		end)
-		button:SetScript("OnEnter", function() button:SetAlpha(10) buttontext:SetText("Copy") end)
+		button:SetScript("OnEnter", function() button:SetAlpha(10) buttontext:SetText(T.panelcolor.."Copy") end)
 		
 		local bnb = function() -- just to shorten the code
 			button:SetAlpha(10)
-			button:SetScript("OnLeave", function() button:SetAlpha(10) buttontext:SetText("Copy") end)
+			button:SetScript("OnLeave", function() button:SetAlpha(10) buttontext:SetText(T.panelcolor.."Copy") end)
 			button:ClearAllPoints()
 			button:SetPoint("TOPRIGHT", 0, 22)
 		end
@@ -112,7 +112,7 @@ local function ChatCopyButtons()
 		-- check chat position
 		if point == "BOTTOMLEFT" or point == "LEFT" then
 			if C.chat.leftchatbackground then
-				button:SetScript("OnLeave", function() buttontext:SetText("Copy") end)
+				button:SetScript("OnLeave", function() buttontext:SetText(T.panelcolor.."Copy") end)
 				if i == 2 and GetChannelName("Log") and not IsAddOnLoaded("nibHideBlackBar") then
 					button:Point("TOPRIGHT", 0, 24)
 				end
@@ -121,7 +121,7 @@ local function ChatCopyButtons()
 			end
 		elseif point == "BOTTOMRIGHT" or point == "RIGHT" then
 			if C.chat.rightchatbackground then
-				button:SetScript("OnLeave", function() buttontext:SetText("Copy") end)
+				button:SetScript("OnLeave", function() buttontext:SetText(T.panelcolor.."Copy") end)
 				button:Point("TOPRIGHT", 0, 24)
 				
 			else
@@ -132,7 +132,7 @@ local function ChatCopyButtons()
 				if i == 2 and GetChannelName("Log") then
 					button:Point("TOPRIGHT", 0, 48)
 				end
-				button:SetScript("OnLeave", function() buttontext:SetText("Copy") end)
+				button:SetScript("OnLeave", function() buttontext:SetText(T.panelcolor.."Copy") end)
 			else
 				bnb()
 			end

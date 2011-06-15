@@ -414,7 +414,19 @@ function Stuffing:CreateBagFrame(w)
 	end
 	f:HookScript("OnUpdate", bagUpdate)
 	
-	-- close button
+	-- CLOSE BUTTON
+	
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+end
+	
 	f.b_close = CreateFrame("Button", "Stuffing_CloseButton" .. w, f)
 	f.b_close:Width(50)
 	f.b_close:Height(20)
@@ -431,28 +443,22 @@ function Stuffing:CreateBagFrame(w)
 		self:GetParent():Hide()
 	end)
 	f.b_close:RegisterForClicks("AnyUp")
-	f.b_close:GetNormalTexture()
+	f.b_close:SetTemplate("Default")
 	f.b_close:SetFrameStrata("HIGH")
-	f.b_close:SetBackdrop({
-	bgFile = C["media"].normTex,
-	edgeFile = C["media"].blank, 
-	tile = false, tileSize = 0, edgeSize = 1, 
-	insets = { left = -1, right = -1, top = -1, bottom = -1}
-	})
-	f.b_close:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-	f.b_close:SetBackdropColor(unpack(C["media"].backdropcolor))
-
 	f.b_text = f.b_close:CreateFontString(nil, "OVERLAY")
 	f.b_text:SetFont(C.media.pixelfont, C["datatext"].fontsize)
 	f.b_text:SetPoint("CENTER", 0, 0)
-	f.b_text:SetText(T.StatColor.."Close")
+	f.b_text:SetText(T.panelcolor.."Close")
 	f.b_close:SetWidth(f.b_text:GetWidth() + 20)
 	
-	f.b_close:HookScript("OnEnter", function(self) f.b_close:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-	f.b_close:HookScript("OnLeave", function(self) f.b_close:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+	f.b_close:HookScript("OnEnter", ModifiedBackdrop)
+	f.b_close:HookScript("OnLeave", OriginalBackdrop)
+
 
 	if w == "Bags" then
-		-- keyring button
+	
+		-- KEYRING BUTTON
+		
 		f.b_key = CreateFrame("Button", "Stuffing_KeyButton" .. w, f)
 		f.b_key:SetWidth(f.b_close:GetWidth())
 		f.b_key:Height(20)
@@ -461,25 +467,16 @@ function Stuffing:CreateBagFrame(w)
 			ToggleKeyRing()
 		end)
 		
-		f.b_key:GetNormalTexture()
+		f.b_key:SetTemplate("Default")
 		f.b_key:SetFrameStrata("HIGH")
-		f.b_key:SetBackdrop({
-		bgFile = C["media"].normTex,
-		edgeFile = C["media"].blank, 
-		tile = false, tileSize = 0, edgeSize = 1, 
-		insets = { left = -1, right = -1, top = -1, bottom = -1}
-		})
-		f.b_key:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-		f.b_key:SetBackdropColor(unpack(C["media"].backdropcolor))
-
 		f.b_ktext = f.b_key:CreateFontString(nil, "OVERLAY")
 		f.b_ktext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
 		f.b_ktext:SetPoint("CENTER", 1, 0)
-		f.b_ktext:SetText(T.StatColor.."Keyring")
+		f.b_ktext:SetText(T.panelcolor.."Keyring")
 		f.b_key:SetWidth(f.b_ktext:GetWidth() + 20)
 		
-		f.b_key:HookScript("OnEnter", function(self) f.b_key:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-		f.b_key:HookScript("OnLeave", function(self) f.b_key:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+		f.b_key:HookScript("OnEnter", ModifiedBackdrop)
+		f.b_key:HookScript("OnLeave", OriginalBackdrop)
 	end
 	
 	-- create the bags frame
@@ -957,7 +954,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 	-- please don't do anything after 1 player_entering_world event.
 	Stuffing:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	
-	if T.toc < 40200 then return end
+	--if T.toc < 40200 then return end
 	
 	-- hooking and setting key ring bag
 	-- this is just a reskin of Blizzard key bag to fit Tukui
@@ -967,15 +964,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 		keybackdrop:Point("TOPLEFT", 9, -40)
 		keybackdrop:Point("BOTTOMLEFT", 0, 0)
 		keybackdrop:Size(179,215)
-		keybackdrop:SetBackdrop({
-		bgFile = C["media"].normTex,
-		edgeFile = C["media"].blank, 
-		tile = false, tileSize = 0, edgeSize = 1, 
-		insets = { left = -1, right = -1, top = -1, bottom = -1}
-		})
-		keybackdrop:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-		keybackdrop:SetBackdropColor(unpack(C["media"].backdropcolor))
-		
+		keybackdrop:SetTemplate("Default")
 		ContainerFrame1CloseButton:Hide()
 		ContainerFrame1Portrait:Hide()
 		ContainerFrame1Name:Hide()
@@ -991,8 +980,8 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 			t:SetTexCoord(.08, .92, .08, .92)
 			t:Point("TOPLEFT", slot, 2, -2)
 			t:Point("BOTTOMRIGHT", slot, -2, 2)
-			slot:SetTemplate("Thin")
-			slot:SetBackdropColor(.090, .090, .090, 1)
+			slot:SetTemplate("Default")
+			slot:SetBackdropColor(0, 0, 0, 0)
 			slot:StyleButton()
 		end		
 	end)

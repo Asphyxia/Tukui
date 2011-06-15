@@ -54,12 +54,12 @@ if C["datatext"].specswitcher and C["datatext"].specswitcher > 0 then
 				GameTooltip:ClearLines()
  
 				if(not GetPrimaryTalentTree()) then
-					GameTooltip:AddLine(T.StatColor..L.datatext_notalents)
+					GameTooltip:AddLine(T.panelcolor..L.datatext_notalents)
 				elseif(hs) then
-					GameTooltip:AddLine(T.StatColor..(c == 1 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree1))..": "..T.StatColor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
-					GameTooltip:AddLine(T.StatColor..(c == 2 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree2))..": "..T.StatColor..group2tree1.."/"..group2tree2.."/"..group2tree3,1,1,1)
+					GameTooltip:AddLine(T.panelcolor..(c == 1 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree1))..": "..T.panelcolor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
+					GameTooltip:AddLine(T.panelcolor..(c == 2 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree2))..": "..T.panelcolor..group2tree1.."/"..group2tree2.."/"..group2tree3,1,1,1)
 				else
-					GameTooltip:AddLine(select(2,GetTalentTabInfo(majorTree1))..": "..T.StatColor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
+					GameTooltip:AddLine(select(2,GetTalentTabInfo(majorTree1))..": "..T.panelcolor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
 				end
  
 				GameTooltip:Show()

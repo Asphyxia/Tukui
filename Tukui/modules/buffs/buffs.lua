@@ -6,11 +6,11 @@ local font = C["media"].pixelfont
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
-		return format("|cffeeeeee%d"..T.StatColor.." d|r", ceil(s / day))
+		return format("|cffeeeeee%d"..T.panelcolor.." d|r", ceil(s / day))
 	elseif s >= hour then
-		return format("|cffeeeeee%d"..T.StatColor.." h|r", ceil(s / hour))
+		return format("|cffeeeeee%d"..T.panelcolor.." h|r", ceil(s / hour))
 	elseif s >= minute then
-		return format("|cffeeeeee%d"..T.StatColor.." m|r", ceil(s / minute))
+		return format("|cffeeeeee%d"..T.panelcolor.." m|r", ceil(s / minute))
 	elseif s >= minute / 12 then
 		return floor(s)
 	end

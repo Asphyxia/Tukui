@@ -27,7 +27,7 @@ tinsert(UISpecialFrames, "aLoadFrame")
 
 loadf.Text = T.SetFontString(loadf, font, fontsize, fontstyle)
 loadf.Text:SetPoint("TOPLEFT", 10, -8)
-loadf.Text:SetText(T.StatColor..ADDONS..": "..myPlayerName)
+loadf.Text:SetText(T.panelcolor..ADDONS..": "..myPlayerName)
 
 local savesetttings = CreateFrame("Button", "al_SaveSettings", aLoadFrame, "SecureActionButtonTemplate")
 savesetttings:CreatePanel("Default", 130, 20, "BOTTOMRIGHT", loadf, "BOTTOM", -3, 9)
@@ -35,8 +35,8 @@ savesetttings:SetFrameStrata("TOOLTIP")
 
 savesetttings.Text = T.SetFontString(savesetttings, font, fontsize, fontstyle)
 savesetttings.Text:Point("CENTER", savesetttings, "CENTER", 1, 0)
-savesetttings.Text:SetText("Save Changes")
-savesetttings.Text:SetTextColor(unpack(C["media"].statcolor))
+savesetttings.Text:SetText(T.panelcolor.."Save Changes")
+
 
 savesetttings:SetScript("OnClick", function() ReloadUI() end)
 savesetttings:HookScript("OnEnter", ModifiedBackdrop)
@@ -48,8 +48,8 @@ closewindow:SetFrameStrata("TOOLTIP")
 
 closewindow.Text = T.SetFontString(closewindow, font, fontsize, fontstyle)
 closewindow.Text:Point("CENTER", closewindow, "CENTER", 1, 0)
-closewindow.Text:SetText("Close")
-closewindow.Text:SetTextColor(unpack(C["media"].statcolor))
+closewindow.Text:SetText(T.panelcolor.."Close")
+
 
 closewindow:SetScript("OnClick", function() loadf:Hide() end)
 closewindow:HookScript("OnEnter", ModifiedBackdrop)

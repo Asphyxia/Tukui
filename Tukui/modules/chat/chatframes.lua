@@ -95,7 +95,7 @@ local function SetChatStyle(frame)
 	ChatFrame4Tab:GetFontString():SetTextColor(unpack(Ctabcolor))
 	
 	-- mouse-over color tabs
-	_G[chat.."Tab"]:HookScript("OnEnter", function(self) self:GetFontString():SetTextColor(1,1,1) end)
+	_G[chat.."Tab"]:HookScript("OnEnter", function(self) self:GetFontString():SetTextColor(0.3, 0.2, 1) end)
 	_G[chat.."Tab"]:HookScript("OnLeave", function(self) self:GetFontString():SetTextColor(unpack(Ctabcolor)) end)
 	
 	-- yeah baby
