@@ -49,6 +49,7 @@ for i = 1, 4 do
 	end)
 end
 
+-- FPS
 HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 	LastUpdate = LastUpdate - elapsed
 	
@@ -63,6 +64,7 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 	end
 end)
 
+-- MS 
 HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 	LastUpdate = LastUpdate - elapsed
 	
@@ -77,7 +79,82 @@ HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 	end
 end)
 
-HydraData[3].Status:SetScript("OnEvent", function(self)
+-- MEMORY
+local f = HydraData[3]
+
+local Stat = CreateFrame("Frame", nil, f)
+Stat:EnableMouse(true)
+Stat:SetFrameStrata("BACKGROUND")
+Stat:SetFrameLevel(4)
+Stat:ClearAllPoints()
+Stat:SetAllPoints(f)
+
+local int = 10
+local StatusBar = f.Status
+local Text = f.Text
+local kiloByteString = "KB: %d"
+local megaByteString = "MB: %.2f "
+
+local function formatMem(memory)
+	local mult = 10^1
+	if memory > 999 then
+		local mem = ((memory/1024) * mult) / mult
+		return string.format(megaByteString, mem)
+	else
+		local mem = (memory * mult) / mult
+		return string.format(kiloByteString, mem)
+	end
+end
+
+local memoryTable = {}
+
+local function RebuildAddonList(self)
+	local addOnCount = GetNumAddOns()
+	if (addOnCount == #memoryTable) then return end
+	memoryTable = {}
+	for i = 1, addOnCount do
+		memoryTable[i] = { i, select(2, GetAddOnInfo(i)), 0, IsAddOnLoaded(i) }
+	end
+	self:SetAllPoints(f)
+end
+
+local function UpdateMemory()
+	UpdateAddOnMemoryUsage()
+	local addOnMem = 0
+	local totalMemory = 0
+	for i = 1, #memoryTable do
+		addOnMem = GetAddOnMemoryUsage(memoryTable[i][1])
+		memoryTable[i][3] = addOnMem
+		totalMemory = totalMemory + addOnMem
+	end
+	table.sort(memoryTable, function(a, b)
+		if a and b then
+			return a[3] > b[3]
+		end
+	end)
+	return totalMemory
+end
+
+local function UpdateMem(self, t)
+	int = int - t
+	
+	if int < 0 then
+		RebuildAddonList(self)
+		local total = UpdateMemory()
+		Text:SetText(formatMem(total))
+		StatusBar:SetMinMaxValues(0,10000)
+		StatusBar:SetValue(total)
+		int = 10
+	end
+end
+
+Stat:SetScript("OnMouseDown", function(self) UpdateMem(Stat, 10) ToggleFrame(aLoadFrame) end)
+Stat:SetScript("OnEnter", function(self) collectgarbage("collect") end)
+Stat:SetScript("OnUpdate", UpdateMem)
+UpdateMem(Stat, 10)
+
+-- DURABILITY
+HydraData[4].Status:SetScript("OnEvent", function(self)
 	local Total = 0
 	local current, max
 	
@@ -95,27 +172,12 @@ HydraData[3].Status:SetScript("OnEvent", function(self)
 
 	self:SetMinMaxValues(0, 100)
 	self:SetValue(value)
-	HydraData[3].Text:SetText("Durability: "..value.."%")			
+	HydraData[4].Text:SetText("Durability: "..value.."%")			
 	self:SetStatusBarColor(0.3, 0.2, 1)
 end)
-HydraData[3].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
-HydraData[3].Status:RegisterEvent("MERCHANT_SHOW")
-HydraData[3].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
-
-HydraData[4].Status:SetScript("OnUpdate", function(self)
-	local free, total, used = 0, 0, 0
-	for i = 0, NUM_BAG_SLOTS do
-		free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
-	end
-	used = total - free
-	value = (used*120/total)
-	
-	self:SetMinMaxValues(0, total)
-	self:SetValue(used)
-	HydraData[4].Text:SetText("Bags: "..used.." / "..total)			
-	self:SetStatusBarColor(0.3, 0.2, 1)
-end)
-HydraData[4].Status:RegisterEvent("BAG_UPDATE")
+HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
+HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
+HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 -- REPUTATION DATABARS
 local RepData = {}
@@ -197,21 +259,32 @@ local function updateReputation()
 	end
 end
 
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+end
+
 local toggle = CreateFrame("Frame", "RepToggle", UIParent)
-toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -3, 0)
+toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -42, 0)
 toggle:EnableMouse(true)
 toggle:SetAlpha(0)
 toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor))end)
 toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-toggle:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-toggle:HookScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+toggle:HookScript("OnEnter", ModifiedBackdrop)
+toggle:HookScript("OnLeave", OriginalBackdrop)
 toggle:SetFrameStrata("MEDIUM")
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, 10)
-toggle.Text:Point("CENTER", toggle, "CENTER", 0, 2)
+toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
 toggle.Text:SetText(T.panelcolor..COMBAT_FACTION_CHANGE)
 toggle:SetWidth(toggle.Text:GetWidth() + 12)
 toggle:SetScript("OnMouseUp", function(self)
@@ -308,6 +381,17 @@ local function updateCurrency()
 	end
 end
 
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+end
+
 local toggle = CreateFrame("Frame", "CurrencyToggle", UIParent)
 toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", RepToggle, "BOTTOMLEFT", -3, 0)
 toggle:EnableMouse(true)
@@ -319,14 +403,13 @@ toggle:CreateShadow("Default")
 toggle:SetAlpha(0)
 toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-toggle:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-toggle:HookScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+toggle:HookScript("OnEnter", ModifiedBackdrop)
+toggle:HookScript("OnLeave", OriginalBackdrop)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, 10)
-toggle.Text:Point("CENTER", toggle, "CENTER", 0, 2)
-toggle.Text:SetText("Currency")
-toggle.Text:SetTextColor(unpack(C["media"].statcolor))
+toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+toggle.Text:SetText(T.panelcolor.."Currency")
 toggle:SetScript("OnMouseUp", function(self)
 	for _, frame in pairs(CurrencyData) do
 		if frame and frame:IsVisible() then
