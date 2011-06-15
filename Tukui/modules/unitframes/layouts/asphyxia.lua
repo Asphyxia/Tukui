@@ -67,9 +67,9 @@ local function Shared(self, unit)
 		-- create a panel
 		local panel = CreateFrame("Frame", nil, self)
 		if T.lowversion then
-			panel:CreatePanel("Default", 186, 21, "BOTTOM", self, "BOTTOM", 0, 0)
+			panel:CreatePanel("Default", 186, 23, "BOTTOM", self, "BOTTOM", 0, 0)
 		else
-			panel:CreatePanel("Default", 250, 21, "BOTTOM", self, "BOTTOM", 0, 0)
+			panel:CreatePanel("Default", 250, 23, "BOTTOM", self, "BOTTOM", 0, 0)
 		end
 		panel:SetFrameLevel(2)
 		panel:SetFrameStrata("MEDIUM")
@@ -125,14 +125,14 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(12)
-		power:Width(190)
+		power:Height(8)
+		power:Width(246)
 		if unit == "player" then
-			power:Point("TOP", health, "BOTTOM", 2, -11)
-			power:Point("TOP", health, "BOTTOM", 0, -11)
+			power:Point("TOP", health, "BOTTOM", 2, -5)
+			power:Point("TOP", health, "BOTTOM", 0, -5)
 		elseif unit == "target" then
-			power:Point("TOP", health, "BOTTOM", 2, -11)
-			power:Point("TOP", health, "BOTTOM", 0, -11)
+			power:Point("TOP", health, "BOTTOM", 2, -5)
+			power:Point("TOP", health, "BOTTOM", 0, -5)
 		end
 		power:SetStatusBarTexture(normTex)
 		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
@@ -391,8 +391,8 @@ local function Shared(self, unit)
 				if T.myclass == "DRUID" then
 
 					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 9, 6)
-					eclipseBar:Size(228, 5)
+					eclipseBar:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
+					eclipseBar:Size(85, 5)
 					eclipseBar:SetFrameStrata("MEDIUM")
 					eclipseBar:SetFrameLevel(8)
 					eclipseBar:SetBackdropBorderColor(0,0,0,0)
@@ -430,7 +430,6 @@ local function Shared(self, unit)
 					
 					eclipseBar.FrameBackdrop = CreateFrame("Frame", nil, eclipseBar)
 					eclipseBar.FrameBackdrop:SetTemplate("Default")
-					eclipseBar.FrameBackdrop:CreateShadow("Default")
 					eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 					eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel() - 1)
@@ -440,15 +439,15 @@ local function Shared(self, unit)
 				if (T.myclass == "WARLOCK" or T.myclass == "PALADIN") then
 		
 					local bars = CreateFrame("Frame", nil, self)
-                    bars:Size(200, 5)
-					bars:Point("TOP", health, "TOP", 1, 12)
+                    bars:Size(15, 8)
+					bars:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
 					bars:SetBackdropBorderColor(0,0,0,0)
 					bars:SetFrameLevel(self:GetFrameLevel() + 3)
-					bars:SetFrameStrata("MEDIUM")
+					bars:SetFrameStrata("HIGH")
 					
 					for i = 1, 3 do					
 						bars[i]=CreateFrame("StatusBar", self:GetName().."_Shard"..i, bars)
-						bars[i]:Height(5)					
+						bars[i]:Height(7)					
 						bars[i]:SetStatusBarTexture(normTex)
 						bars[i]:GetStatusBarTexture():SetHorizTile(false)
 						
@@ -460,20 +459,22 @@ local function Shared(self, unit)
 						
 						if i == 1 then
 							bars[i]:SetPoint("LEFT", bars)
-							bars[i]:SetWidth(T.Scale(180 /3)) 
+							bars[i]:SetWidth(T.Scale(20 /2)) 
 						else
 							bars[i]:Point("LEFT", bars[i-1], "RIGHT", T.Scale(8), 0)
-							bars[i]:SetWidth(T.Scale(180/3))
+							bars[i]:SetWidth(T.Scale(20/2))
 						end
 						
 						bars[i].border = CreateFrame("Frame", nil, bars)
 					    bars[i].border:SetPoint("TOPLEFT", bars[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
 					    bars[i].border:SetPoint("BOTTOMRIGHT", bars[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-					    bars[i].border:SetFrameStrata("BACKGROUND")
-						bars[i].border:SetFrameLevel(2)
+					    bars[i].border:SetFrameStrata("MEDIUM")
+						bars[i].border:SetFrameLevel(6)
+						bars[i]:SetFrameLevel(2)
+						bars[i]:SetFrameStrata("HIGH")
 					    bars[i].border:SetTemplate("Default")
 					    bars[i].border:CreateShadow("Default")
-					   --bars[i].border:SetBackdropColor(.1,.1,.1,1)
+						--bars[i].border:SetBackdropColor(.1,.1,.1,1)
 					end
 					
 					if T.myclass == "WARLOCK" then
@@ -489,21 +490,21 @@ local function Shared(self, unit)
 				if T.myclass == "DEATHKNIGHT" then
 					
 				local Runes = CreateFrame("Frame", nil, self)
-                Runes:Point("LEFT", health, "TOPLEFT", 20, 10)
-                Runes:Size(120, 5)
+                Runes:Point("RIGHT", health, "LEFT", -30, 0)
+                Runes:Size(30, 5)
 				Runes:SetFrameLevel(self:GetFrameLevel() + 3)
 				Runes:SetFrameStrata("MEDIUM")
 
 				for i = 1, 6 do
                     Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-                    Runes[i]:SetHeight(T.Scale(5))
+                    Runes[i]:SetHeight(T.Scale(18))
 
                 if i == 1 then
                         Runes[i]:SetPoint("LEFT", Runes, "LEFT", 0, 0)
-						Runes[i]:SetWidth(T.Scale(176 /6))
+						Runes[i]:SetWidth(T.Scale(30 /6))
                     else
                         Runes[i]:SetPoint("LEFT", Runes[i-1], "RIGHT", T.Scale(5), 0)
-						Runes[i]:SetWidth(T.Scale(176 /6))
+						Runes[i]:SetWidth(T.Scale(30 /6))
                     end
                     Runes[i]:SetStatusBarTexture(normTex)
                     Runes[i]:GetStatusBarTexture():SetHorizTile(false)
@@ -521,9 +522,9 @@ local function Shared(self, unit)
 					Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					Runes[i].border:SetFrameStrata("MEDIUM")
                     Runes[i].border:SetFrameLevel(4)					
-					--Runes[i].border:SetBackdropColor(.1,.1,.1,1 )
 					Runes[i].border:SetTemplate("Default")
 					Runes[i].border:CreateShadow("Default")
+					Runes[i]:SetOrientation'VERTICAL'
                 end
 
                     self.Runes = Runes
@@ -537,12 +538,12 @@ local function Shared(self, unit)
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 						TotemBar[i]:SetFrameLevel(self:GetFrameLevel() + 3)
 						if (i == 1) then
-					    TotemBar[i]:Point("LEFT", health, "TOPLEFT", 20, 10)					else
+					    TotemBar[i]:Point("RIGHT", health, "LEFT", -43, 0) else
 					    TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
-					TotemBar[i]:SetHeight(T.Scale(5))
-					TotemBar[i]:SetWidth(T.Scale(180) / 4)
+					TotemBar[i]:SetHeight(T.Scale(18))
+					TotemBar[i]:SetWidth(T.Scale(20) / 4)
 					TotemBar[i]:SetFrameLevel(4)
 				
 					TotemBar[i]:SetBackdrop(backdrop)
@@ -559,9 +560,11 @@ local function Shared(self, unit)
 					TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					TotemBar[i].border:SetFrameStrata("MEDIUM")
 					TotemBar[i].border:SetFrameLevel(4)
-					--TotemBar[i].border:SetBackdropColor(.1,.1,.1,1)
-					TotemBar[i].border:CreateShadow("Default")
+					TotemBar[i]:SetFrameLevel(4)
+					TotemBar[i]:SetFrameStrata("MEDIUM")
 					TotemBar[i].border:SetTemplate("Default")
+					TotemBar[i].border:CreateShadow("Default")
+					TotemBar[i]:SetOrientation'VERTICAL'
 				end
 				self.TotemBar = TotemBar
 			end
@@ -1820,48 +1823,3 @@ do
 	UnitPopupMenus["FOCUS"] = { "RAID_TARGET_ICON", "CANCEL" }
 	UnitPopupMenus["BOSS"] = { "RAID_TARGET_ICON", "CANCEL" }
 end
-
-
---UNITFRAME LINES FOR PLAYER AND TARGET FRAME
-
--- Unitframe Lines for Player Frame
-local line2 = CreateFrame("Frame", "Tukuiline2", TukuiPlayer)
-Tukuiline2:CreatePanel("Default", 269, 5, "CENTER", player, "CENTER", 0, 14)
-line2:SetFrameLevel(1)
-line2:SetFrameStrata("LOW")
-
-local line3 = CreateFrame("Frame", "Tukuiline3", TukuiPlayer)
-Tukuiline3:CreatePanel("Default", 269, 5, "BOTTOM", Tukuiline2, "BOTTOM", 0, -27)
-line3:SetFrameLevel(1)
-line3:SetFrameStrata("LOW")
-
-local line4 = CreateFrame("Frame", "Tukuiline4", TukuiPlayer)
-Tukuiline4:CreatePanel("Default", 5, 32, "RIGHT", Tukuiline2, "LEFT", 1, -13)
-line4:SetFrameLevel(1)
-line4:SetFrameStrata("LOW")
-
-local line5 = CreateFrame("Frame", "Tukuiline5", TukuiPlayer)
-Tukuiline5:CreatePanel("Default", 5, 32, "LEFT", Tukuiline2, "RIGHT", -1, -13)
-line5:SetFrameLevel(1)
-line5:SetFrameStrata("LOW")
-
--- Unitframe Lines for Target Frame
-local line6 = CreateFrame("Frame", "Tukuiline6", TukuiTarget)
-Tukuiline6:CreatePanel("Default", 268, 5, "CENTER", target, "CENTER", 0, 14)
-line6:SetFrameLevel(1)
-line6:SetFrameStrata("LOW")
-
-local line7 = CreateFrame("Frame", "Tukuiline7", TukuiTarget)
-Tukuiline7:CreatePanel("Default", 268, 5, "BOTTOM", Tukuiline6, "BOTTOM", 0, -27)
-line7:SetFrameLevel(1)
-line7:SetFrameStrata("LOW")
-
-local line8 = CreateFrame("Frame", "Tukuiline8", TukuiTarget)
-Tukuiline8:CreatePanel("Default", 5, 32, "RIGHT", Tukuiline6, "LEFT", 1, -13)
-line8:SetFrameLevel(1)
-line8:SetFrameStrata("LOW")
-
-local line9 = CreateFrame("Frame", "Tukuiline9", TukuiTarget)
-Tukuiline9:CreatePanel("Default", 5, 32, "LEFT", Tukuiline6, "RIGHT", -1, -13)
-line9:SetFrameLevel(1)
-line9:SetFrameStrata("LOW")
