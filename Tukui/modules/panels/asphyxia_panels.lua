@@ -193,8 +193,6 @@ for i = 1, getn(buttons) do
 	frame:CreateShadow("Default")
 	frame:SetScript("OnEnter", function(self) for _, f in pairs(buttons) do _G[f]:SetAlpha(1) end end)
 	frame:SetScript("OnLeave", function(self) for _, f in pairs(buttons) do _G[f]:SetAlpha(0) end end)
-	--frame:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
-	--frame:HookScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 	frame:HookScript("OnEnter", ModifiedBackdrop)
 	frame:HookScript("OnLeave", OriginalBackdrop)
 	
