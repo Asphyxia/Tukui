@@ -210,7 +210,7 @@ WorldStateAlwaysUpFrame:SetPoint("TOP", UIParent, "TOP", 0, T.Scale(-35))
 
 -- TALENT SPEC-SWITCHER (Advanced)
 if C["asphyxia_panels"].asphyxiatalent == true then
-if UnitLevel("player") <= 10 then return end
+if not GetPrimaryTalentTree() then return end
 
 local frame = CreateFrame("Frame", "AsphyxiaTalent", UIParent)
 frame:CreatePanel(nil, 35, 35, "RIGHT", TukuiInfoRight, "LEFT", -3, 9)
