@@ -3,13 +3,13 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C.Addon_Skins.background then
 	-- Addons Background (same size as right chat background)
 	local bg = CreateFrame("Frame", "AddonBGPanel", UIParent)
-	bg:CreatePanel("Transparent", 380, 156, "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -15, 10)
-	bg:CreateShadow("Default")
+	bg:CreatePanel("Default", 382, 135, "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -14, 32)
+	bg:SetFrameStrata("MEDIUM")
 
 	local bgtab = CreateFrame("Frame", nil, bg)
-	bgtab:CreatePanel("Transparent", 1, 20, "TOPLEFT", bg, "TOPLEFT", 5, -5)
-	bgtab:Point("TOPRIGHT", bg, "TOPRIGHT", -5, -5)
-	bgtab:CreateShadow("Default")
+	bgtab:CreatePanel("Default", 1, 17, "TOPLEFT", bg, "TOPLEFT", 0, 0)
+	bgtab:Point("TOPRIGHT", bg, "TOPRIGHT", 0, 0)
+	bgtab:SetFrameStrata("MEDIUM")
 	
 	if C.chat.rightchatbackground then
 		-- Use Chatsize if there is the rightchatbackground

@@ -5,8 +5,8 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = { .02, .02, .02},         	-- default backdrop color of panels
-	["bordercolor"] = {  .150, .150, .150},                    	-- default border color of panels
+	["backdropcolor"] = { .050, .050, .050},         	-- default backdrop color of panels
+	["bordercolor"] = {  .125, .125, .125},                    	-- default border color of panels
 }
 
 C["unitframes"] = {
@@ -16,6 +16,7 @@ C["unitframes"] = {
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
+	["hideunitframes"] = false,
 	["enemyhcolor"] = true,                            	-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                            		-- enable tukui castbar
 	["cblatency"] = true,                             		-- enable castbar latency
@@ -93,8 +94,8 @@ C["actionbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = false,								-- Create a Panel that has the exactly same size as the left chat, placed at the bottomright (for addon placement)
-	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides outfight
+	["background"] = true,								-- Create a Panel that has the exactly same size as the left chat, placed at the bottomright (for addon placement)
+	["combat_toggle"] = true,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,									-- Enable Skada Skin
 	["Omen"] = true,									-- Enable Omen Skin
@@ -194,7 +195,8 @@ C["asphyxia_panels"] = {
 
 C["chat"] = {
 	["enable"] = true,                                  -- blah
-	["whispersound"] = true,                            -- play a sound when receiving whisper
+	["rightchatnumber"] = 4,						-- Rightchat-background is attached to ChatFrameX ..X = value
+	["whispersound"] = true,                           -- play a sound when receiving whisper
 	["background"] = true,								-- Dont make it false!!!
 }
 

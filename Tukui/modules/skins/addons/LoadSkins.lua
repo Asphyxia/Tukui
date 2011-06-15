@@ -26,9 +26,9 @@ local function skinFrame(self, frame)
 			frame:SetFrameStrata("BACKGROUND")
 		end
 	else
-		frame:SetTemplate("Default")
+		frame:SetTemplate("Transparent")
 	end
-	frame:CreateShadow("Default")
+	--frame:CreateShadow("Default")
 end
 local function skinButton(self, button)
 	skinFrame(self, button)
