@@ -24,9 +24,9 @@ T.PP = function(p, obj)
 	local right = TukuiInfoRight
 	local mapleft = TukuiMinimapStatsLeft
 	local mapright = TukuiMinimapStatsRight
-	local middle = TukuiInfoCenter
-	local mleft = TukuiInfoCenterLeft
-	local mright = TukuiInfoCenterRight
+	local center = TukuiInfoCenter
+	local centerleft = TukuiInfoCenterLeft
+	local centerright = TukuiInfoCenterRight
 	
 	if p == 1 then
 		obj:SetParent(left)
@@ -83,29 +83,32 @@ T.PP = function(p, obj)
 		obj:Height(CurrencyStatBottom:GetHeight())
 		obj:Point("CENTER", CurrencyStatBottom, 0, 1)		
 	elseif p == 12 then
-		obj:SetParent(mleft)
-		obj:Height(mleft:GetHeight())
-		obj:Point("CENTER", mleft, 0, 1)
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint("LEFT", center, 30, 0)
+		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('BOTTOM', center)
 	elseif p == 13 then
-		obj:SetParent(middle)
-		obj:SetHeight(middle:GetHeight())
-		obj:SetPoint("LEFT", middle, 20, 5)
-		obj:SetPoint('TOP', middle)
-		obj:SetPoint('BOTTOM', middle)
-	elseif p == 14 then
-		obj:SetParent(middle)
-		obj:Height(middle:GetHeight())
-		obj:Point("CENTER", middle, 0, 2)
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('BOTTOM', center)
+	elseif p ==14 then
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint("RIGHT", center, -30, 0)
+		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('BOTTOM', center)
 	elseif p == 15 then
-		obj:SetParent(middle)
-		obj:SetHeight(middle:GetHeight())
-		obj:SetPoint("RIGHT", middle, -20, 5)
-		obj:SetPoint('TOP', middle)
-		obj:SetPoint('BOTTOM', middle)
+		obj:SetParent(centerleft)
+		obj:SetHeight(centerleft:GetHeight())
+		obj:SetPoint('TOP', centerleft, 0, 2)
+		obj:SetPoint('BOTTOM', centerleft)
 	elseif p == 16 then
-		obj:SetParent(mright)
-		obj:Height(mright:GetHeight())
-		obj:Point("CENTER", mright, 0, 1)		
+		obj:SetParent(centerright)
+		obj:SetHeight(centerright:GetHeight())
+		obj:SetPoint('TOP', centerright, 0, 2)
+		obj:SetPoint('BOTTOM', centerright)
 	end	
 end
 	
