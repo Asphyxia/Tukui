@@ -272,3 +272,19 @@ frame:SetScript("OnMouseDown", ChangeSpec)
 frame:SetScript("OnEnter", StyleTooltip)
 frame:SetScript("OnLeave", function(self) GameTooltip:Hide() self.highlight:Hide() end)
 end
+
+if C["unitframes"].hideunitframes == true then
+local HideUnitframes = function(self, event)
+	if event == "PLAYER_REGEN_DISABLED" then
+		UIFrameFadeIn(TukuiPlayer, 0.5, 0, 1)
+	else
+		UIFrameFadeIn(TukuiPlayer, 0.5, 1, 0)
+	end
+end
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:RegisterEvent("PLAYER_REGEN_ENABLED")
+f:RegisterEvent("PLAYER_REGEN_DISABLED")
+f:SetScript("OnEvent", HideUnitframes)
+end

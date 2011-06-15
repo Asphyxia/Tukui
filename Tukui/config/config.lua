@@ -16,7 +16,7 @@ C["unitframes"] = {
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
-	["hideunitframes"] = false,
+	["hideunitframes"] = false,							-- hide unitframes  when out of combat.
 	["enemyhcolor"] = true,                            	-- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                            		-- enable tukui castbar
 	["cblatency"] = true,                             		-- enable castbar latency
@@ -94,7 +94,7 @@ C["actionbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = true,								-- Create a Panel that has the exactly same size as the left chat, placed at the bottomright (for addon placement)
+	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
 	["combat_toggle"] = true,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,									-- Enable Skada Skin
