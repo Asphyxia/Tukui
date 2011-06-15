@@ -68,6 +68,7 @@
 	<Script file="modules\maps\location_panel.lua"/>
 	
 	<Script file="modules\panels\panels.lua"/>
+	<Script file="modules\panels\asphyxia_panels.lua"/>
 	
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
@@ -193,6 +194,8 @@
 	<Script file="modules\skins\trainer.lua"/>
 	<Script file="modules\skins\watchframe.lua"/>
 	<Script file="modules\skins\worldmap.lua"/>
+	<Script file="modules\skins\tutorial.lua"/>
+	<Script file="modules\skins\colorpicker.lua"/>
 	
 	<Script file="modules\skins\addons\LoadSkins.lua"/>
 	<Script file="modules\skins\addons\addons.lua"/>
