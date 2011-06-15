@@ -96,7 +96,7 @@ local function Shared(self, unit)
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
-		
+	
 		health.value = T.SetFontString(health, font, 10, "THINOUTLINE")
 		health.value:Point("RIGHT", health, "RIGHT", -4, 1)
 		health.PostUpdate = T.PostUpdateHealth
@@ -467,7 +467,7 @@ local function Shared(self, unit)
 						bars[i]:SetFrameStrata("HIGH")
 					    bars[i].border:SetTemplate("Default")
 					    bars[i].border:CreateShadow("Default")
-					   -- bars[i].border:SetBackdropColor(.1,.1,.1,1)
+						--bars[i].border:SetBackdropColor(.1,.1,.1,1)
 					end
 					
 					if T.myclass == "WARLOCK" then
