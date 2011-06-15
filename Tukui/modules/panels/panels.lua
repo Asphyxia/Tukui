@@ -182,7 +182,6 @@ iright:SetFrameLevel(2)
 iright:CreateShadow("Default")
 iright:SetFrameStrata("MEDIUM")
 
-
 -- Alpha horizontal lines because all panels is dependent on this frame.
 ltoabl:SetAlpha(0)
 ltoabr:SetAlpha(0)
@@ -190,12 +189,12 @@ ltoabr:SetAlpha(0)
 -- CHAT BG LEFT
 local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
 chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 20)
-chatleftbg:CreateShadow("")
+chatleftbg:CreateShadow("Default")
 	
 -- CHAT BG RIGHT
 local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
 chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 20)
-chatrightbg:CreateShadow("")
+chatrightbg:CreateShadow("default")
 	
 -- LEFT TAB PANEL
 local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
@@ -271,7 +270,7 @@ if TukuiMinimap then
 end
 --]]
 
---Re-anchor above right chat panel
+--RE-ANCHOR BAR5 & PETBAR ABOVE RIGHT CHAT
 TukuiBar5:ClearAllPoints()
 TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 3)
 
@@ -281,7 +280,7 @@ petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
 TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", tabsbgright, "TOP", 0, 4) end)
 TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 3) end)
 
---Reposition Petbar & Rightbar (if chat right is not visible)
+--REPOSITION BAR5 & PETBAR (if chat right is not visible)
 local function UpdateBar5()
 	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then

@@ -5,8 +5,8 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = { 0, 0, 0},         	-- default backdrop color of panels
-	["bordercolor"] = { .125, .125, .125 },                    	-- default border color of panels
+	["backdropcolor"] = { .02, .02, .02},         	-- default backdrop color of panels
+	["bordercolor"] = {  .150, .150, .150},                    	-- default border color of panels
 }
 
 C["unitframes"] = {
@@ -134,7 +134,7 @@ C["cooldown"] = {
 
 C["datatext"] = {
 	["fps_ms"] = 0,                                     -- show fps and ms on panels
-	["system"] = 3,                                     -- show total memory and others systems infos on panels
+	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 16,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
 	["wowtime"] = 7,                                    -- show time on panels
@@ -154,7 +154,7 @@ C["datatext"] = {
 	["micromenu"] = 15,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
 	["specswitcher"] = 0,								-- show talents on panels
-	["profession"] = 0,									-- show profession
+	["profession"] = 3,									-- show profession
 	
 	-- Color Datatext
 	["classcolored"] = false,							-- classcolored datatext
