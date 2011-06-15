@@ -199,24 +199,51 @@ local function positionsetup()
 end
 
 local v = CreateFrame("Button", "TukuiVersionFrame", UIParent)
-v:SetSize(300, 36)
+v:SetSize(210, 34)
 v:SetPoint("CENTER")
-v:SetTemplate("Default")
+v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347Tukui Asphyxia's Edit - version:|r 2.2  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.5  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
 
-local f = CreateFrame("Frame", "TukuiInstallFrame", UIParent)
+local f = CreateFrame("Frame", "AsphyxiaUIInstallFrame", UIParent)
 f:SetSize(400, 400)
 f:SetPoint("CENTER")
 f:SetTemplate("Default")
 f:CreateShadow("Default")
 f:Hide()
+
+local icon1 = CreateFrame("Frame", "AsphyxiaTest", f)
+icon1:CreatePanel(nil, 58, 58, "BOTTOMRIGHT", f, "TOPRIGHT", 0, 3)
+icon1:SetFrameStrata("HIGH")
+
+icon1.bg = icon1:CreateTexture(nil, "ARTWORK")
+icon1.bg:Point("TOPLEFT", 2, -2)
+icon1.bg:Point("BOTTOMRIGHT", -2, 2)
+icon1.bg:SetTexture([[Interface\AddOns\Tukui\medias\textures\asphyxia]])
+
+local icon2 = CreateFrame("Frame", "AsphyxiaTest", f)
+icon2:CreatePanel(nil, 58, 58, "BOTTOMLEFT", f, "TOPLEFT", 0, 3)
+icon2:SetFrameStrata("HIGH")
+
+icon2.bg = icon2:CreateTexture(nil, "ARTWORK")
+icon2.bg:Point("TOPLEFT", 2, -2)
+icon2.bg:Point("BOTTOMRIGHT", -2, 2)
+icon2.bg:SetTexture([[Interface\AddOns\Tukui\medias\textures\asphyxia]])
+
+local title = CreateFrame("Frame", "TukuiInstallTitle", f)
+title:CreatePanel(nil, f:GetWidth() - 122, 30, "BOTTOM", f, "TOP", 0, 3)
+title:SetFrameStrata("HIGH")
+
+local name = title:CreateFontString(nil, "OVERLAY")
+name:SetFont(C.media.font, 16)
+name:SetPoint("CENTER", title, 0, 0)
+name:SetText("|cff00AAFFAsphyxiaUI|r")
 
 local sb = CreateFrame("StatusBar", nil, f)
 sb:SetStatusBarTexture(C.media.normTex)
@@ -570,6 +597,10 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 	if (IsAddOnLoaded("Tukui_Raid") and IsAddOnLoaded("Tukui_Raid_Healing")) then
 		StaticPopup_Show("TUKUIDISABLE_RAID")
 	end
+	
+	local playerName = UnitName("player")
+	print("Whats up, |cff00AAFF"..playerName.."!|r Thank you for using |cffFF6347AsphyxiaUI|r |cff00AAFF(A heavily modified version of Tukui).")
+	print("For detailed Information |cff00FFFFvisit www.tukui.org or https://github.com/Asphyxia")
 end)
 
 SLASH_TUTORIAL1 = "/uihelp"
