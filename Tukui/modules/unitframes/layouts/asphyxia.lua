@@ -386,7 +386,7 @@ local function Shared(self, unit)
 				ReputationFrame:SetFrameLevel(self.Reputation:GetFrameLevel() - 1)
 			end
 			
-			-- show druid mana when shapeshifted in bear, cat or whatever
+		-- show druid mana when shapeshifted in bear, cat or whatever
 			if C["unitframes"].classbar then
 				if T.myclass == "DRUID" then
 
@@ -486,25 +486,25 @@ local function Shared(self, unit)
 					end
 				end	
 
-				-- deathknight runes
+			-- deathknight runes
 				if T.myclass == "DEATHKNIGHT" then
 					
 				local Runes = CreateFrame("Frame", nil, self)
-                Runes:Point("RIGHT", health, "LEFT", -30, 0)
+                Runes:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
                 Runes:Size(30, 5)
 				Runes:SetFrameLevel(self:GetFrameLevel() + 3)
 				Runes:SetFrameStrata("MEDIUM")
 
 				for i = 1, 6 do
                     Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-                    Runes[i]:SetHeight(T.Scale(18))
+                    Runes[i]:SetHeight(T.Scale(7))
 
                 if i == 1 then
                         Runes[i]:SetPoint("LEFT", Runes, "LEFT", 0, 0)
-						Runes[i]:SetWidth(T.Scale(30 /6))
+						Runes[i]:SetWidth(T.Scale(20 /2))
                     else
                         Runes[i]:SetPoint("LEFT", Runes[i-1], "RIGHT", T.Scale(5), 0)
-						Runes[i]:SetWidth(T.Scale(30 /6))
+						Runes[i]:SetWidth(T.Scale(20 /2))
                     end
                     Runes[i]:SetStatusBarTexture(normTex)
                     Runes[i]:GetStatusBarTexture():SetHorizTile(false)
@@ -529,8 +529,8 @@ local function Shared(self, unit)
 
                     self.Runes = Runes
                 end
-				
-				-- shaman totem bar
+		
+		-- shaman totem bar
 				if T.myclass == "SHAMAN" then
 				local TotemBar = {}
 					TotemBar.Destroy = true
@@ -538,12 +538,12 @@ local function Shared(self, unit)
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 						TotemBar[i]:SetFrameLevel(self:GetFrameLevel() + 3)
 						if (i == 1) then
-					    TotemBar[i]:Point("RIGHT", health, "LEFT", -43, 0) else
+					    TotemBar[i]:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7) else
 					    TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
-					TotemBar[i]:SetHeight(T.Scale(18))
-					TotemBar[i]:SetWidth(T.Scale(20) / 4)
+					TotemBar[i]:SetHeight(T.Scale(7))
+					TotemBar[i]:SetWidth(T.Scale(20) / 2)
 					TotemBar[i]:SetFrameLevel(4)
 				
 					TotemBar[i]:SetBackdrop(backdrop)
@@ -568,7 +568,7 @@ local function Shared(self, unit)
 				end
 				self.TotemBar = TotemBar
 			end
-		end	
+		end
 			
 			-- script for pvp status and low mana
 			self:SetScript("OnEnter", function(self)
@@ -1567,7 +1567,7 @@ local function Shared(self, unit)
 			Trinket.trinketUseAnnounce = true
 			self.Trinket = Trinket
 		end
-		
+
 		-- boss & arena frames cast bar!
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", 23, -1)
