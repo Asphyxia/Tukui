@@ -1,21 +1,29 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+-- Very simple threat bar for T.
+
+-- cannot work without Info Right DataText Panel.
 if not TukuiInfoRight then return end
 
---[[local aggroColors = {
+local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},
 	[2] = {166/255, 171/255,  26/255},
 	[3] = {163/255,  24/255,  24/255},
-}]]
+}
 
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoCenter)
-TukuiThreatBar:Point("TOPLEFT", 2, -2)
-TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
-
+-- create the bar
+local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", UIParent)
 TukuiThreatBar:SetStatusBarTexture(C.media.normTex)
 TukuiThreatBar:GetStatusBarTexture():SetHorizTile(false)
 TukuiThreatBar:SetBackdrop({bgFile = C.media.blank})
 TukuiThreatBar:SetBackdropColor(0, 0, 0, 1)
 TukuiThreatBar:SetMinMaxValues(0, 100)
+TukuiThreatBar:SetOrientation("HORIZONTAL")
+
+local TukuiThreatBarBG = CreateFrame("Frame", nil, TukuiThreatBar)
+TukuiThreatBarBG:CreatePanel("Default", TukuiBar1:GetWidth(), 17, "TOP", TukuiBar1, "BOTTOM", 0, -3)
+
+TukuiThreatBar:Point("TOPLEFT", TukuiThreatBarBG, 2, -2)
+TukuiThreatBar:Point("BOTTOMRIGHT", TukuiThreatBarBG, -2, 2)
 
 TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 10)
 TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
@@ -23,11 +31,8 @@ TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
 TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 10)
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
 TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
-	  
-TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
-TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
-TukuiThreatBar.bg:SetTexture(0, 0, 0)
 
+-- event func
 local function OnEvent(self, event, ...)
 	local party = GetNumPartyMembers()
 	local raid = GetNumRaidMembers()
@@ -80,3 +85,5 @@ TukuiThreatBar.unit = "player"
 TukuiThreatBar.tar = TukuiThreatBar.unit.."target"
 TukuiThreatBar.Colors = aggroColors
 TukuiThreatBar:SetAlpha(0)
+
+-- THAT'S IT!
