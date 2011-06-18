@@ -12,7 +12,7 @@ C["general"] = {
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Tukui",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
+	["style"] = "Asphyxia",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -94,8 +94,8 @@ C["actionbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
-	["combat_toggle"] = true,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
+	["background"] = false,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
+	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,									-- Enable Skada Skin
 	["Omen"] = true,									-- Enable Omen Skin
