@@ -1,5 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
+local DataVisibility = 1
+
 ---------------------------------------------------------
 ---[[ ADDITIONAL Asphyxia PANELS ]]---
 ---------------------------------------------------------
@@ -273,6 +275,8 @@ frame:SetScript("OnEnter", StyleTooltip)
 frame:SetScript("OnLeave", function(self) GameTooltip:Hide() self.highlight:Hide() end)
 end
 
+
+-- UNITFRAME SHOW/HIDE
 if C["unitframes"].hideunitframes == true then
 local HideUnitframes = function(self, event)
 	if event == "PLAYER_REGEN_DISABLED" then
@@ -288,3 +292,25 @@ f:RegisterEvent("PLAYER_REGEN_ENABLED")
 f:RegisterEvent("PLAYER_REGEN_DISABLED")
 f:SetScript("OnEvent", HideUnitframes)
 end
+
+-- DATATEXT PANEL TOGGLE (Button)
+local cp = "|cff9a1212-|r" 
+local cm = "|cff9a1212+|r" 
+local icb = CreateFrame("Frame", "InfoCenterButton", UIParent)
+icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundLeft, "TOPRIGHT", -3, -4)
+icb:EnableMouse(true)
+icb.f = icb:CreateFontString(nil, overlay)
+icb.f:SetPoint("CENTER")
+icb.f:SetFont(C["media"].pixelfont, 15, "THINOUTLINE")
+icb.f:SetText(cp)
+icb.f:Point("CENTER", 1, 1)
+icb:SetScript("OnMouseDown", function(self)
+	ToggleFrame(icenter)
+	ToggleFrame(icenterleft)
+	ToggleFrame(icenterright)
+	if icenter:IsShown() then
+		self.f:SetText(cp)
+	else
+		self.f:SetText(cm)
+	end
+end)

@@ -8,7 +8,7 @@
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
-## SavedVariablesPerCharacter: TukuiDataPerChar
+## SavedVariablesPerCharacter: TukuiDataPerChar, PanelState
 ## OptionalDeps: Tukui_ConfigUI, !ClassColors, Clique, Skada, TinyDPS, Recount, Omen, KLE
 ## X-oUF: oUFTukui
 
