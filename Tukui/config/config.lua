@@ -5,14 +5,15 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = { .050, .050, .050},         	-- default backdrop color of panels
+	["backdropcolor"] = {.050, .050, .050},         	-- default backdrop color of panels
 	["bordercolor"] = {  .125, .125, .125},                    	-- default border color of panels
+	["blizzardreskin"] = true								-- reskin all Blizzard frames
 }
 
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Asphyxia",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
+	["style"] = "Asphyxia3",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -31,6 +32,7 @@ C["unitframes"] = {
 	["showtotalhpmp"] = false,                          	-- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              	-- enable smooth bar
 	["charportrait"] = true,                           		-- you DO NOT want to turn portrait off if you are using "Asphyxia2" style.
+	["classicon"] = true, 										-- Class icon on unitframes.
 	["maintank"] = true,                               		-- enable maintank
 	["mainassist"] = true,                             		-- enable mainassist
 	["unicolor"] = true,                              			-- enable unicolor theme
@@ -79,6 +81,11 @@ C["auras"] = {
 }
 
 C["actionbar"] = {
+	["custombar"] = {								
+		["enable"] = true,								-- Herp
+		["primary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
+		["secondary"] = {},								-- DO NOT CHANGE THIS SETTING HERE! Setup in the profiles.lua either based on class or toon name
+	},
 	["enable"] = true,                                        -- enable tukui action bars
 	["hotkey"] = true,                                		   -- enable hotkey display on buttons.
 	["macrotext"] = true,								   -- display macro text on buttons.

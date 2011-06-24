@@ -30,6 +30,7 @@
 	<Script file="modules\unitframes\plugins\oUF_Trinkets\oUF_Trinkets.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_RaidDebuffs\oUF_RaidDebuffs.lua"/>	
 	<Script file="modules\unitframes\plugins\oUF_WeakenedSoul\oUF_WeakenedSoul.lua"/>	
+	<Script file="modules\unitframes\plugins\oUF_ClassIcons\oUF_ClassIcons.lua"/>
 	<Script file="modules\unitframes\templates\colors.lua"/>
 	
 	<Script file="core\uiscale.lua"/>
@@ -99,6 +100,7 @@
 	<Script file="modules\extras\mail.lua"/>
 	<Script file="modules\extras\tooltipicon.lua"/>
 	<Script file="modules\extras\raidutility.lua"/>
+	<Script file="modules\extras\customactionbar.lua"/>	
 	
 	<Script file="modules\buffs\raidbuffsreminder.lua"/>
 	

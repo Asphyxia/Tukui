@@ -1,0 +1,7 @@
+## Interface: 30200
+## Title: oUF_ClassIcons
+## Author: cogumel0
+## Version: 1.0
+## Dependencies: oUF
+## Notes: oUF Class Icons support
+oUF_ClassIcons.lua
