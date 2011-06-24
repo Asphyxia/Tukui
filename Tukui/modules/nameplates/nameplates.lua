@@ -480,10 +480,15 @@ end
 
 --Health Text, also border coloring for certain plates depending on health
 local function ShowHealth(frame, ...)
+
 	-- show current health value
 	local minHealth, maxHealth = frame.healthOriginal:GetMinMaxValues()
 	local valueHealth = frame.healthOriginal:GetValue()
 	local d =(valueHealth/maxHealth)*100
+	
+	-- Match values
+	frame.hp:SetValue(valueHealth - 1)	--Bug Fix 4.1
+	frame.hp:SetValue(valueHealth)
 	
 	if C["nameplate"].showhealth == true then
 		frame.hp.value:SetText(T.ShortValue(valueHealth).." - "..(string.format("%d%%", math.floor((valueHealth/maxHealth)*100))))
