@@ -26,7 +26,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(23*C["unitframes"].gridscale*T.raidscale)
+	health:Height(20*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(C["media"].normTex)
 	self.Health = health
 	
