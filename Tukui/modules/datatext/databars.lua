@@ -59,10 +59,16 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = GetCVar("MaxFPS")
 		self:SetValue(value)
 		HydraData[1].Text:SetText("FPS: "..value)
-		self:SetStatusBarColor(0.3, 0.2, 1)
+		if value * 100 / max >= 50 then
+			self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+		elseif value * 100 / max < 75 and value * 100 / max > 40 then
+			self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
+		else
+			self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+		end
 		LastUpdate = 1
 	end
-end)
+end )
 
 -- MS 
 HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
@@ -74,10 +80,16 @@ HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = 200
 		self:SetValue(value)
 		HydraData[2].Text:SetText("MS: "..value)			
-		self:SetStatusBarColor(0.3, 0.2, 1)
+		if value * 100 / max <= 35 then
+			self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+		elseif value * 100 / max > 35 and value * 100 / max < 75 then
+			self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
+		else
+			self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+		end
 		LastUpdate = 1
 	end
-end)
+end )
 
 -- MEMORY
 local f = HydraData[3]
@@ -173,8 +185,14 @@ HydraData[4].Status:SetScript("OnEvent", function(self)
 	self:SetMinMaxValues(0, 100)
 	self:SetValue(value)
 	HydraData[4].Text:SetText("Durability: "..value.."%")			
-	self:SetStatusBarColor(0.3, 0.2, 1)
-end)
+	if value >= 75 then
+		self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+	elseif value < 75 and value > 40 then
+		self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
+	else
+		self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+	end
+end )
 HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
 HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -271,7 +289,7 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "RepToggle", UIParent)
-toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -42, 0)
+toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -25, 0)
 toggle:EnableMouse(true)
 toggle:SetAlpha(0)
 toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor))end)
