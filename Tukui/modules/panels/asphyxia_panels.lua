@@ -110,7 +110,7 @@ local helpbutton = CreateFrame("Button", "TukuiHelpButton", TukuiMinimap, "Secur
 helpbutton:CreatePanel("Default", 13, 17, "RIGHT", Tukuiwatch, "LEFT", -3, 0)
 helpbutton:CreateShadow("Default")
 helpbutton:SetAttribute("type", "macro")
-helpbutton:SetAttribute("macrotext", "/help")
+helpbutton:SetAttribute("macrotext", "/ahelp")
 helpbutton:SetFrameStrata("MEDIUM")
 helpbutton:SetFrameLevel(2)
 
@@ -118,19 +118,42 @@ helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, 10)
 helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 0.5)
 helpbutton.Text:SetText(T.panelcolor.."H")
 
+-- Animate function
+TukuiAsphyxiaHelpFrame:Animate( 0, 500, 0.8 )
+TukuiHelpButton:EnableMouse( true )
+TukuiHelpButton:SetScript("OnClick", function(self)
+if InCombatLockdown() then return end
+
+if TukuiAsphyxiaHelpFrame:IsVisible() then
+TukuiAsphyxiaHelpFrame:SlideOut()
+else
+TukuiAsphyxiaHelpFrame:SlideIn()
+end
+end )
+
 -- ADDONS BUTTON
 local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureActionButtonTemplate")
 adbutton:CreatePanel("Default", 100, 17, "BOTTOM", UIParent, "BOTTOM", 0, 12)
 adbutton:SetAttribute("type", "macro")
 adbutton:SetAttribute("macrotext", "/al")
 
-adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 10)
+adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 10, "OUTLINE")
 adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 0.5)
 adbutton.Text:SetText(T.panelcolor..ADDONS)
+adbutton.Text:SetShadowColor( 0, 0, 0 )
+adbutton.Text:SetShadowOffset(1.25, -1.25)
+
+--[[adbutton.Status = CreateFrame( "StatusBar", "HydraDataStatus", adbutton )
+adbutton.Status:SetFrameLevel( 12 )
+adbutton.Status:SetStatusBarTexture( C["media"].normTex )
+adbutton.Status:SetMinMaxValues( 0, 100 )
+adbutton.Status:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+adbutton.Status:Point( "TOPLEFT", adbutton, "TOPLEFT", 2, -2 )
+adbutton.Status:Point( "BOTTOMRIGHT", adbutton, "BOTTOMRIGHT", -2, 2 )--]]
 
 -- RESETUI BUTTON
 local resetuibutton = CreateFrame("Button", "TukuiResetUIButton", UIParent, "SecureActionButtonTemplate")
-resetuibutton:CreatePanel("Default", 55, 17, "LEFT", TukuiAddonsButton, "RIGHT", 5, 0)
+resetuibutton:CreatePanel("Default", 60, 17, "LEFT", TukuiAddonsButton, "RIGHT", 5, 0)
 resetuibutton:SetAttribute("type", "macro")
 resetuibutton:SetAttribute("macrotext", "/resetui")
 
@@ -140,7 +163,7 @@ resetuibutton.Text:SetText(T.panelcolor.."Reset UI")
 
 -- RELOADUI BUTTON
 local rluibutton = CreateFrame("Button", "TukuiReloadUIButton", UIParent, "SecureActionButtonTemplate")
-rluibutton:CreatePanel("Default", 55, 17, "LEFT", resetuibutton, "RIGHT", 5, 0)
+rluibutton:CreatePanel("Default", 60, 17, "LEFT", resetuibutton, "RIGHT", 5, 0)
 rluibutton:SetAttribute("type", "macro")
 rluibutton:SetAttribute("macrotext", "/rl")
 
@@ -150,7 +173,7 @@ rluibutton.Text:SetText(T.panelcolor.."Reload UI")
 
 -- CONFIG BUTTON
 local configbutton = CreateFrame("Button", "TukuiConfigButton", UIParent, "SecureActionButtonTemplate")
-configbutton:CreatePanel("Default", 55, 17, "RIGHT", TukuiAddonsButton, "LEFT", -5, 0)
+configbutton:CreatePanel("Default", 60, 17, "RIGHT", TukuiAddonsButton, "LEFT", -5, 0)
 configbutton:SetAttribute("type", "macro")
 configbutton:SetAttribute("macrotext", "/tc")
 
@@ -160,7 +183,7 @@ configbutton.Text:SetText(T.panelcolor.."Config UI")
 
 -- MOVEUI BUTTON
 local moveuibutton = CreateFrame("Button", "TukuiMoveUIButton", UIParent, "SecureActionButtonTemplate")
-moveuibutton:CreatePanel("Default", 55, 17, "RIGHT", configbutton, "LEFT", -5, 0)
+moveuibutton:CreatePanel("Default", 60, 17, "RIGHT", configbutton, "LEFT", -5, 0)
 moveuibutton:SetAttribute("type", "macro")
 moveuibutton:SetAttribute("macrotext", "/mtukui")
 
@@ -199,8 +222,14 @@ for i = 1, getn(buttons) do
 	frame:HookScript("OnLeave", OriginalBackdrop)
 	
 	if i == 6 then
-		frame:SetFrameLevel(0)
-		frame.shadow:Hide()
+	frame:SetScript("OnEnter", function()
+	if InCombatLockdown() then return end
+		frame:FadeIn()
+	end)
+
+	frame:SetScript("OnLeave", function()
+		frame:FadeOut()
+	end)
 	end
 end
 
@@ -213,7 +242,7 @@ if C["asphyxia_panels"].asphyxiatalent == true then
 if not GetPrimaryTalentTree() then return end
 
 local frame = CreateFrame("Frame", "AsphyxiaTalent", UIParent)
-frame:CreatePanel(nil, 35, 35, "RIGHT", TukuiInfoRight, "LEFT", -3, 9)
+frame:CreatePanel(nil, 20, 20, "RIGHT", TukuiInfoRight, "LEFT", -3, 0)
 frame:EnableMouse(true)
 
 frame.tex = frame:CreateTexture(nil, "ARTWORK")
@@ -296,7 +325,7 @@ end
 -- DATATEXT PANEL TOGGLE (Button)
 local cp = "|cff9a1212-|r" 
 local cm = "|cff9a1212+|r" 
-local icb = CreateFrame("Frame", "InfoCenterButton", UIParent)
+local icb = CreateFrame("Frame", "InfoCenterButton", TukuiChatBackgroundLeft)
 icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundLeft, "TOPRIGHT", -3, -4)
 icb:EnableMouse(true)
 icb.f = icb:CreateFontString(nil, overlay)
