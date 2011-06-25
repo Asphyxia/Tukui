@@ -192,7 +192,7 @@ local SkinBoss=function()
 
 		if not bar.styled then
 			bar:SetHeight(buttonsize)
-			bar:SetTemplate(C.layouts.border)
+			bar:SetTemplate("Default")
 			if drawshadow then
 				bar:CreateShadow()
 			end
