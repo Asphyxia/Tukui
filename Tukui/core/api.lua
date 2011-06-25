@@ -314,6 +314,14 @@ local function SlideOut(self)
 	self.anim.out1:Play()
 end
 
+local function FadeIn(f)
+	UIFrameFadeIn(f, .4, f:GetAlpha(), 1)
+end
+	
+local function FadeOut(f)
+	UIFrameFadeOut(f, .8, f:GetAlpha(), 0)
+end
+
 local function addapi(object)
 	local mt = getmetatable(object).__index
 	if not object.Size then mt.Size = Size end
@@ -332,6 +340,8 @@ local function addapi(object)
 	if not object.Animate then mt.Animate = Animate end
 	if not object.SlideIn then mt.SlideIn = SlideIn end
 	if not object.SlideOut then mt.SlideOut = SlideOut end
+	if not object.FadeIn then mt.FadeIn = FadeIn end
+	if not object.FadeOut then mt.FadeOut = FadeOut end
 end
 
 local handled = {["Frame"] = true}

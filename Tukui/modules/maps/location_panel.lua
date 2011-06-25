@@ -8,6 +8,14 @@ locpanel:CreateShadow("Default")
 locpanel:SetFrameLevel(4)
 locpanel:EnableMouse(true)
 
+--[[locpanel .Status = CreateFrame( "StatusBar", "HydraDataStatus", locpanel  )
+locpanel .Status:SetFrameLevel( 12 )
+locpanel .Status:SetStatusBarTexture( C["media"].normTex )
+locpanel .Status:SetMinMaxValues( 0, 100 )
+locpanel .Status:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+locpanel .Status:Point( "TOPLEFT", locpanel , "TOPLEFT", 2, -2 )
+locpanel .Status:Point( "BOTTOMRIGHT", locpanel , "BOTTOMRIGHT", -2, 2 )--]]
+
 local xcoords = CreateFrame("Frame", "TukuiXCoordsPanel", locpanel)
 xcoords:CreatePanel("Default", 35, 19, "RIGHT", locpanel, "LEFT", 1, 0)
 xcoords:CreateShadow("Default")

@@ -159,3 +159,10 @@ oUF.Tags['Tukui:afk'] = function(unit)
 		return CHAT_FLAG_AFK
 	end
 end
+
+oUF.TagEvents['Tukui:offline'] = 'PLAYER_FLAGS_CHANGED'
+oUF.Tags['Tukui:offline'] = function(unit)
+	if not UnitIsConnected(unit) then
+		return L.unitframes_ouf_offline
+	end
+end

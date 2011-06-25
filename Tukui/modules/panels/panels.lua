@@ -212,7 +212,7 @@ tabsbgright:CreateShadow("")
 
 -- CHAT ANIMATION
 local chat = {"TukuiChatBackgroundLeft", "TukuiChatBackgroundRight"}
-local info = {"TukuiInfoLeft", "TukuiInfoRight"}
+local info = {"TukuiInfoLeft", "TukuiInfoRight", "TukuiInfoLeftBattleGround"}
 
 for i = 1, #chat do
 	_G[chat[i]]:Animate(0, -140, 0.4)
@@ -275,7 +275,7 @@ TukuiBar5:ClearAllPoints()
 TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 3)
 
 petbg:ClearAllPoints()
-petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
+petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 
 TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", tabsbgright, "TOP", 0, 4) end)
 TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 3) end)
@@ -296,26 +296,45 @@ local function UpdatePetbar()
 	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
 		if TukuiBar5:IsVisible() then
-			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
+			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 		else
-			TukuiPetBar:Point("BOTTOM", tabsbgright, "TOP", 0, 3)
+			TukuiPetBar:Point("BOTTOM", tabsbgright, "TOP", 0, 4)
 		end
 	else
 		if TukuiBar5:IsVisible() then
-			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
+			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 		else
-			TukuiPetBar:Point("BOTTOM", iright, "TOP", 0, 3)
+			TukuiPetBar:Point("BOTTOM", iright, "TOP", 0, 4)
 		end
 	end
 end
 CreateFrame("Frame"):SetScript("OnUpdate", UpdatePetbar)
 	
+--[[--BATTLEGROUND STATS FRAME
+if C["datatext"].battleground == true then
+	local bgframe = CreateFrame("Frame", "TukuiInfoLeftBattleGround", UIParent)
+	bgframe:CreatePanel("Invisible", 1, 1, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
+	bgframe:SetAllPoints(ileft)
+	bgframe:SetFrameStrata("MEDIUM")
+	bgframe:SetFrameLevel(6)
+	bgframe:EnableMouse(true)
+end	--]]
+
 --BATTLEGROUND STATS FRAME
 if C["datatext"].battleground == true then
 	local bgframe = CreateFrame("Frame", "TukuiInfoLeftBattleGround", UIParent)
-	bgframe:CreatePanel("Default", 1, 1, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
+	bgframe:CreatePanel("Invisible", 1, 1, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
 	bgframe:SetAllPoints(ileft)
-	bgframe:SetFrameStrata("HIGH")
-	bgframe:SetFrameLevel(0)
+	bgframe:SetFrameStrata("MEDIUM")
+	bgframe:SetFrameLevel(6)
 	bgframe:EnableMouse(true)
+	bgframe:SetScript("OnMouseDown", function()
+	if TukuiChatBackgroundLeft:IsVisible() then
+		TukuiChatBackgroundLeft:SlideOut()
+		TukuiChatBackgroundRight:SlideOut()
+	else
+		TukuiChatBackgroundLeft:SlideIn()
+		TukuiChatBackgroundRight:SlideIn()
+	end
+end)
 end
