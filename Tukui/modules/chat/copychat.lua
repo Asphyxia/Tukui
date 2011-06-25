@@ -13,7 +13,7 @@ local isf = nil
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
 	frame:SetTemplate("Transparent")
-	frame:Width(TukuiBar1:GetWidth())
+	frame:Width(575)
 	frame:Height(250)
 	frame:SetScale(1)
 	frame:Point("BOTTOM", TukuiBar1, "BOTTOM", 0, 0)
