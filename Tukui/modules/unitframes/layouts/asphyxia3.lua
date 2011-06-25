@@ -192,7 +192,7 @@ local function Shared(self, unit)
 		--]]
 
 			-- portraits
-		if (C["unitframes"].charportrait == true) then
+		--[[if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
 			portrait:SetFrameLevel(8)
 			portrait:SetHeight(5)
@@ -214,7 +214,39 @@ local function Shared(self, unit)
 			PFrame:CreateShadow("Default")
 			PFrame:SetFrameLevel(2)
 			self.PFrame = PFrame
+		end--]]
+		
+			-- portraits
+		if (C["unitframes"].charportrait == true) then
+			local portrait = CreateFrame("PlayerModel", nil, power)
+			portrait.PostUpdate = function(self) self:SetAlpha(0) self:SetAlpha(0.35) end -- edit the 0.15 to the alpha you want
+			portrait:SetAllPoints(power)
+			table.insert(self.__elements, T.HidePortrait)
+			self.Portrait = portrait
 		end
+		
+	if (C["unitframes"].classicon == true) then
+		local classicon = CreateFrame("Frame", self:GetName().."_ClassIconBorder", self)
+		classicon:CreateShadow("Default")
+		if unit == "player" then
+			if C.unitframes.charportrait then
+				classicon:CreatePanel("Default", 34, 34, "TOPLEFT", health, "TOPRIGHT", 14,2)
+			else
+				classicon:CreatePanel("Default", 34, 34, "TOPRIGHT", health, "TOPLEFT", -5,2)
+			end
+		elseif unit == "target" then
+			if C.unitframes.charportrait then
+				classicon:CreatePanel("Default", 34, 34, "TOPRIGHT", health, "TOPLEFT", -14,2)
+			else
+				classicon:CreatePanel("Default", 34, 34, "TOPLEFT", health, "TOPRIGHT", 5,2)
+			end
+		end
+
+		local class = classicon:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
+		class:Point("TOPLEFT", 2, -2)
+		class:Point("BOTTOMRIGHT", -2, 2)
+		self.ClassIcon = class
+	end	
 		
 		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
 			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
@@ -302,8 +334,9 @@ local function Shared(self, unit)
 				local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 				Experience:SetStatusBarTexture(normTex)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
-				Experience:Size(TukuiPlayer:GetWidth()+254, 12)
-				Experience:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -10)
+				Experience:Width(5)
+				Experience:Height(151)					
+				Experience:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
 				Experience:SetFrameLevel(10)
 				Experience.Tooltip = true
 				self.Experience = Experience
@@ -316,12 +349,12 @@ local function Shared(self, unit)
 				ExperienceBG:SetTexture(normTex)
 				ExperienceBG:SetVertexColor(.1,.1,.1,1)
 
-				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
+				--[[Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
 				Experience.Text:SetFont(font, 10, "THINOUTLINE")
-				Experience.Text:SetPoint('CENTER', 0, 1, self.Experience)
+				Experience.Text:SetPoint('CENTER', self.Experience)
 				Experience.Text:SetShadowOffset(T.mult, -T.mult)
 				self.Experience.Text = Experience.Text
-				self.Experience.PostUpdate = T.ExperienceText
+				self.Experience.PostUpdate = T.ExperienceText--]]
 
 				self.Experience.Rested = CreateFrame('StatusBar', nil, self.Experience)
 				self.Experience.Rested:SetAllPoints(self.Experience)
@@ -348,21 +381,22 @@ local function Shared(self, unit)
 			if T.level == MAX_PLAYER_LEVEL then
 				local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 				Reputation:SetStatusBarTexture(normTex)
-				Reputation:Size(TukuiPlayer:GetWidth() +254, 12)
-				Reputation:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -10)
+				Reputation:Width(5)
+				Reputation:Height(151)
+				Reputation:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
 				Reputation:SetFrameLevel(10)
 				local ReputationBG = Reputation:CreateTexture(nil, 'BORDER')
 				ReputationBG:SetAllPoints()
 				ReputationBG:SetTexture(normTex)
 				ReputationBG:SetVertexColor(.1,.1,.1,1)
 
-				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
+				--[[Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
 				Reputation.Text:SetFont(font, 10, "THINOUTLINE")
-				Reputation.Text:SetPoint('CENTER', 0, 1, Reputation)
+				Reputation.Text:SetPoint('CENTER', Reputation)
 				Reputation.Text:SetShadowOffset(T.mult, -T.mult)
 				Reputation.Text:Show()
 				Reputation.PostUpdate = T.UpdateReputation
-				Reputation.Text = Reputation.Text
+				Reputation.Text = Reputation.Text--]]
 
 				Reputation.PostUpdate = T.UpdateReputationColor
 				Reputation.Tooltip = true
@@ -586,6 +620,7 @@ local function Shared(self, unit)
 			Name:Point("LEFT", panel, "LEFT", 4, 0)
 			Name:SetJustifyH("LEFT")
 			Name:SetFont(font, 10, "THINOUTLINE")
+			Name:SetShadowOffset(1.25, -1.25)
 
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
@@ -1227,7 +1262,7 @@ local function Shared(self, unit)
 		self.Castbar.Time = castbar.time
 		self.Castbar.Icon = castbar.icon
 	end
-	
+
 	------------------------------------------------------------------------
 	--	Focus target unit layout
 	------------------------------------------------------------------------
@@ -1802,6 +1837,21 @@ if C["unitframes"].mainassist == true then
 	end
 end
 
+--------------------------
+--custom AB move function
+--------------------------
+CustomBar_UpdateInterval = .5
+TimeSinceLastUpdate = 0
+local function Update(self, elapsed)
+  TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
+
+	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
+		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, 3)
+	end
+    TimeSinceLastUpdate = 0
+end
+
+CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 

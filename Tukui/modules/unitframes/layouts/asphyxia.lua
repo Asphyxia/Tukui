@@ -224,6 +224,29 @@ local function Shared(self, unit)
 			self.Portrait = portrait
 		end
 		
+		if (C["unitframes"].classicon == true) then
+		local classicon = CreateFrame("Frame", self:GetName().."_ClassIconBorder", self)
+		classicon:CreateShadow("Default")
+		if unit == "player" then
+			if C.unitframes.charportrait then
+				classicon:CreatePanel("Default", 34, 34, "TOPLEFT", health, "TOPRIGHT", 5,2)
+			else
+				classicon:CreatePanel("Default", 34, 34, "TOPRIGHT", health, "TOPLEFT", -5,2)
+			end
+		elseif unit == "target" then
+			if C.unitframes.charportrait then
+				classicon:CreatePanel("Default", 34, 34, "TOPRIGHT", health, "TOPLEFT", -5,2)
+			else
+				classicon:CreatePanel("Default", 34, 34, "TOPLEFT", health, "TOPRIGHT", 5,2)
+			end
+		end
+
+		local class = classicon:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
+		class:Point("TOPLEFT", 2, -2)
+		class:Point("BOTTOMRIGHT", -2, 2)
+		self.ClassIcon = class
+	end
+		
 		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
 			local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
 			ws:SetAllPoints(power)
@@ -309,8 +332,9 @@ local function Shared(self, unit)
 				local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 				Experience:SetStatusBarTexture(normTex)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
-				Experience:Size(TukuiPlayer:GetWidth() +246, 12)
-				Experience:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -10)
+				Experience:Width(5)
+				Experience:Height(151)					
+				Experience:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
 				Experience:SetFrameLevel(10)
 				Experience.Tooltip = true
 				self.Experience = Experience
@@ -323,12 +347,12 @@ local function Shared(self, unit)
 				ExperienceBG:SetTexture(normTex)
 				ExperienceBG:SetVertexColor(.1,.1,.1,1)
 
-				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
+				--[[Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
 				Experience.Text:SetFont(font, 10, "THINOUTLINE")
 				Experience.Text:SetPoint('CENTER', self.Experience)
 				Experience.Text:SetShadowOffset(T.mult, -T.mult)
 				self.Experience.Text = Experience.Text
-				self.Experience.PostUpdate = T.ExperienceText
+				self.Experience.PostUpdate = T.ExperienceText--]]
 
 				self.Experience.Rested = CreateFrame('StatusBar', nil, self.Experience)
 				self.Experience.Rested:SetAllPoints(self.Experience)
@@ -355,21 +379,22 @@ local function Shared(self, unit)
 			if T.level == MAX_PLAYER_LEVEL then
 				local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 				Reputation:SetStatusBarTexture(normTex)
-				Reputation:Size(TukuiPlayer:GetWidth() +246, 12)
-				Reputation:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -10)
+				Reputation:Width(5)
+				Reputation:Height(151)
+				Reputation:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
 				Reputation:SetFrameLevel(10)
 				local ReputationBG = Reputation:CreateTexture(nil, 'BORDER')
 				ReputationBG:SetAllPoints()
 				ReputationBG:SetTexture(normTex)
 				ReputationBG:SetVertexColor(.1,.1,.1,1)
 
-				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
+				--[[Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
 				Reputation.Text:SetFont(font, 10, "THINOUTLINE")
 				Reputation.Text:SetPoint('CENTER', Reputation)
 				Reputation.Text:SetShadowOffset(T.mult, -T.mult)
 				Reputation.Text:Show()
 				Reputation.PostUpdate = T.UpdateReputation
-				Reputation.Text = Reputation.Text
+				Reputation.Text = Reputation.Text--]]
 
 				Reputation.PostUpdate = T.UpdateReputationColor
 				Reputation.Tooltip = true
@@ -391,7 +416,7 @@ local function Shared(self, unit)
 				if T.myclass == "DRUID" then
 
 					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
+					eclipseBar:Point("TOPLEFT", health, "TOPLEFT", 7, 8)
 					eclipseBar:Size(85, 5)
 					eclipseBar:SetFrameStrata("MEDIUM")
 					eclipseBar:SetFrameLevel(8)
@@ -440,7 +465,7 @@ local function Shared(self, unit)
 		
 					local bars = CreateFrame("Frame", nil, self)
                     bars:Size(15, 8)
-					bars:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
+					bars:Point("TOPLEFT", health, "TOPLEFT", 7, 8)
 					bars:SetBackdropBorderColor(0,0,0,0)
 					bars:SetFrameLevel(self:GetFrameLevel() + 3)
 					bars:SetFrameStrata("HIGH")
@@ -490,7 +515,7 @@ local function Shared(self, unit)
 				if T.myclass == "DEATHKNIGHT" then
 					
 				local Runes = CreateFrame("Frame", nil, self)
-                Runes:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7)
+                Runes:Point("TOPLEFT", health, "TOPLEFT", 7, 8)
                 Runes:Size(30, 5)
 				Runes:SetFrameLevel(self:GetFrameLevel() + 3)
 				Runes:SetFrameStrata("MEDIUM")
@@ -538,7 +563,7 @@ local function Shared(self, unit)
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 						TotemBar[i]:SetFrameLevel(self:GetFrameLevel() + 3)
 						if (i == 1) then
-					    TotemBar[i]:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -7) else
+					    TotemBar[i]:Point("TOPLEFT", health, "TOPLEFT", 7, 8) else
 					    TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
@@ -1800,6 +1825,21 @@ if C["unitframes"].mainassist == true then
 	end
 end
 
+--------------------------
+--custom AB move function
+--------------------------
+CustomBar_UpdateInterval = .5
+TimeSinceLastUpdate = 0
+local function Update(self, elapsed)
+  TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
+
+	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
+		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, 3)
+	end
+    TimeSinceLastUpdate = 0
+end
+
+CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 
