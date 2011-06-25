@@ -19,7 +19,7 @@ for i = 1, 4 do
 	HydraData[i].Status:SetFrameLevel(12)
 	HydraData[i].Status:SetStatusBarTexture(C.media.normTex)
 	HydraData[i].Status:SetMinMaxValues(0, 100)
-	HydraData[i].Status:SetStatusBarColor(0.3, 0.2, 1)
+	HydraData[i].Status:SetStatusBarColor(.4, .4, .4, 1)
 	HydraData[i].Status:Point("TOPLEFT", HydraData[i], "TOPLEFT", 2, -2)
 	HydraData[i].Status:Point("BOTTOMRIGHT", HydraData[i], "BOTTOMRIGHT", -2, 2)
 
@@ -59,7 +59,7 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = GetCVar("MaxFPS")
 		self:SetValue(value)
 		HydraData[1].Text:SetText("FPS: "..value)
-		if value * 100 / max >= 50 then
+		if value * 100 / max >= 75 then
 			self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
 		elseif value * 100 / max < 75 and value * 100 / max > 40 then
 			self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
