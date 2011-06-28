@@ -179,6 +179,7 @@ HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
 HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
 
+--[[
 -- REPUTATION DATABARS
 local RepData = {}
 local db = C["databars"].reps
@@ -301,6 +302,7 @@ local updater = CreateFrame("Frame")
 updater:RegisterEvent("PLAYER_ENTERING_WORLD")
 updater:RegisterEvent("UPDATE_FACTION")
 updater:SetScript("OnEvent", updateReputation)
+--]]
 
 -- CURRENCY DATA BARS
 local CurrencyData = {}
@@ -393,10 +395,10 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "CurrencyToggle", UIParent)
-toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", RepToggle, "BOTTOMLEFT", -3, 0)
+toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", TukuiInfoRight, "BOTTOMLEFT", -75, 0)
 toggle:EnableMouse(true)
-toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
-toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+--toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
+--toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 toggle:SetFrameStrata("MEDIUM")
 toggle:SetFrameLevel(2)
 toggle:CreateShadow("Default")
