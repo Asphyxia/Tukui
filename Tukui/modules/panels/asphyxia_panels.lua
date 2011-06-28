@@ -53,12 +53,11 @@ watch:SetFrameStrata("MEDIUM")
 watch:SetFrameLevel(2)
 
 -- SWITCH LAYOUT
-if C.chat.background then
-	local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", TukuiTabsRightBackground, "SecureActionButtonTemplate")
-	swl:Size(114, TukuiTabsRightBackground:GetHeight())
-	swl:Point("CENTER", TukuiTabsRightBackground, "CENTER", 0, 0)
-	swl:SetFrameStrata(TukuiTabsRightBackground:GetFrameStrata())
-	swl:SetFrameLevel(TukuiTabsRightBackground:GetFrameLevel())
+local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", UIParent, "SecureActionButtonTemplate")
+	swl:Size(20, 20)
+	swl:Point("LEFT", TukuiInfoLeft, "RIGHT", 3, 0)
+	swl:SetFrameStrata("BACKGROUND")
+	swl:SetFrameLevel(2)
 	swl:RegisterForClicks("AnyUp") swl:SetScript("OnClick", function()
 		if IsAddOnLoaded("Tukui_Raid") then
 			DisableAddOn("Tukui_Raid")
@@ -72,12 +71,7 @@ if C.chat.background then
 			EnableAddOn("Tukui_Raid")
 			ReloadUI()
 		end
-	end)
-
-	swl.Text = T.SetFontString(swl, C.media.pixelfont, 10)
-	swl.Text:Point("RIGHT", swl, "RIGHT", -5, 0.5)
-	swl.Text:SetText(T.panelcolor..L.datatext_switch_layout)
-end
+end)
 
 -- VERSION BUTTON
 local verbutton = CreateFrame("Button", "TukuiVersionButton", TukuiMinimap, "SecureActionButtonTemplate")
@@ -325,8 +319,8 @@ end
 -- DATATEXT PANEL TOGGLE (Button)
 local cp = "|cff9a1212-|r" 
 local cm = "|cff9a1212+|r" 
-local icb = CreateFrame("Frame", "InfoCenterButton", TukuiChatBackgroundLeft)
-icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundLeft, "TOPRIGHT", -3, -4)
+local icb = CreateFrame("Frame", "InfoCenterButton", TukuiChatBackgroundRight)
+icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
 icb:EnableMouse(true)
 icb.f = icb:CreateFontString(nil, overlay)
 icb.f:SetPoint("CENTER")

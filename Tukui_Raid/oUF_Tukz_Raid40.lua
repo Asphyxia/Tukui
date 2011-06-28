@@ -271,6 +271,18 @@ local function Shared(self, unit)
 	return self
 end
 
+ -- switch layout
+	local swlicon = CreateFrame("Frame", "TukuiSwitchLayoutIcon", UIParent)
+	swlicon:CreatePanel("Default", 20, 20, "LEFT", TukuiInfoLeft, "RIGHT", 3, 0)
+	swlicon:SetFrameStrata("BACKGROUND")
+	swlicon:SetFrameLevel(2)
+	swlicon:CreateShadow("Hydra")
+
+	local tex = swlicon:CreateTexture(nil, "OVERLAY")
+	tex:SetTexture(C.media.switchlayoutdd)
+	tex:SetPoint("TOPLEFT", swlicon, "TOPLEFT",  2, -2)
+	tex:SetPoint("BOTTOMRIGHT", swlicon, "BOTTOMRIGHT", -2, 2)
+
 
 oUF:RegisterStyle('TukuiDpsR40', Shared)
 oUF:Factory(function(self)
