@@ -99,6 +99,7 @@ local function UpdateAuras(header, button, weapon)
 		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
 		button.bg:SetFrameLevel(button:GetFrameLevel() - 1)
 		button.bg:SetFrameStrata(button:GetFrameStrata())
+		button.bg:CreateShadow("")
 	end
 		
 	if(name) then
