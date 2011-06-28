@@ -301,7 +301,7 @@ local function Shared(self, unit)
 			FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 			FlashInfo.parent = self
 			FlashInfo:SetAllPoints(panel)
-			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, 12)
+			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, 10)
 			FlashInfo.ManaLevel:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			self.FlashInfo = FlashInfo
 			
@@ -334,34 +334,31 @@ local function Shared(self, unit)
 				local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 				Experience:SetStatusBarTexture(normTex)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
-				Experience:Width(5)
-				Experience:Height(151)					
-				Experience:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
-				Experience:SetFrameLevel(10)
+				Experience:Size(200, 13)
+				Experience:Point("LEFT", HydraData4, "RIGHT", 5, 0)
+				Experience:SetFrameLevel(8)
+				Experience:SetFrameStrata("HIGH")
 				Experience.Tooltip = true
 				self.Experience = Experience
-				Experience:SetAlpha(0)
-				Experience:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-				Experience:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 				
 				local ExperienceBG = Experience:CreateTexture(nil, 'BORDER')
 				ExperienceBG:SetAllPoints()
 				ExperienceBG:SetTexture(normTex)
 				ExperienceBG:SetVertexColor(.1,.1,.1,1)
 
-				--[[Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
+				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
 				Experience.Text:SetFont(font, 10, "THINOUTLINE")
 				Experience.Text:SetPoint('CENTER', self.Experience)
 				Experience.Text:SetShadowOffset(T.mult, -T.mult)
 				self.Experience.Text = Experience.Text
-				self.Experience.PostUpdate = T.ExperienceText--]]
+				self.Experience.PostUpdate = T.ExperienceText
 
 				self.Experience.Rested = CreateFrame('StatusBar', nil, self.Experience)
 				self.Experience.Rested:SetAllPoints(self.Experience)
 				self.Experience.Rested:SetStatusBarTexture(normTex)
 				self.Experience.Rested:SetStatusBarColor(1, 0, 1, 0.2)		
-
-				local Resting = Experience:CreateTexture(nil, "OVERLAY")
+				
+				local Resting = self:CreateTexture(nil, "OVERLAY")
 				Resting:SetHeight(28)
 				Resting:SetWidth(28)
 				Resting:SetPoint("BOTTOMRIGHT", self, "TOPLEFT", 10, -4)
@@ -375,35 +372,67 @@ local function Shared(self, unit)
 				ExperienceFrame:SetTemplate("Default")
 				ExperienceFrame:CreateShadow("Default")
 				ExperienceFrame:SetFrameLevel(self.Experience:GetFrameLevel() - 1)
+			
+			local function ModifiedBackdrop(self)
+				local color = RAID_CLASS_COLORS[T.myclass]
+				self:SetBackdropColor(unpack(C["media"].backdropcolor))
+				self:SetBackdropBorderColor(color.r, color.g, color.b)
 			end
 
+			local function OriginalBackdrop(self)
+				self:SetBackdropColor(unpack(C["media"].backdropcolor))
+				self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			end
+			
+			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
+			toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -27, 0)
+			toggle:EnableMouse(true)
+			toggle:SetFrameStrata("MEDIUM")
+			toggle:SetFrameLevel(2)
+			toggle:CreateShadow("Default")
+			toggle:SetAlpha(0)
+			toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+			toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
+			toggle:HookScript("OnEnter", ModifiedBackdrop) 
+			toggle:HookScript("OnLeave", OriginalBackdrop)
+
+			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
+			toggle.Text:SetFont(C.media.pixelfont, 10)
+			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
+			toggle:SetScript("OnMouseUp", function(self) 
+			Experience:Animate(0, 100, 0.4)
+				if Experience:IsVisible() then
+					Experience:SlideOut()
+				else
+					Experience:SlideIn()
+				end
+				end)
+			end
+			
 			-- reputation bar for max level character
 			if T.level == MAX_PLAYER_LEVEL then
 				local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 				Reputation:SetStatusBarTexture(normTex)
-				Reputation:Width(5)
-				Reputation:Height(151)
-				Reputation:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPRIGHT", 5, -15)
+				Reputation:Size(200, 13)
+				Reputation:Point("LEFT", HydraData4, "RIGHT", 5, 0)
 				Reputation:SetFrameLevel(10)
 				local ReputationBG = Reputation:CreateTexture(nil, 'BORDER')
 				ReputationBG:SetAllPoints()
 				ReputationBG:SetTexture(normTex)
 				ReputationBG:SetVertexColor(.1,.1,.1,1)
 
-				--[[Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
+				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
 				Reputation.Text:SetFont(font, 10, "THINOUTLINE")
 				Reputation.Text:SetPoint('CENTER', Reputation)
 				Reputation.Text:SetShadowOffset(T.mult, -T.mult)
 				Reputation.Text:Show()
 				Reputation.PostUpdate = T.UpdateReputation
-				Reputation.Text = Reputation.Text--]]
+				Reputation.Text = Reputation.Text
 
 				Reputation.PostUpdate = T.UpdateReputationColor
 				Reputation.Tooltip = true
 				self.Reputation = Reputation
-				Reputation:SetAlpha(0)
-				Reputation:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-				Reputation:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 
 				local ReputationFrame = CreateFrame("Frame", nil, self.Reputation)
 				ReputationFrame:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
@@ -411,7 +440,43 @@ local function Shared(self, unit)
 				ReputationFrame:SetTemplate("Default")
 				ReputationFrame:CreateShadow("Default")
 				ReputationFrame:SetFrameLevel(self.Reputation:GetFrameLevel() - 1)
+				
+			local function ModifiedBackdrop(self)
+				local color = RAID_CLASS_COLORS[T.myclass]
+				self:SetBackdropColor(unpack(C["media"].backdropcolor))
+				self:SetBackdropBorderColor(color.r, color.g, color.b)
 			end
+
+			local function OriginalBackdrop(self)
+				self:SetBackdropColor(unpack(C["media"].backdropcolor))
+				self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			end
+			
+			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
+			toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -27, 0)
+			toggle:EnableMouse(true)
+			toggle:SetFrameStrata("MEDIUM")
+			toggle:SetFrameLevel(2)
+			toggle:CreateShadow("Default")
+			toggle:SetAlpha(0)
+			toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+			toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
+			toggle:HookScript("OnEnter", ModifiedBackdrop) 
+			toggle:HookScript("OnLeave", OriginalBackdrop)
+
+			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
+			toggle.Text:SetFont(C.media.pixelfont, 10)
+			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
+			toggle:SetScript("OnMouseUp", function(self) 
+			Reputation:Animate(0, 100, 0.4)
+			if Reputation:IsVisible() then
+				Reputation:SlideOut()
+			else
+				Reputation:SlideIn()
+			end
+			end)
+		end
 		
 			-- show druid mana when shapeshifted in bear, cat or whatever
 			if C["unitframes"].classbar then
