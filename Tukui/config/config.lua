@@ -13,7 +13,7 @@ C["general"] = {
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Asphyxia3",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3" or "Tukui")
+	["style"] = "Smelly",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3", "Smelly" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -180,17 +180,7 @@ C["databars"] = {
 	["width"] = 100,                                   -- enable Databars in the top left of the screen.
 	["height"] = 17,                                   -- enable Databars in the top left of the screen.
 	["point"] = {"TOPLEFT",UIParent,"TOPLEFT",8,-10},   -- where the bars will anchor
-	
-["currency"] = true,                               -- show bars with currency
-	["reputation"] = true,                             -- show bars with reputation
-	
-	["reps"] = {                                       -- Show 5 factions of your choice, including your guild.
-		"Hellscream's Reach",
-		"Therazane",
-		"Dragonmaw Clan",
-		"Guardians of Hyjal",
-		"Systematic Chaos",
-	},
+	["currency"] = true,                               -- show bars with currency
 }
 
 C["asphyxia_panels"] = {

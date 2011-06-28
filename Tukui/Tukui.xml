@@ -214,6 +214,7 @@
 	<Script file="modules\unitframes\layouts\asphyxia.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia2.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia3.lua"/>
+	<Script file="modules\unitframes\layouts\smelly.lua"/>
 	
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
