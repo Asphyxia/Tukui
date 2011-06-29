@@ -233,7 +233,7 @@ WorldStateAlwaysUpFrame:SetPoint("TOP", UIParent, "TOP", 0, T.Scale(-35))
 
 -- TALENT SPEC-SWITCHER (Advanced)
 if C["asphyxia_panels"].asphyxiatalent == true then
-if not GetPrimaryTalentTree() then return end
+if UnitLevel("player") <= 10 then return end
 
 local frame = CreateFrame("Frame", "AsphyxiaTalent", UIParent)
 frame:CreatePanel(nil, 20, 20, "RIGHT", TukuiInfoRight, "LEFT", -3, 0)
@@ -267,6 +267,8 @@ local ChangeSpec = function()
 	end
 end
 
+local color = RAID_CLASS_COLORS[T.myclass]
+
 local StyleTooltip = function(self)
 	if not InCombatLockdown() then
 		local p1 = select(5, GetTalentTabInfo(1))
@@ -275,18 +277,25 @@ local StyleTooltip = function(self)
 		local name = select(2, GetTalentTabInfo(GetPrimaryTalentTree()))
 		local spec = GetActiveTalentGroup()
 		
-		GameTooltip:SetOwner(self, "ANCHOR_NONE", 0, 0)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, 2)
 		GameTooltip:ClearLines()
 		
 		if spec == 1 then
-			GameTooltip:AddDoubleLine(format("|cffFFFFFF%s: %s/%s/%s - [%s]|r", name, p1, p2, p3, PRIMARY))
+			GameTooltip:AddDoubleLine(format(T.panelcolor.."%s: %s/%s/%s - [%s]", name, p1, p2, p3, PRIMARY))
 		else
-			GameTooltip:AddDoubleLine(format("|cffFFFFFF%s: %s/%s/%s - [%s]|r", name, p1, p2, p3, SECONDARY))
+			GameTooltip:AddDoubleLine(format(T.panelcolor.."%s: %s/%s/%s - [%s]", name, p1, p2, p3, SECONDARY))
 		end
 		
 		self.highlight:Show()
+		self:SetBackdropBorderColor(color.r, color.g, color.b)
 		GameTooltip:Show()
 	end
+end
+
+local OnLeave = function(self)
+	GameTooltip:Hide()
+	self.highlight:Hide()
+	self:SetBackdropBorderColor(unpack(C.media.bordercolor))
 end
 
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -295,7 +304,7 @@ frame:RegisterEvent("PLAYER_TALENT_UPDATE")
 frame:SetScript("OnEvent", UpdateTexture)
 frame:SetScript("OnMouseDown", ChangeSpec)
 frame:SetScript("OnEnter", StyleTooltip)
-frame:SetScript("OnLeave", function(self) GameTooltip:Hide() self.highlight:Hide() end)
+frame:SetScript("OnLeave", OnLeave)
 end
 
 
