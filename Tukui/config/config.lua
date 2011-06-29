@@ -5,7 +5,7 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = {.050, .050, .050},         	-- default backdrop color of panels
+	["backdropcolor"] = {0, 0, 0, 1},         	-- default backdrop color of panels
 	["bordercolor"] = {  .125, .125, .125},                    	-- default border color of panels
 	["blizzardreskin"] = true								-- reskin all Blizzard frames
 }
