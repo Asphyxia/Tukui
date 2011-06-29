@@ -10,10 +10,6 @@ local function LoadSkin()
 		"PVPBannerFrameAcceptButton",
 	}
 
-	if T.toc < 40200 then
-		tinsert(buttons, "PVPHonorFrameWarGameButton")
-	end
-
 	for i = 1, #buttons do
 		_G[buttons[i]]:StripTextures()
 		T.SkinButton(_G[buttons[i]])
@@ -91,21 +87,15 @@ local function LoadSkin()
 	PVPTeamManagementFrameInvalidTeamFrame.backdrop:Point( "BOTTOMRIGHT", PVPTeamManagementFrameInvalidTeamFrame, "BOTTOMRIGHT")
 	PVPTeamManagementFrameInvalidTeamFrame.backdrop:SetFrameLevel(PVPTeamManagementFrameInvalidTeamFrame:GetFrameLevel())
 
-	if T.toc < 40200 then
-		PVPFrameConquestBar:StripTextures()
-		PVPFrameConquestBar:SetStatusBarTexture(C["media"].normTex)
-		PVPFrameConquestBar:CreateBackdrop("Transparent")
-	else
-		PVPFrameConquestBarLeft:Kill()
-		PVPFrameConquestBarRight:Kill()
-		PVPFrameConquestBarMiddle:Kill()
-		PVPFrameConquestBarBG:Kill()
-		PVPFrameConquestBarShadow:Kill()
-		PVPFrameConquestBar.progress:SetTexture(C["media"].normTex)
-		PVPFrameConquestBar:CreateBackdrop("Transparent")
-		PVPFrameConquestBar.backdrop:Point("TOPLEFT", PVPFrameConquestBar.progress, "TOPLEFT", -2, 2)
-		PVPFrameConquestBar.backdrop:Point("BOTTOMRIGHT", PVPFrameConquestBar, "BOTTOMRIGHT", -2, 2) 
-	end
+	PVPFrameConquestBarLeft:Kill()
+	PVPFrameConquestBarRight:Kill()
+	PVPFrameConquestBarMiddle:Kill()
+	PVPFrameConquestBarBG:Kill()
+	PVPFrameConquestBarShadow:Kill()
+	PVPFrameConquestBar.progress:SetTexture(C["media"].normTex)
+	PVPFrameConquestBar:CreateBackdrop("Transparent")
+	PVPFrameConquestBar.backdrop:Point("TOPLEFT", PVPFrameConquestBar.progress, "TOPLEFT", -2, 2)
+	PVPFrameConquestBar.backdrop:Point("BOTTOMRIGHT", PVPFrameConquestBar, "BOTTOMRIGHT", -2, 2) 
 
 	PVPBannerFrame:CreateBackdrop("Transparent")
 	PVPBannerFrame.backdrop:Point( "TOPLEFT", PVPBannerFrame, "TOPLEFT")
@@ -136,15 +126,13 @@ local function LoadSkin()
 	PVPColorPickerButton3:Height(PVPColorPickerButton1:GetHeight())
 
 	--War Games
-	if T.toc >= 40200 then
-		T.SkinButton(WarGameStartButton, true)
-		WarGamesFrame:StripTextures()
-		T.SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
+	T.SkinButton(WarGameStartButton, true)
+	WarGamesFrame:StripTextures()
+	T.SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
 		
-		WarGameStartButton:ClearAllPoints()
-		WarGameStartButton:Point("LEFT", PVPFrameLeftButton, "RIGHT", 2, 0)
-		WarGamesFrameDescription:SetTextColor(1, 1, 1)
-	end
+	WarGameStartButton:ClearAllPoints()
+	WarGameStartButton:Point("LEFT", PVPFrameLeftButton, "RIGHT", 2, 0)
+	WarGamesFrameDescription:SetTextColor(1, 1, 1)
 
 	--Freaking gay Cancel Button FFSlocal
 	local f = PVPBannerFrameCancelButton
@@ -160,16 +148,9 @@ local function LoadSkin()
 	f.backdrop:Point( "BOTTOMRIGHT", PVPBannerFrameAcceptButton, "BOTTOMRIGHT", PVPBannerFrame:GetWidth()-PVPBannerFrameAcceptButton:GetWidth()-10, 0)
 	f.backdrop:SetFrameLevel(f:GetFrameLevel()-1)
 
-	--Bottom Tabs
-	if T.toc < 40200 then
-		for i=1,3 do
-			T.SkinTab(_G["PVPFrameTab"..i])
-		end
-	else
-		for i=1,4 do
-			T.SkinTab(_G["PVPFrameTab"..i])
-		end			
-	end
+	for i=1,4 do
+		T.SkinTab(_G["PVPFrameTab"..i])
+	end			
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

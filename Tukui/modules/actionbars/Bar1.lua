@@ -68,8 +68,6 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			
 		RegisterStateDriver(self, "page", GetBar())
 	elseif event == "PLAYER_ENTERING_WORLD" then
-		if T.toc < 40200 then MainMenuBar_UpdateKeyRing() end
-		
 		local button
 		for i = 1, 12 do
 			button = _G["ActionButton"..i]

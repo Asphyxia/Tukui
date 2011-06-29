@@ -140,7 +140,7 @@ if not C.chat.background then
 	if C["bags"].enable then
 		cuberight:EnableMouse(true)
 		cuberight:SetScript("OnMouseDown", function(self)
-		if T.toc < 40200 then ToggleKeyRing() else ToggleAllBags() end
+		ToggleAllBags()
 		end)
 	end
 end

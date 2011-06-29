@@ -82,10 +82,7 @@ local function LoadSkin()
 	HelpFrameKnowledgebaseSearchBox:ClearAllPoints()
 	HelpFrameKnowledgebaseSearchBox:Point("TOPLEFT", HelpFrameMainInset, "TOPLEFT", 13, -10)
 	HelpFrameKnowledgebaseNavBarOverlay:Kill()
-
-	if T.toc >= 40200 then
-		HelpFrameKnowledgebaseNavBar:StripTextures()
-	end
+	HelpFrameKnowledgebaseNavBar:StripTextures()
 
 	HelpFrame:StripTextures(true)
 	HelpFrame:CreateBackdrop("Transparent")
@@ -96,7 +93,7 @@ local function LoadSkin()
 
 	--Hearth Stone Button
 	HelpFrameCharacterStuckHearthstone:StyleButton()
-	HelpFrameCharacterStuckHearthstone:SetTemplate("Default", true)
+	HelpFrameCharacterStuckHearthstone:SetTemplate("Transparent", true)
 	HelpFrameCharacterStuckHearthstone.IconTexture:ClearAllPoints()
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("TOPLEFT", 2, -2)
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("BOTTOMRIGHT", -2, 2)
