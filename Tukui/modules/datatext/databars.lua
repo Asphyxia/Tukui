@@ -179,7 +179,6 @@ HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
 HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
 
---[[
 -- REPUTATION DATABARS
 local RepData = {}
 local db = C["databars"].reps
@@ -195,93 +194,86 @@ local standing = {
 	[43000] = {75/255,  175/255, 76/255}, -- Exalted
 }
 
-local function updateReputation()
-	if RepData[1] then
-		for i = 1, getn(RepData) do RepData[i]:Kill() end
-		wipe(RepData)
-	end
+for i = 1, GetNumFactions() do
+	local name, _, _, bottomValue, topValue, earnedValue, _, _, _, _, _, _, _ = GetFactionInfo(i)
+	local min, max = earnedValue-bottomValue, topValue-bottomValue
 
-	for i = 1, GetNumFactions() do
-		local name, _, _, bottomValue, topValue, earnedValue, _, _, _, _, _, _, _ = GetFactionInfo(i)
+	if name == db[1] or name == db[2] or name == db[3] or name == db[4] or name == db[5] then
+	
+		local frame = CreateFrame("Frame", "RepData"..i, UIParent)
+		frame:CreatePanel(nil, TukuiMinimap:GetWidth(), 18, "CENTER", UIParent, "CENTER", 0, 0)
+		frame:EnableMouse(true)
+		frame:Animate(160, 0, 0.4)
+		frame:Hide()
+		if T.Hydra then frame:SetBorder() end
+		
+		frame.Status = CreateFrame("StatusBar", "RepDataStatus"..i, frame)
+		frame.Status:SetFrameLevel(12)
+		frame.Status:SetStatusBarTexture(C["media"].normTex)
+		frame.Status:SetMinMaxValues(0, max)
+		frame.Status:SetValue(min)
+		frame.Status:SetStatusBarColor(unpack(standing[topValue]))
+		frame.Status:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
+		frame.Status:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
+		
+		frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
+		frame.Text:SetFont(C.media.pixelfont, 10)
+		frame.Text:Point("LEFT", frame, "LEFT", 6, 0)
+		frame.Text:SetShadowColor(0, 0, 0)
+		frame.Text:SetShadowOffset(1.25, -1.25)
+		frame.Text:SetText(format("%s / %s", min, max))
+		frame.Text:Hide()
+		
+		frame.Name = frame.Status:CreateFontString(nil, "OVERLAY")
+		frame.Name:SetFont(C.media.pixelfont, 10)
+		frame.Name:Point("LEFT", frame, "LEFT", 6, 0)
+		frame.Name:SetShadowColor(0, 0, 0)
+		frame.Name:SetShadowOffset(1.25, -1.25)
+		frame.Name:SetText(name)
+		
+		frame:SetScript("OnEnter", function(self)
+			self.Name:Hide()
+			self.Text:Show()
+		end)
+		
+		frame:SetScript("OnLeave", function(self)
+			self.Name:Show()
+			self.Text:Hide()
+		end)
+		
+		frame.id = i
+		frame.Status = frame.Status
+		frame.Text = frame.Text
+		
+		tinsert(RepData, frame)
+	end
+end
+
+for key, frame in ipairs(RepData) do
+	frame:ClearAllPoints()
+	if key == 1 then
+		frame:Point("TOP", TukuiMinimap, "BOTTOM", 0, -3)
+	else
+		frame:Point("TOP", RepData[key-1], "BOTTOM", 0, -3)
+	end
+end
+
+local update = function()
+	for _, frame in ipairs(RepData) do
+		local name, _, _, bottomValue, topValue, earnedValue, _, _, _, _, _, _, _ = GetFactionInfo(frame.id)
 		local min, max = earnedValue-bottomValue, topValue-bottomValue
-
-		if name == db[1] or name == db[2] or name == db[3] or name == db[4] or name == db[5] then
-			local frame = CreateFrame("Frame", "RepData"..i, UIParent)
-			frame:CreatePanel(nil, TukuiMinimap:GetWidth(), 18, "CENTER", UIParent, "CENTER", 0, 0)
-			frame:EnableMouse(true)
-			frame:Animate(160, 0, 0.4)
-			frame:Hide()
-
-			frame.Status = CreateFrame("StatusBar", "RepDataStatus"..i, frame)
-			frame.Status:SetFrameLevel(12)
-			frame.Status:SetStatusBarTexture(C["media"].normTex)
-			frame.Status:SetMinMaxValues(0, max)
-			frame.Status:SetValue(min)
-			frame.Status:SetStatusBarColor(unpack(standing[topValue]))
-			frame.Status:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
-			frame.Status:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
-
-			frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
-			frame.Text:SetFont(C.media.pixelfont, 10)
-			frame.Text:Point("LEFT", frame, "LEFT", 6, 2)
-			frame.Text:SetShadowColor(0, 0, 0)
-			frame.Text:SetShadowOffset(1.25, -1.25)
-			frame.Text:SetText(format("%s / %s", min, max))
-			frame.Text:Hide()
-			
-			frame.Name = frame.Status:CreateFontString(nil, "OVERLAY")
-			frame.Name:SetFont(C.media.pixelfont, 10)
-			frame.Name:Point("LEFT", frame, "LEFT", 6, 2)
-			frame.Name:SetShadowColor(0, 0, 0)
-			frame.Name:SetShadowOffset(1.25, -1.25)
-			frame.Name:SetText(name)
-
-			frame:SetScript("OnEnter", function(self)
-				self.Name:Hide()
-				self.Text:Show()
-			end)
-			
-			frame:SetScript("OnLeave", function(self)
-				self.Name:Show()
-				self.Text:Hide()
-			end)
-			
-			tinsert(RepData, frame)
-		end
-	end
-
-	for key, frame in ipairs(RepData) do
-		frame:ClearAllPoints()
-		if key == 1 then
-			frame:Point("TOP", TukuiMinimap, "BOTTOM", 0, -3)
-		else
-			frame:Point("TOP", RepData[key-1], "BOTTOM", 0, -3)
-		end
+		
+		frame.Status:SetValue(min)
+		frame.Text:SetText(format("%s / %s", min, max))
 	end
 end
 
-local function ModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-end
-
-local function OriginalBackdrop(self)
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-end
-
-local toggle = CreateFrame("Frame", "RepToggle", UIParent)
-toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -25, 0)
+local toggle = CreateFrame("Button", "RepToggle", UIParent)
+toggle:Size(114, TukuiTabsRightBackground:GetHeight())
+toggle:Point("CENTER", TukuiTabsRightBackground, "CENTER", 50, 0)
+toggle:SetFrameStrata(TukuiTabsRightBackground:GetFrameStrata())
+toggle:SetFrameLevel(TukuiTabsRightBackground:GetFrameLevel() + 1)
 toggle:EnableMouse(true)
-toggle:SetAlpha(0)
-toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor))end)
-toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
-toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-toggle:HookScript("OnEnter", ModifiedBackdrop)
-toggle:HookScript("OnLeave", OriginalBackdrop)
-toggle:SetFrameStrata("MEDIUM")
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, 10)
@@ -298,11 +290,13 @@ toggle:SetScript("OnMouseUp", function(self)
 	end
 end)
 
+toggle:SetScript("OnEnter", function(self) self.Text:SetTextColor(1,1,1) end)
+toggle:SetScript("OnLeave", function(self) self.Text:SetTextColor(0,0.7,1) end)
+
 local updater = CreateFrame("Frame")
 updater:RegisterEvent("PLAYER_ENTERING_WORLD")
 updater:RegisterEvent("UPDATE_FACTION")
-updater:SetScript("OnEvent", updateReputation)
---]]
+updater:SetScript("OnEvent", update)
 
 -- CURRENCY DATA BARS
 local CurrencyData = {}
