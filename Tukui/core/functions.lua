@@ -557,7 +557,7 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		elseif UnitIsGhost(unit) then
 			health.value:SetText("|cffD7BEA5"..L.unitframes_ouf_ghost.."|r")
 		end
-		health:SetStatusBarColor(.8, .3, .3) -- Red health if offline/dead/dc'd
+		--health:SetStatusBarColor(.8, .3, .3) -- Red health if offline/dead/dc'd
 	else
 		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
 			local c = T.oUF_colors.reaction[5]

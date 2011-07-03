@@ -268,11 +268,11 @@ local update = function()
 	end
 end
 
-local toggle = CreateFrame("Button", "RepToggle", UIParent)
+local toggle = CreateFrame("Button", "RepToggle", TukuiTabsRightBackground)
 toggle:Size(114, TukuiTabsRightBackground:GetHeight())
 toggle:Point("CENTER", TukuiTabsRightBackground, "CENTER", 50, 0)
-toggle:SetFrameStrata(TukuiTabsRightBackground:GetFrameStrata())
-toggle:SetFrameLevel(TukuiTabsRightBackground:GetFrameLevel() + 1)
+toggle:SetFrameStrata("HIGH")
+toggle:SetFrameLevel(2)
 toggle:EnableMouse(true)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
