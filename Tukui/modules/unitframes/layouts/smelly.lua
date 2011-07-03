@@ -747,7 +747,7 @@ local function Shared(self, unit)
 			castbar.bg:SetVertexColor(.05, .05, .05)
 			if unit == "player" then
 				if C["unitframes"].cbicons == true then
-					castbar:SetWidth(300)
+					castbar:SetWidth(TukuiBar1:GetWidth() - 38)
 				else
 					castbar:SetWidth(TukuiBar1:GetWidth() - 4)
 				end
@@ -763,6 +763,13 @@ local function Shared(self, unit)
 				castbar:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, -8)
 			end
 			castbar:SetFrameLevel(6)
+			
+			if( C["unitframes"].cbspark == true ) then
+					castbar.Spark = castbar:CreateTexture(nil, 'OVERLAY')
+					castbar.Spark:SetHeight(36)
+					castbar.Spark:SetWidth(15)
+					castbar.Spark:SetBlendMode('ADD')
+				end
 
 			-- Border
 			castbar.border = CreateFrame("Frame", nil, castbar)

@@ -22,6 +22,7 @@ C["unitframes"] = {
 	["unitcastbar"] = true,                            		-- enable tukui castbar
 	["cblatency"] = true,                             		-- enable castbar latency
 	["cbicons"] = true,                                 		-- enable icons on castbar
+	["cbspark"] = true,										-- enable castbar spark
 	["auratimer"] = true,                               		-- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                            		-- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                           	 	-- enable auras
@@ -227,6 +228,8 @@ C["tooltip"] = {
 C["merchant"] = {
 	["sellgrays"] = true,                               -- automaticly sell grays?
 	["autorepair"] = true,                              -- automaticly repair?
+		["guildrepair"] = true,							-- automatically use guild funds to repair (if available) -- guild repair only if autorepair == true
+	["sellmisc"] = true,                                -- sell defined items automatically
 	["sellmisc"] = true,                                -- sell defined items automatically
 }
 

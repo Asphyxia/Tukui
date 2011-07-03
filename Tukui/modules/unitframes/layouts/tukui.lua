@@ -760,6 +760,13 @@ local function Shared(self, unit)
 				castbar:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 8)
 			end
 			castbar:SetFrameLevel(6)
+			
+			if( C["unitframes"].cbspark == true ) then
+					castbar.Spark = castbar:CreateTexture(nil, 'OVERLAY')
+					castbar.Spark:SetHeight(36)
+					castbar.Spark:SetWidth(15)
+					castbar.Spark:SetBlendMode('ADD')
+				end
 
 			-- Border
 			castbar.border = CreateFrame("Frame", nil, castbar)
