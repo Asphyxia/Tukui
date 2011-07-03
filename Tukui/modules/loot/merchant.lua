@@ -11,7 +11,9 @@ local filter = {
 	[42337] = true, -- Sun Rock Ring
 	[43244] = true, -- Crystal Citrine Necklace
 	[43571] = true, -- Sewer Carp
-	[43572] = true, -- Magic Eater		
+	[43572] = true, -- Magic Eater
+	[53062] = true, -- Sharptooth	
+	[53069] = true, -- Murglesnout		
 }
 
 local f = CreateFrame("Frame")
@@ -44,12 +46,25 @@ f:SetScript("OnEvent", function()
 	if not IsShiftKeyDown() then
 		if CanMerchantRepair() and C["merchant"].autorepair then
 			local cost, possible = GetRepairAllCost()
+			if C["merchant"].guildrepair then
+				if (IsInGuild()) and (CanGuildBankRepair()) then
+					if cost <= GetGuildBankWithdrawMoney() then
+						guildRepairFlag = 1
+					end
+				end
+			end
 			if cost>0 then
 				if possible then
-					RepairAllItems()
 					local c = cost%100
 					local s = math.floor((cost%10000)/100)
 					local g = math.floor(cost/10000)
+					if guildRepairFlag == 1 then
+						RepairAllItems(1)
+						DEFAULT_CHAT_FRAME:AddMessage("|cffffff00Repaired using guild bank.|r")
+					else
+						RepairAllItems()
+						DEFAULT_CHAT_FRAME:AddMessage("|cffffff00Repaired using personal funds.|r")
+					end
 					DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repaircost.." |cffffffff"..g..L.goldabbrev.." |cffffffff"..s..L.silverabbrev.." |cffffffff"..c..L.copperabbrev..".",255,255,0)
 				else
 					DEFAULT_CHAT_FRAME:AddMessage(L.merchant_repairnomoney,255,0,0)
