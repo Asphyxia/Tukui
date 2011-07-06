@@ -44,7 +44,7 @@ local function chatsetup()
 		-- set default tukui font size
 		FCF_SetChatWindowFontSize(nil, frame, 12)
 		
-		-- rename windows general and combat log
+	-- rename windows general and combat log
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
 	end
@@ -205,20 +205,20 @@ v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.6  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.7  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
 
 local ahelp = CreateFrame("Button", "TukuiAsphyxiaHelpFrame", UIParent)
-ahelp:SetSize(550, 276)
+ahelp:SetSize(550, 325)
 ahelp:SetPoint("CENTER")
 ahelp:SetTemplate("Transparent")
 ahelp:CreateShadow("Default")
 ahelp:FontString("Text", C.media.font, 13)
 ahelp.Text:SetPoint("CENTER")
-ahelp.Text:SetText(L.core_uihelp20..L.core_uihelp21..L.core_uihelp22..L.core_uihelp23..L.core_uihelp24..L.core_uihelp25..L.core_uihelp26..L.core_uihelp27..L.core_uihelp28..L.core_uihelp29..L.core_uihelp30)
+ahelp.Text:SetText(L.core_uihelp20..L.core_uihelp21..L.core_uihelp22..L.core_uihelp23..L.core_uihelp24..L.core_uihelp25..L.core_uihelp26..L.core_uihelp27..L.core_uihelp28..L.core_uihelp29..L.core_uihelp30..L.core_uihelp31)
 ahelp:SetScript("OnClick", function()
 	ahelp:Hide()
 end)
