@@ -1,11 +1,11 @@
 --------------------------------------------------------------------
 -- FRIEND
 --------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L, DB = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 if not C["datatext"].friends or C["datatext"].friends == 0 then return end
 
-	-- create a popup
+-- create a popup
 StaticPopupDialogs.SET_BN_BROADCAST = {
 	text = BN_BROADCAST_TOOLTIP,
 	button1 = ACCEPT,
@@ -42,7 +42,7 @@ Text:SetShadowOffset(T.mult, -T.mult)
 T.PP(C["datatext"].friends, Text)
 Stat:SetParent(Text:GetParent())
 
-local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu",T.UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", T.UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true, },
@@ -71,14 +71,14 @@ local levelNameString = "|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r"
 local clientLevelNameString = "%s |cff%02x%02x%02x(%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r"
 local levelNameClassString = "|cff%02x%02x%02x%d|r %s%s%s"
 local worldOfWarcraftString = "World of Warcraft"
-local battleNetString = "Battle.NET"
+local battleNetString = "BattlT.NET"
 local wowString = "WoW"
 local otherGameInfoString = "%s (%s)"
 local otherGameInfoString2 = "%s %s"
 local totalOnlineString = join("", FRIENDS_LIST_ONLINE, ": %s/%s")
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
-local displayString = join("", "%s: ",T.panelcolor, "%d|r")
+local displayString = join("", "%s: ", T.panelcolor, "%d|r")
 local statusTable = { L.chat_FLAG_AFK, L.chat_FLAG_DND, "" }
 local groupedTable = { "|cffaaaaaa*|r", "" } 
 local friendTable, BNTable = {}, {}
@@ -110,7 +110,7 @@ local function BuildBNTable(total)
 		presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
 		
 		if isOnline then 
-			_, _, _, realmName, faction, _, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+			_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
 			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 			BNTable[i] = { presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
 		end
@@ -177,9 +177,9 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 				realID = (BATTLENET_NAME_FORMAT):format(info[2], info[3])
 				menuCountWhispers = menuCountWhispers + 1
 				menuList[3].menuList[menuCountWhispers] = {text = realID, arg1 = realID,notCheckable=true, func = whisperClick}
-
+				
 				if select(1, UnitFactionGroup("player")) == "Horde" then playerFaction = 0 else playerFaction = 1 end
-				if info[6] == wowString and info[11] ==T.myrealm and playerFaction == info[12] then
+				if info[6] == wowString and info[11] == T.myrealm and playerFaction == info[12] then
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[info[14]], GetQuestDifficultyColor(info[16])
 					if classc == nil then classc = GetQuestDifficultyColor(info[16]) end
 
@@ -217,7 +217,7 @@ Stat:SetScript("OnEnter", function(self)
 	local totalfriends = numberOfFriends + totalBNet
 	local zonec, classc, levelc, realmc, info
 
-	local anchor, panel, xoff, yoff =T.DataTextTooltipAnchor(Text)
+	local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	GameTooltip:AddDoubleLine(L.datatext_friendlist, format(totalOnlineString, totalonline, totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
