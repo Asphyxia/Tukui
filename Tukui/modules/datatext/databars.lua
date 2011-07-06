@@ -8,6 +8,7 @@ local LastUpdate = 1
 for i = 1, 4 do
 	HydraData[i] = CreateFrame("Frame", "HydraData"..i, UIParent)
 	HydraData[i]:CreatePanel(nil, 100, 17, "CENTER", UIParent, "CENTER", -200, 200)
+	HydraData[i]:CreateShadow("")
 	
 	if i == 1 then
 		HydraData[i]:Point("TOPLEFT", UIParent, "TOPLEFT", 8, -10)
@@ -268,18 +269,41 @@ local update = function()
 	end
 end
 
-local toggle = CreateFrame("Button", "RepToggle", TukuiTabsRightBackground)
-toggle:Size(114, TukuiTabsRightBackground:GetHeight())
-toggle:Point("CENTER", TukuiTabsRightBackground, "CENTER", 50, 0)
-toggle:SetFrameStrata("HIGH")
-toggle:SetFrameLevel(2)
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+end
+
+local toggle = CreateFrame("Frame", "RepToggle", TukuiChatBackgroundRight)
+toggle:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -26)
 toggle:EnableMouse(true)
+toggle:SetFrameStrata("HIGH")
+toggle:SetFrameLevel(10)
+toggle:CreateShadow("Default")
+toggle:SetAlpha(0)
+toggle:HookScript("OnEnter", ModifiedBackdrop)
+toggle:HookScript("OnLeave", OriginalBackdrop)
+
+toggle:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		toggle:FadeIn()
+	end)
+
+	toggle:SetScript("OnLeave", function()
+		toggle:FadeOut()
+	end)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, 10)
 toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
-toggle.Text:SetText(T.panelcolor..COMBAT_FACTION_CHANGE)
-toggle:SetWidth(toggle.Text:GetWidth() + 12)
+toggle.Text:SetText(T.panelcolor.."R")
+
 toggle:SetScript("OnMouseUp", function(self)
 	for _, frame in pairs(RepData) do
 		if frame and frame:IsVisible() then
@@ -289,9 +313,6 @@ toggle:SetScript("OnMouseUp", function(self)
 		end
 	end
 end)
-
-toggle:SetScript("OnEnter", function(self) self.Text:SetTextColor(1,1,1) end)
-toggle:SetScript("OnLeave", function(self) self.Text:SetTextColor(0,0.7,1) end)
 
 local updater = CreateFrame("Frame")
 updater:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -308,10 +329,10 @@ local tokens = {
 	{390, 3000}, -- Conquest Points
 	{391, 2000},  -- Tol Barad Commendation
 	{392, 4000}, -- Honor Points
-	{393, 200},  -- Fossil Archaeology Fragment
 	{395, 4000}, -- Justice Points
 	{396, 4000}, -- Valor Points
 	{402, 10},	 -- Chef's Award 
+	{416, 300}, -- Mark of the World Tree
 }
 
 if C["databars"].currency == true then
@@ -389,18 +410,23 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "CurrencyToggle", UIParent)
-toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", TukuiInfoRight, "BOTTOMLEFT", -75, 0)
+toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", TukuiInfoRight, "BOTTOMLEFT", -84, 0)
 toggle:EnableMouse(true)
---toggle:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
---toggle:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
 toggle:SetFrameStrata("MEDIUM")
 toggle:SetFrameLevel(2)
 toggle:CreateShadow("Default")
 toggle:SetAlpha(0)
-toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 toggle:HookScript("OnEnter", ModifiedBackdrop)
 toggle:HookScript("OnLeave", OriginalBackdrop)
+
+toggle:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		toggle:FadeIn()
+	end)
+
+	toggle:SetScript("OnLeave", function()
+		toggle:FadeOut()
+	end)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, 10)

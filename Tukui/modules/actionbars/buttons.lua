@@ -163,16 +163,16 @@ local function MoveButtonBar(button, bar)
 if button == TukuiBar5ButtonTop then	
 		local buttontop = TukuiBar5ButtonTop
 		buttontop:ClearAllPoints()
-		buttontop:Size(20, 17)
-		buttontop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, 0)
+		buttontop:Size(20, 20)
+		buttontop:Point("TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
 		if bar:IsShown() then
 			db.hidebar5 = false
 			
-			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."Hide") end		
+			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."-") end		
 		else
 			db.hidebar5 = true
 			
-			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."Show") end
+			if not T.lowversion then buttontop.text:SetText(T.panelcolor.."+") end
 		end	
 	end
 end
@@ -233,18 +233,23 @@ TukuiBar4Button.text:SetPoint("CENTER", 0, 1)
 TukuiBar4Button.text:SetText(T.panelcolor.."Collapse")
 
 local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
-TukuiBar5ButtonTop:SetWidth(20)
-TukuiBar5ButtonTop:Height(17)
-TukuiBar5ButtonTop:Point("TOPRIGHT", TukuiTabsRightBackground, "TOPRIGHT", -55, 0)
+TukuiBar5ButtonTop:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
+TukuiBar5ButtonTop:Point("TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
 TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
 TukuiBar5ButtonTop:SetAlpha(0)
 TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
-TukuiBar5ButtonTop:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-TukuiBar5ButtonTop:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.pixelfont, 10, "OUTLINE")
 TukuiBar5ButtonTop.text:Point("CENTER", 1, 1)
-TukuiBar5ButtonTop.text:SetText(T.panelcolor.."Hide")
-TukuiBar5ButtonTop:SetBackdropBorderColor(unpack(C["media"].bordercolor))				
+TukuiBar5ButtonTop.text:SetText(T.panelcolor.."-")	
+
+TukuiBar5ButtonTop:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		TukuiBar5ButtonTop:FadeIn()
+	end)
+
+	TukuiBar5ButtonTop:SetScript("OnLeave", function()
+		TukuiBar5ButtonTop:FadeOut()
+	end)	
 
 -- exit vehicle button on left side of bottom action bar
 local vehicleleft = CreateFrame("Button", "TukuiExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")

@@ -9,7 +9,7 @@ local DataVisibility = 1
 --TOP DUMMY FRAME DOES NOTHING 
 if C["asphyxia_panels"].toppanel == true then 
 local toppanel = CreateFrame("Frame", "TukuiTopPanel", UIParent)
-toppanel:CreatePanel("Transparent", 2000, 20, "TOP", UIParent, "TOP", 0, 0)
+toppanel:CreatePanel("Default", 2000, 20, "TOP", UIParent, "TOP", 0, 0)
 toppanel:SetFrameStrata("BACKGROUND")
 toppanel:SetFrameLevel(0)
 toppanel:CreateShadow("Default")
@@ -18,7 +18,7 @@ end
 --BOTTOM DUMMY FRAME DOES NOTHING 
 if C["asphyxia_panels"].bottompanel == true then 
 local bottompanel = CreateFrame("Frame", "TukuiBottomPanel", UIParent)
-bottompanel:CreatePanel("Transparent", 2000, 20, "BOTTOM", UIParent, "BOTTOM", 0, 0)
+bottompanel:CreatePanel("Default", 2000, 20, "BOTTOM", UIParent, "BOTTOM", 0, 0)
 bottompanel:SetFrameStrata("BACKGROUND")
 bottompanel:SetFrameLevel(0)
 bottompanel:CreateShadow("Default")
@@ -86,6 +86,15 @@ verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, 10)
 verbutton.Text:Point("CENTER", verbutton, "CENTER", 0.5, 0.5)
 verbutton.Text:SetText(T.panelcolor.."V")
 
+--[[verbutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		verbutton:FadeIn()
+	end)
+
+	verbutton:SetScript("OnLeave", function()
+		verbutton:FadeOut()
+	end)--]]
+
 -- VERSION LOGO (Asphyxia Avatar)
 	local avatar = CreateFrame("Frame", nil, TukuiVersionFrame)
 	avatar:CreatePanel(avatar, 58, 58, "BOTTOM", TukuiVersionFrame, "TOP", 0, 2)
@@ -125,17 +134,41 @@ TukuiAsphyxiaHelpFrame:SlideIn()
 end
 end )
 
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetBackdropColor(unpack(C["media"].backdropcolor))
+	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+end
+
 -- ADDONS BUTTON
 local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureActionButtonTemplate")
 adbutton:CreatePanel("Default", 100, 17, "BOTTOM", UIParent, "BOTTOM", 0, 12)
+adbutton:SetFrameStrata("HIGH")
+adbutton:SetAlpha(0)
 adbutton:SetAttribute("type", "macro")
-adbutton:SetAttribute("macrotext", "/al")
+adbutton:SetAttribute("macrotext", "/am")
+adbutton:HookScript("OnEnter", ModifiedBackdrop)
+adbutton:HookScript("OnLeave", OriginalBackdrop)
 
 adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 10, "OUTLINE")
 adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 0.5)
 adbutton.Text:SetText(T.panelcolor..ADDONS)
 adbutton.Text:SetShadowColor( 0, 0, 0 )
 adbutton.Text:SetShadowOffset(1.25, -1.25)
+
+adbutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		adbutton:FadeIn()
+	end)
+
+	adbutton:SetScript("OnLeave", function()
+		adbutton:FadeOut()
+	end)
 
 --[[adbutton.Status = CreateFrame( "StatusBar", "HydraDataStatus", adbutton )
 adbutton.Status:SetFrameLevel( 12 )
@@ -148,8 +181,21 @@ adbutton.Status:Point( "BOTTOMRIGHT", adbutton, "BOTTOMRIGHT", -2, 2 )--]]
 -- RESETUI BUTTON
 local resetuibutton = CreateFrame("Button", "TukuiResetUIButton", UIParent, "SecureActionButtonTemplate")
 resetuibutton:CreatePanel("Default", 60, 17, "LEFT", TukuiAddonsButton, "RIGHT", 5, 0)
+resetuibutton:SetFrameStrata("HIGH")
+resetuibutton:SetAlpha(0)
 resetuibutton:SetAttribute("type", "macro")
 resetuibutton:SetAttribute("macrotext", "/resetui")
+resetuibutton:HookScript("OnEnter", ModifiedBackdrop)
+resetuibutton:HookScript("OnLeave", OriginalBackdrop)
+
+resetuibutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		resetuibutton:FadeIn()
+	end)
+
+	resetuibutton:SetScript("OnLeave", function()
+		resetuibutton:FadeOut()
+	end)
 
 resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, 10)
 resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 0, 0.5)
@@ -158,8 +204,21 @@ resetuibutton.Text:SetText(T.panelcolor.."Reset UI")
 -- RELOADUI BUTTON
 local rluibutton = CreateFrame("Button", "TukuiReloadUIButton", UIParent, "SecureActionButtonTemplate")
 rluibutton:CreatePanel("Default", 60, 17, "LEFT", resetuibutton, "RIGHT", 5, 0)
+rluibutton:SetFrameStrata("HIGH")
+rluibutton:SetAlpha(0)
 rluibutton:SetAttribute("type", "macro")
 rluibutton:SetAttribute("macrotext", "/rl")
+rluibutton:HookScript("OnEnter", ModifiedBackdrop)
+rluibutton:HookScript("OnLeave", OriginalBackdrop)
+
+rluibutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		rluibutton:FadeIn()
+	end)
+
+	rluibutton:SetScript("OnLeave", function()
+		rluibutton:FadeOut()
+	end)
 
 rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, 10)
 rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 0, 0.5)
@@ -168,8 +227,21 @@ rluibutton.Text:SetText(T.panelcolor.."Reload UI")
 -- CONFIG BUTTON
 local configbutton = CreateFrame("Button", "TukuiConfigButton", UIParent, "SecureActionButtonTemplate")
 configbutton:CreatePanel("Default", 60, 17, "RIGHT", TukuiAddonsButton, "LEFT", -5, 0)
+configbutton:SetFrameStrata("HIGH")
+configbutton:SetAlpha(0)
 configbutton:SetAttribute("type", "macro")
 configbutton:SetAttribute("macrotext", "/tc")
+configbutton:HookScript("OnEnter", ModifiedBackdrop)
+configbutton:HookScript("OnLeave", OriginalBackdrop)
+
+configbutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		configbutton:FadeIn()
+	end)
+
+	configbutton:SetScript("OnLeave", function()
+		configbutton:FadeOut()
+	end)
 
 configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, 10)
 configbutton.Text:Point("CENTER", configbutton, "CENTER", 0, 0.5)
@@ -178,54 +250,25 @@ configbutton.Text:SetText(T.panelcolor.."Config UI")
 -- MOVEUI BUTTON
 local moveuibutton = CreateFrame("Button", "TukuiMoveUIButton", UIParent, "SecureActionButtonTemplate")
 moveuibutton:CreatePanel("Default", 60, 17, "RIGHT", configbutton, "LEFT", -5, 0)
+moveuibutton:SetFrameStrata("HIGH")
+moveuibutton:SetAlpha(0)
 moveuibutton:SetAttribute("type", "macro")
 moveuibutton:SetAttribute("macrotext", "/mtukui")
+moveuibutton:HookScript("OnEnter", ModifiedBackdrop)
+moveuibutton:HookScript("OnLeave", OriginalBackdrop)
+
+moveuibutton:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		moveuibutton:FadeIn()
+	end)
+
+	moveuibutton:SetScript("OnLeave", function()
+		moveuibutton:FadeOut()
+	end)
 
 moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, 10)
 moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 0, 0.5)
 moveuibutton.Text:SetText(T.panelcolor.."Move UI")
-
--- MOUSEOVER FUNCTION FOR BUTTONS
-local buttonsBG = CreateFrame("frame", "AsphyxiaButtonsBG", UIParent)
-buttonsBG:SetPoint("TOPLEFT", moveuibutton, "TOPLEFT" ,0, 0)
-buttonsBG:SetPoint("BOTTOMRIGHT", rluibutton, "BOTTOMRIGHT" ,0, 0)
-buttonsBG:EnableMouse(true)
-
-local function ModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-end
-
-local function OriginalBackdrop(self)
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-end
-
-local buttons = {"TukuiMoveUIButton", "TukuiConfigButton", "TukuiAddonsButton", "TukuiResetUIButton", "TukuiReloadUIButton", "AsphyxiaButtonsBG"}
-
-for i = 1, getn(buttons) do
-	local frame = _G[buttons[i]]
-	frame:SetFrameStrata("BACKGROUND")
-	frame:SetFrameLevel(2)
-	frame:SetAlpha(0)
-	frame:CreateShadow("Default")
-	frame:SetScript("OnEnter", function(self) for _, f in pairs(buttons) do _G[f]:SetAlpha(1) end end)
-	frame:SetScript("OnLeave", function(self) for _, f in pairs(buttons) do _G[f]:SetAlpha(0) end end)
-	frame:HookScript("OnEnter", ModifiedBackdrop)
-	frame:HookScript("OnLeave", OriginalBackdrop)
-	
-	if i == 6 then
-	frame:SetScript("OnEnter", function()
-	if InCombatLockdown() then return end
-		frame:FadeIn()
-	end)
-
-	frame:SetScript("OnLeave", function()
-		frame:FadeOut()
-	end)
-	end
-end
 
 -- WORLD STATE FRAME 
 WorldStateAlwaysUpFrame:ClearAllPoints()
@@ -329,7 +372,8 @@ end
 local cp = "|cff9a1212-|r" 
 local cm = "|cff9a1212+|r" 
 local icb = CreateFrame("Frame", "InfoCenterButton", TukuiChatBackgroundRight)
-icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
+icb:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -48)
+icb:SetAlpha(0)
 icb:EnableMouse(true)
 icb.f = icb:CreateFontString(nil, overlay)
 icb.f:SetPoint("CENTER")
@@ -346,3 +390,12 @@ icb:SetScript("OnMouseDown", function(self)
 		self.f:SetText(cm)
 	end
 end)
+
+icb:SetScript("OnEnter", function()
+		if InCombatLockdown() then return end
+		icb:FadeIn()
+	end)
+
+	icb:SetScript("OnLeave", function()
+		icb:FadeOut()
+	end)
