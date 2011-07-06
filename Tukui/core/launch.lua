@@ -200,7 +200,7 @@ end
 
 local v = CreateFrame("Button", "TukuiVersionFrame", UIParent)
 v:SetSize(210, 34)
-v:SetPoint("CENTER", UIParent, "CENTER", 0, 160)
+v:SetPoint("CENTER", UIParent, "CENTER", 0, 184)
 v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
