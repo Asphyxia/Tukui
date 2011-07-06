@@ -108,7 +108,7 @@ C["castbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
+	["background"] = false,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
 	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["addons_toggle"] = false,							-- Toggle buttons for Recount, Omen, Atlasloot, and Encounter journal.
 	["Recount"] = true,									-- Enable Recount Skin
