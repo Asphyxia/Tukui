@@ -13,7 +13,7 @@ C["general"] = {
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Smelly",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3", "Smelly" or "Tukui")
+	["style"] = "Smelly",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3", "Asphyxia4", "Smelly" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -101,9 +101,16 @@ C["actionbar"] = {
 	["bgPanel"] = true,									-- enable background panels for actionbars
 }
 
+C["castbar"] = {
+	["classcolor"] = true, 							-- classcolor
+	["castbarcolor"] = {.150, .150, .150, 1}, 				-- color if classcolor = false
+	["nointerruptcolor"] = { 1, 0, 0, 1 }, 			-- color of casts which can't be interrupted
+}
+
 C["Addon_Skins"] = {
-	["background"] = false,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
+	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
 	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
+	["addons_toggle"] = false,							-- Toggle buttons for Recount, Omen, Atlasloot, and Encounter journal.
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,									-- Enable Skada Skin
 	["Omen"] = true,									-- Enable Omen Skin
@@ -159,7 +166,7 @@ C["datatext"] = {
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                  -- show your tracked currency on panels
 	["hit"] = 13,                                        -- show hit rating
-	["mastery"] = 5,                                    -- show mastery rating
+	["mastery"] =5,                                    -- show mastery rating
 	["micromenu"] = 15,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
 	["specswitcher"] = 0,								-- show talents on panels
@@ -193,7 +200,7 @@ C["databars"] = {
 }
 
 C["asphyxia_panels"] = {
-	["toppanel"] = true, 							-- enable or disable top dummy panel.
+	["toppanel"] = false, 							-- enable or disable top dummy panel.
 	["bottompanel"] = true, 					-- enable or disable bottom dummy panel.
 	["asphyxiatalent"] = true,					-- enable or disable talent switcher module (replaces specswitcher datatext).
 	
@@ -215,6 +222,7 @@ C["nameplate"] = {
 	["goodcolor"] = {75/255,  175/255, 76/255},	        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
+	["trackauras"] = true                					-- player debuffs on nameplates
 }
 
 C["tooltip"] = {

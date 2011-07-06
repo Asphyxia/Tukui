@@ -12,7 +12,7 @@ local hpWidth = 110
 local iconSize = 25		--Size of all Icons, RaidIcon/ClassIcon/Castbar Icon
 local cbHeight = 5
 local cbWidth = 110
-local blankTex = C["media"].blank
+local blankTex = C["media"].normTex
 local OVERLAY = [=[Interface\TargetingFrame\UI-TargetingFrame-Flash]=]
 local numChildren = -1
 local frames = {}
@@ -63,6 +63,8 @@ local PlateBlacklist = {
 	["Venomous Snake"] = true,
 	["Viper"] = true,
 
+	-- Stupid Magmaw
+	["Lava Parasites"] = true,
 	--Test
 	--["Unbound Seer"] = true,
 }
@@ -139,6 +141,80 @@ local function SetVirtualBorder(parent, r, g, b, a)
 	parent.borderright:SetTexture(r, g, b)
 end
 
+--Create our Aura Icons
+local function CreateAuraIcon(parent)
+	local button = CreateFrame("Frame",nil,parent)
+	button:SetWidth(20)
+	button:SetHeight(20)
+	
+	button.bg = button:CreateTexture(nil, "BACKGROUND")
+	button.bg:SetTexture(unpack(C["media"].backdropcolor))
+	button.bg:SetAllPoints(button)
+	
+	button.bord = button:CreateTexture(nil, "BORDER")
+	button.bord:SetTexture(unpack(C["media"].bordercolor))
+	button.bord:SetPoint("TOPLEFT",button,"TOPLEFT", noscalemult,-noscalemult)
+	button.bord:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",-noscalemult,noscalemult)
+	
+	button.bg2 = button:CreateTexture(nil, "ARTWORK")
+	button.bg2:SetTexture(unpack(C["media"].backdropcolor))
+	button.bg2:SetPoint("TOPLEFT",button,"TOPLEFT", noscalemult*2,-noscalemult*2)
+	button.bg2:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",-noscalemult*2,noscalemult*2)	
+	
+	button.icon = button:CreateTexture(nil, "OVERLAY")
+	button.icon:SetPoint("TOPLEFT",button,"TOPLEFT", noscalemult*3,-noscalemult*3)
+	button.icon:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",-noscalemult*3,noscalemult*3)
+	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	button.cd = CreateFrame("Cooldown",nil,button)
+	button.cd:SetAllPoints(button)
+	button.cd:SetReverse(true)
+	button.count = button:CreateFontString(nil,"OVERLAY")
+	button.count:SetFont(FONT,10,FONTFLAG)
+	button.count:SetShadowColor(0, 0, 0, 0.4)
+	button.count:SetPoint("TOPRIGHT", button, "TOPRIGHT", 0, -2)
+	return button
+end
+
+--Update an Aura Icon
+local function UpdateAuraIcon(button, unit, index, filter)
+	local name,_,icon,count,debuffType,duration,expirationTime,_,_,_,spellID = UnitAura(unit,index,filter)
+	
+	button.icon:SetTexture(icon)
+	button.cd:SetCooldown(expirationTime-duration,duration)
+	button.expirationTime = expirationTime
+	button.duration = duration
+	button.spellID = spellID
+	if count > 1 then 
+		button.count:SetText(count)
+	else
+		button.count:SetText("")
+	end
+	button.cd:SetScript("OnUpdate", function(self) if not button.cd.timer then self:SetScript("OnUpdate", nil) return end button.cd.timer.text:SetFont(FONT,9,FONTFLAG) button.cd.timer.text:SetShadowColor(0, 0, 0, 0.4) end)
+	button:Show()
+end
+
+--Filter auras on nameplate, and determine if we need to update them or not.
+local function OnAura(frame, unit)
+	if not frame.icons or not frame.unit then return end
+	local i = 1
+	for index = 1,40 do
+		if i > 5 then return end
+		local match
+		local name,_,_,_,_,duration,_,caster,_,_,spellid = UnitAura(frame.unit,index,"HARMFUL")
+		if caster == "player" then match = true end
+		
+		if duration and match == true then
+			if not frame.icons[i] then frame.icons[i] = CreateAuraIcon(frame) end
+			local icon = frame.icons[i]
+			if i == 1 then icon:SetPoint("RIGHT",frame.icons,"RIGHT") end
+			if i ~= 1 and i <= 5 then icon:SetPoint("RIGHT", frame.icons[i-1], "LEFT", -2, 0) end
+			i = i + 1
+			UpdateAuraIcon(icon, frame.unit, index, "HARMFUL")
+		end
+	end
+	for index = i, #frame.icons do frame.icons[index]:Hide() end
+end
+
 --Color the castbar depending on if we can interrupt or not, 
 --also resize it as nameplates somehow manage to resize some frames when they reappear after being hidden
 local function UpdateCastbar(frame)
@@ -197,7 +273,6 @@ end
 --Color Nameplate
 local function Colorize(frame)
 	local r,g,b = frame.hp:GetStatusBarColor()
-	
 	for class, color in pairs(RAID_CLASS_COLORS) do
 		local r, g, b = floor(r*100+.5)/100, floor(g*100+.5)/100, floor(b*100+.5)/100
 		if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
@@ -222,6 +297,7 @@ local function Colorize(frame)
 	else -- enemy player
 		frame.isFriendly = false
 	end
+	
 	frame.hasClass = false
 	
 	frame.hp:SetStatusBarColor(r,g,b)
@@ -248,6 +324,8 @@ local function UpdateObjects(frame)
 	
 	if C["nameplate"].enhancethreat == true then
 		frame.hp.name:SetTextColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
+	-- else
+		-- frame.hp.name:SetTextColor(1,1,0)
 	end
 	
 	--Set the name text
@@ -277,6 +355,19 @@ local function UpdateObjects(frame)
 	frame.overlay:ClearAllPoints()
 	frame.overlay:SetAllPoints(frame.hp)
 
+	-- Aura tracking
+	if C["nameplate"].trackauras == true then
+		if frame.icons then return end
+		frame.icons = CreateFrame("Frame",nil,frame)
+		frame.icons:SetPoint("BOTTOMRIGHT",frame.hp,"TOPRIGHT", 2, FONTSIZE+3)
+		frame.icons:SetWidth(20 + hpWidth)
+		frame.icons:SetHeight(25)
+		frame.icons:SetFrameLevel(frame.hp:GetFrameLevel()+2)
+		frame:RegisterEvent("UNIT_AURA")
+		frame:HookScript("OnEvent", OnAura)
+	end	
+
+	
 	HideObjects(frame)
 end
 
@@ -327,6 +418,13 @@ local function SkinObjects(frame)
 	
 	hp:HookScript('OnShow', UpdateObjects)
 	frame.hp = hp
+	
+	--Class Icon
+	-- local cicon = hp:CreateTexture(nil, "OVERLAY")
+	-- cicon:Point("LEFT", hp, "LEFT", -22, 0)
+	-- cicon:SetTexture("Interface\\WorldStateFrame\\Icons-Classes")
+	-- cicon:Size(iconSize)
+	-- frame.class = cicon
 	
 	--Cast Bar
 	cb:SetFrameLevel(1)
@@ -480,15 +578,10 @@ end
 
 --Health Text, also border coloring for certain plates depending on health
 local function ShowHealth(frame, ...)
-
 	-- show current health value
 	local minHealth, maxHealth = frame.healthOriginal:GetMinMaxValues()
 	local valueHealth = frame.healthOriginal:GetValue()
 	local d =(valueHealth/maxHealth)*100
-	
-	-- Match values
-	frame.hp:SetValue(valueHealth - 1)	--Bug Fix 4.1
-	frame.hp:SetValue(valueHealth)
 	
 	if C["nameplate"].showhealth == true then
 		frame.hp.value:SetText(T.ShortValue(valueHealth).." - "..(string.format("%d%%", math.floor((valueHealth/maxHealth)*100))))
@@ -506,6 +599,22 @@ local function ShowHealth(frame, ...)
 	elseif (frame.hasClass ~= true and frame.isFriendly ~= true) and C["nameplate"].enhancethreat == true then
 		SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
 	end
+end
+
+--Scan all visible nameplate for a known unit.
+local function CheckUnit_Guid(frame, ...)
+	--local numParty, numRaid = GetNumPartyMembers(), GetNumRaidMembers()
+	if UnitExists("target") and frame:GetAlpha() == 1 and UnitName("target") == frame.hp.name:GetText() then
+		frame.guid = UnitGUID("target")
+		frame.unit = "target"
+		OnAura(frame, "target")
+	elseif frame.overlay:IsShown() and UnitExists("mouseover") and UnitName("mouseover") == frame.hp.name:GetText() then
+		frame.guid = UnitGUID("mouseover")
+		frame.unit = "mouseover"
+		OnAura(frame, "mouseover")
+	else
+		frame.unit = nil
+	end	
 end
 
 --Run a function for all visible nameplates
@@ -549,6 +658,7 @@ CreateFrame('Frame'):SetScript('OnUpdate', function(self, elapsed)
 	ForEachPlate(ShowHealth)
 	ForEachPlate(CheckBlacklist)
 	ForEachPlate(HideDrunkenText)
+	ForEachPlate(CheckUnit_Guid)
 end)
 
 --Only show nameplates when in combat
