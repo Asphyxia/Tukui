@@ -802,6 +802,11 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 	icon.duration = duration
 	icon.timeLeft = expirationTime
 	icon.first = true
+	if T.ReverseTimer and T.ReverseTimer[spellID] then 
+		icon.reverse = true 
+	else
+		icon.reverse = false
+	end	
 	icon:SetScript("OnUpdate", CreateAuraTimer)
 end
 
@@ -814,23 +819,33 @@ T.HidePortrait = function(self, unit)
 		end
 	end
 end
-
-local CheckInterrupt = function(self, unit)
-	if unit == "vehicle" then unit = "player" end
-
-	if self.interrupt and UnitCanAttack("player", unit) then
-		self:SetStatusBarColor(1, 0, 0, 0.5)	
-	else
-		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)		
+T.PortraitUpdate = function(self, unit)
+	--Fucking Furries
+	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
+		self:SetCamera(1)
 	end
 end
+-- jasje castbar
+T.PostCastStart = function(self, unit, name, rank, castid)
+	if unit == "vehicle" then unit = "player" end
+	--Fix blank castbar with opening text
+	if name == "Opening" then
+		self.Text:SetText("Opening")
+	end
 
-T.CheckCast = function(self, unit, name, rank, castid)
-	CheckInterrupt(self, unit)
-end
-
-T.CheckChannel = function(self, unit, name, rank)
-	CheckInterrupt(self, unit)
+	if self.interrupt and unit ~= "player" then
+		if UnitCanAttack("player", unit) then
+			self:SetStatusBarColor(unpack(C["castbar"].nointerruptcolor))
+		else
+			self:SetStatusBarColor(unpack(C["castbar"].nointerruptcolor))	
+		end
+	else
+        if C["castbar"].classcolor and (unit == "player" or unit == "target") then
+            self:SetStatusBarColor(unpack(oUF.colors.class[select(2, UnitClass(unit))]))
+        else
+            self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))
+        end
+	end
 end
 
 T.UpdateShards = function(self, event, unit, powerType)

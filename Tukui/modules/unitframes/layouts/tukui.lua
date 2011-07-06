@@ -365,10 +365,17 @@ local function Shared(self, unit)
 			toggle:SetFrameLevel(2)
 			toggle:CreateShadow("Default")
 			toggle:SetAlpha(0)
-			toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-			toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 			toggle:HookScript("OnEnter", ModifiedBackdrop) 
 			toggle:HookScript("OnLeave", OriginalBackdrop)
+			
+			toggle:SetScript("OnEnter", function()
+				if InCombatLockdown() then return end
+					toggle:FadeIn()
+				end)
+
+				toggle:SetScript("OnLeave", function()
+					toggle:FadeOut()
+				end)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 			toggle.Text:SetFont(C.media.pixelfont, 10)
@@ -433,10 +440,17 @@ local function Shared(self, unit)
 			toggle:SetFrameLevel(2)
 			toggle:CreateShadow("Default")
 			toggle:SetAlpha(0)
-			toggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
-			toggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 			toggle:HookScript("OnEnter", ModifiedBackdrop) 
 			toggle:HookScript("OnLeave", OriginalBackdrop)
+			
+			toggle:SetScript("OnEnter", function()
+				if InCombatLockdown() then return end
+					toggle:FadeIn()
+				end)
+
+				toggle:SetScript("OnLeave", function()
+					toggle:FadeOut()
+				end)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 			toggle.Text:SetFont(C.media.pixelfont, 10)
@@ -776,8 +790,8 @@ local function Shared(self, unit)
 			
 			castbar.CustomTimeText = T.CustomCastTimeText
 			castbar.CustomDelayText = T.CustomCastDelayText
-			castbar.PostCastStart = T.CheckCast
-			castbar.PostChannelStart = T.CheckChannel
+			castbar.PostCastStart =T.PostCastStart
+			castbar.PostChannelStart =T.PostCastStart
 
 			castbar.time = T.SetFontString(castbar,font, 10, "THINOUTLINE")
 			castbar.time:Point("RIGHT", castbar.bg, "RIGHT", -4, 0)
@@ -1276,8 +1290,8 @@ local function Shared(self, unit)
 		castbar.Text:Height(12)
 		
 		castbar.CustomDelayText = T.CustomCastDelayText
-		castbar.PostCastStart = T.CheckCast
-		castbar.PostChannelStart = T.CheckChannel
+		castbar.PostCastStart =T.PostCastStart
+		castbar.PostChannelStart =T.PostCastStart
 								
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:Height(castbar:GetHeight()+4)
@@ -1442,8 +1456,8 @@ local function Shared(self, unit)
 		castbar.Text:Height(12)
 		
 		castbar.CustomDelayText = T.CustomCastDelayText
-		castbar.PostCastStart = T.CheckCast
-		castbar.PostChannelStart = T.CheckChannel
+		castbar.PostCastStart =T.PostCastStart
+		castbar.PostChannelStart =T.PostCastStart
 								
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:Height(castbar:GetHeight()+4)
@@ -1669,8 +1683,8 @@ local function Shared(self, unit)
 		castbar.Text:Height(10)
 		
 		castbar.CustomDelayText = T.CustomCastDelayText
-		castbar.PostCastStart = T.CheckCast
-		castbar.PostChannelStart = T.CheckChannel
+		castbar.PostCastStart =T.PostCastStart
+		castbar.PostChannelStart =T.PostCastStart
 								
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:Height(castbar:GetHeight()+4)

@@ -7,7 +7,7 @@ ns._Headers = {}
 
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
-if C["unitframes"].style ~= "Asphyxia2" then return end
+if C["unitframes"].style ~= "Asphyxia4" then return end
 
 ------------------------------------------------------------------------
 --	local variables
@@ -79,7 +79,7 @@ local function Shared(self, unit)
 	
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(25)
+		health:Height(28)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -125,18 +125,18 @@ local function Shared(self, unit)
 
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(45)
-		power:Width(180)
+		power:Height(5)
+		power:Width(130)
 		if unit == "player" then
-			power:Point("TOP", health, "BOTTOM", 2, 25)
-			power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 8, -2)
+			power:Point("TOP", health, "BOTTOM", 2, 1)
+			power:Point("TOPRIGHT", health, "BOTTOMRIGHT", -8, -2)
 		elseif unit == "target" then
-			power:Point("TOP", health, "BOTTOM", 2, 26)
-			power:Point("TOPLEFT", health, "BOTTOMLEFT", -8, 25)
+			power:Point("TOP", health, "BOTTOM", 2, 1)
+			power:Point("TOPLEFT", health, "BOTTOMLEFT", 8, 1)
 		end
 		power:SetStatusBarTexture(normTex)
 		power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
-		power:SetFrameStrata("BACKGROUND")
+		--power:SetFrameStrata("BACKGROUND")
 		
 		-- Border for Power
 		local PowerBorder = CreateFrame("Frame", nil, power)
@@ -196,13 +196,13 @@ local function Shared(self, unit)
 		if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
 			portrait:SetFrameLevel(8)
-			portrait:SetHeight(15)
-			portrait:SetWidth(68)
+			portrait:SetHeight(28)
+			portrait:SetWidth(65)
 			portrait:SetAlpha(1)
 			if unit == "player" then
-				portrait:SetPoint("TOP", health, "BOTTOM", -89, -5)
+				portrait:SetPoint("RIGHT", health, "LEFT", -5, 0)
 			elseif unit == "target" then
-				portrait:SetPoint("TOP", health, "BOTTOM", 89, -5)
+				portrait:SetPoint("LEFT", health, "RIGHT", 5, 0)
 			end
 			table.insert(self.__elements, T.HidePortrait)
 			self.Portrait = portrait
@@ -222,13 +222,13 @@ local function Shared(self, unit)
 		classicon:CreateShadow("Default")
 		if unit == "player" then
 			if C.unitframes.charportrait then
-				classicon:CreatePanel("Default", 32, 32, "TOPLEFT", health, "TOPRIGHT", 13,2)
+				classicon:CreatePanel("Default", 32, 32, "TOPLEFT", health, "TOPRIGHT", 5,2)
 			else
 				classicon:CreatePanel("Default", 32, 32, "TOPRIGHT", health, "TOPLEFT", -5,2)
 			end
 		elseif unit == "target" then
 			if C.unitframes.charportrait then
-				classicon:CreatePanel("Default", 32, 32, "TOPRIGHT", health, "TOPLEFT", -13,2)
+				classicon:CreatePanel("Default", 32, 32, "TOPRIGHT", health, "TOPLEFT", -5,2)
 			else
 				classicon:CreatePanel("Default", 32, 32, "TOPLEFT", health, "TOPRIGHT", 5,2)
 			end
@@ -293,7 +293,7 @@ local function Shared(self, unit)
 			FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 			FlashInfo.parent = self
 			FlashInfo:SetAllPoints(panel)
-			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font1, 12)
+			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, 10)
 			FlashInfo.ManaLevel:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			self.FlashInfo = FlashInfo
 			
@@ -1914,7 +1914,7 @@ local function Update(self, elapsed)
   TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
 
 	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
-		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, -10)
+		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, 5)
 	end
     TimeSinceLastUpdate = 0
 end
@@ -1922,6 +1922,7 @@ end
 CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
+
 ------------------------------------------------------------------------
 -- Right-Click on unit frames menu. 
 -- Doing this to remove SET_FOCUS eveywhere.
