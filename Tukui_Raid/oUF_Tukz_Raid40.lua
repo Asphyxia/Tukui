@@ -229,6 +229,17 @@ local function Shared(self, unit)
 		}
 	end
 	
+	--Resurrect Indicator
+	local Resurrect = CreateFrame('Frame', nil, self)
+	Resurrect:SetFrameLevel(20)
+
+	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
+	ResurrectIcon:Point(health.value:GetPoint())
+	ResurrectIcon:Size(30, 25)
+	ResurrectIcon:SetDrawLayer('OVERLAY', 7)
+
+	self.ResurrectIcon = ResurrectIcon
+	
 	if C["unitframes"].raidunitdebuffwatch == true then
 		-- AuraWatch (corner icon)
 		T.createAuraWatch(self,unit)

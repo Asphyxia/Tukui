@@ -69,19 +69,6 @@ local function Shared(self, unit)
 		health.colorReaction = true			
 	end
 	
-	--Resurrect Indicator
-	if C["unitframes"].aggro == true then
-	local Resurrect = CreateFrame('Frame', nil, self)
-	Resurrect:SetFrameLevel(20)
-
-	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
-	ResurrectIcon:Point(self.health.value:GetPoint())
-	ResurrectIcon:Size(30, 25)
-	ResurrectIcon:SetDrawLayer('OVERLAY', 7)
-
-	self.ResurrectIcon = ResurrectIcon
-	end
-	
 	if C.unitframes.gradienthealth and C.unitframes.unicolor then
 		self:HookScript("OnEnter", function(self) -- Mouseover coloring
 			if not UnitIsConnected(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) then return end
@@ -240,6 +227,17 @@ local function Shared(self, unit)
 			maxOverflow = 1,
 		}
 	end
+	
+	--Resurrect Indicator
+	local Resurrect = CreateFrame('Frame', nil, self)
+	Resurrect:SetFrameLevel(20)
+
+	local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
+	ResurrectIcon:Point(health.value:GetPoint())
+	ResurrectIcon:Size(30, 25)
+	ResurrectIcon:SetDrawLayer('OVERLAY', 7)
+
+	self.ResurrectIcon = ResurrectIcon
 	
 	if C["unitframes"].raidunitdebuffwatch == true then
 		-- AuraWatch (corner icon)
