@@ -1,4 +1,9 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+
+------------------------------
+-- Creadit: Epicgrim
+------------------------------
+
 --silly anchor trix are for kids
 local cbanchor = CreateFrame("Frame", "CustomTukuiActionBarAnchor", UIParent) 
 cbanchor:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
@@ -80,7 +85,7 @@ local function MakePrimaryButtons()
 		-- cooldown stuffz
 		local function OnUpdate(self, elapsed)
 		TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
-		if(TimeSinceLastUpdate > .5) then
+		if(TimeSinceLastUpdate > .25) then
 		local name = GetItemInfo(v)
 			if IsEquippedItem(name) == 1 then
 				custombutton[i].value:Hide()
@@ -177,8 +182,11 @@ local function MakeSecondaryButtons()
 
 		-- hoverover stuffz
 		custombutton[i]:StyleButton()
+		
 		-- cooldown stuffz
-		local function Update(self, t)
+		local function OnUpdate(self, elapsed)
+		TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
+		if(TimeSinceLastUpdate > .5) then
 		local name = GetItemInfo(v)
 			if IsEquippedItem(name) == 1 then
 				custombutton[i].value:Hide()
@@ -188,6 +196,7 @@ local function MakeSecondaryButtons()
 				if trinket1id == v then var = 13 elseif trinket2id == v then var = 14 end
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", var)
 				if enabled ~= 0 then
@@ -200,6 +209,7 @@ local function MakeSecondaryButtons()
 				custombutton[i].value:Hide()
 				custombutton[i].texture:SetTexture(select(3, GetSpellInfo(v)))
 				local start, duration, enabled = GetSpellCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "spell");
 				custombutton[i]:SetAttribute("spell", v)
 				if enabled ~= 0 then
@@ -212,6 +222,7 @@ local function MakeSecondaryButtons()
 			if type(v) == "number" then
 				custombutton[i].texture:SetTexture(select(10, GetItemInfo(v)))
 				local start, duration, enabled = GetItemCooldown(v)
+				custombutton[i].startval = start
 				custombutton[i]:SetAttribute("type", "item");
 				custombutton[i]:SetAttribute("item", GetItemInfo(v))
 				if enabled ~= 0 then
@@ -224,8 +235,16 @@ local function MakeSecondaryButtons()
 			else
 				custombutton[i].value:Show()
 			end
+		
+			if custombutton[i].startval == 0 then
+				custombutton[i].cooldown:SetAlpha(0)
+			else
+				custombutton[i].cooldown:SetAlpha(1)
+			end
+			TimeSinceLastUpdate = 0
+			end
 		end
-		custombutton[i]:SetScript("OnUpdate", Update)
+		custombutton[i]:SetScript("OnUpdate", OnUpdate)
 	end
 end
 

@@ -72,7 +72,7 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
-	tab:GetFontString():SetFont(C.media.pixelfont, 10)
+	tab:GetFontString():SetFont(C.media.pixelfont, 10, "THINOUTLINE")
 	
 	-- color chat tabs, original by Elv, edited by Hydra
 	local classcolortab = RAID_CLASS_COLORS[T.myclass]
@@ -301,5 +301,5 @@ local function SetupTempChat()
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
 
-GeneralDockManager:SetParent(TukuiTabsLeftBackground)
-ChatFrame4Tab:SetParent(TukuiTabsRightBackground)
+GeneralDockManager:SetParent(TukuiChatBackgroundLeft)
+ChatFrame4Tab:SetParent(TukuiChatBackgroundRight)

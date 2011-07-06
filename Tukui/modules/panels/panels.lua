@@ -188,24 +188,24 @@ ltoabr:SetAlpha(0)
 
 -- CHAT BG LEFT
 local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 20)
+chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 114, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 21)
 chatleftbg:CreateShadow("Default")
 	
 -- CHAT BG RIGHT
 local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 115, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 20)
+chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 114, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 21)
 chatrightbg:CreateShadow("default")
 	
 -- LEFT TAB PANEL
 local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
-tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(4))
 tabsbgleft:SetFrameLevel(1)
 tabsbgleft:SetFrameStrata("BACKGROUND")
 tabsbgleft:CreateShadow("")
 
 -- RIGHT TAB PANEL
 local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiChatBackgroundRight)
-tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(3))
+tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(4))
 tabsbgright:SetFrameLevel(1)
 tabsbgright:SetFrameStrata("BACKGROUND")
 tabsbgright:CreateShadow("")

@@ -142,7 +142,7 @@ end
 makeList()
 
 -- Slash commands
-SLASH_ALOAD1 = "/al"
+SLASH_ALOAD1 = "/am"
 SlashCmdList.ALOAD = function (msg)
 	loadf:Show()
 end

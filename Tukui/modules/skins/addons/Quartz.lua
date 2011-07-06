@@ -1,76 +1,79 @@
-﻿local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
---[[
-    Quartz3 skin by Darth Android / Telroth-The Venture Co.
+﻿--[[
+	Omen skin by Darth Android / Telroth - Black Dragonflight
+	
+	Skins Omen to look like TelUI.
 	
 	Todo:
-     + Remove useless options
-    
-	(C)2010 Darth Android / Telroth-The Venture Co.
-	File version v91.109
+	 + Reorganize to allow skin subclass overrides
+	 + Reorganize to allow layout subclass overrides
+	
+	File version v15.37
+	(C)2010 Darth Android / Telroth - Black Dragonflight
 ]]
-if not C.Addon_Skins.Quartz or not IsAddOnLoaded("Quartz") then return end
-local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
-if not Q3 then return end
+local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+if not IsAddOnLoaded("Omen") or not C.Addon_Skins.Omen then return end
 
-AddonSkins_Mod:RegisterSkin("Quartz",function(Skin, skin, Layout, layout, config)
-	-- Skin and Layout overrides
-	Skin.SkinQuartzBar = function(self, bar)
-		self:SkinFrame(bar)
-		-- Skin Icon
-		if not bar.IconBorder then
-			-- Can't skin a texture, so we create a frame for this
-			bar.IconBorder = CreateFrame("Frame",nil,bar)
-			self:SkinBackgroundFrame(bar.IconBorder)
-			bar.IconBorder:SetPoint("TOPLEFT",bar.Icon,"TOPLEFT",-config.borderWidth,config.borderWidth)
-			bar.IconBorder:SetPoint("BOTTOMRIGHT",bar.Icon,"BOTTOMRIGHT",config.borderWidth,-config.borderWidth)
-			bar.IconBorder:SetFrameStrata("LOW")
+local Omen = LibStub("AceAddon-3.0"):GetAddon("Omen")
+AddonSkins_Mod:RegisterSkin("Omen",function(Skin, skin, Layout, layout, config)
+	
+	-- Skin Bar Texture
+	Omen.UpdateBarTextureSettings_ = Omen.UpdateBarTextureSettings
+	Omen.UpdateBarTextureSettings = function(self)
+		for i, v in ipairs(self.Bars) do
+			v.texture:SetTexture(config.normTexture)
 		end
-		if bar.config.hideicon then
-			bar.IconBorder:Hide()
-		else
-			bar.IconBorder:Show()
+	end
+
+	-- Skin Bar fonts
+	Omen.UpdateBarLabelSettings_ = Omen.UpdateBarLabelSettings
+	Omen.UpdateBarLabelSettings = function(self)
+		self:UpdateBarLabelSettings_()
+		for i, v in ipairs(self.Bars) do
+			v.Text1:SetFont(config.font,self.db.profile.Bar.FontSize)
+			v.Text2:SetFont(config.font,self.db.profile.Bar.FontSize)
+			v.Text3:SetFont(config.font,self.db.profile.Bar.FontSize)
 		end
-		-- Fonts
-		bar.Text:SetFont(config.font,bar.config.fontsize)
-		bar.TimeText:SetFont(config.font,bar.config.timefontsize)
-		-- Bar Texture
-		bar.Bar:SetStatusBarTexture(config.barTexture)
 	end
-	
-	Layout.PositionQuartzBar = dummy
-	
-	-- Hook Bar Template
-	local template = Q3.CastBarTemplate.template
-	
-	template.ApplySettings_ = template.ApplySettings
-	template.ApplySettings = function (self)
-		self:ApplySettings_()
-		self:SetWidth(self.config.w + config.borderWidth * 2)
-		self:SetHeight(self.config.h + config.borderWidth * 2)
-		
-		skin:SkinQuartzBar(self)
-		
-		self.Bar:SetFrameStrata("HIGH")
-		self:SetFrameStrata("HIGH")
+	-- Skin Title Bar
+	Omen.UpdateTitleBar_ = Omen.UpdateTitleBar
+	Omen.UpdateTitleBar = function(self)
+		Omen.db.profile.Scale = 1
+		Omen.db.profile.Background.EdgeSize = 1
+		Omen.db.profile.Background.BarInset = config.borderWidth
+		Omen.db.profile.TitleBar.UseSameBG = true
+		self:UpdateTitleBar_()
+		self.TitleText:SetFont(config.font,self.db.profile.TitleBar.FontSize)
+		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT",0,-1)
 	end
-	
-	-- Hook spellcasts to reskin after the shield disrupts it.
-	template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE_ = template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE
-	template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE = function(self, event, unit)
-		self:UNIT_SPELLCAST_NOT_INTERRUPTIBLE_(event, unit)
-		skin:SkinQuartzBar(self)
+	--Skin Title/Bars backgrounds
+	Omen.UpdateBackdrop_ = Omen.UpdateBackdrop
+	Omen.UpdateBackdrop = function(self)
+		Omen.db.profile.Scale = 1
+		Omen.db.profile.Background.EdgeSize = 1
+		Omen.db.profile.Background.BarInset = config.borderWidth
+		self:UpdateBackdrop_()
+		skin:SkinBackgroundFrame(self.BarList)
+		-- skin:SkinBackgroundFrame(self.Title)
+		self.Title:SetBackdropColor(0,0,0,0)
+		self.Title:SetBackdropBorderColor(0,0,0,0)
+		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT",0,-1)
 	end
-	template.UNIT_SPELLCAST_START_ = template.UNIT_SPELLCAST_START
-	template.UNIT_SPELLCAST_START = function(self, event, unit)
-		self:UNIT_SPELLCAST_START_(event, unit)
-		skin:SkinQuartzBar(self)
+	-- Hook bar creation to apply settings
+	local omen_mt = getmetatable(Omen.Bars)
+	local oldidx = omen_mt.__index
+	omen_mt.__index = function(self, barID)
+	    local bar = oldidx(self, barID)
+	    Omen:UpdateBarTextureSettings()
+	    Omen:UpdateBarLabelSettings()
+	    return bar
 	end
-	-- Fix for uninterruptable channeled casts - Provided by Caulk on the TukUI forums.
-	template.UNIT_SPELLCAST_CHANNEL_START_ = template.UNIT_SPELLCAST_CHANNEL_START
-	template.UNIT_SPELLCAST_CHANNEL_START = function(self, event, unit)
-		self:UNIT_SPELLCAST_CHANNEL_START_(event, unit)
-		skin:SkinQuartzBar(self)
-	end
+	-- Option Overrides
+	Omen.db.profile.Bar.Spacing = 2
 	-- Force updates
-	Q3:ApplySettings()
+	Omen:UpdateBarTextureSettings()
+	Omen:UpdateBarLabelSettings()
+	Omen:UpdateTitleBar()
+	Omen:UpdateBackdrop()
+	Omen:ReAnchorBars()
+	Omen:ResizeBars()
 end)
