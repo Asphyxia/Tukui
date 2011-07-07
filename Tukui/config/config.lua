@@ -238,7 +238,6 @@ C["merchant"] = {
 	["autorepair"] = true,                              -- automaticly repair?
 		["guildrepair"] = true,							-- automatically use guild funds to repair (if available) -- guild repair only if autorepair == true
 	["sellmisc"] = true,                                -- sell defined items automatically
-	["sellmisc"] = true,                                -- sell defined items automatically
 }
 
 C["error"] = {
