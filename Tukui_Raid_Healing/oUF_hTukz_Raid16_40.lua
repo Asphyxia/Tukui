@@ -49,7 +49,7 @@ local function Shared(self, unit)
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	health.value:Point("CENTER", health, 1, -3)
-	health.value:SetFont(font, 10, "THINOUTLINE")
+	health.value:SetFont(font, 8, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -85,9 +85,9 @@ local function Shared(self, unit)
 	end
 		
 	local power = CreateFrame("StatusBar", nil, self)
-	power:SetHeight(3*C["unitframes"].gridscale*T.raidscale)
-	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 9, 0)
-	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", -9, 0)
+	power:SetHeight(1.5*C["unitframes"].gridscale*T.raidscale)
+	power:SetWidth(54)
+	power:Point("CENTER", self.Health, "CENTER", 0, -8)
 	power:SetStatusBarTexture(C["media"].normTex)
 	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 	self.Power = power
@@ -99,13 +99,13 @@ local function Shared(self, unit)
 	power.bg:SetAllPoints(power)
 	power.bg:SetTexture(C["media"].normTex)
 	power.bg:SetAlpha(1)
-	power.bg.multiplier = 0.4
+	power.bg.multiplier = .4
 	
 	local PowerBorder = CreateFrame("Frame", nil, power)
 	PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 	PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-	PowerBorder:SetTemplate("Default")
-	PowerBorder:CreateShadow("Default")
+	PowerBorder:SetTemplate("Thin")
+	--PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 	self.PowerBorder = PowerBorder
 	
@@ -121,7 +121,7 @@ local function Shared(self, unit)
 	name:SetPoint("BOTTOM") 
 	name:SetPoint("LEFT", 4, 0) 
 	name:SetPoint("RIGHT")
-	name:SetFont(font, 10, "THINOUTLINE")
+	name:SetFont(font, 8, "MONOCHROMEOUTLINE")
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
@@ -267,11 +267,11 @@ local function Shared(self, unit)
 		end
 		
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(C["media"].pixelfont, 10, "THINOUTLINE")
+		RaidDebuffs.count:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 		RaidDebuffs.count:SetPoint('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		
-		RaidDebuffs:FontString('time', C["media"].pixelfont, 10, "THINOUTLINE")
+		RaidDebuffs:FontString('time', C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 		RaidDebuffs.time:SetPoint('CENTER')
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 		
@@ -306,7 +306,7 @@ oUF:Factory(function(self)
 			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
 			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
-			"xoffset", T.Scale(3),
+			"xoffset", T.Scale(8),
 			"yOffset", T.Scale(-3),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
@@ -328,10 +328,10 @@ oUF:Factory(function(self)
 			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
 			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
-			"showPlayer", C["unitframes"].showplayerinparty, 
+			"showPlayer", C["unitframes"].showplayerinparty,
 			"showSolo", C["unitframes"].showsolo,
-			"showRaid", true, 
-			"xoffset", T.Scale(3),
+			"showRaid", true,
+			"xoffset", T.Scale(8),
 			"yOffset", T.Scale(-3),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",

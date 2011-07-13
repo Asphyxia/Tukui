@@ -40,7 +40,7 @@ local function Shared(self, unit)
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	health.value:SetPoint("RIGHT", health, -3, 1)
-	health.value:SetFont(font2, 12*T.raidscale, "THINOUTLINE")
+	health.value:SetFont(font, 8, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -76,21 +76,29 @@ local function Shared(self, unit)
 	end
 	
 	local power = CreateFrame("StatusBar", nil, self)
-	power:Height(4*T.raidscale)
-	power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-	power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-	power:SetStatusBarTexture(normTex)
+	power:SetHeight(1.5*C["unitframes"].gridscale*T.raidscale)
+	power:SetWidth(54)
+	power:Point("CENTER", self.Health, "CENTER", 0, -8)
+	power:SetStatusBarTexture(C["media"].normTex)
+	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 	self.Power = power
-	
+
 	power.frequentUpdates = true
 	power.colorDisconnected = true
 
-	power.bg = self.Power:CreateTexture(nil, "BORDER")
+	power.bg = power:CreateTexture(nil, "BORDER")
 	power.bg:SetAllPoints(power)
-	power.bg:SetTexture(normTex)
+	power.bg:SetTexture(C["media"].normTex)
 	power.bg:SetAlpha(1)
-	power.bg.multiplier = 0.4
-	self.Power.bg = power.bg
+	power.bg.multiplier = .4
+	
+	local PowerBorder = CreateFrame("Frame", nil, power)
+	PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
+	PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+	PowerBorder:SetTemplate("Thin")
+	--PowerBorder:CreateShadow("Default")
+	PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
+	self.PowerBorder = PowerBorder
 	
 	if C.unitframes.unicolor == true then
 		power.colorClass = true
@@ -101,7 +109,7 @@ local function Shared(self, unit)
 	
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("LEFT", health, 3, 0)
-	name:SetFont(font, 10, "THINOUTLINE")
+	name:SetFont(font, 8, "MONOCHROMEOUTLINE")
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, "[Tukui:namemedium]")
 	self.Name = name
