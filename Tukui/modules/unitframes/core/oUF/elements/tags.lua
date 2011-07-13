@@ -343,25 +343,6 @@ local tagEvents = {
 	["pereclipse"]          = 'UNIT_POWER',
 }
 
-if(not WoW41) then
-	tagStrings['happiness'] = [[function(u)
-		if(UnitIsUnit(u, 'pet')) then
-			local happiness = GetPetHappiness()
-			if(happiness == 1) then
-				return ":<"
-			elseif(happiness == 2) then
-				return ":|"
-			elseif(happiness == 3) then
-				return ":D"
-			end
-		end
-	end]]
-
-	tagEvents['happiness'] = 'UNIT_POWER'
-end
-
-
-
 local unitlessEvents = {
 	PLAYER_LEVEL_UP = true,
 	PLAYER_UPDATE_RESTING = true,
