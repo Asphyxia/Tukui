@@ -22,12 +22,14 @@ TukuiL.option_nameplates_combat = "Only show enemy nameplates in-combat"
 TukuiL.option_nameplates_goodcolor = "Good threat color, varies depending if your a tank or dps/heal"
 TukuiL.option_nameplates_badcolor = "Bad threat color, varies depending if your a tank or dps/heal"
 TukuiL.option_nameplates_transitioncolor = "Losing/Gaining threat color"
+TukuiL.option_nameplates_trackauras = "Track buffs/debuffs on namepalte"
  
 -- merchant
 TukuiL.option_merchant = "Merchant"
 TukuiL.option_merchant_autosell = "Auto sell grey items"
 TukuiL.option_merchant_autorepair = "Auto Repair items"
 TukuiL.option_merchant_sellmisc = "Sell some defined (craps not grey) items automatically"
+TukuiL.option_merchant_guildrepair = "Auto Guild repair"
  
 -- bags
 TukuiL.option_bags = "Bags"
@@ -59,7 +61,11 @@ TukuiL.option_datatext_currency = "Currency position (0 for disabled)"
 TukuiL.option_datatext_micromenu = "Micro Menu position (0 for disabled)"
 TukuiL.option_datatext_hit = "Hit position (0 for disabled)"
 TukuiL.option_datatext_mastery = "Mastery position (0 for disabled)"
-
+TukuiL.option_datatext_BG_Announcer = "Battleground defense announcer"
+TukuiL.option_datatext_color = "Default color"
+TukuiL.option_datatext_classcolored = "Class colored datatext"
+TukuiL.option_datatext_profession = "Profession (0 for disabled)"
+TukuiL.option_datatext_specswitcher = "Spec switcher (0 for disabled)"
  
 -- unit frames
 TukuiL.option_unitframes_unitframes = "Unit Frames"
@@ -106,6 +112,14 @@ TukuiL.option_unitframes_weakenedsoulbar = "Enable Weakened Soul bar notificatio
 TukuiL.option_unitframes_onlyselfdebuffs = "Display only our debuffs on target"
 TukuiL.option_unitframes_focus = "Enable Focus target"
 TukuiL.option_unitframes_bordercolor = "Set default border color of panels"
+TukuiL.option_unitframes_hide_unitframes = "Hide unitframes out of combat"
+TukuiL.option_unitframes_show_solo = "Show raidframe when solo (DPS layout only)"
+TukuiL.option_unitframes_gradient = "Default gradient color"
+TukuiL.option_unitframes_extended_pet = "Extended pet frame"
+TukuiL.option_unitframes_gradient_health = "Change health color based on health percent."
+TukuiL.option_unitframes_cbspark  = "Castbar spark"
+TukuiL.option_unitframes_classicon ="Class icons"
+TukuiL.option_unitframes_style = "Unitframes layout style"
  
 -- loot
 TukuiL.option_loot = "Loot"
@@ -141,6 +155,7 @@ TukuiL.option_reminder_sound = "Enable a warning sound for aura warning"
 -- error
 TukuiL.option_error = "Error Message"
 TukuiL.option_error_hide = "Hide spamming error in the middle of your screen"
+TukuiL.option_reminder_raidbuff_reminder = "Raid buff reminder"
  
 -- action bar
 TukuiL.option_actionbar = "Action Bars"
@@ -155,6 +170,11 @@ TukuiL.option_actionbar_rn = "Number of action bars on right (0, 1, 2 or 3)"
 TukuiL.option_actionbar_buttonsize = "Size of the main action buttons"
 TukuiL.option_actionbar_buttonspacing = "Spacing of the main action buttons"
 TukuiL.option_actionbar_petbuttonsize = "Size of pet/shapeshift buttons"
+TukuiL.option_actionbar_mainbar_Width = "Amount of buttons per row on main bar (set between 1-12)"
+TukuiL.option_actionbar_vertical_shapeshift = "Set shapeshift bar to show vertically"
+TukuiL.option_actionbar_sidebar_Width = "Amount of buttons per row on splitbars (set between 0-6, 0 = disabled)"
+TukuiL.option_actionbar_bgPanel = "Enable background panels for actionbars"
+TukuiL.option_actionbar_macrotext = "Display macro text on buttons"
 
 -- quest watch frame
 TukuiL.option_quest = "Quests"
@@ -179,6 +199,7 @@ TukuiL.option_chat = "Social"
 TukuiL.option_chat_enable = "Enable Tukui Chat"
 TukuiL.option_chat_whispersound = "Play sound when receiving private message"
 TukuiL.option_chat_background = "Enable chat panel background"
+TukuiL.option_chat_rightchat_number = "Rightchat-background is attached to ChatFrameX ..X = value"
 
 -- buff
 TukuiL.option_auras = "Auras"
