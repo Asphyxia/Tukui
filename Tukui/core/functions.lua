@@ -57,49 +57,49 @@ T.PP = function(p, obj)
 	elseif p == 7 then
 		obj:SetParent(Tukuiwatch)
 		obj:Height(Tukuiwatch:GetHeight())
-		obj:Point("CENTER", Tukuiwatch, 0, 1)	
+		obj:Point("CENTER", Tukuiwatch, 0, 0)	
 	elseif p == 8 then
 		obj:SetParent(BattleStatTop)
 		obj:Height(BattleStatTop:GetHeight())
-		obj:Point("CENTER", BattleStatTop, 0, 1)
+		obj:Point("CENTER", BattleStatTop, 0, 0)
     elseif p == 9 then
 		obj:SetParent(BattleStatBottom)
 		obj:Height(BattleStatBottom:GetHeight())
-		obj:Point("CENTER", BattleStatBottom, 0, 1)
+		obj:Point("CENTER", BattleStatBottom, 0, 0)
     elseif p == 10 then
 		obj:SetParent(CurrencyStatTop)
 		obj:Height(CurrencyStatTop:GetHeight())
-		obj:Point("CENTER", CurrencyStatTop, 0, 1)
+		obj:Point("CENTER", CurrencyStatTop, 0, 0)
     elseif p == 11 then
 		obj:SetParent(CurrencyStatBottom)
 		obj:Height(CurrencyStatBottom:GetHeight())
-		obj:Point("CENTER", CurrencyStatBottom, 0, 1)		
+		obj:Point("CENTER", CurrencyStatBottom, 0, 0)		
 	elseif p == 12 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("LEFT", center, 30, 0)
-		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('TOP', center, 0, 0)
 		obj:SetPoint('BOTTOM', center)
 	elseif p == 13 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
-		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('TOP', center, 0, 0)
 		obj:SetPoint('BOTTOM', center)
 	elseif p ==14 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("RIGHT", center, -30, 0)
-		obj:SetPoint('TOP', center, 0, 2)
+		obj:SetPoint('TOP', center, 0, 0)
 		obj:SetPoint('BOTTOM', center)
 	elseif p == 15 then
 		obj:SetParent(centerleft)
 		obj:SetHeight(centerleft:GetHeight())
-		obj:SetPoint('TOP', centerleft, 0, 2)
+		obj:SetPoint('TOP', centerleft, 0, 0)
 		obj:SetPoint('BOTTOM', centerleft)
 	elseif p == 16 then
 		obj:SetParent(centerright)
 		obj:SetHeight(centerright:GetHeight())
-		obj:SetPoint('TOP', centerright, 0, 2)
+		obj:SetPoint('TOP', centerright, 0, 0)
 		obj:SetPoint('BOTTOM', centerright)
 	end	
 end
@@ -1003,7 +1003,8 @@ T.UpdateThreat = function(self, event, unit)
 	end 
 end
 
-function updateAuraTrackerTime(self, elapsed)
+-- AuraTracker Function
+	function updateAuraTrackerTime(self, elapsed)
 	if (self.active) then
 		self.timeleft = self.timeleft - elapsed
 

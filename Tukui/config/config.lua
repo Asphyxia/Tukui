@@ -34,8 +34,8 @@ C["unitframes"] = {
 	["showsmooth"] = true,                              	-- enable smooth bar
 	["charportrait"] = true,                           		-- you DO NOT want to turn portrait off if you are using "Asphyxia2" style.
 	["classicon"] = true, 										-- Class icon on unitframes.
-	["maintank"] = true,                               		-- enable maintank
-	["mainassist"] = true,                             		-- enable mainassist
+	["maintank"] = false,                               		-- enable maintank
+	["mainassist"] = false,                             		-- enable mainassist
 	["unicolor"] = true,                              			-- enable unicolor theme
 	["combatfeedback"] = true,                         	-- enable combattext on player and target.
 	["playeraggro"] = true,                             		-- color player border to red if you have aggro on current target.
@@ -75,6 +75,10 @@ C["unitframes"] = {
 
 C["arena"] = {
 	["unitframes"] = true,								   -- enable tukz arena unitframes (requirement : tukui unitframes enabled)	
+}
+
+C["interruptanncounce"] = {
+["enable"] = true, 											-- enable/disable interrupt announce
 }
 
 C["auras"] = {
@@ -174,13 +178,14 @@ C["datatext"] = {
 	
 	-- Color Datatext
 	["classcolored"] = false,							-- classcolored datatext
-	["color"] = {0.3, 0.2, 1},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
+	["color"] = {0.1, 0.3, 0.8},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
 
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
+	["bgannouncer"] = true,                			-- enable an announcer mod for BGs.
 	["time24"] = false,                                 -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	["fontsize"] = 10,                                  -- font size for panels.
+	["fontsize"] = 8,                                  -- font size for panels.
 }
 
 C["databars"] = {
@@ -201,7 +206,7 @@ C["databars"] = {
 
 C["asphyxia_panels"] = {
 	["toppanel"] = false, 							-- enable or disable top dummy panel.
-	["bottompanel"] = true, 					-- enable or disable bottom dummy panel.
+	["bottompanel"] = false, 					-- enable or disable bottom dummy panel.
 	["asphyxiatalent"] = true,					-- enable or disable talent switcher module (replaces specswitcher datatext).
 	
 	}

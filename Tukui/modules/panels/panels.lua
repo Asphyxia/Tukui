@@ -57,7 +57,7 @@ TukuiBar7:SetFrameLevel(2)
 TukuiBar7:SetAlpha(0)
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
-petbg:CreatePanel("Invisible", (T.petbuttonsize * 10) + (T.petbuttonspacing * 9), T.petbuttonsize, "BOTTOM", TukuiBar5, "TOP", 0, 5)
+petbg:CreatePanel("Invisible", (T.petbuttonsize * 10) + (T.petbuttonspacing * 9), T.petbuttonsize, "BOTTOM", TukuiBar1, "TOP", 0, 5)
 
 local ltpetbg1 = CreateFrame("Frame", "TukuiLineToPetActionBarBackground", petbg)
 ltpetbg1:CreatePanel("Invisible", 24, 265, "LEFT", petbg, "RIGHT", 0, 0)
@@ -277,8 +277,8 @@ TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 3)
 petbg:ClearAllPoints()
 petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 
-TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", tabsbgright, "TOP", 0, 4) end)
-TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 3) end)
+TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
+TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
 
 --REPOSITION BAR5 & PETBAR (if chat right is not visible)
 local function UpdateBar5()
@@ -292,6 +292,7 @@ end
 
 CreateFrame("Frame"):SetScript("OnUpdate", UpdateBar5)
 
+--[[
 local function UpdatePetbar()
 	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
@@ -309,17 +310,8 @@ local function UpdatePetbar()
 	end
 end
 CreateFrame("Frame"):SetScript("OnUpdate", UpdatePetbar)
+--]]
 	
---[[--BATTLEGROUND STATS FRAME
-if C["datatext"].battleground == true then
-	local bgframe = CreateFrame("Frame", "TukuiInfoLeftBattleGround", UIParent)
-	bgframe:CreatePanel("Invisible", 1, 1, "TOPLEFT", UIParent, "BOTTOMLEFT", 0, 0)
-	bgframe:SetAllPoints(ileft)
-	bgframe:SetFrameStrata("MEDIUM")
-	bgframe:SetFrameLevel(6)
-	bgframe:EnableMouse(true)
-end	--]]
-
 --BATTLEGROUND STATS FRAME
 if C["datatext"].battleground == true then
 	local bgframe = CreateFrame("Frame", "TukuiInfoLeftBattleGround", UIParent)
@@ -328,13 +320,4 @@ if C["datatext"].battleground == true then
 	bgframe:SetFrameStrata("MEDIUM")
 	bgframe:SetFrameLevel(6)
 	bgframe:EnableMouse(true)
-	bgframe:SetScript("OnMouseDown", function()
-	if TukuiChatBackgroundLeft:IsVisible() then
-		TukuiChatBackgroundLeft:SlideOut()
-		TukuiChatBackgroundRight:SlideOut()
-	else
-		TukuiChatBackgroundLeft:SlideIn()
-		TukuiChatBackgroundRight:SlideIn()
-	end
-end)
 end

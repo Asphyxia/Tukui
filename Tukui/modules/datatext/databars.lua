@@ -25,7 +25,7 @@ for i = 1, 4 do
 	HydraData[i].Status:Point("BOTTOMRIGHT", HydraData[i], "BOTTOMRIGHT", -2, 2)
 
 	HydraData[i].Text = HydraData[i].Status:CreateFontString(nil, "OVERLAY")
-	HydraData[i].Text:SetFont(C.media.pixelfont, 10)
+	HydraData[i].Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 	HydraData[i].Text:Point("LEFT", HydraData[i], "LEFT", 6, 1.5)
 	HydraData[i].Text:SetShadowColor(0, 0, 0)
 	HydraData[i].Text:SetShadowOffset(1.25, -1.25)
@@ -218,7 +218,7 @@ for i = 1, GetNumFactions() do
 		frame.Status:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
 		
 		frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
-		frame.Text:SetFont(C.media.pixelfont, 10)
+		frame.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 		frame.Text:Point("LEFT", frame, "LEFT", 6, 0)
 		frame.Text:SetShadowColor(0, 0, 0)
 		frame.Text:SetShadowOffset(1.25, -1.25)
@@ -226,7 +226,7 @@ for i = 1, GetNumFactions() do
 		frame.Text:Hide()
 		
 		frame.Name = frame.Status:CreateFontString(nil, "OVERLAY")
-		frame.Name:SetFont(C.media.pixelfont, 10)
+		frame.Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 		frame.Name:Point("LEFT", frame, "LEFT", 6, 0)
 		frame.Name:SetShadowColor(0, 0, 0)
 		frame.Name:SetShadowOffset(1.25, -1.25)
@@ -300,8 +300,8 @@ toggle:SetScript("OnEnter", function()
 	end)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-toggle.Text:SetFont(C.media.pixelfont, 10)
-toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+toggle.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+toggle.Text:Point("CENTER", toggle, "CENTER", 0, 0)
 toggle.Text:SetText(T.panelcolor.."R")
 
 toggle:SetScript("OnMouseUp", function(self)
@@ -366,7 +366,7 @@ local function updateCurrency()
 			frame.Status:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
 
 			frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
-			frame.Text:SetFont(C.media.pixelfont, 10)
+			frame.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 			frame.Text:Point("CENTER", frame, "CENTER", 0, 2)
 			frame.Text:Width(frame:GetWidth() - 4)
 			frame.Text:SetShadowColor(0, 0, 0)
@@ -429,8 +429,8 @@ toggle:SetScript("OnEnter", function()
 	end)
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-toggle.Text:SetFont(C.media.pixelfont, 10)
-toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+toggle.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+toggle.Text:Point("CENTER", toggle, "CENTER", 1, 0)
 toggle.Text:SetText(T.panelcolor.."Currency")
 toggle:SetScript("OnMouseUp", function(self)
 	for _, frame in pairs(CurrencyData) do

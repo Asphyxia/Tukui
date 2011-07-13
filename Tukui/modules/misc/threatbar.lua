@@ -25,10 +25,10 @@ TukuiThreatBarBG:CreatePanel("Default", TukuiBar1:GetWidth(), 17, "TOP", TukuiBa
 TukuiThreatBar:Point("TOPLEFT", TukuiThreatBarBG, 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", TukuiThreatBarBG, -2, 2)
 
-TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 10)
+TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
 
-TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 10)
+TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
 TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
 

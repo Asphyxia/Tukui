@@ -398,12 +398,7 @@ function Stuffing:CreateBagFrame(w)
 		if w == "Bank" then
 			f:Point("BOTTOM", TukuiTabsLeftBackground, "TOP", 0, 3)
 		else
-			if HasPetUI() then
-				f:ClearAllPoints()
-				f:Point("BOTTOM", TukuiPetBar, "TOP", 0, 3)
-			elseif UnitHasVehicleUI("player") then
-				f:SetPoint("BOTTOMRIGHT", TukuiChatRight, "TOPRIGHT", 0, 3)
-			elseif TukuiBar5 and TukuiBar5:IsShown() then
+			if TukuiBar5 and TukuiBar5:IsShown() then
 				f:ClearAllPoints()
 				f:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
 			elseif not TukuiBar5:IsShown() then

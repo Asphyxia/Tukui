@@ -47,7 +47,7 @@ C["media"] = {
 	["altbordercolor"] = { .125,.125,.125 }, -- alternative border color, mainly for unitframes text panels.
 	["backdropcolor"] = C.general.backdropcolor or {.1,.1,.1,1}, -- background color of tukui panels
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
-	["statcolor"] = {0.3, 0.2, 1}, -- stats color of tukui panels
+	["statcolor"] = {0.1, 0.3, 0.8}, -- stats color of tukui panels
 	
 	-- sound
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],

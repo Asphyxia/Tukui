@@ -31,14 +31,14 @@ local function LoadSkin()
 	-- skin main frames
 	for i = 1, #frames do
 		_G[frames[i]]:StripTextures(true)
-		_G[frames[i]]:CreateBackdrop("Default")
+		_G[frames[i]]:CreateBackdrop("Transparent")
 	end
 
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)
 	HelpFrameKnowledgebaseErrorFrame:SetFrameLevel(HelpFrameKnowledgebaseErrorFrame:GetFrameLevel() + 2)
 
 	HelpFrameTicketScrollFrame:StripTextures()
-	HelpFrameTicketScrollFrame:CreateBackdrop("Default")
+	HelpFrameTicketScrollFrame:CreateBackdrop("Transparent")
 	HelpFrameTicketScrollFrame.backdrop:Point("TOPLEFT", -4, 4)
 	HelpFrameTicketScrollFrame.backdrop:Point("BOTTOMRIGHT", 6, -4)
 	for i=1, HelpFrameTicket:GetNumChildren() do
@@ -82,13 +82,10 @@ local function LoadSkin()
 	HelpFrameKnowledgebaseSearchBox:ClearAllPoints()
 	HelpFrameKnowledgebaseSearchBox:Point("TOPLEFT", HelpFrameMainInset, "TOPLEFT", 13, -10)
 	HelpFrameKnowledgebaseNavBarOverlay:Kill()
-
-	if T.toc >= 40200 then
-		HelpFrameKnowledgebaseNavBar:StripTextures()
-	end
+	HelpFrameKnowledgebaseNavBar:StripTextures()
 
 	HelpFrame:StripTextures(true)
-	HelpFrame:CreateBackdrop("Default")
+	HelpFrame:CreateBackdrop("Transparent")
 	T.SkinEditBox(HelpFrameKnowledgebaseSearchBox)
 	T.SkinScrollBar(HelpFrameKnowledgebaseScrollFrameScrollBar)
 	T.SkinCloseButton(HelpFrameCloseButton, HelpFrame.backdrop)	
@@ -96,7 +93,7 @@ local function LoadSkin()
 
 	--Hearth Stone Button
 	HelpFrameCharacterStuckHearthstone:StyleButton()
-	HelpFrameCharacterStuckHearthstone:SetTemplate("Default", true)
+	HelpFrameCharacterStuckHearthstone:SetTemplate("Transparent", true)
 	HelpFrameCharacterStuckHearthstone.IconTexture:ClearAllPoints()
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("TOPLEFT", 2, -2)
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("BOTTOMRIGHT", -2, 2)
@@ -133,7 +130,7 @@ local function LoadSkin()
 	for i=1, HelpFrameGM_Response:GetNumChildren() do
 		local child = select(i, HelpFrameGM_Response:GetChildren())
 		if child and child:GetObjectType() == "Frame" and not child:GetName() then
-			child:SetTemplate("Default")
+			child:SetTemplate("Transparent")
 		end
 	end
 end

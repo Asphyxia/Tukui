@@ -13,7 +13,7 @@ local function CaptureUpdate()
 				if( i == 1 ) then
 					captureBar:Point("TOP", UIParent, "TOP", 0, -120)
 				else
-					captureBar:Point("TOPLEFT", getglobal("WorldStateCaptureBar" .. i - 1 ), "TOPLEFT", 0, -120)
+					captureBar:Point("TOPLEFT", getglobal("WorldStateCaptureBar" .. i - 1 ), "TOPLEFT", 0, -25)
 				end
 			end	
 		end	

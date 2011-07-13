@@ -9,7 +9,7 @@ AchievementHolder:SetBackdropBorderColor(1, 0, 0)
 AchievementHolder:SetClampedToScreen(true)
 AchievementHolder:SetMovable(true)
 AchievementHolder:SetAlpha(0)
-AchievementHolder.text = T.SetFontString(AchievementHolder, C.media.pixelfont, 10)
+AchievementHolder.text = T.SetFontString(AchievementHolder, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 AchievementHolder.text:SetPoint("CENTER")
 AchievementHolder.text:SetText(L.move_achievements)
 

@@ -32,14 +32,14 @@ anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
 if C.chat.background and TukuiChatBackgroundRight then
-	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 0)
+	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 5)
 else
 	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
 end
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(C.media.backdropcolor)
 anchor:SetMovable(true)
-anchor.text = T.SetFontString(anchor, C.media.pixelfont, 10, "THINOUTLINE")
+anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 
@@ -85,31 +85,28 @@ local function UpdateTooltip(self)
 		local point = TukuiTooltipAnchor:GetPoint()
 		if point == "TOPLEFT" then
 			self:ClearAllPoints()
-			self:SetPoint("TOPLEFT", TukuiTooltipAnchor, "BOTTOMLEFT", 0, -x)			
+			self:SetPoint("TOPLEFT", TukuiTooltipAnchor, "BOTTOMLEFT", 0, -x)
 		elseif point == "TOP" then
 			self:ClearAllPoints()
-			self:SetPoint("TOP", TukuiTooltipAnchor, "BOTTOM", 0, -x)			
+			self:SetPoint("TOP", TukuiTooltipAnchor, "BOTTOM", 0, -x)
 		elseif point == "TOPRIGHT" then
 			self:ClearAllPoints()
-			self:SetPoint("TOPRIGHT", TukuiTooltipAnchor, "BOTTOMRIGHT", 0, -x)			
+			self:SetPoint("TOPRIGHT", TukuiTooltipAnchor, "BOTTOMRIGHT", 0, -x)
 		elseif point == "BOTTOMLEFT" or point == "LEFT" then
 			self:ClearAllPoints()
-			self:SetPoint("BOTTOMLEFT", TukuiTooltipAnchor, "TOPLEFT", 0, x)		
+			self:SetPoint("BOTTOMLEFT", TukuiTooltipAnchor, "TOPLEFT", 0, x)
 		elseif point == "BOTTOMRIGHT" or point == "RIGHT" then
 			if TukuiBags and TukuiBags:IsShown() then
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", TukuiBags, "TOPRIGHT", 0, x)
-			elseif HasPetUI() then
-					self:ClearAllPoints()
-					self:SetPoint("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", 0, x)
 			elseif TukuiBar5 and TukuiBar5:IsShown() then
 					self:ClearAllPoints()
-					self:SetPoint("BOTTOMRIGHT", TukuiBar5, "TOPRIGHT", 0, x)	
-			else	
+					self:SetPoint("BOTTOMRIGHT", TukuiBar5, "TOPRIGHT", 0, x)
+			else
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", TukuiTooltipAnchor, "TOPRIGHT", 0, x)
-			end	
-		end	
+			end
+		end
 	end
 end
 
@@ -190,7 +187,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
 		end
 		
-		self.text:SetFont(C["media"].pixelfont, 10, "THINOUTLINE")
+		self.text:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)

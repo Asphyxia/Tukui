@@ -75,15 +75,15 @@ end)
 
 -- VERSION BUTTON
 local verbutton = CreateFrame("Button", "TukuiVersionButton", TukuiMinimap, "SecureActionButtonTemplate")
-verbutton:CreatePanel("Transparent", 13, 17, "LEFT", Tukuiwatch, "RIGHT", 3, 0)
+verbutton:CreatePanel("Default", 13, 17, "LEFT", Tukuiwatch, "RIGHT", 3, 0)
 verbutton:CreateShadow("Default")
 verbutton:SetAttribute("type", "macro")
 verbutton:SetAttribute("macrotext", "/version")
 verbutton:SetFrameStrata("MEDIUM")
 verbutton:SetFrameLevel(2)
 
-verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, 10)
-verbutton.Text:Point("CENTER", verbutton, "CENTER", 0.5, 0.5)
+verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+verbutton.Text:Point("CENTER", verbutton, "CENTER", 1, 0)
 verbutton.Text:SetText(T.panelcolor.."V")
 
 --[[verbutton:SetScript("OnEnter", function()
@@ -117,8 +117,8 @@ helpbutton:SetAttribute("macrotext", "/ahelp")
 helpbutton:SetFrameStrata("MEDIUM")
 helpbutton:SetFrameLevel(2)
 
-helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, 10)
-helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 0.5)
+helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 0)
 helpbutton.Text:SetText(T.panelcolor.."H")
 
 -- Animate function
@@ -150,13 +150,14 @@ local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureAct
 adbutton:CreatePanel("Default", 100, 17, "BOTTOM", UIParent, "BOTTOM", 0, 12)
 adbutton:SetFrameStrata("HIGH")
 adbutton:SetAlpha(0)
+adbutton:CreateShadow("Default")
 adbutton:SetAttribute("type", "macro")
 adbutton:SetAttribute("macrotext", "/am")
 adbutton:HookScript("OnEnter", ModifiedBackdrop)
 adbutton:HookScript("OnLeave", OriginalBackdrop)
 
-adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 10, "OUTLINE")
-adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 0.5)
+adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 0)
 adbutton.Text:SetText(T.panelcolor..ADDONS)
 adbutton.Text:SetShadowColor( 0, 0, 0 )
 adbutton.Text:SetShadowOffset(1.25, -1.25)
@@ -183,6 +184,7 @@ local resetuibutton = CreateFrame("Button", "TukuiResetUIButton", UIParent, "Sec
 resetuibutton:CreatePanel("Default", 60, 17, "LEFT", TukuiAddonsButton, "RIGHT", 5, 0)
 resetuibutton:SetFrameStrata("HIGH")
 resetuibutton:SetAlpha(0)
+resetuibutton:CreateShadow("Default")
 resetuibutton:SetAttribute("type", "macro")
 resetuibutton:SetAttribute("macrotext", "/resetui")
 resetuibutton:HookScript("OnEnter", ModifiedBackdrop)
@@ -197,8 +199,8 @@ resetuibutton:SetScript("OnEnter", function()
 		resetuibutton:FadeOut()
 	end)
 
-resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, 10)
-resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 0, 0.5)
+resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 0, 0)
 resetuibutton.Text:SetText(T.panelcolor.."Reset UI")
 
 -- RELOADUI BUTTON
@@ -206,6 +208,7 @@ local rluibutton = CreateFrame("Button", "TukuiReloadUIButton", UIParent, "Secur
 rluibutton:CreatePanel("Default", 60, 17, "LEFT", resetuibutton, "RIGHT", 5, 0)
 rluibutton:SetFrameStrata("HIGH")
 rluibutton:SetAlpha(0)
+rluibutton:CreateShadow("Default")
 rluibutton:SetAttribute("type", "macro")
 rluibutton:SetAttribute("macrotext", "/rl")
 rluibutton:HookScript("OnEnter", ModifiedBackdrop)
@@ -220,8 +223,8 @@ rluibutton:SetScript("OnEnter", function()
 		rluibutton:FadeOut()
 	end)
 
-rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, 10)
-rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 0, 0.5)
+rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 0, 0)
 rluibutton.Text:SetText(T.panelcolor.."Reload UI")
 
 -- CONFIG BUTTON
@@ -229,6 +232,7 @@ local configbutton = CreateFrame("Button", "TukuiConfigButton", UIParent, "Secur
 configbutton:CreatePanel("Default", 60, 17, "RIGHT", TukuiAddonsButton, "LEFT", -5, 0)
 configbutton:SetFrameStrata("HIGH")
 configbutton:SetAlpha(0)
+configbutton:CreateShadow("Default")
 configbutton:SetAttribute("type", "macro")
 configbutton:SetAttribute("macrotext", "/tc")
 configbutton:HookScript("OnEnter", ModifiedBackdrop)
@@ -243,8 +247,8 @@ configbutton:SetScript("OnEnter", function()
 		configbutton:FadeOut()
 	end)
 
-configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, 10)
-configbutton.Text:Point("CENTER", configbutton, "CENTER", 0, 0.5)
+configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+configbutton.Text:Point("CENTER", configbutton, "CENTER", 0, 0)
 configbutton.Text:SetText(T.panelcolor.."Config UI")
 
 -- MOVEUI BUTTON
@@ -252,6 +256,7 @@ local moveuibutton = CreateFrame("Button", "TukuiMoveUIButton", UIParent, "Secur
 moveuibutton:CreatePanel("Default", 60, 17, "RIGHT", configbutton, "LEFT", -5, 0)
 moveuibutton:SetFrameStrata("HIGH")
 moveuibutton:SetAlpha(0)
+moveuibutton:CreateShadow("Default")
 moveuibutton:SetAttribute("type", "macro")
 moveuibutton:SetAttribute("macrotext", "/mtukui")
 moveuibutton:HookScript("OnEnter", ModifiedBackdrop)
@@ -266,8 +271,8 @@ moveuibutton:SetScript("OnEnter", function()
 		moveuibutton:FadeOut()
 	end)
 
-moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, 10)
-moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 0, 0.5)
+moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 0, 0)
 moveuibutton.Text:SetText(T.panelcolor.."Move UI")
 
 -- WORLD STATE FRAME 
@@ -280,6 +285,7 @@ if UnitLevel("player") <= 10 then return end
 
 local frame = CreateFrame("Frame", "AsphyxiaTalent", UIParent)
 frame:CreatePanel(nil, 20, 20, "RIGHT", TukuiInfoRight, "LEFT", -3, 0)
+frame:CreateShadow("Default")
 frame:EnableMouse(true)
 
 frame.tex = frame:CreateTexture(nil, "ARTWORK")
@@ -377,9 +383,9 @@ icb:SetAlpha(0)
 icb:EnableMouse(true)
 icb.f = icb:CreateFontString(nil, overlay)
 icb.f:SetPoint("CENTER")
-icb.f:SetFont(C["media"].pixelfont, 15, "THINOUTLINE")
+icb.f:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 icb.f:SetText(cp)
-icb.f:Point("CENTER", 1, 1)
+icb.f:Point("CENTER", 1, 0)
 icb:SetScript("OnMouseDown", function(self)
 	ToggleFrame(icenter)
 	ToggleFrame(icenterleft)

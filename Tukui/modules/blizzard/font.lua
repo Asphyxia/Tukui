@@ -9,12 +9,6 @@ local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	elseif r then obj:SetAlpha(r) end
 end
 
-local FixTitleFont = function()
-	for _,butt in pairs(PaperDollTitlesPane.buttons) do
-		butt.text:SetFontObject(GameFontHighlightSmallLeft)
-	end
-end
-
 TukuiFonts:RegisterEvent("ADDON_LOADED")
 TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Tukui" then return end
@@ -22,6 +16,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	local NORMAL     = C.media.font
 	local COMBAT     = C.media.dmgfont
 	local NUMBER     = C.media.font
+	local PIXEL 	 = C.media.pixelfont
 
 	if T.eyefinity then
 		-- damage are huge on eyefinity, so we disable it
@@ -48,7 +43,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	STANDARD_TEXT_FONT = NORMAL
 
 	-- Base fonts
-	SetFont(GameTooltipHeader,                  NORMAL, 12)
+	SetFont(GameTooltipHeader,                  NORMAL, 12, "OUTLINE")
 	SetFont(NumberFont_OutlineThick_Mono_Small, NUMBER, 12, "OUTLINE")
 	SetFont(NumberFont_Outline_Huge,            NUMBER, 28, "THICKOUTLINE", 28)
 	SetFont(NumberFont_Outline_Large,           NUMBER, 15, "OUTLINE")
@@ -69,17 +64,14 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Shadow_Small,            NORMAL, 11)
 	SetFont(SystemFont_Small,                   NORMAL, 12)
 	SetFont(SystemFont_Tiny,                    NORMAL, 12)
-	SetFont(Tooltip_Med,                        NORMAL, 12)
-	SetFont(Tooltip_Small,                      NORMAL, 12)
+	SetFont(Tooltip_Med,                        NORMAL, 12, "THINOUTLINE")
+	SetFont(Tooltip_Small,                      NORMAL, 12, "THINOUTLINE")
 	SetFont(CombatTextFont,                     COMBAT, 100, "OUTLINE") -- number here just increase the font quality.
 	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 20, "THINOUTLINE")
 	SetFont(ZoneTextString,                     NORMAL, 32, "OUTLINE")
 	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
 	SetFont(PVPInfoTextString,                  NORMAL, 22, "THINOUTLINE")
 	SetFont(PVPArenaTextString,                 NORMAL, 22, "THINOUTLINE")
-
-	hooksecurefunc("PaperDollTitlesPane_Update", FixTitleFont)
-	FixTitleFont()
 
 	SetFont = nil
 	self:SetScript("OnEvent", nil)

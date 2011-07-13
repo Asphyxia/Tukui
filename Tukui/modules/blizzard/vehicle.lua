@@ -11,7 +11,7 @@ anchor:SetClampedToScreen(true)
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(1,0,0)
 anchor:SetAlpha(0)
-anchor.text = T.SetFontString(anchor, C.media.pixelfont, 10)
+anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_vehicle)
 

@@ -1,10 +1,10 @@
 local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	WorldMapFrame:CreateBackdrop("Default")
+	WorldMapFrame:CreateBackdrop("Transparent")
 	-- WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
 	WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
-	WorldMapDetailFrame.backdrop:SetTemplate("Default")
+	WorldMapDetailFrame.backdrop:SetTemplate("Transparent")
 	WorldMapDetailFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -2, 2)
 	WorldMapDetailFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 2, -2)
 	WorldMapDetailFrame.backdrop:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() - 2)
@@ -65,18 +65,18 @@ local function LoadSkin()
 		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235)  
 		
 		if not WorldMapQuestDetailScrollFrame.backdrop then
-			WorldMapQuestDetailScrollFrame:CreateBackdrop("Default")
+			WorldMapQuestDetailScrollFrame:CreateBackdrop("Transparent")
 			WorldMapQuestDetailScrollFrame.backdrop:Point("TOPLEFT", -22, 2)
 			WorldMapQuestDetailScrollFrame.backdrop:Point("BOTTOMRIGHT", 23, -4)
 		end
 		
 		if not WorldMapQuestRewardScrollFrame.backdrop then
-			WorldMapQuestRewardScrollFrame:CreateBackdrop("Default")
+			WorldMapQuestRewardScrollFrame:CreateBackdrop("Transparent")
 			WorldMapQuestRewardScrollFrame.backdrop:Point("BOTTOMRIGHT", 22, -4)				
 		end
 		
 		if not WorldMapQuestScrollFrame.backdrop then
-			WorldMapQuestScrollFrame:CreateBackdrop("Default")
+			WorldMapQuestScrollFrame:CreateBackdrop("Transparent")
 			WorldMapQuestScrollFrame.backdrop:Point("TOPLEFT", 0, 2)
 			WorldMapQuestScrollFrame.backdrop:Point("BOTTOMRIGHT", 24, -3)				
 		end

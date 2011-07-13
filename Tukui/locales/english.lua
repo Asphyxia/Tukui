@@ -144,6 +144,17 @@ L.unitframes_ouf_starfirespell = "Starfire"
 
 L.tooltip_count = "Count"
 
+L.tooltip_count = "Count"
+L.tooltip_boss = "|cffAF5050Boss|r"
+L.tooltip_rare = "|cffAF5050Rare|r"
+L.tooltip_rare_elite = "|cffAF5050+ Rare|r"
+L.tooltip_targeted_by = "Targeted By"
+
+L.mail_need = "Need a mailbox."
+L.mail_messages = "Messages"
+
+L.addon_dep = "|cffff4400Dependencies: |r"
+
 L.bags_noslots = "can't buy anymore slots!"
 L.bags_costs = "Cost: %.2f gold"
 L.bags_buyslots = "Buy new slot with /bags purchase yes"
@@ -188,7 +199,7 @@ L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
 L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
 L.core_uihelp100 = "(Scroll up for more commands ...)"
 
-L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 2.7 - Help."
+L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 2.8 - Help."
 L.core_uihelp21 = "\n\n|cffFF0000AsphyxiaUI slash commands:\n|cffEAC117/scp|r - Unlock sCombo bar to move."
 L.core_uihelp22 = "\n|cffEAC117/test|r -  Test mode for unitframes."
 L.core_uihelp23 = "\n|cffEAC117/testarena|r - Test mode for arena frames."

@@ -1,6 +1,6 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 local myPlayerName  = UnitName("player")
-local font, fontsize, fontstyle = C.media.pixelfont, 10, "OUTLINE"
+local font, fontsize, fontstyle = C.media.pixelfont, 8, "MONOCHROMEOUTLINE"
 
 local function ModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[T.myclass]

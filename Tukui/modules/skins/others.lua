@@ -28,7 +28,7 @@ local function LoadSkin()
 	for i = 1, getn(skins) do
 		_G[skins[i]]:SetTemplate("Transparent")
 		if _G[skins[i]] ~= _G["AutoCompleteBox"] then -- frame to blacklist from create shadow function
-			--_G[skins[i]]:CreateShadow("Default")
+			_G[skins[i]]:CreateShadow("Default")
 		end
 	end
 
@@ -44,7 +44,7 @@ local function LoadSkin()
 		if _G[ChatMenus[i]] == _G["ChatMenu"] then
 			_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) self:ClearAllPoints() self:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, T.Scale(30)) end)
 		else
-			_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Transparent", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) end)
+			_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) end)
 		end
 	end
 
@@ -72,7 +72,7 @@ local function LoadSkin()
 			_G["StaticPopup"..i.."EditBox"].backdrop:Point("BOTTOMRIGHT", 2, 4)
 			_G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
 			_G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
-			_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Default")
+			_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Transparent")
 			_G["StaticPopup"..i.."ItemFrame"]:StyleButton()
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
@@ -145,7 +145,8 @@ local function LoadSkin()
 		"ReadyCheckFrameNoButton",
 		"StackSplitOkayButton",
 		"StackSplitCancelButton",
-		"RolePollPopupAcceptButton"
+		"RolePollPopupAcceptButton",
+		"InterfaceOptionsHelpPanelResetTutorials",
 	}
 
 	for i = 1, getn(BlizzardButtons) do

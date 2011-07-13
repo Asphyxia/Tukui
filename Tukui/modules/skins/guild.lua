@@ -40,8 +40,8 @@ local function LoadSkin()
 		_G[frame]:StripTextures()
 	end
 	
-	GuildNewsBossModel:CreateBackdrop("Default")
-	GuildNewsBossModelTextFrame:CreateBackdrop("Default")
+	GuildNewsBossModel:CreateBackdrop("Transparent")
+	GuildNewsBossModelTextFrame:CreateBackdrop("Transparent")
 	GuildNewsBossModelTextFrame.backdrop:Point("TOPLEFT", GuildNewsBossModel.backdrop, "BOTTOMLEFT", 0, -1)
 	GuildNewsBossModel:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
 	
@@ -97,7 +97,7 @@ local function LoadSkin()
 	
 	GuildFactionBar:StripTextures()
 	GuildFactionBar.progress:SetTexture(C["media"].normTex)
-	GuildFactionBar:CreateBackdrop("Default")
+	GuildFactionBar:CreateBackdrop("Transparent")
 	GuildFactionBar.backdrop:Point("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
 	GuildFactionBar.backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", -2, 0)
 	
@@ -108,7 +108,7 @@ local function LoadSkin()
 	GuildXPBarShadow:Kill()
 	GuildXPBarCap:Kill()
 	GuildXPBar.progress:SetTexture(C["media"].normTex)
-	GuildXPBar:CreateBackdrop("Default")
+	GuildXPBar:CreateBackdrop("Transparent")
 	GuildXPBar.backdrop:Point("TOPLEFT", GuildXPBar.progress, "TOPLEFT", -2, 2)
 	GuildXPBar.backdrop:Point("BOTTOMRIGHT", GuildXPBar, "BOTTOMRIGHT", -2, 4)
 	
@@ -116,7 +116,7 @@ local function LoadSkin()
 	GuildLatestPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	GuildLatestPerkButtonIconTexture:ClearAllPoints()
 	GuildLatestPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-	GuildLatestPerkButton:CreateBackdrop("Default")
+	GuildLatestPerkButton:CreateBackdrop("Transparent")
 	GuildLatestPerkButton.backdrop:Point("TOPLEFT", GuildLatestPerkButtonIconTexture, "TOPLEFT", -2, 2)
 	GuildLatestPerkButton.backdrop:Point("BOTTOMRIGHT", GuildLatestPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 	
@@ -124,7 +124,7 @@ local function LoadSkin()
 	GuildNextPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	GuildNextPerkButtonIconTexture:ClearAllPoints()
 	GuildNextPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-	GuildNextPerkButton:CreateBackdrop("Default")
+	GuildNextPerkButton:CreateBackdrop("Transparent")
 	GuildNextPerkButton.backdrop:Point("TOPLEFT", GuildNextPerkButtonIconTexture, "TOPLEFT", -2, 2)
 	GuildNextPerkButton.backdrop:Point("BOTTOMRIGHT", GuildNextPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 	
@@ -137,7 +137,7 @@ local function LoadSkin()
 			button.icon:SetTexCoord(.08, .92, .08, .92)
 			button.icon:ClearAllPoints()
 			button.icon:Point("TOPLEFT", 2, -2)
-			button:CreateBackdrop("Default")
+			button:CreateBackdrop("Transparent")
 			button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 			button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 			button.icon:SetParent(button.backdrop)
@@ -160,9 +160,9 @@ local function LoadSkin()
 	end
 	
 	--Detail Frame
-	GuildMemberDetailFrame:SetTemplate("Default")
-	GuildMemberNoteBackground:SetTemplate("Default")
-	GuildMemberOfficerNoteBackground:SetTemplate("Default")
+	GuildMemberDetailFrame:SetTemplate("Transparent")
+	GuildMemberNoteBackground:SetTemplate("Transparent")
+	GuildMemberOfficerNoteBackground:SetTemplate("Transparent")
 	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
 	T.SkinDropDownBox(GuildMemberRankDropdown, 175)
 
@@ -173,7 +173,7 @@ local function LoadSkin()
 	end
 	
 	GuildNewsFiltersFrame:StripTextures()
-	GuildNewsFiltersFrame:SetTemplate("Default")
+	GuildNewsFiltersFrame:SetTemplate("Transparent")
 	T.SkinCloseButton(GuildNewsFiltersFrameCloseButton)
 	
 	for i=1, 7 do
@@ -191,24 +191,24 @@ local function LoadSkin()
 	end
 	
 	local backdrop1 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop1:SetTemplate("Default")
+	backdrop1:SetTemplate("Transparent")
 	backdrop1:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop1:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -22)
 	backdrop1:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 200)
 	
 	local backdrop2 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop2:SetTemplate("Default")
+	backdrop2:SetTemplate("Transparent")
 	backdrop2:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop2:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -158)
 	backdrop2:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 118)	
 
 	local backdrop3 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop3:SetTemplate("Default")
+	backdrop3:SetTemplate("Transparent")
 	backdrop3:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop3:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -233)
 	backdrop3:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 3)	
 	
-	GuildRecruitmentCommentInputFrame:SetTemplate("Default")
+	GuildRecruitmentCommentInputFrame:SetTemplate("Transparent")
 	
 	for _, button in next, GuildInfoFrameApplicantsContainer.buttons do
 		button.selectedTex:Kill()
@@ -217,9 +217,9 @@ local function LoadSkin()
 	end
 	
 	--Text Edit Frame
-	GuildTextEditFrame:SetTemplate("Default")
+	GuildTextEditFrame:SetTemplate("Transparent")
 	T.SkinScrollBar(GuildTextEditScrollFrameScrollBar)
-	GuildTextEditContainer:SetTemplate("Default")
+	GuildTextEditContainer:SetTemplate("Transparent")
 	for i=1, GuildTextEditFrame:GetNumChildren() do
 		local child = select(i, GuildTextEditFrame:GetChildren())
 		if child:GetName() == "GuildTextEditFrameCloseButton" and child:GetWidth() == 32 then
@@ -231,7 +231,7 @@ local function LoadSkin()
 	
 	--Guild Log
 	T.SkinScrollBar(GuildLogScrollFrameScrollBar)
-	GuildLogFrame:SetTemplate("Default")
+	GuildLogFrame:SetTemplate("Transparent")
 
 	--Blizzard has two buttons with the same name, this is a fucked up way of determining that it isn't the other button
 	for i=1, GuildLogFrame:GetNumChildren() do
@@ -254,7 +254,7 @@ local function LoadSkin()
 			button.icon:SetTexCoord(.08, .92, .08, .92)
 			button.icon:ClearAllPoints()
 			button.icon:Point("TOPLEFT", 2, -2)
-			button:CreateBackdrop("Default")
+			button:CreateBackdrop("Transparent")
 			button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 			button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 			button.icon:SetParent(button.backdrop)

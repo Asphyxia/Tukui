@@ -30,14 +30,14 @@ local function style(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-	Count:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+	Count:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
  
 	if not C["actionbar"].macrotext == true then
 		Btname:SetText("")
 		Btname:Kill()
 	else
 		Btname:SetAlphaGradient(0,Button:GetWidth())
-		Btname:SetFont(C.media.pixelfont, C["datatext"].fontsize, "THINOUTLINE")
+		Btname:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	end
  
 	if not _G[name.."Panel"] then
@@ -61,7 +61,7 @@ local function style(self)
 
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	HotKey:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+	HotKey:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 	HotKey.ClearAllPoints = T.dummy
 	HotKey.SetPoint = T.dummy
  

@@ -36,7 +36,7 @@ local function LoadSkin()
 		icon:Point("BOTTOMRIGHT", -2, 2)
 		
 		slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-		slot:CreateBackdrop("Default")
+		slot:CreateBackdrop("Transparent")
 		slot.backdrop:SetAllPoints()
 	end
 
@@ -78,7 +78,7 @@ local function LoadSkin()
 				icon:Point("BOTTOMRIGHT", -2, 2)	
 				button:SetFrameLevel(button:GetFrameLevel() + 2)
 				if not button.backdrop then
-					button:CreateBackdrop("Default")
+					button:CreateBackdrop("Transparent")
 					button.backdrop:SetAllPoints()			
 				end
 			end
@@ -87,7 +87,7 @@ local function LoadSkin()
 
 	--Icon in upper right corner of character frame
 	CharacterFramePortrait:Kill()
-	CharacterModelFrame:CreateBackdrop("Default")
+	CharacterModelFrame:CreateBackdrop("Transparent")
 
 	local scrollbars = {
 		"PaperDollTitlesPaneScrollBar",
@@ -133,7 +133,7 @@ local function LoadSkin()
 			object.icon:SetTexCoord(.08, .92, .08, .92)
 			
 			if not object.backdrop then
-				object:CreateBackdrop("Default")
+				object:CreateBackdrop("Transparent")
 			end
 			
 			object.backdrop:Point("TOPLEFT", object.icon, "TOPLEFT", -2, 2)
@@ -147,11 +147,11 @@ local function LoadSkin()
 			object.icon.SetSize = T.dummy
 		end
 		GearManagerDialogPopup:StripTextures()
-		GearManagerDialogPopup:SetTemplate("Default")
+		GearManagerDialogPopup:SetTemplate("Transparent")
 		GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
 		GearManagerDialogPopupScrollFrame:StripTextures()
 		GearManagerDialogPopupEditBox:StripTextures()
-		GearManagerDialogPopupEditBox:SetTemplate("Default")
+		GearManagerDialogPopupEditBox:SetTemplate("Transparent")
 		T.SkinButton(GearManagerDialogPopupOkay)
 		T.SkinButton(GearManagerDialogPopupCancel)
 		
@@ -171,7 +171,7 @@ local function LoadSkin()
 				icon:Point("BOTTOMRIGHT", -2, 2)	
 				button:SetFrameLevel(button:GetFrameLevel() + 2)
 				if not button.backdrop then
-					button:CreateBackdrop("Default")
+					button:CreateBackdrop("Transparent")
 					button.backdrop:SetAllPoints()			
 				end
 			end
@@ -203,7 +203,7 @@ local function LoadSkin()
 						region.SetTexCoord = T.dummy
 					end
 				end
-				tab:CreateBackdrop("Default")
+				tab:CreateBackdrop("Transparent")
 				tab.backdrop:Point("TOPLEFT", 1, -2)
 				tab.backdrop:Point("BOTTOMRIGHT", 1, -2)	
 			end
@@ -227,7 +227,7 @@ local function LoadSkin()
 				statusbar:SetStatusBarTexture(C["media"].normTex)
 				
 				if not statusbar.backdrop then
-					statusbar:CreateBackdrop("Default")
+					statusbar:CreateBackdrop("Transparent")
 				end
 				
 				_G["ReputationBar"..i.."Background"]:SetTexture(nil)
@@ -243,7 +243,7 @@ local function LoadSkin()
 			end		
 		end
 		ReputationDetailFrame:StripTextures()
-		ReputationDetailFrame:SetTemplate("Default")
+		ReputationDetailFrame:SetTemplate("Transparent")
 		ReputationDetailFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)			
 	end	
 	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
@@ -266,15 +266,15 @@ local function LoadSkin()
 			end
 		end
 		TokenFramePopup:StripTextures()
-		TokenFramePopup:SetTemplate("Default")
+		TokenFramePopup:SetTemplate("Transparent")
 		TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
 	end)
 
 	--Pet
-	PetModelFrame:CreateBackdrop("Default")
+	PetModelFrame:CreateBackdrop("Transparent")
 	PetPaperDollFrameExpBar:StripTextures()
 	PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
-	PetPaperDollFrameExpBar:CreateBackdrop("Default")
+	PetPaperDollFrameExpBar:CreateBackdrop("Transparent")
 	T.SkinRotateButton(PetModelFrameRotateRightButton)
 	T.SkinRotateButton(PetModelFrameRotateLeftButton)
 	PetModelFrameRotateRightButton:ClearAllPoints()
@@ -282,7 +282,7 @@ local function LoadSkin()
 
 	local xtex = PetPaperDollPetInfo:GetRegions()
 	xtex:SetTexCoord(.12, .63, .15, .55)
-	PetPaperDollPetInfo:CreateBackdrop("Default")
+	PetPaperDollPetInfo:CreateBackdrop("Transparent")
 	PetPaperDollPetInfo:Size(24, 24)
 	
 	-- a request to color item by rarity on character frame.

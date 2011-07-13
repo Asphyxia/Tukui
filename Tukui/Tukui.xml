@@ -101,6 +101,10 @@
 	<Script file="modules\extras\tooltipicon.lua"/>
 	<Script file="modules\extras\raidutility.lua"/>
 	<Script file="modules\extras\customactionbar.lua"/>	
+	<Script file="modules\extras\bgannouncer.lua"/>
+	<Script file="modules\extras\addons\addons.lua"/>
+	<Script file="modules\extras\addons\addons_toggle.lua"/>
+	<Script file="modules\extras\announce.lua"/>
 	
 	<Script file="modules\buffs\raidbuffsreminder.lua"/>
 	
@@ -142,6 +146,15 @@
 	
 	<Script file="modules\blizzard\mirror.lua"/>
 	<Script file="modules\notifications\selfbuffs.lua"/>
+	
+	<Script file="modules\addonskins\addons.lua"/>
+	<Script file="modules\addonskins\addons_toggle.lua"/>
+	<Script file="modules\addonskins\LoadSkins.lua"/>
+	<Script file="modules\addonskins\KLE.lua"/>
+	<Script file="modules\addonskins\Omen.lua"/>
+	<Script file="modules\addonskins\Recount.lua"/>
+	<Script file="modules\addonskins\Skada.lua"/>
+	<Script file="modules\addonskins\TinyDPS.lua"/>
 	
 	<Script file="modules\skins\core.lua"/>
 	<Script file="modules\skins\achievement.lua"/>
@@ -198,16 +211,6 @@
 	<Script file="modules\skins\worldmap.lua"/>
 	<Script file="modules\skins\tutorial.lua"/>
 	<Script file="modules\skins\colorpicker.lua"/>
-	
-	<Script file="modules\skins\addons\LoadSkins.lua"/>
-	<Script file="modules\skins\addons\addons.lua"/>
-	<Script file="modules\skins\addons\addons_toggle.lua"/>
-	<Script file="modules\skins\addons\Skada.lua"/>
-	<Script file="modules\skins\addons\Omen.lua"/>
-	<Script file="modules\skins\addons\Recount.lua"/>
-	<Script file="modules\skins\addons\KLE.lua"/>
-	<Script file="modules\skins\addons\TinyDPS.lua"/>
-	<Script file="modules\skins\addons\Quartz.lua"/>
 	
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>

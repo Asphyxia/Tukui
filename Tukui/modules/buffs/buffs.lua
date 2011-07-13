@@ -44,7 +44,7 @@ local function UpdateWeapons(button, slot, active, expiration)
 		
 		button.time = button:CreateFontString(nil, "ARTWORK")
 		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(font, 10, "OUTLINE")
+		button.time:SetFont(font, 8, "MONOCHROMEOUTLINE")
 				
 		button.bg = CreateFrame("Frame", nil, button)
 		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
@@ -87,11 +87,11 @@ local function UpdateAuras(header, button, weapon)
 
 		button.count = button:CreateFontString(nil, "ARTWORK")
 		button.count:SetPoint("BOTTOMRIGHT", -1, 1)
-		button.count:SetFont(font, 10, "THINOUTLINE")
+		button.count:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 
 		button.time = button:CreateFontString(nil, "ARTWORK")
 		button.time:SetPoint("BOTTOM", 0, -5)
-		button.time:SetFont(font, 10, "THINOUTLINE")
+		button.time:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 
 		button:SetScript("OnUpdate", UpdateTime)
 		
@@ -197,7 +197,7 @@ local function CreateAuraHeader(filter, ...)
 	header:SetBackdropBorderColor(0,0,0,0)
 	header:Show()
 	
-	header.text = T.SetFontString(header, C.media.pixelfont, 10)
+	header.text = T.SetFontString(header, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 	header.text:SetPoint("CENTER")
 	if filter == "HELPFUL" then
 		header.text:SetText(L.move_buffs)

@@ -85,7 +85,7 @@ local function ChatCopyButtons()
 		button:SetBackdropColor(unpack(C["media"].backdropcolor))
 		
 		local buttontext = button:CreateFontString(nil,"OVERLAY",nil)
-		buttontext:SetFont(C.media.pixelfont, 10, "THINOUTLINE")
+		buttontext:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 		buttontext:SetText(T.panelcolor.."Copy")
 		buttontext:SetShadowColor(0, 0, 0)
 		buttontext:SetShadowOffset(1.25, -1.25)

@@ -12,7 +12,7 @@ local function LoadSkin()
 	TradeSkillFrame:CreateShadow("Default")
 	TradeSkillFrame:Height(TradeSkillFrame:GetHeight() + 12)
 	TradeSkillRankFrame:StripTextures()
-	TradeSkillRankFrame:CreateBackdrop("Default")
+	TradeSkillRankFrame:CreateBackdrop("Transparent")
 	TradeSkillRankFrame:SetStatusBarTexture(C["media"].normTex)
 	
 	T.SkinButton(TradeSkillCreateButton, true)
@@ -24,7 +24,7 @@ local function LoadSkin()
 	TradeSkillLinkButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
 	TradeSkillLinkButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
 	TradeSkillLinkButton:GetHighlightTexture():Kill()
-	TradeSkillLinkButton:CreateBackdrop("Default")
+	TradeSkillLinkButton:CreateBackdrop("Transparent")
 	TradeSkillLinkButton:Size(17, 14)
 	TradeSkillLinkButton:Point("LEFT", TradeSkillLinkFrame, "LEFT", 5, -1)
 	T.SkinEditBox(TradeSkillFrameSearchBox)
@@ -44,7 +44,7 @@ local function LoadSkin()
 			TradeSkillSkillIcon:GetNormalTexture():Point("TOPLEFT", 2, -2)
 			TradeSkillSkillIcon:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 		end
-		TradeSkillSkillIcon:SetTemplate("Default")
+		TradeSkillSkillIcon:SetTemplate("Transparent")
 
 		for i=1, MAX_TRADE_SKILL_REAGENTS do
 			local button = _G["TradeSkillReagent"..i]
@@ -56,7 +56,7 @@ local function LoadSkin()
 			if not icon.backdrop then
 				icon.backdrop = CreateFrame("Frame", nil, button)
 				icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
-				icon.backdrop:SetTemplate("Default")
+				icon.backdrop:SetTemplate("Transparent")
 				icon.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
 				icon.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
 			end
@@ -79,10 +79,10 @@ local function LoadSkin()
 	
 	--Guild Crafters
 	TradeSkillGuildFrame:StripTextures()
-	TradeSkillGuildFrame:SetTemplate("Default")
+	TradeSkillGuildFrame:SetTemplate("Transparent")
 	TradeSkillGuildFrame:Point("BOTTOMLEFT", TradeSkillFrame, "BOTTOMRIGHT", 3, 19)
 	TradeSkillGuildFrameContainer:StripTextures()
-	TradeSkillGuildFrameContainer:SetTemplate("Default")
+	TradeSkillGuildFrameContainer:SetTemplate("Transparent")
 	T.SkinCloseButton(TradeSkillGuildFrameCloseButton)
 end
 

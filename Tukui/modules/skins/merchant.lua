@@ -29,7 +29,7 @@ local function LoadSkin()
 		local t = _G["MerchantItem"..i.."ItemButtonIconTexture"]
 		local item_bar = _G["MerchantItem"..i]
 		item_bar:StripTextures(true)
-		item_bar:CreateBackdrop("Default")
+		item_bar:CreateBackdrop("Transparent")
 		
 		b:StripTextures()
 		b:StyleButton(false)

@@ -12,12 +12,12 @@ local function SkinIt(bar)
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
-			region:SetFont(C["media"].pixelfont, 10, "THINOUTLINE")
+			region:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 			region:SetShadowColor(0,0,0,0)
 		end
 	end
 	
-	bar:SetStatusBarTexture(C["media"].normTex)
+	bar:SetStatusBarTexture(C["media"].blank)
 	bar:SetStatusBarColor(170/255, 10/255, 10/255)
 	
 	bar.backdrop = CreateFrame("Frame", nil, bar)

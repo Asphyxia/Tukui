@@ -21,6 +21,49 @@ T.mult = mult
 -- TEMPLATES
 ---------------------------------------------------
 
+local function CreateOverlay(f)
+	if f.overlay then return end
+
+	local overlay = f:CreateTexture(f:GetName() and f:GetName().."Overlay" or nil, "BORDER", f)
+	overlay:ClearAllPoints()
+	overlay:Point("TOPLEFT", 2, -2)
+	overlay:Point("BOTTOMRIGHT", -2, 2)
+	overlay:SetTexture(C["media"].normTex)
+	overlay:SetVertexColor(unpack(C["media"].bordercolor))
+	f.overlay = overlay
+end
+
+local function CreateBorder(f, i, o)
+	if i then
+		if f.iborder then return end
+		local border = CreateFrame("Frame", f:GetName() and f:GetName() .. "InnerBorder" or nil, f)
+		border:Point("TOPLEFT", mult, -mult)
+		border:Point("BOTTOMRIGHT", -mult, mult)
+		border:SetBackdrop({
+			edgeFile = C["media"].blank, 
+			edgeSize = mult, 
+			insets = { left = mult, right = mult, top = mult, bottom = mult }
+		})
+		border:SetBackdropBorderColor(0,0,0)
+		f.iborder = border
+	end
+
+	if o then
+		if f.oborder then return end
+		local border = CreateFrame("Frame", f:GetName() and f:GetName() .. "OuterBorder" or nil, f)
+		border:Point("TOPLEFT", -mult, mult)
+		border:Point("BOTTOMRIGHT", mult, -mult)
+		border:SetFrameLevel(f:GetFrameLevel() + 1)
+		border:SetBackdrop({
+			edgeFile = C["media"].blank, 
+			edgeSize = mult, 
+			insets = { left = mult, right = mult, top = mult, bottom = mult }
+		})
+		border:SetBackdropBorderColor(0,0,0)
+		f.oborder = border
+	end
+end
+
 local function GetTemplate(t)
 	if t == "Tukui" then
 		borderr, borderg, borderb = .6, .6, .6

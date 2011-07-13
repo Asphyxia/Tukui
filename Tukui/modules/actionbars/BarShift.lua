@@ -23,7 +23,7 @@ ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
-ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 10)
+ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 

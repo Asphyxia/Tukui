@@ -38,7 +38,7 @@ yFS:SetFont(font, fsize, fstyle)
 
 local function SetLocColor(frame, pvpT)
 	if (pvpT == "arena" or pvpT == "combat") then
-		frame:SetTextColor(1, 0.5, 0)
+		frame:SetTextColor(1, 0, 0)
 	elseif pvpT == "friendly" then
 		frame:SetTextColor(0, 1, 0)
 	elseif pvpT == "contested" then
@@ -58,20 +58,20 @@ local function OnEvent()
 	locFS:SetText(location)
 	locpanel:SetWidth(locFS:GetStringWidth() + 40)
 	SetLocColor(locFS, pvpType)
-	locFS:SetPoint("CENTER", locpanel, "CENTER", 1, 0.5)
+	locFS:SetPoint("CENTER", locpanel, "CENTER", 1, 0)
 	locFS:SetJustifyH("CENTER")
 end
 local function xUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posX = math.floor(100 * posX)
 	xFS:SetText(T.panelcolor..posX)
-	xFS:SetPoint("CENTER", xcoords, "CENTER", 1, 0.5)
+	xFS:SetPoint("CENTER", xcoords, "CENTER", 1, 0)
 end
 local function yUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posY = math.floor(100 * posY)
 	yFS:SetText(T.panelcolor..posY)
-	yFS:SetPoint("CENTER", ycoords, "CENTER", 1, 0.5)
+	yFS:SetPoint("CENTER", ycoords, "CENTER", 1, 0)
 end
 locpanel:SetScript("OnMouseDown", function()
 	if WorldMapFrame:IsShown() then
