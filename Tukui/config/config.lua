@@ -93,7 +93,7 @@ C["actionbar"] = {
 	},
 	["enable"] = true,                                        -- enable tukui action bars
 	["hotkey"] = true,                                		   -- enable hotkey display on buttons.
-	["macrotext"] = true,								   -- display macro text on buttons.
+	["macrotext"] = false,								   -- display macro text on buttons.
 	["hideshapeshift"] = false,                            -- hide shapeshift or totembar because it was a lot requested.
 	["verticalshapeshift"] = false,						   -- set shapeshift bar to show vertically
 	["showgrid"] = true,                                     -- show grid on empty button
