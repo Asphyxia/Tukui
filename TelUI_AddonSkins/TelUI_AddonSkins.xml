@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- API -->
+	<Script file='AddonSkins.lua' />
+	<Script file='compat_TukUI.lua' />
+	<!-- Addon Skins -->
+	<Script file='skins\ArkInventory.lua' />
+	<Script file='skins\DXE.lua' />
+	<Script file='skins\HealBot.lua' />
+	<Script file='skins\LibSharedMedia.lua' />
+	<Script file='skins\QBar.lua' />
+	<Script file='skins\Quartz.lua' />
+	<Script file='skins\SexyCooldown.lua' />
+</Ui>

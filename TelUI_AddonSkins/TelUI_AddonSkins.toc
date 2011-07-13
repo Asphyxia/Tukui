@@ -1,0 +1,16 @@
+## Interface: 40200
+## Title: |cFF1478ECTelUI|r [|cFFFFFFFFAddon Skins|r]
+## Author: Telroth
+## Version: 1.0-109
+## eMail: darthandroid@gmail.com
+## OptionalDeps: TelUI, Tukui, Recount, QBar, Omen, SexyCooldown, Skada, DXE, DBM, HealBot, TinyDPS
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## X-ClassDefs: Mod_AddonSkins
+## Notes: Skins 3rd party addons to fit TelUI
+## X-Curse-Packaged-Version: r109
+## X-Curse-Project-Name: TelUI
+## X-Curse-Project-ID: telui
+## X-Curse-Repository-ID: wow/telui/mainline
+
+TelUI_AddonSkins.xml
