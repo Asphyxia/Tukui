@@ -10,9 +10,6 @@ local function LoadSkin()
 		"MacroNewButton",
 		"MacroExitButton",
 		"MacroEditButton",
-		"MacroSaveButton",
-		"MacroSaveButton",
-		"MacroCancelButton",
 		"MacroFrameTab1",
 		"MacroFrameTab2",
 		"MacroPopupOkayButton",
@@ -63,7 +60,7 @@ local function LoadSkin()
 	MacroFrameSelectedMacroButton:StripTextures()
 	MacroFrameSelectedMacroButton:StyleButton(true)
 	MacroFrameSelectedMacroButton:GetNormalTexture():SetTexture(nil)
-	MacroFrameSelectedMacroButton:SetTemplate("Transparent")
+	MacroFrameSelectedMacroButton:SetTemplate("Default")
 	MacroFrameSelectedMacroButtonIcon:SetTexCoord(.08, .92, .08, .92)
 	MacroFrameSelectedMacroButtonIcon:ClearAllPoints()
 	MacroFrameSelectedMacroButtonIcon:Point("TOPLEFT", 2, -2)
@@ -98,7 +95,7 @@ local function LoadSkin()
 			pb:StripTextures()
 			pb:StyleButton(true)
 			
-			pb:SetTemplate("Transparent")					
+			pb:SetTemplate("Default")					
 		end
 		
 		if pt then

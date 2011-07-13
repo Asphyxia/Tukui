@@ -1,7 +1,7 @@
 local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
-	ColorPickerFrame:CreateBackdrop("Transparent")
+	ColorPickerFrame:CreateBackdrop("Default")
 	T.SkinButton(ColorPickerOkayButton)
 	T.SkinButton(ColorPickerCancelButton)
 	ColorPickerOkayButton:ClearAllPoints()

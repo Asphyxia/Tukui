@@ -4,7 +4,7 @@ local function LoadSkin()
 	ItemSocketingFrame:StripTextures()
 	ItemSocketingFrame:SetTemplate("Transparent")
 	ItemSocketingScrollFrame:StripTextures()
-	ItemSocketingScrollFrame:CreateBackdrop("Transparent")
+	ItemSocketingScrollFrame:CreateBackdrop("Default")
 
 	for i = 1, MAX_NUM_SOCKETS  do
 		local button = _G["ItemSocketingSocket"..i]

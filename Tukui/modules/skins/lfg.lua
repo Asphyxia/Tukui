@@ -31,7 +31,7 @@ local function LoadSkin()
 	T.SkinButton(LookingForGuildBrowseButton)
 	T.SkinButton(LookingForGuildRequestButton)
 	T.SkinCloseButton(LookingForGuildFrameCloseButton)
-	LookingForGuildCommentInputFrame:CreateBackdrop("Transparent")
+	LookingForGuildCommentInputFrame:CreateBackdrop("Default")
 	LookingForGuildCommentInputFrame:StripTextures(false)
 	
 	-- skin container buttons on browse and request page
@@ -48,11 +48,11 @@ local function LoadSkin()
 	end
 	
 	GuildFinderRequestMembershipFrame:StripTextures(true)
-	GuildFinderRequestMembershipFrame:SetTemplate("Transparent")
+	GuildFinderRequestMembershipFrame:SetTemplate("Default")
 	T.SkinButton(GuildFinderRequestMembershipFrameAcceptButton)
 	T.SkinButton(GuildFinderRequestMembershipFrameCancelButton)
 	GuildFinderRequestMembershipFrameInputFrame:StripTextures()
-	GuildFinderRequestMembershipFrameInputFrame:SetTemplate("Transparent")		
+	GuildFinderRequestMembershipFrameInputFrame:SetTemplate("Default")		
 end
 
 T.SkinFuncs["Blizzard_LookingForGuildUI"] = LoadSkin

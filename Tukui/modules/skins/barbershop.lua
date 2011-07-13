@@ -50,7 +50,7 @@ local function LoadSkin()
 	BarberShopAltFormFrameBorder:StripTextures()
 	BarberShopAltFormFrame:Point( "BOTTOM", BarberShopFrame, "TOP", 0, 5 )
 	BarberShopAltFormFrame:StripTextures()
-	BarberShopAltFormFrame:CreateBackdrop("Transparent")
+	BarberShopAltFormFrame:CreateBackdrop("Default")
 end
 
 T.SkinFuncs["Blizzard_BarbershopUI"] = LoadSkin

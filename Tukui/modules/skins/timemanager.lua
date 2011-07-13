@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	TimeManagerFrame:StripTextures()
-	TimeManagerFrame:SetTemplate("Transparent")
+	TimeManagerFrame:SetTemplate("Default")
 
 	T.SkinCloseButton(TimeManagerCloseButton)
 
@@ -25,7 +25,7 @@ local function LoadSkin()
 	T.SkinCheckBox(TimeManagerLocalTimeCheck)
 	
 	TimeManagerStopwatchFrame:StripTextures()
-	TimeManagerStopwatchCheck:SetTemplate("Transparent")
+	TimeManagerStopwatchCheck:SetTemplate("Default")
 	TimeManagerStopwatchCheck:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 	TimeManagerStopwatchCheck:GetNormalTexture():ClearAllPoints()
 	TimeManagerStopwatchCheck:GetNormalTexture():Point("TOPLEFT", 2, -2)
@@ -37,7 +37,7 @@ local function LoadSkin()
 	TimeManagerStopwatchCheck:SetHighlightTexture(hover)
 	
 	StopwatchFrame:StripTextures()
-	StopwatchFrame:CreateBackdrop("Transparent")
+	StopwatchFrame:CreateBackdrop("Default")
 	StopwatchFrame.backdrop:Point("TOPLEFT", 0, -17)
 	StopwatchFrame.backdrop:Point("BOTTOMRIGHT", 0, 2)
 	

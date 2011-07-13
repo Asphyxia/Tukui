@@ -57,14 +57,14 @@ local function LoadSkin()
 	ClassTrainerFrame.backdrop:Point("BOTTOMRIGHT", ClassTrainerFrame, "BOTTOMRIGHT")
 	T.SkinCloseButton(ClassTrainerFrameCloseButton,ClassTrainerFrame)
 	ClassTrainerFrameSkillStepButton.icon:SetTexCoord(.08, .92, .08, .92)
-	ClassTrainerFrameSkillStepButton:CreateBackdrop("Transparent")
+	ClassTrainerFrameSkillStepButton:CreateBackdrop("Default")
 	ClassTrainerFrameSkillStepButton.backdrop:Point("TOPLEFT", ClassTrainerFrameSkillStepButton.icon, "TOPLEFT", -2, 2)
 	ClassTrainerFrameSkillStepButton.backdrop:Point("BOTTOMRIGHT", ClassTrainerFrameSkillStepButton.icon, "BOTTOMRIGHT", 2, -2)
 	ClassTrainerFrameSkillStepButton.icon:SetParent(ClassTrainerFrameSkillStepButton.backdrop)
 	
 	ClassTrainerStatusBar:StripTextures()
 	ClassTrainerStatusBar:SetStatusBarTexture(C["media"].normTex)
-	ClassTrainerStatusBar:CreateBackdrop("Transparent")
+	ClassTrainerStatusBar:CreateBackdrop("Default")
 end
 
 T.SkinFuncs["Blizzard_TrainerUI"] = LoadSkin
