@@ -39,7 +39,7 @@ local function Local(o)
 	if o == "TukuiConfigUIgeneralbackdropcolor" then o = TukuiL.option_general_backdropcolor end
 	if o == "TukuiConfigUIgeneralbordercolor" then o = TukuiL.option_general_bordercolor end
 	if o == "TukuiConfigUIgeneralblizzardreskin" then o = TukuiL.option_general_blizzardreskin end
-	
+
 	-- nameplate
 	if o == "TukuiConfigUInameplate" then o = TukuiL.option_nameplates end
 	if o == "TukuiConfigUInameplateenable" then o = TukuiL.option_nameplates_enable end
@@ -50,12 +50,14 @@ local function Local(o)
 	if o == "TukuiConfigUInameplategoodcolor" then o = TukuiL.option_nameplates_goodcolor end
 	if o == "TukuiConfigUInameplatebadcolor" then o = TukuiL.option_nameplates_badcolor end
 	if o == "TukuiConfigUInameplatetransitioncolor" then o = TukuiL.option_nameplates_transitioncolor end
+	if o =="TukuiConfigUInameplatetrackauras" then o = TukuiL.option_nameplates_trackauras end
 	
 	-- merchant
 	if o == "TukuiConfigUImerchant" then o = TukuiL.option_merchant end
 	if o == "TukuiConfigUImerchantsellgrays" then o = TukuiL.option_merchant_autosell end
 	if o == "TukuiConfigUImerchantautorepair" then o = TukuiL.option_merchant_autorepair end
 	if o == "TukuiConfigUImerchantsellmisc" then o = TukuiL.option_merchant_sellmisc end
+	if o == "TukuiConfigUImerchantguildrepair" then o = TukuiL.option_merchant_guildrepair end
 	
 	-- bags
 	if o == "TukuiConfigUIbags" then o = TukuiL.option_bags end
@@ -88,6 +90,11 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatexthit" then o = TukuiL.option_datatext_hit end	
 	if o == "TukuiConfigUIdatatextmastery" then o = TukuiL.option_datatext_mastery end	
 	if o == "TukuiConfigUIdatatextregen" then o = MANA_REGEN end
+	if o == "TukuiConfigUIdatatextbgannouncer" then o = TukuiL.option_datatext_BG_Announcer end
+	if o == "TukuiConfigUIdatatextcolor" then o = TukuiL.option_datatext_color end
+	if o == "TukuiConfigUIdatatextclasscolored" then  o = TukuiL.option_datatext_classcolored end
+	if o == "TukuiConfigUIdatatextprofession" then o = TukuiL.option_datatext_profession end
+	if o == "TukuiConfigUIdatatextspecswitcher" then o = TukuiL.option_datatext_specswitcher end
 
 	-- unit frames
 	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes_unitframes end
@@ -137,6 +144,14 @@ local function Local(o)
 	if o == "TukuiConfigUIunitframesonlyselfdebuffs" then o = TukuiL.option_unitframes_onlyselfdebuffs end
 	if o == "TukuiConfigUIunitframesshowfocustarget" then o = TukuiL.option_unitframes_focus end
 	if o == "TukuiConfigUIunitframesbordercolor" then o = TukuiL.option_unitframes_bordercolor end
+	if o == "TukuiConfigUIunitframeshideunitframes" then o = TukuiL.option_unitframes_hide_unitframes end
+	if o == "TukuiConfigUIunitframesshowsolo" then o = TukuiL.option_unitframes_show_solo end
+	if o == "TukuiConfigUIunitframesgradient" then o = TukuiL.option_unitframes_gradient end
+	if o == "TukuiConfigUIunitframesextendedpet" then o = TukuiL.option_unitframes_extended_pet end
+	if o == "TukuiConfigUIunitframesgradienthealth" then o = TukuiL.option_unitframes_gradient_health end
+	if o == "TukuiConfigUIunitframescbspark" then o = TukuiL.option_unitframes_cbspark end
+	if o == "TukuiConfigUIunitframesclassicon" then o = TukuiL.option_unitframes_classicon end
+	if o == "TukuiConfigUIunitframesstyle" then o = TukuiL.option_unitframes_style end
 
 	-- loot
 	if o == "TukuiConfigUIloot" then o = TukuiL.option_loot end
@@ -168,6 +183,7 @@ local function Local(o)
 	if o == "TukuiConfigUIbuffreminder" then o = TukuiL.option_reminder end
 	if o == "TukuiConfigUIbuffreminderenable" then o = TukuiL.option_reminder_enable end
 	if o == "TukuiConfigUIbuffremindersound" then o = TukuiL.option_reminder_sound end
+	if o == "TukuiConfigUIbuffreminderraidbuffreminder" then o = TukuiL.option_reminder_raidbuff_reminder end
 	
 	-- error
 	if o == "TukuiConfigUIerror" then o = TukuiL.option_error end
@@ -186,6 +202,11 @@ local function Local(o)
 	if o == "TukuiConfigUIactionbarbuttonsize" then o = TukuiL.option_actionbar_buttonsize end
 	if o == "TukuiConfigUIactionbarbuttonspacing" then o = TukuiL.option_actionbar_buttonspacing end
 	if o == "TukuiConfigUIactionbarpetbuttonsize" then o = TukuiL.option_actionbar_petbuttonsize end
+	if o == "TukuiConfigUIactionbarmainbarWidth" then o = TukuiL.option_actionbar_mainbar_Width end
+	if o == "TukuiConfigUIactionbarverticalshapeshift" then o = TukuiL.option_actionbar_vertical_shapeshift end
+	if o == "TukuiConfigUIactionbarsidebarWidth" then o = TukuiL.option_actionbar_sidebar_Width end
+	if o == "TukuiConfigUIactionbarbgPanel" then o = TukuiL.option_actionbar_bgPanel end
+	if o == "TukuiConfigUIactionbarmacrotext" then o = TukuiL.option_actionbar_macrotext end
 	
 	-- quest watch frame
 	if o == "TukuiConfigUIwatchframe" then o = TukuiL.option_quest end
@@ -210,6 +231,7 @@ local function Local(o)
 	if o == "TukuiConfigUIchatenable" then o = TukuiL.option_chat_enable end
 	if o == "TukuiConfigUIchatwhispersound" then o = TukuiL.option_chat_whispersound end
 	if o == "TukuiConfigUIchatbackground" then o = TukuiL.option_chat_background end
+	if o == "TukuiConfigUIchatrightchatnumber" then o = TukuiL.option_chat_rightchat_number end
 	
 	-- aura
 	if o == "TukuiConfigUIauras" then o = TukuiL.option_auras end
