@@ -272,10 +272,10 @@ end
 
 --RE-ANCHOR BAR5 & PETBAR ABOVE RIGHT CHAT
 TukuiBar5:ClearAllPoints()
-TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 3)
+TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 5)
 
 petbg:ClearAllPoints()
-petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
+petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5)
 
 TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
 TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
