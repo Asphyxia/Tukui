@@ -144,6 +144,15 @@ local function LoadSkin()
 	T.SkinCloseButton(FriendsFrameCloseButton,FriendsFrame.backdrop)
 	T.SkinDropDownBox(WhoFrameDropDown,150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown,70)
+	
+	--BNet Conversation
+	BNConversationInviteDialog:StripTextures()
+	BNConversationInviteDialog:CreateBackdrop("Transparent")
+
+	BNConversationInviteDialogList:StripTextures()
+	T.SkinEditBox(BNConversationInviteDialogList)
+	T.SkinButton(BNConversationInviteDialogInviteButton)
+	T.SkinButton(BNConversationInviteDialogCancelButton)
 
 	--Bottom Tabs
 	for i=1, 4 do
