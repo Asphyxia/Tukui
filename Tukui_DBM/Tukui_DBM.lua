@@ -116,7 +116,7 @@ local function SkinBars(self)
 					name:Point("LEFT", frame, "LEFT", 5, 1)
 					name:SetWidth(165)
 					name:SetHeight(8)
-					name:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+					name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 					name:SetJustifyH("LEFT")
 					name:SetShadowColor(0, 0, 0, 0)
 					name.SetFont = T.dummy
@@ -126,7 +126,7 @@ local function SkinBars(self)
 				if not timer.styled then	
 					timer:ClearAllPoints()
 					timer:Point("RIGHT", frame, "RIGHT", -5, 1)
-					timer:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+					timer:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 					timer:SetJustifyH("RIGHT")
 					timer:SetShadowColor(0, 0, 0, 0)
 					timer.SetFont = T.dummy
@@ -153,7 +153,7 @@ local SkinBossTitle=function()
 	if not anchor.styled then
 		local header={anchor:GetRegions()}
 			if header[1]:IsObjectType("FontString") then
-				header[1]:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+				header[1]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 				header[1]:SetTextColor(1,1,1,1)
 				header[1]:SetShadowColor(0, 0, 0, 0)
 				anchor.styled=true	
@@ -212,7 +212,7 @@ local SkinBoss=function()
 		if not name.styled then
 			name:ClearAllPoints()
 			name:Point("LEFT", progress, "LEFT", 5, 1)
-			name:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+			name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			name:SetJustifyH("LEFT")
 			name:SetShadowColor(0, 0, 0, 0)
 			name.styled=true
@@ -221,7 +221,7 @@ local SkinBoss=function()
 		if not timer.styled then
 			timer:ClearAllPoints()
 			timer:Point("RIGHT", progress, "RIGHT", -5, 1)
-			timer:SetFont(C["media"].pixelfont, 10, "OUTLINE")
+			timer:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			timer:SetJustifyH("RIGHT")
 			timer:SetShadowColor(0, 0, 0, 0)
 			timer.styled=true
