@@ -122,9 +122,9 @@ if IsAddOnLoaded("spellstealer") then
 	ssframeb:Point("BOTTOMRIGHT", sslist, "TOPRIGHT", 0, 3)
 	ssframeb:CreateShadow("")
 	
-	SSFrametitletext:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+	SSFrametitletext:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	SSFrametitletext:SetTextColor(unpack(C.datatext.color))
-	SSFrameListText:SetFont(C.media.font, 8, "MONOCHROMEOUTLINE")
+	SSFrameListText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	
 	SSFrameListText:Point("LEFT", 2, 0)
 	SSFrametitletext:ClearAllPoints()

@@ -10,7 +10,7 @@ TinyDPS:SetScript("OnEvent", function(self, event, addon)
 	tdps.barHeight = 14
 	tdps.spacing = 1
 	tdpsFont.name = C["media"].pixelfont
-	tdpsFont.size = 8
+	tdpsFont.size = 10
 	tdpsFont.outline = "MONOCHROMEOUTLINE"
 
 	tdpsPosition = {x = 0, y = -6}

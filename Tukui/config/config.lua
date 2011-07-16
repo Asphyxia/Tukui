@@ -185,7 +185,7 @@ C["datatext"] = {
 	["bgannouncer"] = true,                			-- enable an announcer mod for BGs.
 	["time24"] = false,                                 -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	["fontsize"] = 8,                                  -- font size for panels.
+	["fontsize"] = 10,                                  -- font size for panels.
 }
 
 C["databars"] = {

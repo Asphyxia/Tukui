@@ -27,7 +27,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(27*T.raidscale)
+	health:Height(30*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -40,7 +40,7 @@ local function Shared(self, unit)
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	health.value:SetPoint("RIGHT", health, -3, 1)
-	health.value:SetFont(font, 8, "MONOCHROMEOUTLINE")
+	health.value:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -109,7 +109,7 @@ local function Shared(self, unit)
 	
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("LEFT", health, 3, 0)
-	name:SetFont(font, 8, "MONOCHROMEOUTLINE")
+	name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, "[Tukui:namemedium]")
 	self.Name = name

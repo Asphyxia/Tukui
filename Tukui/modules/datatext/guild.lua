@@ -41,7 +41,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+	Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	T.PP(C["datatext"].guild, Text)
 
 	local BASE_GP = 1

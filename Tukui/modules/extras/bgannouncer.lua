@@ -28,7 +28,7 @@ button1:SetAttribute("macrotext", "/bg Light attack incoming to "..GetMinimapZon
 
 local button1_text = button1:CreateFontString(nil,"Overlay")
 button1_text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-button1_text:Point("Center",0,0)
+button1_text:Point("Center",0,1)
 button1_text:SetText(T.StatColor.."Low")
 button1:SetScript("OnEnter", function(self) self:SetBackdropBorderColor(color.r, color.g, color.b) end)
 button1:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C.media.bordercolor)) end)

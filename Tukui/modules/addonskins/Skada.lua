@@ -83,9 +83,9 @@ AddonSkins_Mod:RegisterSkin("Skada",function(Skin,skin,Layout,layout,config)
         end
         win.bargroup:SetTexture(config.normTexture)
         win.bargroup:SetSpacing(config.barSpacing)
-		win.bargroup:SetFont(config.font,config.fontSize, config.fontFlags)
+		win.bargroup:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		local titlefont = CreateFont("TitleFont"..win.db.name)
-		titlefont:SetFont(config.font,config.fontSize, config.fontFlags)
+		titlefont:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		win.bargroup.button:SetNormalFontObject(titlefont)
         local color = win.db.title.color
 	    win.bargroup.button:SetBackdropColor(unpack(C["media"].bordercolor))

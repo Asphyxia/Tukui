@@ -72,7 +72,7 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
-	tab:GetFontString():SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+	tab:GetFontString():SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	
 	-- color chat tabs, original by Elv, edited by Hydra
 	local classcolortab = RAID_CLASS_COLORS[T.myclass]

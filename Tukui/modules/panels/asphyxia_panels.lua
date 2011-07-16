@@ -82,8 +82,8 @@ verbutton:SetAttribute("macrotext", "/version")
 verbutton:SetFrameStrata("MEDIUM")
 verbutton:SetFrameLevel(2)
 
-verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-verbutton.Text:Point("CENTER", verbutton, "CENTER", 1, 0)
+verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+verbutton.Text:Point("CENTER", verbutton, "CENTER", 1, 1)
 verbutton.Text:SetText(T.panelcolor.."V")
 
 --[[verbutton:SetScript("OnEnter", function()
@@ -117,8 +117,8 @@ helpbutton:SetAttribute("macrotext", "/ahelp")
 helpbutton:SetFrameStrata("MEDIUM")
 helpbutton:SetFrameLevel(2)
 
-helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 0)
+helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1, 1)
 helpbutton.Text:SetText(T.panelcolor.."H")
 
 -- Animate function
@@ -156,8 +156,8 @@ adbutton:SetAttribute("macrotext", "/am")
 adbutton:HookScript("OnEnter", ModifiedBackdrop)
 adbutton:HookScript("OnLeave", OriginalBackdrop)
 
-adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 0)
+adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+adbutton.Text:Point("CENTER", adbutton, "CENTER", 0, 1)
 adbutton.Text:SetText(T.panelcolor..ADDONS)
 adbutton.Text:SetShadowColor( 0, 0, 0 )
 adbutton.Text:SetShadowOffset(1.25, -1.25)
@@ -199,8 +199,8 @@ resetuibutton:SetScript("OnEnter", function()
 		resetuibutton:FadeOut()
 	end)
 
-resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 0, 0)
+resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 0, 1)
 resetuibutton.Text:SetText(T.panelcolor.."Reset UI")
 
 -- RELOADUI BUTTON
@@ -223,8 +223,8 @@ rluibutton:SetScript("OnEnter", function()
 		rluibutton:FadeOut()
 	end)
 
-rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 0, 0)
+rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 0, 1)
 rluibutton.Text:SetText(T.panelcolor.."Reload UI")
 
 -- CONFIG BUTTON
@@ -247,8 +247,8 @@ configbutton:SetScript("OnEnter", function()
 		configbutton:FadeOut()
 	end)
 
-configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-configbutton.Text:Point("CENTER", configbutton, "CENTER", 0, 0)
+configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+configbutton.Text:Point("CENTER", configbutton, "CENTER", 0, 1)
 configbutton.Text:SetText(T.panelcolor.."Config UI")
 
 -- MOVEUI BUTTON
@@ -271,8 +271,8 @@ moveuibutton:SetScript("OnEnter", function()
 		moveuibutton:FadeOut()
 	end)
 
-moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 0, 0)
+moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 0, 1)
 moveuibutton.Text:SetText(T.panelcolor.."Move UI")
 
 -- WORLD STATE FRAME 
@@ -385,7 +385,7 @@ icb.f = icb:CreateFontString(nil, overlay)
 icb.f:SetPoint("CENTER")
 icb.f:SetFont(C["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 icb.f:SetText(cp)
-icb.f:Point("CENTER", 1, 0)
+icb.f:Point("CENTER", 1, 1)
 icb:SetScript("OnMouseDown", function(self)
 	ToggleFrame(icenter)
 	ToggleFrame(icenterleft)

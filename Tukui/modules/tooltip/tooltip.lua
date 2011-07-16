@@ -39,7 +39,7 @@ end
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(C.media.backdropcolor)
 anchor:SetMovable(true)
-anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+anchor.text = T.SetFontString(anchor, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 
@@ -187,7 +187,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
 		end
 		
-		self.text:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
+		self.text:SetFont(C["media"].pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)

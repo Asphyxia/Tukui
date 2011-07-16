@@ -24,7 +24,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(28*C["unitframes"].gridscale*T.raidscale)
+	health:Height(30*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(C["media"].normTex)
 	self.Health = health
 	
@@ -48,8 +48,8 @@ local function Shared(self, unit)
 	self.HealthBorder = HealthBorder
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:Point("CENTER", health, 1, -3)
-	health.value:SetFont(font, 8, "MONOCHROMEOUTLINE")
+	health.value:Point("CENTER", health, 1, -1)
+	health.value:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -87,7 +87,7 @@ local function Shared(self, unit)
 	local power = CreateFrame("StatusBar", nil, self)
 	power:SetHeight(1.5*C["unitframes"].gridscale*T.raidscale)
 	power:SetWidth(54)
-	power:Point("CENTER", self.Health, "CENTER", 0, -8)
+	power:Point("CENTER", self.Health, "CENTER", 0, -10)
 	power:SetStatusBarTexture(C["media"].normTex)
 	power:SetFrameLevel(self.Health:GetFrameLevel() + 2)
 	self.Power = power
@@ -117,11 +117,11 @@ local function Shared(self, unit)
 	end
 	
 	local name = self.Health:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("TOP", 0, 15) 
+    name:SetPoint("TOP", 0, 18) 
 	name:SetPoint("BOTTOM") 
 	name:SetPoint("LEFT", 4, 0) 
 	name:SetPoint("RIGHT")
-	name:SetFont(font, 8, "MONOCHROMEOUTLINE")
+	name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	name:SetShadowOffset(1.25, -1.25)
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
@@ -267,11 +267,11 @@ local function Shared(self, unit)
 		end
 		
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
+		RaidDebuffs.count:SetFont(C["media"].pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		RaidDebuffs.count:SetPoint('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		
-		RaidDebuffs:FontString('time', C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
+		RaidDebuffs:FontString('time', C["media"].pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		RaidDebuffs.time:SetPoint('CENTER')
 		RaidDebuffs.time:SetTextColor(1, .9, 0)
 		
@@ -304,7 +304,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),	
+			'initial-height', T.Scale(35*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(8),
 			"yOffset", T.Scale(-3),
@@ -326,7 +326,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(35*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty,
 			"showSolo", C["unitframes"].showsolo,

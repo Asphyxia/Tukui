@@ -98,7 +98,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 		
-		health.value = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		health.value:Point("RIGHT", health, "RIGHT", -4, 1)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -153,7 +153,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		power.value:Point("LEFT", health, "LEFT", 4, 1)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -185,7 +185,7 @@ local function Shared(self, unit)
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 			Name:SetJustifyH("CENTER")
-			Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			Name:SetShadowColor(0, 0, 0)
 			Name:SetShadowOffset(1.25, -1.25)
 			self.Name = Name
@@ -293,7 +293,7 @@ local function Shared(self, unit)
 			FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 			FlashInfo.parent = self
 			FlashInfo:SetAllPoints(panel)
-			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, 8, "MONOCHROMEOUTLINE")
+			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			FlashInfo.ManaLevel:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			self.FlashInfo = FlashInfo
 			
@@ -338,8 +338,8 @@ local function Shared(self, unit)
 				ExperienceBG:SetVertexColor(.1,.1,.1,1)
 
 				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
-				Experience.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-				Experience.Text:SetPoint('CENTER', self.Experience)
+				Experience.Text:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+				Experience.Text:SetPoint('CENTER', 0, 1)
 				Experience.Text:SetShadowOffset(T.mult, -T.mult)
 				self.Experience.Text = Experience.Text
 				self.Experience.PostUpdate = T.ExperienceText
@@ -395,8 +395,8 @@ local function Shared(self, unit)
 				end)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-			toggle.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 0)
+			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
 			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
 			toggle:SetScript("OnMouseUp", function(self) 
 			Experience:Animate(0, 100, 0.4)
@@ -421,8 +421,8 @@ local function Shared(self, unit)
 				ReputationBG:SetVertexColor(.1,.1,.1,1)
 
 				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
-				Reputation.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-				Reputation.Text:SetPoint('CENTER', Reputation)
+				Reputation.Text:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+				Reputation.Text:SetPoint('CENTER', 0, 1)
 				Reputation.Text:SetShadowOffset(T.mult, -T.mult)
 				Reputation.Text:Show()
 				Reputation.PostUpdate = T.UpdateReputation
@@ -470,8 +470,8 @@ local function Shared(self, unit)
 				end)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-			toggle.Text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 0)
+			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
 			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
 			toggle:SetScript("OnMouseUp", function(self) 
 			Reputation:Animate(0, 100, 0.4)
@@ -514,7 +514,7 @@ local function Shared(self, unit)
 					local eclipseBarText = eclipseBar:CreateFontString(nil, 'OVERLAY')
 					eclipseBarText:SetPoint('TOP', eclipseBar, 0, 25)
 					eclipseBarText:SetPoint('BOTTOM', eclipseBar)
-					eclipseBarText:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+					eclipseBarText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 					eclipseBarText:SetShadowOffset(T.mult, -T.mult)
 					eclipseBarText:SetShadowColor(0, 0, 0, 0.4)
 					eclipseBar.PostUpdatePower = T.EclipseDirection
@@ -686,7 +686,7 @@ local function Shared(self, unit)
 			local Name = health:CreateFontString(nil, "OVERLAY")
 			Name:Point("LEFT", health, "LEFT", 4, 0)
 			Name:SetJustifyH("LEFT")
-			Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			Name:SetShadowOffset(1.25, -1.25)
 
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
@@ -810,12 +810,12 @@ local function Shared(self, unit)
 			castbar.PostCastStart = T.PostCastStart
 			castbar.PostChannelStart = T.PostCastStart
 
-			castbar.time = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			castbar.time = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			castbar.time:Point("RIGHT", castbar.bg, "RIGHT", -4, 0)
 			castbar.time:SetTextColor(0, 4, 0)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			castbar.Text = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			castbar.Text:Point("LEFT", castbar.bg, "LEFT", 4, 0)
 			castbar.Text:SetTextColor(0.3, 0.2, 1)
 			castbar.Text:Width(100)
@@ -850,7 +850,7 @@ local function Shared(self, unit)
 		-- add combat feedback support
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
-			CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			CombatFeedbackText:SetPoint("CENTER", 0, 1)
 			CombatFeedbackText.colors = {
 				DAMAGE = {0.69, 0.31, 0.31},
@@ -1010,7 +1010,7 @@ local function Shared(self, unit)
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
 		Name:SetPoint("CENTER", health, "CENTER", 2, 2)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		self.Name = Name
@@ -1143,7 +1143,7 @@ local function Shared(self, unit)
 		-- Unit name
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", self.Health, "CENTER", 1, 2)
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetJustifyH("CENTER")
 		Name:SetShadowOffset(1.25, -1.25)
 
@@ -1197,7 +1197,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, font, 8, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 1)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1248,7 +1248,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font, 8, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 1)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1260,7 +1260,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1298,13 +1298,13 @@ local function Shared(self, unit)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.time = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0, 4, 0)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.3, 0.2, 1)
 		castbar.Text:Width(100)
@@ -1363,7 +1363,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, font, 8, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 1)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1414,7 +1414,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font, 8, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 1)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1426,7 +1426,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1464,13 +1464,13 @@ local function Shared(self, unit)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.time = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0, 4, 0)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.3, 0.2, 1)
 		castbar.Text:Width(100)
@@ -1532,7 +1532,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 0.5)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1583,7 +1583,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 0.5)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1595,7 +1595,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
@@ -1691,13 +1691,13 @@ local function Shared(self, unit)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.time = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0, 4, 0)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		castbar.Text = T.SetFontString(castbar,C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		castbar.Text:Point("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.3, 0.2, 1)
 		castbar.Text:Width(100)
@@ -1776,7 +1776,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		

@@ -188,12 +188,12 @@ ltoabr:SetAlpha(0)
 
 -- CHAT BG LEFT
 local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 114, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 21)
+chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 113, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 21)
 chatleftbg:CreateShadow("Default")
 	
 -- CHAT BG RIGHT
 local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 114, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 21)
+chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 113, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 21)
 chatrightbg:CreateShadow("default")
 	
 -- LEFT TAB PANEL
