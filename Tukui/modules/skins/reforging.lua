@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	ReforgingFrame:StripTextures()
-	ReforgingFrame:SetTemplate("Transparent")
+	ReforgingFrame:SetTemplate("Default")
 	
 	ReforgingFrameTopInset:StripTextures()
 	ReforgingFrameInset:StripTextures()

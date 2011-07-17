@@ -36,7 +36,7 @@ local function LoadSkin()
 		end
 	end
 	
-	AchievementFrame:CreateBackdrop("Transparent")
+	AchievementFrame:CreateBackdrop("Default")
 	AchievementFrame.backdrop:Point("TOPLEFT", 0, 6)
 	AchievementFrame.backdrop:SetPoint("BOTTOMRIGHT")
 	AchievementFrameHeaderTitle:ClearAllPoints()
@@ -45,10 +45,10 @@ local function LoadSkin()
 	AchievementFrameHeaderPoints:Point("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
 	
 	--Backdrops
-	AchievementFrameCategoriesContainer:CreateBackdrop("Transparent")
+	AchievementFrameCategoriesContainer:CreateBackdrop("Default")
 	AchievementFrameCategoriesContainer.backdrop:Point("TOPLEFT", 0, 4)
 	AchievementFrameCategoriesContainer.backdrop:Point("BOTTOMRIGHT", -2, -3)
-	AchievementFrameAchievementsContainer:CreateBackdrop("Transparent")
+	AchievementFrameAchievementsContainer:CreateBackdrop("Default")
 	AchievementFrameAchievementsContainer.backdrop:Point("TOPLEFT", 0, 2)
 	AchievementFrameAchievementsContainer.backdrop:Point("BOTTOMRIGHT", -3, -3)
 	
@@ -57,11 +57,11 @@ local function LoadSkin()
 	AchievementFrameFilterDropDown:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 5)
 	
 	-- ScrollBars
-	T.SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
-	T.SkinScrollBar(AchievementFrameAchievementsContainerScrollBar)
-	T.SkinScrollBar(AchievementFrameStatsContainerScrollBar)
-	T.SkinScrollBar(AchievementFrameComparisonContainerScrollBar)
-	T.SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
+	T.SkinScrollBar(AchievementFrameCategoriesContainerScrollBar, 5)
+	T.SkinScrollBar(AchievementFrameAchievementsContainerScrollBar, 5)
+	T.SkinScrollBar(AchievementFrameStatsContainerScrollBar, 5)
+	T.SkinScrollBar(AchievementFrameComparisonContainerScrollBar, 5)
+	T.SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar, 5)
 	
 	--Tabs
 	for i = 1, 3 do
@@ -73,7 +73,7 @@ local function LoadSkin()
 		bar:StripTextures()
 		bar:SetStatusBarTexture(C["media"].normTex)
 		bar:SetStatusBarColor(4/255, 179/255, 30/255)
-		bar:CreateBackdrop("Transparent")
+		bar:CreateBackdrop("Default")
 		
 		if _G[bar:GetName().."Title"] then
 			_G[bar:GetName().."Title"]:SetPoint("LEFT", 4, 0)
@@ -127,13 +127,13 @@ local function LoadSkin()
 			_G["AchievementFrameSummaryAchievement"..i.."Description"]:SetTextColor(0.6, 0.6, 0.6)
 			
 			if not frame.backdrop then
-				frame:CreateBackdrop("Transparent", true)
+				frame:CreateBackdrop("Default", true)
 				frame.backdrop:Point("TOPLEFT", 2, -2)
 				frame.backdrop:Point("BOTTOMRIGHT", -2, 2)
 
 				_G["AchievementFrameSummaryAchievement"..i.."IconBling"]:Kill()
 				_G["AchievementFrameSummaryAchievement"..i.."IconOverlay"]:Kill()
-				_G["AchievementFrameSummaryAchievement"..i.."Icon"]:SetTemplate("Transparent")
+				_G["AchievementFrameSummaryAchievement"..i.."Icon"]:SetTemplate("Default")
 				_G["AchievementFrameSummaryAchievement"..i.."Icon"]:Height(_G["AchievementFrameSummaryAchievement"..i.."Icon"]:GetHeight() - 14)
 				_G["AchievementFrameSummaryAchievement"..i.."Icon"]:Width(_G["AchievementFrameSummaryAchievement"..i.."Icon"]:GetWidth() - 14)
 				_G["AchievementFrameSummaryAchievement"..i.."Icon"]:ClearAllPoints()
@@ -187,7 +187,7 @@ local function LoadSkin()
 		
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconBling"]:Kill()
 		_G["AchievementFrameAchievementsContainerButton"..i.."IconOverlay"]:Kill()
-		_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:SetTemplate("Transparent")
+		_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:SetTemplate("Default")
 		_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:Height(_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:GetHeight() - 14)
 		_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:Width(_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:GetWidth() - 14)
 		_G["AchievementFrameAchievementsContainerButton"..i.."Icon"]:ClearAllPoints()
@@ -200,7 +200,7 @@ local function LoadSkin()
 		
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"].oborder = "Don't use sharp border" --Needed for ElvUI only
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:StripTextures()
-		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:SetTemplate("Transparent")
+		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:SetTemplate("Default")
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:Size(12, 12)
 		_G["AchievementFrameAchievementsContainerButton"..i.."Tracked"]:GetCheckedTexture():Point("TOPLEFT", -4, 4)
@@ -266,7 +266,7 @@ local function LoadSkin()
 							
 			_G[frame.."IconBling"]:Kill()
 			_G[frame.."IconOverlay"]:Kill()
-			_G[frame.."Icon"]:SetTemplate("Transparent")
+			_G[frame.."Icon"]:SetTemplate("Default")
 			_G[frame.."Icon"]:Height(_G[frame.."Icon"]:GetHeight() - 14)
 			_G[frame.."Icon"]:Width(_G[frame.."Icon"]:GetWidth() - 14)
 			_G[frame.."Icon"]:ClearAllPoints()

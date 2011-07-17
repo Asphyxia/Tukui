@@ -4,18 +4,15 @@ T.SkinFuncs = {}
 T.SkinFuncs["Tukui"] = {}
 
 function T.SetModifiedBackdrop(self)
+	if self.backdrop then self = self.backdrop end
 	local color = RAID_CLASS_COLORS[T.myclass]
 	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
 	self:SetBackdropBorderColor(color.r, color.g, color.b)
 end
 
 function T.SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	if C["general"].classcolortheme == true then
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		self:SetTemplate("Transparent")
-	end
+	if self.backdrop then self = self.backdrop end
+	self:SetTemplate("Default")
 end
 
 function T.SkinButton(f, strip)
@@ -40,12 +37,12 @@ function T.SkinButton(f, strip)
 	
 	if strip then f:StripTextures() end
 	
-	f:SetTemplate("Transparent")
+	f:SetTemplate("Default")
 	f:HookScript("OnEnter", T.SetModifiedBackdrop)
 	f:HookScript("OnLeave", T.SetOriginalBackdrop)
 end
 
-function T.SkinScrollBar(frame)
+function T.SkinScrollBar(frame, thumbTrim)
 	if _G[frame:GetName().."BG"] then _G[frame:GetName().."BG"]:SetTexture(nil) end
 	if _G[frame:GetName().."Track"] then _G[frame:GetName().."Track"]:SetTexture(nil) end
 	
@@ -53,6 +50,68 @@ function T.SkinScrollBar(frame)
 		_G[frame:GetName().."Top"]:SetTexture(nil)
 		_G[frame:GetName().."Bottom"]:SetTexture(nil)
 		_G[frame:GetName().."Middle"]:SetTexture(nil)
+	end
+	
+	if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
+		_G[frame:GetName().."ScrollUpButton"]:StripTextures()
+		_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Default", true)
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', T.SetModifiedBackdrop)
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', T.SetOriginalBackdrop)		
+		if not _G[frame:GetName().."ScrollUpButton"].texture then
+			_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, 'OVERLAY')
+			_G[frame:GetName().."ScrollUpButton"].texture:Point("TOPLEFT", 2, -2)
+			_G[frame:GetName().."ScrollUpButton"].texture:Point("BOTTOMRIGHT", -2, 2)
+			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
+			_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
+		end
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self)
+			local color = RAID_CLASS_COLORS[T.myclass]
+			self.texture:SetVertexColor(color.r, color.g, color.b)	
+		end)	
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self)
+			self.texture:SetVertexColor(unpack(C["media"].bordercolor)) 
+		end)		
+
+		_G[frame:GetName().."ScrollDownButton"]:StripTextures()
+		_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Default", true)
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', T.SetModifiedBackdrop)
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', T.SetOriginalBackdrop)		
+		if not _G[frame:GetName().."ScrollDownButton"].texture then
+			_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, 'OVERLAY')
+			_G[frame:GetName().."ScrollDownButton"].texture:Point("TOPLEFT", 2, -2)
+			_G[frame:GetName().."ScrollDownButton"].texture:Point("BOTTOMRIGHT", -2, 2)
+			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
+			_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
+		end
+
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self)
+			local color = RAID_CLASS_COLORS[T.myclass]
+			self.texture:SetVertexColor(color.r, color.g, color.b)	
+		end)	
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', function(self)
+			self.texture:SetVertexColor(unpack(C["media"].bordercolor)) 
+		end)				
+
+		if not frame.trackbg then
+			frame.trackbg = CreateFrame("Frame", nil, frame)
+			frame.trackbg:Point("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
+			frame.trackbg:Point("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
+			frame.trackbg:SetTemplate("Default")
+		end
+
+		if frame:GetThumbTexture() then
+			if not thumbTrim then thumbTrim = 3 end
+			frame:GetThumbTexture():SetTexture(nil)
+			if not frame.thumbbg then
+				frame.thumbbg = CreateFrame("Frame", nil, frame)
+				frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+				frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+				frame.thumbbg:SetTemplate("Default", true)
+				if frame.trackbg then
+					frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
+				end
+			end
+		end
 	end
 end
 
@@ -82,14 +141,19 @@ function T.SkinTab(tab)
 	end
 	
 	tab.backdrop = CreateFrame("Frame", nil, tab)
-	tab.backdrop:SetTemplate("Transparent")
+	tab.backdrop:SetTemplate("Default")
 	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 	tab.backdrop:Point("TOPLEFT", 10, -3)
-	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)				
+	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)
+
+	-- always set tab text centered
+	local name = tab:GetName()
+	_G[name.."Text"]:ClearAllPoints()
+	_G[name.."Text"]:SetPoint("TOP", name, 0, -11)
 end
 
 function T.SkinNextPrevButton(btn, horizonal)
-	btn:SetTemplate("Transparent")
+	btn:SetTemplate("Default")
 	btn:Size(btn:GetWidth() - 7, btn:GetHeight() - 7)	
 	
 	if horizonal then
@@ -120,7 +184,7 @@ function T.SkinNextPrevButton(btn, horizonal)
 end
 
 function T.SkinRotateButton(btn)
-	btn:SetTemplate("Transparent")
+	btn:SetTemplate("Default")
 	btn:Size(btn:GetWidth() - 14, btn:GetHeight() - 14)	
 	
 	btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
@@ -140,7 +204,7 @@ function T.SkinEditBox(frame)
 	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
 	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
 	if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
-	frame:CreateBackdrop("Transparent")
+	frame:CreateBackdrop("Default")
 	
 	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
 		frame.backdrop:Point("BOTTOMRIGHT", -12, -2)
@@ -164,14 +228,14 @@ function T.SkinDropDownBox(frame, width)
 	
 	T.SkinNextPrevButton(button, true)
 	
-	frame:CreateBackdrop("Transparent")
+	frame:CreateBackdrop("Default")
 	frame.backdrop:Point("TOPLEFT", 20, -2)
 	frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
 
 function T.SkinCheckBox(frame)
 	frame:StripTextures()
-	frame:CreateBackdrop("Transparent")
+	frame:CreateBackdrop("Default")
 	frame.backdrop:Point("TOPLEFT", 4, -4)
 	frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
 	
@@ -188,17 +252,25 @@ function T.SkinCheckBox(frame)
 	frame.SetHighlightTexture = T.dummy
 end
 
-function T.SkinCloseButton(f, point)
-	for i=1, f:GetNumRegions() do
-		local region = select(i, f:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			region:SetDesaturated(1)
-			
-			if region:GetTexture() == "Interface\\DialogFrame\\UI-DialogBox-Corner" then
-				region:Kill()
-			end
-		end
-	end	
+function T.SkinCloseButton(f, point, text)
+	f:StripTextures()
+
+	if not f.backdrop then
+		f:CreateBackdrop("Default", true)
+		f.backdrop:Point('TOPLEFT', 7, -8)
+		f.backdrop:Point('BOTTOMRIGHT', -8, 8)
+		f:HookScript('OnEnter', T.SetModifiedBackdrop)
+		f:HookScript('OnLeave', T.SetOriginalBackdrop)	
+	end
+
+	if not text then text = 'x' end
+	if not f.text then
+		f.text = f:CreateFontString(nil, 'OVERLAY')
+		f.text:SetFont(C.media.font, 16, 'THINOUTLINE')
+		f.text:SetText(text)
+		f.text:SetJustifyH('CENTER')
+		f.text:SetPoint('CENTER', f, 'CENTER')
+	end
 	
 	if point then
 		f:Point("TOPRIGHT", point, "TOPRIGHT", 2, 2)

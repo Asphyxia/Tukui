@@ -1,6 +1,9 @@
 local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
+	T.SkinScrollBar(FriendsFrameFriendsScrollFrameScrollBar, 5)
+	T.SkinScrollBar(WhoListScrollFrameScrollBar, 5)
+	T.SkinScrollBar(ChannelRosterScrollFrameScrollBar, 5)
 	local tabs = {
 		"LeftDisabled",
 		"MiddleDisabled",
@@ -18,7 +21,7 @@ local function LoadSkin()
 		end
 		tab:GetHighlightTexture():SetTexture(nil)
 		tab.backdrop = CreateFrame("Frame", nil, tab)
-		tab.backdrop:SetTemplate("Transparent")
+		tab.backdrop:SetTemplate("Default")
 		tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 		tab.backdrop:Point("TOPLEFT", 3, -8)
 		tab.backdrop:Point("BOTTOMRIGHT", -6, 0)
@@ -115,7 +118,7 @@ local function LoadSkin()
 	FriendsFrame:StripTextures(true)
 
 	T.SkinEditBox(AddFriendNameEditBox)
-	AddFriendFrame:SetTemplate("Transparent")			
+	AddFriendFrame:SetTemplate("Default")			
 
 	--Who Frame
 	local function UpdateWhoSkins()
@@ -126,9 +129,9 @@ local function LoadSkin()
 		ChannelRosterScrollFrame:StripTextures()
 	end
 	--BNet Frame
-	FriendsFrameBroadcastInput:CreateBackdrop("Transparent")
-	ChannelFrameDaughterFrameChannelName:CreateBackdrop("Transparent")
-	ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Transparent")			
+	FriendsFrameBroadcastInput:CreateBackdrop("Default")
+	ChannelFrameDaughterFrameChannelName:CreateBackdrop("Default")
+	ChannelFrameDaughterFrameChannelPassword:CreateBackdrop("Default")			
 
 	ChannelFrame:HookScript("OnShow", UpdateChannel)
 	hooksecurefunc("FriendsFrame_OnEvent", UpdateChannel)
@@ -136,23 +139,14 @@ local function LoadSkin()
 	WhoFrame:HookScript("OnShow", UpdateWhoSkins)
 	hooksecurefunc("FriendsFrame_OnEvent", UpdateWhoSkins)
 
-	ChannelFrameDaughterFrame:CreateBackdrop("Transparent")
-	FriendsFrame:CreateBackdrop("Transparent")
+	ChannelFrameDaughterFrame:CreateBackdrop("Default")
+	FriendsFrame:CreateBackdrop("Default")
 	FriendsFrame.backdrop:Point( "TOPLEFT", FriendsFrame, "TOPLEFT", 11,-12)
 	FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
 	T.SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton,ChannelFrameDaughterFrame)
 	T.SkinCloseButton(FriendsFrameCloseButton,FriendsFrame.backdrop)
 	T.SkinDropDownBox(WhoFrameDropDown,150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown,70)
-	
-	--BNet Conversation
-	BNConversationInviteDialog:StripTextures()
-	BNConversationInviteDialog:CreateBackdrop("Transparent")
-
-	BNConversationInviteDialogList:StripTextures()
-	T.SkinEditBox(BNConversationInviteDialogList)
-	T.SkinButton(BNConversationInviteDialogInviteButton)
-	T.SkinButton(BNConversationInviteDialogCancelButton)
 
 	--Bottom Tabs
 	for i=1, 4 do
@@ -177,7 +171,7 @@ local function LoadSkin()
 	hooksecurefunc("ChannelList_Update", Channel)
 	
 	--View Friends BN Frame
-	FriendsFriendsFrame:CreateBackdrop("Transparent")
+	FriendsFriendsFrame:CreateBackdrop("Default")
 
 	T.SkinEditBox(FriendsFriendsList)
 	T.SkinEditBox(FriendsFriendsNoteFrame)

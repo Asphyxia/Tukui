@@ -2,13 +2,13 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	EncounterJournal:StripTextures(true)
-	
+		
 	EncounterJournal.backdrop = EncounterJournal:CreateTexture(nil, "BACKGROUND")
 	EncounterJournal.backdrop:SetDrawLayer("BACKGROUND", -7)
 	EncounterJournal.backdrop:SetTexture(0, 0, 0)
 	EncounterJournal.backdrop:Point("TOPLEFT", EncounterJournal, "TOPLEFT", -T.mult*3, T.mult*3)
 	EncounterJournal.backdrop:Point("BOTTOMRIGHT", EncounterJournal, "BOTTOMRIGHT", T.mult*3, -T.mult*3)
-	
+		
 	EncounterJournal.backdrop2 = EncounterJournal:CreateTexture(nil, "BACKGROUND")
 	EncounterJournal.backdrop2:SetDrawLayer("BACKGROUND", -6)
 	EncounterJournal.backdrop2:SetTexture(unpack(C["media"].bordercolor))
@@ -25,18 +25,18 @@ local function LoadSkin()
 	EncounterJournal.backdrop4:SetDrawLayer("BACKGROUND", -4)
 	EncounterJournal.backdrop4:SetTexture(unpack(C["media"].backdropcolor))
 	EncounterJournal.backdrop4:SetAllPoints()						
-	
+		
 	EncounterJournalNavBar:StripTextures(true)
 	EncounterJournalNavBarOverlay:StripTextures(true)
-	
-	EncounterJournalNavBar:CreateBackdrop("Transparent")
+		
+	EncounterJournalNavBar:CreateBackdrop("Default")
 	EncounterJournalNavBar.backdrop:Point("TOPLEFT", -2, 0)
 	EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT")
 	T.SkinButton(EncounterJournalNavBarHomeButton, true)
-	
+		
 	T.SkinEditBox(EncounterJournalSearchBox)
 	T.SkinCloseButton(EncounterJournalCloseButton)
-	
+		
 	EncounterJournalInset:StripTextures(true)
 	EncounterJournal:HookScript("OnShow", function()
 		if not EncounterJournalInstanceSelect.backdrop then						
@@ -45,7 +45,7 @@ local function LoadSkin()
 			EncounterJournalInstanceSelect.backdrop:SetTexture(0, 0, 0)
 			EncounterJournalInstanceSelect.backdrop:Point("TOPLEFT", EncounterJournalInstanceSelect.bg, "TOPLEFT", -T.mult*3, T.mult*3)
 			EncounterJournalInstanceSelect.backdrop:Point("BOTTOMRIGHT", EncounterJournalInstanceSelect.bg, "BOTTOMRIGHT", T.mult*3, -T.mult*3)
-			
+				
 			EncounterJournalInstanceSelect.backdrop2 = EncounterJournalInstanceSelect:CreateTexture(nil, "BACKGROUND")
 			EncounterJournalInstanceSelect.backdrop2:SetDrawLayer("BACKGROUND", -2)
 			EncounterJournalInstanceSelect.backdrop2:SetTexture(unpack(C["media"].bordercolor))
@@ -58,14 +58,14 @@ local function LoadSkin()
 			EncounterJournalInstanceSelect.backdrop3:Point("TOPLEFT", EncounterJournalInstanceSelect.bg, "TOPLEFT", -T.mult, T.mult)
 			EncounterJournalInstanceSelect.backdrop3:Point("BOTTOMRIGHT", EncounterJournalInstanceSelect.bg, "BOTTOMRIGHT", T.mult, -T.mult)								
 		end
-		
+
 		if not EncounterJournalEncounterFrameInfo.backdrop then						
 			EncounterJournalEncounterFrameInfo.backdrop = EncounterJournalEncounterFrameInfo:CreateTexture(nil, "BACKGROUND")
 			EncounterJournalEncounterFrameInfo.backdrop:SetDrawLayer("BACKGROUND", -3)
 			EncounterJournalEncounterFrameInfo.backdrop:SetTexture(0, 0, 0)
 			EncounterJournalEncounterFrameInfo.backdrop:Point("TOPLEFT", EncounterJournalEncounterFrameInfoBG, "TOPLEFT", -T.mult*3, T.mult*3)
 			EncounterJournalEncounterFrameInfo.backdrop:Point("BOTTOMRIGHT", EncounterJournalEncounterFrameInfoBG, "BOTTOMRIGHT", T.mult*3, -T.mult*3)
-			
+				
 			EncounterJournalEncounterFrameInfo.backdrop2 = EncounterJournalEncounterFrameInfo:CreateTexture(nil, "BACKGROUND")
 			EncounterJournalEncounterFrameInfo.backdrop2:SetDrawLayer("BACKGROUND", -2)
 			EncounterJournalEncounterFrameInfo.backdrop2:SetTexture(unpack(C["media"].bordercolor))
@@ -82,27 +82,17 @@ local function LoadSkin()
 		EncounterJournalEncounterFrameInfoBossTab:Point("LEFT", EncounterJournalEncounterFrameInfoEncounterTile, "RIGHT", -10, 4)
 		EncounterJournalEncounterFrameInfoLootTab:ClearAllPoints()
 		EncounterJournalEncounterFrameInfoLootTab:Point("LEFT", EncounterJournalEncounterFrameInfoBossTab, "RIGHT", -24, 0)
-		
+			
 		EncounterJournalEncounterFrameInfoBossTab:SetFrameStrata("HIGH")
 		EncounterJournalEncounterFrameInfoLootTab:SetFrameStrata("HIGH")
-		
+			
 		EncounterJournalEncounterFrameInfoBossTab:SetScale(0.75)
 		EncounterJournalEncounterFrameInfoLootTab:SetScale(0.75)
-		
-		EncounterJournalEncounterFrameInfoLootScrollFrameFilter:SetScript("OnShow", function()
-			EncounterJournalEncounterFrameInfoBossTab:ClearAllPoints()
-			EncounterJournalEncounterFrameInfoBossTab:Point("LEFT", EncounterJournalEncounterFrameInfoLootScrollFrameFilter, "RIGHT", 0, 0)	
-			EncounterJournalEncounterFrameInfoEncounterTile:Hide()
-		end)
-
-		EncounterJournalEncounterFrameInfoLootScrollFrameFilter:SetScript("OnHide", function()
-			EncounterJournalEncounterFrameInfoBossTab:ClearAllPoints()
-			EncounterJournalEncounterFrameInfoBossTab:Point("LEFT", EncounterJournalEncounterFrameInfoEncounterTile, "RIGHT", -10, 4)	
-			EncounterJournalEncounterFrameInfoEncounterTile:Show()
-		end)		
 	end)
 		
-	T.SkinScrollBar(EncounterJournalInstanceSelectScrollFrameScrollBar)
+	T.SkinScrollBar(EncounterJournalInstanceSelectScrollFrameScrollBar, 4)
+	T.SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar, 4)
+	T.SkinScrollBar(EncounterJournalEncounterFrameInfoLootScrollFrameScrollBar, 4)
 
 	EncounterJournalEncounterFrameInfoBossTab:GetNormalTexture():SetTexture(nil)
 	EncounterJournalEncounterFrameInfoBossTab:GetPushedTexture():SetTexture(nil)

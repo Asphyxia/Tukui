@@ -4,7 +4,7 @@ local function LoadSkin()
 	InspectFrame:StripTextures(true)
 	InspectFrameInset:StripTextures(true)
 	InspectTalentFramePointsBar:StripTextures()
-	InspectFrame:CreateBackdrop("Transparent")
+	InspectFrame:CreateBackdrop("Default")
 	InspectFrame.backdrop:SetAllPoints()
 	T.SkinCloseButton(InspectFrameCloseButton)
 	
@@ -22,7 +22,7 @@ local function LoadSkin()
 	InspectModelFrameBorderBottom:Kill()
 	InspectModelFrameBorderBottom2:Kill()
 	InspectModelFrameBackgroundOverlay:Kill()
-	InspectModelFrame:CreateBackdrop("Transparent")
+	InspectModelFrame:CreateBackdrop("Default")
 	
 		local slots = {
 			"HeadSlot",
@@ -56,7 +56,7 @@ local function LoadSkin()
 			icon:Point("BOTTOMRIGHT", -2, 2)
 			
 			slot:SetFrameLevel(slot:GetFrameLevel() + 2)
-			slot:CreateBackdrop("Transparent")
+			slot:CreateBackdrop("Default")
 			slot.backdrop:SetAllPoints()
 		end		
 	
@@ -74,7 +74,7 @@ local function LoadSkin()
 	end
 	
 	InspectTalentFrame.bg = CreateFrame("Frame", nil, InspectTalentFrame)
-	InspectTalentFrame.bg:SetTemplate("Transparent")
+	InspectTalentFrame.bg:SetTemplate("Default")
 	InspectTalentFrame.bg:Point("TOPLEFT", InspectTalentFrameBackgroundTopLeft, "TOPLEFT", -2, 2)
 	InspectTalentFrame.bg:Point("BOTTOMRIGHT", InspectTalentFrameBackgroundBottomRight, "BOTTOMRIGHT", -20, 52)
 	InspectTalentFrame.bg:SetFrameLevel(InspectTalentFrame.bg:GetFrameLevel() - 2)
@@ -85,7 +85,7 @@ local function LoadSkin()
 		if button then
 			button:StripTextures()
 			button:StyleButton()
-			button:SetTemplate("Transparent")
+			button:SetTemplate("Default")
 			button.SetHighlightTexture = T.dummy
 			button.SetPushedTexture = T.dummy
 			button:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)

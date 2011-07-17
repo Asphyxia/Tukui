@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	MailFrame:StripTextures(true)
-	MailFrame:CreateBackdrop("Transparent")
+	MailFrame:CreateBackdrop("Default")
 	MailFrame.backdrop:Point("TOPLEFT", 4, 0)
 	MailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
 	MailFrame.backdrop:CreateShadow("Default")
@@ -11,7 +11,7 @@ local function LoadSkin()
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local bg = _G["MailItem"..i]
 		bg:StripTextures()
-		bg:CreateBackdrop("Transparent")
+		bg:CreateBackdrop("Default")
 		bg.backdrop:Point("TOPLEFT", 2, 1)
 		bg.backdrop:Point("BOTTOMRIGHT", -2, 2)
 		
@@ -38,7 +38,7 @@ local function LoadSkin()
 
 	-- send mail
 	SendMailScrollFrame:StripTextures(true)
-	SendMailScrollFrame:SetTemplate("Transparent")
+	SendMailScrollFrame:SetTemplate("Default")
 
 	T.SkinScrollBar(SendMailScrollFrameScrollBar)
 
@@ -77,7 +77,7 @@ local function LoadSkin()
 
 	-- open mail (cod)
 	OpenMailFrame:StripTextures(true)
-	OpenMailFrame:CreateBackdrop("Transparent")
+	OpenMailFrame:CreateBackdrop("Default")
 	OpenMailFrame.backdrop:Point("TOPLEFT", 4, 0)
 	OpenMailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
 	OpenMailFrame.backdrop:CreateShadow("Default")
@@ -88,11 +88,9 @@ local function LoadSkin()
 	T.SkinButton(OpenMailReplyButton)
 	T.SkinButton(OpenMailDeleteButton)
 	T.SkinButton(OpenMailCancelButton)
-	T.SkinButton(OpenAllButton)
-	T.SkinButton(OpenAllButton2)
 
 	OpenMailScrollFrame:StripTextures(true)
-	OpenMailScrollFrame:SetTemplate("Transparent")
+	OpenMailScrollFrame:SetTemplate("Default")
 
 	T.SkinScrollBar(OpenMailScrollFrameScrollBar)
 

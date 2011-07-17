@@ -26,7 +26,7 @@ local function LoadSkin()
 	}
 
 	for i = 1, getn(skins) do
-		_G[skins[i]]:SetTemplate("Transparent")
+		_G[skins[i]]:SetTemplate("Default")
 		if _G[skins[i]] ~= _G["AutoCompleteBox"] then -- frame to blacklist from create shadow function
 			_G[skins[i]]:CreateShadow("Default")
 		end
@@ -50,7 +50,7 @@ local function LoadSkin()
 
 	--LFD Role Picker frame
 	LFDRoleCheckPopup:StripTextures()
-	LFDRoleCheckPopup:SetTemplate("Transparent")
+	LFDRoleCheckPopup:SetTemplate("Default")
 	T.SkinButton(LFDRoleCheckPopupAcceptButton)
 	T.SkinButton(LFDRoleCheckPopupDeclineButton)
 	T.SkinCheckBox(LFDRoleCheckPopupRoleButtonTank:GetChildren())
@@ -72,7 +72,7 @@ local function LoadSkin()
 			_G["StaticPopup"..i.."EditBox"].backdrop:Point("BOTTOMRIGHT", 2, 4)
 			_G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
 			_G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
-			_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Transparent")
+			_G["StaticPopup"..i.."ItemFrame"]:SetTemplate("Default")
 			_G["StaticPopup"..i.."ItemFrame"]:StyleButton()
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
 			_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
@@ -145,8 +145,7 @@ local function LoadSkin()
 		"ReadyCheckFrameNoButton",
 		"StackSplitOkayButton",
 		"StackSplitCancelButton",
-		"RolePollPopupAcceptButton",
-		"InterfaceOptionsHelpPanelResetTutorials",
+		"RolePollPopupAcceptButton"
 	}
 
 	for i = 1, getn(BlizzardButtons) do
@@ -180,9 +179,9 @@ local function LoadSkin()
 	_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
 	_G["StackSplitFrame"]:GetRegions():Hide()
 
-	RolePollPopup:SetTemplate("Transparent")
+	RolePollPopup:SetTemplate("Default")
 	RolePollPopup:CreateShadow("Default")
-	LFDDungeonReadyDialog:SetTemplate("Transparent")
+	LFDDungeonReadyDialog:SetTemplate("Default")
 	LFDDungeonReadyDialog:CreateShadow("Default")
 	T.SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
 	T.SkinButton(LFDDungeonReadyDialogLeaveQueueButton)

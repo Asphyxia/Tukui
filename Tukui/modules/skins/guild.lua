@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	GuildFrame:StripTextures(true)
-	GuildFrame:SetTemplate("Transparent")
+	GuildFrame:SetTemplate("Default")
 	GuildFrame:CreateShadow("Default")
 	GuildLevelFrame:Kill()
 	
@@ -40,8 +40,8 @@ local function LoadSkin()
 		_G[frame]:StripTextures()
 	end
 	
-	GuildNewsBossModel:CreateBackdrop("Transparent")
-	GuildNewsBossModelTextFrame:CreateBackdrop("Transparent")
+	GuildNewsBossModel:CreateBackdrop("Default")
+	GuildNewsBossModelTextFrame:CreateBackdrop("Default")
 	GuildNewsBossModelTextFrame.backdrop:Point("TOPLEFT", GuildNewsBossModel.backdrop, "BOTTOMLEFT", 0, -1)
 	GuildNewsBossModel:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
 	
@@ -93,11 +93,11 @@ local function LoadSkin()
 	GuildXPFrame:ClearAllPoints()
 	GuildXPFrame:Point("TOP", GuildFrame, "TOP", 0, -40)
 	
-	T.SkinScrollBar(GuildPerksContainerScrollBar)
+	T.SkinScrollBar(GuildPerksContainerScrollBar, 4)
 	
 	GuildFactionBar:StripTextures()
 	GuildFactionBar.progress:SetTexture(C["media"].normTex)
-	GuildFactionBar:CreateBackdrop("Transparent")
+	GuildFactionBar:CreateBackdrop("Default")
 	GuildFactionBar.backdrop:Point("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
 	GuildFactionBar.backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", -2, 0)
 	
@@ -108,7 +108,7 @@ local function LoadSkin()
 	GuildXPBarShadow:Kill()
 	GuildXPBarCap:Kill()
 	GuildXPBar.progress:SetTexture(C["media"].normTex)
-	GuildXPBar:CreateBackdrop("Transparent")
+	GuildXPBar:CreateBackdrop("Default")
 	GuildXPBar.backdrop:Point("TOPLEFT", GuildXPBar.progress, "TOPLEFT", -2, 2)
 	GuildXPBar.backdrop:Point("BOTTOMRIGHT", GuildXPBar, "BOTTOMRIGHT", -2, 4)
 	
@@ -116,7 +116,7 @@ local function LoadSkin()
 	GuildLatestPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	GuildLatestPerkButtonIconTexture:ClearAllPoints()
 	GuildLatestPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-	GuildLatestPerkButton:CreateBackdrop("Transparent")
+	GuildLatestPerkButton:CreateBackdrop("Default")
 	GuildLatestPerkButton.backdrop:Point("TOPLEFT", GuildLatestPerkButtonIconTexture, "TOPLEFT", -2, 2)
 	GuildLatestPerkButton.backdrop:Point("BOTTOMRIGHT", GuildLatestPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 	
@@ -124,7 +124,7 @@ local function LoadSkin()
 	GuildNextPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	GuildNextPerkButtonIconTexture:ClearAllPoints()
 	GuildNextPerkButtonIconTexture:Point("TOPLEFT", 2, -2)
-	GuildNextPerkButton:CreateBackdrop("Transparent")
+	GuildNextPerkButton:CreateBackdrop("Default")
 	GuildNextPerkButton.backdrop:Point("TOPLEFT", GuildNextPerkButtonIconTexture, "TOPLEFT", -2, 2)
 	GuildNextPerkButton.backdrop:Point("BOTTOMRIGHT", GuildNextPerkButtonIconTexture, "BOTTOMRIGHT", 2, -2)
 	
@@ -137,7 +137,7 @@ local function LoadSkin()
 			button.icon:SetTexCoord(.08, .92, .08, .92)
 			button.icon:ClearAllPoints()
 			button.icon:Point("TOPLEFT", 2, -2)
-			button:CreateBackdrop("Transparent")
+			button:CreateBackdrop("Default")
 			button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 			button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 			button.icon:SetParent(button.backdrop)
@@ -145,7 +145,7 @@ local function LoadSkin()
 	end
 	
 	--Roster
-	T.SkinScrollBar(GuildRosterContainerScrollBar)
+	T.SkinScrollBar(GuildRosterContainerScrollBar, 5)
 	T.SkinCheckBox(GuildRosterShowOfflineButton)
 	
 	
@@ -160,9 +160,9 @@ local function LoadSkin()
 	end
 	
 	--Detail Frame
-	GuildMemberDetailFrame:SetTemplate("Transparent")
-	GuildMemberNoteBackground:SetTemplate("Transparent")
-	GuildMemberOfficerNoteBackground:SetTemplate("Transparent")
+	GuildMemberDetailFrame:SetTemplate("Default")
+	GuildMemberNoteBackground:SetTemplate("Default")
+	GuildMemberOfficerNoteBackground:SetTemplate("Default")
 	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
 	T.SkinDropDownBox(GuildMemberRankDropdown, 175)
 
@@ -173,7 +173,7 @@ local function LoadSkin()
 	end
 	
 	GuildNewsFiltersFrame:StripTextures()
-	GuildNewsFiltersFrame:SetTemplate("Transparent")
+	GuildNewsFiltersFrame:SetTemplate("Default")
 	T.SkinCloseButton(GuildNewsFiltersFrameCloseButton)
 	
 	for i=1, 7 do
@@ -181,34 +181,34 @@ local function LoadSkin()
 	end
 	
 	GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
-	T.SkinScrollBar(GuildNewsContainerScrollBar)
+	T.SkinScrollBar(GuildNewsContainerScrollBar, 4)
 	
 	--Info Frame
-	T.SkinScrollBar(GuildInfoDetailsFrameScrollBar)
+	T.SkinScrollBar(GuildInfoDetailsFrameScrollBar, 4)
 	
 	for i=1, 3 do
 		_G["GuildInfoFrameTab"..i]:StripTextures()
 	end
 	
 	local backdrop1 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop1:SetTemplate("Transparent")
+	backdrop1:SetTemplate("Default")
 	backdrop1:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop1:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -22)
 	backdrop1:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 200)
 	
 	local backdrop2 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop2:SetTemplate("Transparent")
+	backdrop2:SetTemplate("Default")
 	backdrop2:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop2:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -158)
 	backdrop2:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 118)	
 
 	local backdrop3 = CreateFrame("Frame", nil, GuildInfoFrameInfo)
-	backdrop3:SetTemplate("Transparent")
+	backdrop3:SetTemplate("Default")
 	backdrop3:SetFrameLevel(GuildInfoFrameInfo:GetFrameLevel() - 1)
 	backdrop3:Point("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -233)
 	backdrop3:Point("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 3)	
 	
-	GuildRecruitmentCommentInputFrame:SetTemplate("Transparent")
+	GuildRecruitmentCommentInputFrame:SetTemplate("Default")
 	
 	for _, button in next, GuildInfoFrameApplicantsContainer.buttons do
 		button.selectedTex:Kill()
@@ -217,9 +217,9 @@ local function LoadSkin()
 	end
 	
 	--Text Edit Frame
-	GuildTextEditFrame:SetTemplate("Transparent")
-	T.SkinScrollBar(GuildTextEditScrollFrameScrollBar)
-	GuildTextEditContainer:SetTemplate("Transparent")
+	GuildTextEditFrame:SetTemplate("Default")
+	T.SkinScrollBar(GuildTextEditScrollFrameScrollBar, 5)
+	GuildTextEditContainer:SetTemplate("Default")
 	for i=1, GuildTextEditFrame:GetNumChildren() do
 		local child = select(i, GuildTextEditFrame:GetChildren())
 		if child:GetName() == "GuildTextEditFrameCloseButton" and child:GetWidth() == 32 then
@@ -230,8 +230,8 @@ local function LoadSkin()
 	end
 	
 	--Guild Log
-	T.SkinScrollBar(GuildLogScrollFrameScrollBar)
-	GuildLogFrame:SetTemplate("Transparent")
+	T.SkinScrollBar(GuildLogScrollFrameScrollBar, 4)
+	GuildLogFrame:SetTemplate("Default")
 
 	--Blizzard has two buttons with the same name, this is a fucked up way of determining that it isn't the other button
 	for i=1, GuildLogFrame:GetNumChildren() do
@@ -244,7 +244,10 @@ local function LoadSkin()
 	end
 	
 	--Rewards
-	T.SkinScrollBar(GuildRewardsContainerScrollBar)
+	T.SkinScrollBar(GuildRewardsContainerScrollBar, 5)
+	GuildRewardsContainerScrollBar.thumbbg:ClearAllPoints()
+	GuildRewardsContainerScrollBar.thumbbg:Point('TOPLEFT', GuildRewardsContainerScrollBar:GetThumbTexture(), 'TOPLEFT', 6, -5)
+	GuildRewardsContainerScrollBar.thumbbg:Point('BOTTOMRIGHT', GuildRewardsContainerScrollBar:GetThumbTexture(), 'BOTTOMRIGHT', -6, 5)
 	
 	for i=1, 8 do
 		local button = _G["GuildRewardsContainerButton"..i]
@@ -254,7 +257,7 @@ local function LoadSkin()
 			button.icon:SetTexCoord(.08, .92, .08, .92)
 			button.icon:ClearAllPoints()
 			button.icon:Point("TOPLEFT", 2, -2)
-			button:CreateBackdrop("Transparent")
+			button:CreateBackdrop("Default")
 			button.backdrop:Point("TOPLEFT", button.icon, "TOPLEFT", -2, 2)
 			button.backdrop:Point("BOTTOMRIGHT", button.icon, "BOTTOMRIGHT", 2, -2)
 			button.icon:SetParent(button.backdrop)

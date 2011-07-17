@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	--GLYPHS TAB
-	GlyphFrameSparkleFrame:CreateBackdrop("Transparent")
+	GlyphFrameSparkleFrame:CreateBackdrop("Default")
 	GlyphFrameSparkleFrame.backdrop:Point( "TOPLEFT", GlyphFrameSparkleFrame, "TOPLEFT", 3, -3 )
 	GlyphFrameSparkleFrame.backdrop:Point( "BOTTOMRIGHT", GlyphFrameSparkleFrame, "BOTTOMRIGHT", -3, 3 )
 	T.SkinEditBox(GlyphFrameSearchBox)
@@ -11,6 +11,13 @@ local function LoadSkin()
 	GlyphFrameBackground:SetParent(GlyphFrameSparkleFrame)
 	GlyphFrameBackground:SetPoint("TOPLEFT", 4, -4)
 	GlyphFrameBackground:SetPoint("BOTTOMRIGHT", -4, 4)
+	
+	GlyphFrame.levelOverlay1:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlayText1:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlay2:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlayText2:SetParent(GlyphFrameSparkleFrame)
+
+
 	
 	for i=1, 9 do
 		_G["GlyphFrameGlyph"..i]:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 5)
@@ -43,12 +50,12 @@ local function LoadSkin()
 	GlyphFrameClearInfoFrameIcon:Point("TOPLEFT", 2, -2)
 	GlyphFrameClearInfoFrameIcon:Point("BOTTOMRIGHT", -2, 2)
 	
-	GlyphFrameClearInfoFrame:CreateBackdrop("Transparent", true)
+	GlyphFrameClearInfoFrame:CreateBackdrop("Default", true)
 	GlyphFrameClearInfoFrame.backdrop:SetAllPoints()
 	GlyphFrameClearInfoFrame:StyleButton()
 	GlyphFrameClearInfoFrame:Size(25, 25)
 	
-	T.SkinScrollBar(GlyphFrameScrollFrameScrollBar)
+	T.SkinScrollBar(GlyphFrameScrollFrameScrollBar, 5)
 
 	local StripAllTextures = {
 		"GlyphFrameScrollFrame",

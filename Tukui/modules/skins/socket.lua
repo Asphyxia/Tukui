@@ -2,9 +2,9 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	ItemSocketingFrame:StripTextures()
-	ItemSocketingFrame:SetTemplate("Transparent")
+	ItemSocketingFrame:SetTemplate("Default")
 	ItemSocketingScrollFrame:StripTextures()
-	ItemSocketingScrollFrame:CreateBackdrop("Transparent")
+	ItemSocketingScrollFrame:CreateBackdrop("Default")
 
 	for i = 1, MAX_NUM_SOCKETS  do
 		local button = _G["ItemSocketingSocket"..i]

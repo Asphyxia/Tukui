@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	GuildRegistrarFrame:StripTextures(true)
-	GuildRegistrarFrame:SetTemplate("Transparent")
+	GuildRegistrarFrame:SetTemplate("Default")
 	GuildRegistrarGreetingFrame:StripTextures()
 	T.SkinButton(GuildRegistrarFrameGoodbyeButton)
 	T.SkinButton(GuildRegistrarFrameCancelButton)
