@@ -6,13 +6,16 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C["datatext"].gold and C["datatext"].gold > 0 then
 	local Stat = CreateFrame("Frame")
 	Stat:EnableMouse(true)
-	Stat:SetFrameStrata("HIGH")
+	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+	Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	T.PP(C["datatext"].gold, Text)
 
+	local COPPER_ICON = "|TInterface\\MONEYFRAME\\UI-CopperIcon:0:0:0:-1|t"
+	local SILVER_ICON = "|TInterface\\MONEYFRAME\\UI-SilverIcon:0:0:0:-1|t"
+	local GOLD_ICON = "|TInterface\\MONEYFRAME\\UI-GoldIcon:0:0:0:-1|t"
 	local Profit	= 0
 	local Spent		= 0
 	local OldMoney	= 0
@@ -23,18 +26,18 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		local silver = mod(floor(math.abs(money) / 100), 100)
 		local copper = mod(floor(math.abs(money)), 100)
 		if gold ~= 0 then
-			return format("%s"..L.goldabbrev.." %s"..L.silverabbrev.." %s"..L.copperabbrev, gold, silver, copper)
+			return format("%s"..GOLD_ICON.." %s"..SILVER_ICON.." %s"..COPPER_ICON, gold, silver, copper)
 		elseif silver ~= 0 then
-			return format("%s"..L.silverabbrev.." %s"..L.copperabbrev, silver, copper)
+			return format("%s"..SILVER_ICON.." %s"..COPPER_ICON, silver, copper)
 		else
-			return format("%s"..L.copperabbrev, copper)
+			return format("%s"..COPPER_ICON, copper)
 		end
 	end
 
 	local function FormatTooltipMoney(money)
 		local gold, silver, copper = abs(money / 10000), abs(mod(money / 100, 100)), abs(mod(money, 100))
 		local cash = ""
-		cash = format("%.2d"..L.goldabbrev.." %.2d"..L.silverabbrev.." %.2d"..L.copperabbrev, gold, silver, copper)		
+		cash = format("%.2d"..GOLD_ICON.." %.2d"..SILVER_ICON.." %.2d"..COPPER_ICON, gold, silver, copper)		
 		return cash
 	end	
 
