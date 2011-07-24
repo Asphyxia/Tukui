@@ -53,8 +53,6 @@ function openMail(index)
 		stopOpening("|cffffff00"..L_MAIL_COMPLETE)
 		MiniMapMailFrame:Hide()
 		TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
-		TukuiInfoLeftMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
-		TukuiInfoRightMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
 	end
 end
 
