@@ -20,13 +20,20 @@ for i = 1, 4 do
 	HydraData[i].Status:SetFrameLevel(12)
 	HydraData[i].Status:SetStatusBarTexture(C.media.normTex)
 	HydraData[i].Status:SetMinMaxValues(0, 100)
-	HydraData[i].Status:SetStatusBarColor(0.3, 0.2, 1)
+	
+	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+	if C["datatext"].classcolored then
+		HydraData[i].Status:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
+	else
+	HydraData[i].Status:SetStatusBarColor(0.3, 0.2, 0.8)
+	end
+	
 	HydraData[i].Status:Point("TOPLEFT", HydraData[i], "TOPLEFT", 2, -2)
 	HydraData[i].Status:Point("BOTTOMRIGHT", HydraData[i], "BOTTOMRIGHT", -2, 2)
 
 	HydraData[i].Text = HydraData[i].Status:CreateFontString(nil, "OVERLAY")
 	HydraData[i].Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-	HydraData[i].Text:Point("LEFT", HydraData[i], "LEFT", 6, 1)
+	HydraData[i].Text:Point("LEFT", HydraData[i], "LEFT", 6, 1.5)
 	HydraData[i].Text:SetShadowColor(0, 0, 0)
 	HydraData[i].Text:SetShadowOffset(1.25, -1.25)
 end
@@ -60,7 +67,14 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = GetCVar("MaxFPS")
 		self:SetValue(value)
 		HydraData[1].Text:SetText("FPS: "..value)
-		self:SetStatusBarColor(0.3, 0.2, 1)
+		
+	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+	if C["datatext"].classcolored then
+		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
+	else
+		self:SetStatusBarColor(0.3, 0.2, 0.8)
+	end
+		
 		LastUpdate = 1
 	end
 end)
@@ -75,7 +89,14 @@ HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = 200
 		self:SetValue(value)
 		HydraData[2].Text:SetText("MS: "..value)			
-		self:SetStatusBarColor(0.3, 0.2, 1)
+		
+	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+	if C["datatext"].classcolored then
+		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
+	else
+		self:SetStatusBarColor(0.3, 0.2, 0.8)
+	end
+		
 		LastUpdate = 1
 	end
 end)
@@ -174,7 +195,14 @@ HydraData[4].Status:SetScript("OnEvent", function(self)
 	self:SetMinMaxValues(0, 100)
 	self:SetValue(value)
 	HydraData[4].Text:SetText("Durability: "..value.."%")			
-	self:SetStatusBarColor(0.3, 0.2, 1)
+
+	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+	if C["datatext"].classcolored then
+		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
+	else
+		self:SetStatusBarColor(0.3, 0.2, 0.8)
+	end
+	
 end)
 HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
@@ -219,15 +247,15 @@ for i = 1, GetNumFactions() do
 		
 		frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
 		frame.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		frame.Text:Point("LEFT", frame, "LEFT", 6, 1)
+		frame.Text:Point("LEFT", frame, "LEFT", 6, 2)
 		frame.Text:SetShadowColor(0, 0, 0)
 		frame.Text:SetShadowOffset(1.25, -1.25)
 		frame.Text:SetText(format("%s / %s", min, max))
 		frame.Text:Hide()
 		
 		frame.Name = frame.Status:CreateFontString(nil, "OVERLAY")
-		frame.Name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		frame.Name:Point("LEFT", frame, "LEFT", 6, 1.5)
+		frame.Name:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
+		frame.Name:Point("LEFT", frame, "LEFT", 6, 2)
 		frame.Name:SetShadowColor(0, 0, 0)
 		frame.Name:SetShadowOffset(1.25, -1.25)
 		frame.Name:SetText(name)
@@ -281,7 +309,7 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "RepToggle", TukuiChatBackgroundRight)
-toggle:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -26)
+toggle:CreatePanel(nil, 30, 15, "RIGHT", TukuiTabsRightBackground, "RIGHT", -84, 0)
 toggle:EnableMouse(true)
 toggle:SetFrameStrata("HIGH")
 toggle:SetFrameLevel(10)
@@ -301,7 +329,7 @@ toggle:SetScript("OnEnter", function()
 
 toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1.5)
+toggle.Text:Point("CENTER", toggle, "CENTER", 1, 1)
 toggle.Text:SetText(T.panelcolor.."R")
 
 toggle:SetScript("OnMouseUp", function(self)
@@ -367,7 +395,7 @@ local function updateCurrency()
 
 			frame.Text = frame.Status:CreateFontString(nil, "OVERLAY")
 			frame.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			frame.Text:Point("CENTER", frame, "CENTER", 0, 1.5)
+			frame.Text:Point("CENTER", frame, "CENTER", 0, 2)
 			frame.Text:Width(frame:GetWidth() - 4)
 			frame.Text:SetShadowColor(0, 0, 0)
 			frame.Text:SetShadowOffset(1.25, -1.25)
@@ -410,7 +438,7 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "CurrencyToggle", UIParent)
-toggle:CreatePanel("Default", 53, 17, "BOTTOMRIGHT", TukuiInfoRight, "BOTTOMLEFT", -84, 0)
+toggle:CreatePanel("Default", 53, 20, "LEFT", TukuiInfoLeft, "RIGHT", 30, 0)
 toggle:EnableMouse(true)
 toggle:SetFrameStrata("MEDIUM")
 toggle:SetFrameLevel(2)
