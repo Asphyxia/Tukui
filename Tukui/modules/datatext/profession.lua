@@ -10,7 +10,7 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata("HIGH")
 Stat:SetFrameLevel(3)
 	
-local Text = T.SetFontString(TukuiInfoLeft, C.media.pixelfont, C["datatext"].fontsize)
+local Text = T.SetFontString(TukuiInfoLeft, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 T.PP(C["datatext"].profession, Text)
 
 local function Update(self)

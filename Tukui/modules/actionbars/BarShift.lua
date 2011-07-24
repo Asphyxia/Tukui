@@ -7,7 +7,7 @@ if not C["actionbar"].enable == true then return end
 
 -- used for anchor totembar or shapeshiftbar
 local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
-TukuiShift:SetPoint("TOPLEFT", TukuiChatBackgroundLeft, "BOTTOMRIGHT", 19, 0)
+TukuiShift:SetPoint("BOTTOM", TukuiBar2, "TOP", 0, 12)
 TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
 TukuiShift:SetHeight(T.petbuttonsize/2)
 TukuiShift:SetFrameStrata("MEDIUM")

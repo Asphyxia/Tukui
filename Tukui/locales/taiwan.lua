@@ -20,7 +20,7 @@ if T.client == "zhTW" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "is now |cff298F00online|r"
 	L.chat_ERR_FRIEND_OFFLINE_S = "is now |cffff0000offline|r"
 	
-	L.chat_general = "綜合"
+	L.chat_general = "消息"
 	L.chat_trade = "交易"
 	L.chat_defense = "本地防務"
 	L.chat_recrutment = "公會招募"

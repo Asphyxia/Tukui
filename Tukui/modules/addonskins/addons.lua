@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C.Addon_Skins.background then
 	-- Addons Background (same size as right chat background)
 	local bg = CreateFrame("Frame", "AddonBGPanel", UIParent)
-	bg:CreatePanel("Default", 382, 135, "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -14, 32)
+	bg:CreatePanel("Default", T.InfoLeftRightWidth + 12, 177, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, -6)
 	bg:SetFrameStrata("MEDIUM")
 
 	local bgtab = CreateFrame("Frame", nil, bg)

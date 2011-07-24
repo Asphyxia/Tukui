@@ -47,9 +47,9 @@ AddonSkins_Mod:RegisterSkin("Recount",function(Skin, skin, Layout, layout, confi
 			v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 			v.StatusBar:GetStatusBarTexture():SetVertTile(false)
 			v.LeftText:SetPoint("LEFT", 4, 0)
-			v.LeftText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			v.LeftText:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			v.RightText:SetPoint("RIGHT", -4, 0)
-			v.RightText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			v.RightText:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		end
 	end
 	Recount.SetBarTextures = Recount.UpdateBarTextures

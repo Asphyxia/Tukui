@@ -20,7 +20,7 @@ if T.client == "deDE" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "ist jetzt |cff298F00online|r"
 	L.chat_ERR_FRIEND_OFFLINE_S = "ist jetzt |cffff0000offline|r"
 	
-	L.chat_general = "Allgemein"
+	L.chat_general = "Nachrichten"
 	L.chat_trade = "Handel"
 	L.chat_defense = "LokaleVerteidigung"
 	L.chat_recrutment = "Gildenrekrutierung"

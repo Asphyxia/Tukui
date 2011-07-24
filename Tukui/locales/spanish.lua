@@ -20,7 +20,7 @@ if T.client == "esES" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "is now |cff298F00online|r"
 	L.chat_ERR_FRIEND_OFFLINE_S = "is now |cffff0000offline|r"
 	
-	L.chat_general = "General"
+	L.chat_general = "Mensajes"
 	L.chat_trade = "Comercio"
 	L.chat_defense = "DefensaLocal"
 	L.chat_recrutment = "ReclutamientoHermandad"

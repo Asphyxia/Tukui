@@ -20,7 +20,7 @@ if T.client == "ruRU" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "|cff298F00входит|r"
 	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000выходит|r"
 	
-	L.chat_general = "Общий"
+	L.chat_general = "Сообщения"
 	L.chat_trade = "Торговля"
 	L.chat_defense = "ОборонаЛокальный"
 	L.chat_recrutment = "Гильдии"

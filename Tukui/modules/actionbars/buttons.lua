@@ -163,8 +163,8 @@ local function MoveButtonBar(button, bar)
 if button == TukuiBar5ButtonTop then	
 		local buttontop = TukuiBar5ButtonTop
 		buttontop:ClearAllPoints()
-		buttontop:Size(20, 20)
-		buttontop:Point("TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
+		buttontop:Size(30, 18)
+		buttontop:Point("RIGHT", TukuiTabsRightBackground, "RIGHT", -50, 0)
 		if bar:IsShown() then
 			db.hidebar5 = false
 			
@@ -232,13 +232,13 @@ TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.pixelfont, C["da
 TukuiBar4Button.text:SetPoint("CENTER", 0, 1)
 TukuiBar4Button.text:SetText(T.panelcolor.."Collapse")
 
-local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
-TukuiBar5ButtonTop:CreatePanel(nil, 20, 20, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
-TukuiBar5ButtonTop:Point("TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -3, -4)
+local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", TukuiChatBackgroundRight)
+TukuiBar5ButtonTop:CreatePanel("Transparent", 30, 15, "RIGHT", TukuiTabsRightBackground, "RIGHT", -50, 0)
 TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
 TukuiBar5ButtonTop:SetAlpha(0)
+TukuiBar5ButtonTop:SetFrameStrata("MEDIUM")
 TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
-TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.pixelfont, 10, "MONOCHROMEOUTLINE")
+TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.pixelfont, 12, "MONOCHROMEOUTLINE")
 TukuiBar5ButtonTop.text:Point("CENTER", 1, 1)
 TukuiBar5ButtonTop.text:SetText(T.panelcolor.."-")	
 

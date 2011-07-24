@@ -20,7 +20,7 @@ if T.client == "koKR" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "|cff298F00접속|r했습니다"
 	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000접속종료|r했습니다"
  
-	L.chat_general = "일반"
+	L.chat_general = "위스"
 	L.chat_trade = "거래"
 	L.chat_defense = "수비"
 	L.chat_recrutment = "길드모집"

@@ -5,15 +5,15 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = {0, 0, 0, 1},         	-- default backdrop color of panels
-	["bordercolor"] = {  .125, .125, .125},                    	-- default border color of panels
+	["backdropcolor"] = {0,0,0},         					-- default backdrop color of panels
+	["bordercolor"] = {.125, .125, .125},               -- default border color of panels
 	["blizzardreskin"] = true								-- reskin all Blizzard frames
 }
 
 C["unitframes"] = {
 
 	-- layout
-	["style"] = "Smelly",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3", "Asphyxia4", "Smelly" or "Tukui")
+	["style"] = "Asphyxia3",                           			 	-- unitframe style, choose from ("Asphyxia", "Asphyxia2", "Asphyxia3", "Asphyxia4", "Smelly" or "Tukui")
 
 	-- general options
 	["enable"] = true,                                  		-- do i really need to explain this?
@@ -112,20 +112,17 @@ C["castbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = false,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
-	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
+	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
+	["combat_toggle"] = true,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["addons_toggle"] = true,							-- Toggle buttons for Recount, Omen, Atlasloot, and Encounter journal.
 	["Recount"] = true,									-- Enable Recount Skin
-	["Skada"] = true,									-- Enable Skada Skin
-	["Omen"] = true,									-- Enable Omen Skin
-	["KLE"] = true,										-- Enable KLE Skin
+	["Skada"] = true,										-- Enable Skada Skin
+	["Omen"] = true,										-- Enable Omen Skin
+	["KLE"] = true,											-- Enable KLE Skin
 	["TinyDPS"] = true,									-- Enable TinyDPS Skin
-}
-
-C["DBM_Skin"] = {
-	["barheight"] = 16,									-- Set bar height of timer bars.
-	["barwidth"] = 150,									-- Set bar width of timer bars.
-	["iconsize"] = 20,									-- Change spell icon size.
+	["dxe"] = true,											-- skins DXE
+	["dbm"] = true,											-- skins DBM
+	["bigwigs"] = true,									-- skins BigWigs
 }
 
 C["sCombo"] = {
@@ -171,21 +168,21 @@ C["datatext"] = {
 	["currency"] = 0,                                  -- show your tracked currency on panels
 	["hit"] = 13,                                        -- show hit rating
 	["mastery"] =5,                                    -- show mastery rating
-	["micromenu"] = 15,                                  -- add a micro menu thought datatext
+	["micromenu"] = 0,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
-	["specswitcher"] = 0,								-- show talents on panels
+	["specswitcher"] = 15,								-- show talents on panels
 	["profession"] = 3,									-- show profession
 	
 	-- Color Datatext
 	["classcolored"] = false,							-- classcolored datatext
-	["color"] = {0.1, 0.3, 0.8},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
+	["color"] = {0.5, 0.5, 0.7},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
 
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["bgannouncer"] = true,                			-- enable an announcer mod for BGs.
 	["time24"] = false,                                 -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	["fontsize"] = 10,                                  -- font size for panels.
+	["fontsize"] = 12,                                  -- font size for panels.
 }
 
 C["databars"] = {
@@ -218,7 +215,6 @@ C["chat"] = {
 	["background"] = true,								-- Dont make it false!!!
 }
 
-
 C["nameplate"] = {
 	["enable"] = true,                                  -- enable nice skinned nameplates that fit into tukui
 	["showhealth"] = true,				                -- show health text on nameplate
@@ -227,7 +223,8 @@ C["nameplate"] = {
 	["goodcolor"] = {75/255,  175/255, 76/255},	        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
 	["transitioncolor"] = {218/255, 197/255, 92/255},	-- threat color when gaining threat
-	["trackauras"] = true                					-- player debuffs on nameplates
+	["trackcc"] = true,									--track all CC debuffs
+	["trackdebuffs"] = true,							--track players debuffs only (debuff list derived from classtimer spell list)
 }
 
 C["tooltip"] = {
@@ -241,7 +238,7 @@ C["tooltip"] = {
 C["merchant"] = {
 	["sellgrays"] = true,                               -- automaticly sell grays?
 	["autorepair"] = true,                              -- automaticly repair?
-		["guildrepair"] = true,							-- automatically use guild funds to repair (if available) -- guild repair only if autorepair == true
+	["guildrepair"] = true,							-- automatically use guild funds to repair (if available) -- guild repair only if autorepair == true
 	["sellmisc"] = true,                                -- sell defined items automatically
 }
 

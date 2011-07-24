@@ -37,7 +37,7 @@ local function style(self)
 		Btname:Kill()
 	else
 		Btname:SetAlphaGradient(0,Button:GetWidth())
-		Btname:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		BtName:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 	end
  
 	if not _G[name.."Panel"] then

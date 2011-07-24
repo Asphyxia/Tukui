@@ -50,7 +50,8 @@ local function Local(o)
 	if o == "TukuiConfigUInameplategoodcolor" then o = TukuiL.option_nameplates_goodcolor end
 	if o == "TukuiConfigUInameplatebadcolor" then o = TukuiL.option_nameplates_badcolor end
 	if o == "TukuiConfigUInameplatetransitioncolor" then o = TukuiL.option_nameplates_transitioncolor end
-	if o =="TukuiConfigUInameplatetrackauras" then o = TukuiL.option_nameplates_trackauras end
+	if o =="TukuiConfigUInameplatetrackcc" then o = TukuiL.option_nameplates_trackcc end
+	if o =="TukuiConfigUInameplatetrackdebuffs" then o = TukuiL.option_nameplates_trackdebuffs end
 	
 	-- merchant
 	if o == "TukuiConfigUImerchant" then o = TukuiL.option_merchant end

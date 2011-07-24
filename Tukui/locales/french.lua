@@ -20,7 +20,7 @@ if T.client == "frFR" then
 	L.chat_ERR_FRIEND_ONLINE_SS = "s'est |cff298F00connecté|r"
 	L.chat_ERR_FRIEND_OFFLINE_S = "s'est |cffff0000déconnecté|r"
 	
-	L.chat_general = "Général"
+	L.chat_general = "Whispers"
 	L.chat_trade = "Commerce"
 	L.chat_defense = "DéfenseLocale"
 	L.chat_recrutment = "RecrutementDeGuilde"

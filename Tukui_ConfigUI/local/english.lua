@@ -22,7 +22,8 @@ TukuiL.option_nameplates_combat = "Only show enemy nameplates in-combat"
 TukuiL.option_nameplates_goodcolor = "Good threat color, varies depending if your a tank or dps/heal"
 TukuiL.option_nameplates_badcolor = "Bad threat color, varies depending if your a tank or dps/heal"
 TukuiL.option_nameplates_transitioncolor = "Losing/Gaining threat color"
-TukuiL.option_nameplates_trackauras = "Track buffs/debuffs on namepalte"
+TukuiL.option_nameplates_trackdebuffs = "Track buffs/debuffs on namepalte"
+TukuiL.option_nameplates_trackcc = "Track crowd control times on namepalte"
  
 -- merchant
 TukuiL.option_merchant = "Merchant"

@@ -145,7 +145,8 @@ local function LoadSkin()
 		"ReadyCheckFrameNoButton",
 		"StackSplitOkayButton",
 		"StackSplitCancelButton",
-		"RolePollPopupAcceptButton"
+		"RolePollPopupAcceptButton",
+		"InterfaceOptionsHelpPanelResetTutorials"
 	}
 
 	for i = 1, getn(BlizzardButtons) do

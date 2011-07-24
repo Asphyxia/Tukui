@@ -44,7 +44,7 @@ local function CreateBorder(f, i, o)
 			edgeSize = mult, 
 			insets = { left = mult, right = mult, top = mult, bottom = mult }
 		})
-		border:SetBackdropBorderColor(0,0,0)
+		border:SetBackdropBorderColor(0, 0, 0)
 		f.iborder = border
 	end
 
@@ -183,7 +183,7 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	f:SetFrameStrata("BACKGROUND")
 	f:SetPoint(a1, p, a2, Scale(x), Scale(y))
 	f:SetBackdrop({
-	  bgFile = C["media"].normTex, 
+	  bgFile = C["media"].blank, 
 	  edgeFile = C["media"].blank, 
 	  tile = false, tileSize = 0, edgeSize = mult, 
 	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}

@@ -182,8 +182,8 @@ local function CreateAuraHeader(filter, ...)
 	header:SetAttribute("minHeight", 94)
 	header:SetAttribute("xOffset", -36)
 	header:SetAttribute("wrapYOffset", -68)
-	header:SetAttribute("wrapAfter", 16)
-	header:SetAttribute("maxWraps", 2)
+	header:SetAttribute("wrapAfter", 11)
+	header:SetAttribute("maxWraps", 3)
 	
 	-- look for weapons buffs
 	if filter == "HELPFUL" then

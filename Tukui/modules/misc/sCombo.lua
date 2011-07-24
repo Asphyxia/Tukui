@@ -26,7 +26,7 @@ Anchor:CreateShadow("")
 Anchor:SetMovable(true)
 Anchor:Hide()
 Anchor.text = Anchor:CreateFontString(nil, "OVERLAY")
-Anchor.text:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+Anchor.text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Anchor.text:SetPoint("CENTER")
 Anchor.text:SetText(T.panelcolor.."Move CP-Bar (sCombo)")
 
@@ -37,7 +37,7 @@ for i = 1, 5 do
 	sCombo[i]:CreateShadow("Default")
 	if C.datatext.fontsize == 8 then
 		sCombo[i].text = sCombo[i]:CreateFontString(nil, "OVERLAY")
-		sCombo[i].text:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+		sCombo[i].text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		sCombo[i].text:SetPoint("CENTER")
 		sCombo[i].text:SetText(i)
 	end
@@ -109,7 +109,7 @@ sPowerStatus:Point("TOPLEFT", sPowerBG, "TOPLEFT", 2, -2)
 sPowerStatus:Point("BOTTOMRIGHT", sPowerBG, "BOTTOMRIGHT", -2, 2)
 sPowerStatus.t = sPowerStatus:CreateFontString(nil, "OVERLAY")
 sPowerStatus.t:SetPoint("CENTER")
-sPowerStatus.t:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+sPowerStatus.t:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 sPowerStatus.t:SetShadowOffset(0.5, -0.5)
 sPowerStatus.t:SetShadowColor(0,0,0)
 local color = RAID_CLASS_COLORS[T.myclass]

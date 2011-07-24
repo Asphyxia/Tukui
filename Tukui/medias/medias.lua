@@ -43,11 +43,11 @@ C["media"] = {
 	["asphyxia"] = [[Interface\AddOns\Tukui\medias\textures\asphyxia]], -- UI version logo 
 	
 	-- colors
-	["bordercolor"] = C.general.bordercolor or { 0, 0, 0, 1 }, -- border color of tukui panels
-	["altbordercolor"] = { .125,.125,.125 }, -- alternative border color, mainly for unitframes text panels.
-	["backdropcolor"] = C.general.backdropcolor or {.1,.1,.1,1}, -- background color of tukui panels
+	["bordercolor"] = C.general.bordercolor, -- border color of tukui panels
+	["altbordercolor"] = C.unitframes.bordercolor, -- alternative border color, mainly for unitframes text panels.
+	["backdropcolor"] = C.general.backdropcolor, -- background color of tukui panels
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
-	["statcolor"] = {0.1, 0.3, 0.8}, -- stats color of tukui panels
+	["statcolor"] = {0.5, 0.5, 0.7}, -- stats color of tukui panels
 	
 	-- sound
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],

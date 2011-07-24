@@ -28,7 +28,7 @@ end
 local cbtoggle = CreateFrame("Frame", "CustomTukuiActionBarToggle", UIParent)
 cbtoggle:CreatePanel("Default", 1, 12, "TOPLEFT", custombar, "BOTTOMLEFT", 0, -3)
 cbtoggle.text = T.SetFontString(cbtoggle, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-cbtoggle.text:SetPoint("CENTER", 0, 0)
+cbtoggle.text:SetPoint("CENTER", 0, 1)
 cbtoggle.text:SetText(T.panelcolor.."Close")
 cbtoggle:SetAlpha(0)
 cbtoggle:SetScript("OnEnter", function() cbtoggle:SetAlpha(1) end)

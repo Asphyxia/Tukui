@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C.map.location_panel then return end
-local font, fsize, fstyle = C.media.pixelfont, C.datatext.fontsize, "THINOUTLINE"
+local font, fsize, fstyle = C.media.pixelfont, C.datatext.fontsize, "MONOCHROMEOUTLINE"
 
 local locpanel = CreateFrame("Frame", "TukuiLocationPanel", UIParent)
 locpanel:CreatePanel("Default", 70, 23, "TOP", UIParent, "TOP", 0, -10)

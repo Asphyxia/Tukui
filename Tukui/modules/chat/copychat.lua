@@ -12,12 +12,15 @@ local isf = nil
 
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
-	frame:SetTemplate("Transparent")
-	frame:Width(575)
+	frame:SetTemplate("Default")
+	if T.lowversion then
+		frame:Width(TukuiBar1:GetWidth() + 10)
+	else
+		frame:Width((TukuiBar1:GetWidth() * 2) + 20)
+	end
 	frame:Height(250)
 	frame:SetScale(1)
-	frame:Point("BOTTOM", TukuiBar1, "BOTTOM", 0, 0)
-	frame:CreateShadow("Default")
+	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	frame:Hide()
 	frame:SetFrameStrata("DIALOG")
 

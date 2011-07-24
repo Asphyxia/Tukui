@@ -88,6 +88,8 @@ local function LoadSkin()
 	T.SkinButton(OpenMailReplyButton)
 	T.SkinButton(OpenMailDeleteButton)
 	T.SkinButton(OpenMailCancelButton)
+	T.SkinButton(TakeAll_Button)
+	T.SkinButton(TakeCash_Button)
 
 	OpenMailScrollFrame:StripTextures(true)
 	OpenMailScrollFrame:SetTemplate("Default")

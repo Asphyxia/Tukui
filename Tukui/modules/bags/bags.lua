@@ -396,14 +396,19 @@ function Stuffing:CreateBagFrame(w)
 
 	local function bagUpdate(f, ...)
 		if w == "Bank" then
-			f:Point("BOTTOM", TukuiTabsLeftBackground, "TOP", 0, 3)
+			f:Point("BOTTOM", TukuiTabsLeftBackground, "TOP", 0, 4)
 		else
-			if TukuiBar5 and TukuiBar5:IsShown() then
+			if HasPetUI() then
 				f:ClearAllPoints()
-				f:Point("BOTTOM", TukuiBar5, "TOP", 0, 3)
+				f:Point("BOTTOM", TukuiPetBar, "TOP", 0, 4)
+			elseif UnitHasVehicleUI("player") then
+				f:SetPoint("BOTTOMRIGHT", TukuiChatRight, "TOPRIGHT", 0, 4)
+			elseif TukuiBar5 and TukuiBar5:IsShown() then
+				f:ClearAllPoints()
+				f:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 			elseif not TukuiBar5:IsShown() then
 				f:ClearAllPoints()
-				f:SetPoint("BOTTOM", TukuiTabsRightBackground, "TOP", 0, 3)
+				f:SetPoint("BOTTOM", TukuiTabsRightBackground, "TOP", 0, 4)
 			end
 		end
 	end
@@ -441,7 +446,7 @@ end
 	f.b_close:SetTemplate("Default")
 	f.b_close:SetFrameStrata("HIGH")
 	f.b_text = f.b_close:CreateFontString(nil, "OVERLAY")
-	f.b_text:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+	f.b_text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	f.b_text:SetPoint("CENTER", 0, 0)
 	f.b_text:SetText(T.panelcolor.."Close")
 	f.b_close:SetWidth(f.b_text:GetWidth() + 20)
@@ -525,7 +530,7 @@ function Stuffing:InitBags()
 	detail:Point("TOPLEFT", f, 12, -14)
 	detail:Point("RIGHT",-(16 + 24), 0)
 	detail:SetJustifyH("LEFT")
-	detail:SetText("|cff9999ff" .. L.bags_search)
+	detail:SetText(T.panelcolor.. L.bags_search)
 	editbox:SetAllPoints(detail)
 
 	local gold = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
@@ -622,9 +627,9 @@ function Stuffing:Layout(lb)
 		f = self.frame
 
 		f.gold:SetText(GetMoneyString(GetMoney(), 12))
-		f.editbox:SetFont(C.media.pixelfont, C["datatext"].fontsize)
-		f.detail:SetFont(C.media.pixelfont, C["datatext"].fontsize)
-		f.gold:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+		f.editbox:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		f.detail:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		f.gold:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 
 		f.detail:ClearAllPoints()
 		f.detail:Point("TOPLEFT", f, 12, -10)

@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	GuildFrame:StripTextures(true)
-	GuildFrame:SetTemplate("Default")
+	GuildFrame:SetTemplate("Transparent")
 	GuildFrame:CreateShadow("Default")
 	GuildLevelFrame:Kill()
 	
@@ -40,7 +40,7 @@ local function LoadSkin()
 		_G[frame]:StripTextures()
 	end
 	
-	GuildNewsBossModel:CreateBackdrop("Default")
+	GuildNewsBossModel:CreateBackdrop("Transparent")
 	GuildNewsBossModelTextFrame:CreateBackdrop("Default")
 	GuildNewsBossModelTextFrame.backdrop:Point("TOPLEFT", GuildNewsBossModel.backdrop, "BOTTOMLEFT", 0, -1)
 	GuildNewsBossModel:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
@@ -160,7 +160,7 @@ local function LoadSkin()
 	end
 	
 	--Detail Frame
-	GuildMemberDetailFrame:SetTemplate("Default")
+	GuildMemberDetailFrame:SetTemplate("Transparent")
 	GuildMemberNoteBackground:SetTemplate("Default")
 	GuildMemberOfficerNoteBackground:SetTemplate("Default")
 	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
@@ -173,7 +173,7 @@ local function LoadSkin()
 	end
 	
 	GuildNewsFiltersFrame:StripTextures()
-	GuildNewsFiltersFrame:SetTemplate("Default")
+	GuildNewsFiltersFrame:SetTemplate("Transparent")
 	T.SkinCloseButton(GuildNewsFiltersFrameCloseButton)
 	
 	for i=1, 7 do
@@ -217,12 +217,12 @@ local function LoadSkin()
 	end
 	
 	--Text Edit Frame
-	GuildTextEditFrame:SetTemplate("Default")
+	GuildTextEditFrame:SetTemplate("Transparent")
 	T.SkinScrollBar(GuildTextEditScrollFrameScrollBar, 5)
 	GuildTextEditContainer:SetTemplate("Default")
 	for i=1, GuildTextEditFrame:GetNumChildren() do
 		local child = select(i, GuildTextEditFrame:GetChildren())
-		if child:GetName() == "GuildTextEditFrameCloseButton" and child:GetWidth() == 32 then
+		if child:GetName() == "GuildTextEditFrameCloseButton" and child:GetWidth() < 33 then
 			T.SkinCloseButton(child)
 		elseif child:GetName() == "GuildTextEditFrameCloseButton" then
 			T.SkinButton(child, true)
@@ -231,12 +231,12 @@ local function LoadSkin()
 	
 	--Guild Log
 	T.SkinScrollBar(GuildLogScrollFrameScrollBar, 4)
-	GuildLogFrame:SetTemplate("Default")
+	GuildLogFrame:SetTemplate("Transparent")
 
 	--Blizzard has two buttons with the same name, this is a fucked up way of determining that it isn't the other button
 	for i=1, GuildLogFrame:GetNumChildren() do
 		local child = select(i, GuildLogFrame:GetChildren())
-		if child:GetName() == "GuildLogFrameCloseButton" and child:GetWidth() == 32 then
+		if child:GetName() == "GuildLogFrameCloseButton" and child:GetWidth() < 33 then
 			T.SkinCloseButton(child)
 		elseif child:GetName() == "GuildLogFrameCloseButton" then
 			T.SkinButton(child, true)
@@ -245,9 +245,6 @@ local function LoadSkin()
 	
 	--Rewards
 	T.SkinScrollBar(GuildRewardsContainerScrollBar, 5)
-	GuildRewardsContainerScrollBar.thumbbg:ClearAllPoints()
-	GuildRewardsContainerScrollBar.thumbbg:Point('TOPLEFT', GuildRewardsContainerScrollBar:GetThumbTexture(), 'TOPLEFT', 6, -5)
-	GuildRewardsContainerScrollBar.thumbbg:Point('BOTTOMRIGHT', GuildRewardsContainerScrollBar:GetThumbTexture(), 'BOTTOMRIGHT', -6, 5)
 	
 	for i=1, 8 do
 		local button = _G["GuildRewardsContainerButton"..i]
