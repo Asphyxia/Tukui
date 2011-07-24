@@ -239,7 +239,8 @@ oUF:Factory(function(self)
 	'initial-width', T.Scale(150*T.raidscale),
 	'initial-height', T.Scale(32*T.raidscale),	
 	"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-4))
-	raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
+	--raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
+	raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0, 100)
 	
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 

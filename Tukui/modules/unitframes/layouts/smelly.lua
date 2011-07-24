@@ -98,7 +98,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 		
-		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		health.value:Point("RIGHT", health, "RIGHT", -4, 3)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -142,7 +142,7 @@ local function Shared(self, unit)
 		local PowerBorder = CreateFrame("Frame", nil, power)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		PowerBorder:SetTemplate("Thin")
+		PowerBorder:SetTemplate("Default")
 		--PowerBorder:CreateShadow("Default")
 		--PowerBorder.shadow:Point("TOPLEFT", -3, 0)
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
@@ -153,7 +153,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health,font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		power.value:Point("LEFT", health, "LEFT", 6, 3)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -185,7 +185,7 @@ local function Shared(self, unit)
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 			Name:SetJustifyH("CENTER")
-			Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			Name:SetShadowColor(0, 0, 0)
 			Name:SetShadowOffset(1.25, -1.25)
 			self.Name = Name
@@ -276,9 +276,9 @@ local function Shared(self, unit)
 			FlashInfo = CreateFrame("Frame", "TukuiFlashInfo", self)
 			FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 			FlashInfo.parent = self
-			FlashInfo:SetAllPoints(panel)
-			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			FlashInfo.ManaLevel:SetPoint("CENTER", panel, "CENTER", 0, 0)
+			FlashInfo:SetAllPoints(health)
+			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
+			FlashInfo.ManaLevel:SetPoint("CENTER", health, "CENTER", 0, 1)
 			self.FlashInfo = FlashInfo
 			
 			-- pvp status icon
@@ -360,7 +360,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -27, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -380,7 +380,7 @@ local function Shared(self, unit)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+			toggle.Text:Point("CENTER", toggle, "CENTER", 1, 1)
 			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
 			toggle:SetScript("OnMouseUp", function(self) 
 			Experience:Animate(0, 100, 0.4)
@@ -435,7 +435,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 17, "RIGHT", TukuiInfoRight, "LEFT", -27, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -455,7 +455,7 @@ local function Shared(self, unit)
 
 			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
 			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 1)
+			toggle.Text:Point("CENTER", toggle, "CENTER", 1, 1)
 			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
 			toggle:SetScript("OnMouseUp", function(self) 
 			Reputation:Animate(0, 100, 0.4)
@@ -672,7 +672,7 @@ local function Shared(self, unit)
 			local Name = health:CreateFontString(nil, "OVERLAY")
 			Name:Point("LEFT", health, "LEFT", 4, 3)
 			Name:SetJustifyH("LEFT")
-			Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			Name:SetShadowOffset(1.25, -1.25)
 
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
@@ -751,7 +751,6 @@ local function Shared(self, unit)
 		
 		-- cast bar for player and target
 		if (C["unitframes"].unitcastbar == true) then
-			-- castbar of player and target
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
 			
@@ -761,19 +760,19 @@ local function Shared(self, unit)
 			castbar.bg:SetVertexColor(.05, .05, .05)
 			if unit == "player" then
 				if C["unitframes"].cbicons == true then
-					castbar:SetWidth(TukuiPetBar:GetWidth() - 4)
+					castbar:SetWidth(TukuiBar1:GetWidth() - 31)
 				else
-					castbar:SetWidth(TukuiPetBar:GetWidth() - 4)
+					castbar:SetWidth(TukuiBar1:GetWidth() - 4)
 				end
-				castbar:SetHeight(17)
-				castbar:Point("BOTTOM", TukuiPetBar, "TOP", 0, 7)
+				castbar:SetHeight(20)
+				castbar:Point("BOTTOMRIGHT", TukuiBar1, "TOPRIGHT", -2, 5)
 			elseif unit == "target" then
 				if C["unitframes"].cbicons == true then
-					castbar:SetWidth(246 - 27)
+					castbar:SetWidth(246 - 40)
 				else
 					castbar:SetWidth(246)
 				end
-				castbar:SetHeight(17)
+				castbar:SetHeight(20)
 				castbar:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, -8)
 			end
 			castbar:SetFrameLevel(6)
@@ -809,7 +808,7 @@ local function Shared(self, unit)
 			
 			if C["unitframes"].cbicons == true then
 				castbar.button = CreateFrame("Frame", nil, castbar)
-				castbar.button:Size(22)
+				castbar.button:Size(24)
 				castbar.button:SetTemplate("Default")
 				castbar.button:CreateShadow("Default")
 				castbar.button:SetPoint("RIGHT",castbar,"LEFT", -5, 0)
@@ -836,7 +835,7 @@ local function Shared(self, unit)
 		-- add combat feedback support
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
-			CombatFeedbackText = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			CombatFeedbackText = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			CombatFeedbackText:SetPoint("CENTER", 0, 1)
 			CombatFeedbackText.colors = {
 				DAMAGE = {0.69, 0.31, 0.31},
@@ -936,15 +935,7 @@ local function Shared(self, unit)
 		if C["unitframes"].showsmooth == true then
 			health.Smooth = true
 		end
-		
-		-- Unitframe Lines
-		-- Creating an Invisible Line To Anchor Player and Target Frames Properly.
-		local line1 = CreateFrame("Frame", "Tukuiline1", TukuiTargetTarget)
-		Tukuiline1:CreatePanel(line1, 1, 1, "CENTER", health, "CENTER", 0, 0)
-		line1:SetFrameLevel(0)
-		line1:SetAlpha(0)
-		
-			
+					
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(3)
@@ -957,7 +948,7 @@ local function Shared(self, unit)
 		local PowerBorder = CreateFrame("Frame", nil, power)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		PowerBorder:SetTemplate("Thin")
+		PowerBorder:SetTemplate("Default")
 		--PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
@@ -996,7 +987,7 @@ local function Shared(self, unit)
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
 		Name:SetPoint("CENTER", health, "CENTER", 2, 4)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		self.Name = Name
@@ -1117,7 +1108,7 @@ local function Shared(self, unit)
 			local PowerBorder = CreateFrame("Frame", nil, power)
 			PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 			PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-			PowerBorder:SetTemplate("Thin")
+			PowerBorder:SetTemplate("Default")
 			--PowerBorder:CreateShadow("Default")
 			PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 			self.PowerBorder = PowerBorder
@@ -1129,7 +1120,7 @@ local function Shared(self, unit)
 		-- Unit name
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", self.Health, "CENTER", 1, 5)
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetJustifyH("CENTER")
 		Name:SetShadowOffset(1.25, -1.25)
 
@@ -1183,7 +1174,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 4)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1218,7 +1209,7 @@ local function Shared(self, unit)
 		local PowerBorder = CreateFrame("Frame", nil, power)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		PowerBorder:SetTemplate("Thin")
+		PowerBorder:SetTemplate("Default")
 		--PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
@@ -1234,7 +1225,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 4)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1246,7 +1237,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 3)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1349,7 +1340,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 4)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1384,7 +1375,7 @@ local function Shared(self, unit)
 		local PowerBorder = CreateFrame("Frame", nil, power)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		PowerBorder:SetTemplate("Thin")
+		PowerBorder:SetTemplate("Default")
 		--PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
@@ -1400,7 +1391,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 4)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1412,7 +1403,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 3)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1518,7 +1509,7 @@ local function Shared(self, unit)
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(0, 0, 0)
 
-		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		health.value:Point("LEFT", 2, 3)
 		health.PostUpdate = T.PostUpdateHealth
 				
@@ -1553,7 +1544,7 @@ local function Shared(self, unit)
 		local PowerBorder = CreateFrame("Frame", nil, power)
 		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-		PowerBorder:SetTemplate("Thin")
+		PowerBorder:SetTemplate("Default")
 		--PowerBorder:CreateShadow("Default")
 		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 		self.PowerBorder = PowerBorder
@@ -1569,7 +1560,7 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		power.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		power.value:Point("RIGHT", -2, 3)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
@@ -1581,7 +1572,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 3)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
@@ -1762,7 +1753,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 		Name:SetJustifyH("CENTER")
-		Name:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
@@ -1795,16 +1786,16 @@ target:Size(246, 44)
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
 if T.lowversion then
-	tot:SetPoint("RIGHT", target, "LEFT", -69, 10)
+	tot:SetPoint("TOPRIGHT", target, "BOTTOMLEFT", 0, -2)
 	tot:Size(186, 18)
 else
-	tot:SetPoint("RIGHT", target, "LEFT", -69, 10)
+	tot:SetPoint("TOPRIGHT", target, "BOTTOMLEFT", 0, -2)
 	tot:Size(129, 36)
 end
 
 -- pet
 local pet = oUF:Spawn('pet', "TukuiPet")
-	pet:SetPoint("LEFT", player, "RIGHT", 70, -30)
+	pet:SetPoint("TOPLEFT", player, "BOTTOMRIGHT", 0, -2)
 	pet:Size(129, 36)
 
 -- focus
@@ -1900,7 +1891,7 @@ local function Update(self, elapsed)
   TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
 
 	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
-		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, -2)
+		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, 0)
 	end
     TimeSinceLastUpdate = 0
 end
@@ -1929,3 +1920,35 @@ do
 	UnitPopupMenus["FOCUS"] = { "RAID_TARGET_ICON", "CANCEL" }
 	UnitPopupMenus["BOSS"] = { "RAID_TARGET_ICON", "CANCEL" }
 end
+
+local moveUFs = CreateFrame("Frame")
+moveUFs:RegisterEvent("PLAYER_ENTERING_WORLD")
+moveUFs:RegisterEvent("UNIT_NAME_UPDATE")
+moveUFs:RegisterEvent("RAID_ROSTER_UPDATE")
+moveUFs:RegisterEvent("RAID_TARGET_UPDATE")
+moveUFs:RegisterEvent("PARTY_MEMBERS_CHANGED")
+moveUFs:SetScript("OnEvent", function(self)
+	if not IsAddOnLoaded("Tukui_Raid_Healing") then return end
+
+	if TukuiGrid:IsVisible() then
+		TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13) + 2)
+		TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13) + 2)
+		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing+1, T.buttonspacing)
+		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing+1, -T.buttonspacing)
+		player:ClearAllPoints()
+		target:ClearAllPoints()
+		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -100, 70)
+		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 100, 70)
+		tot:SetAlpha(1)
+	else
+		TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
+		TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
+		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
+		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing, -T.buttonspacing)
+		player:ClearAllPoints()
+		target:ClearAllPoints()
+		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -100, 70)
+		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 100, 70)
+		tot:SetAlpha(1)
+	end
+end)

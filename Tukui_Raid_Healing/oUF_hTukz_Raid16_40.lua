@@ -283,7 +283,7 @@ end
 
   -- switch layout
 	local swlicon = CreateFrame("Frame", "TukuiSwitchLayoutIcon", UIParent)
-	swlicon:CreatePanel("Default", 20, 20, "LEFT", TukuiInfoLeft, "RIGHT", 3, 0)
+	swlicon:CreatePanel("Default", 20, 20, "LEFT", TukuiInfoLeft, "RIGHT", 8, 0)
 	swlicon:SetFrameStrata("BACKGROUND")
 	swlicon:SetFrameLevel(2)
 	swlicon:CreateShadow("Hydra")
@@ -342,7 +342,8 @@ oUF:Factory(function(self)
 			"columnSpacing", T.Scale(3),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
+		--raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
+		raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0, 75)
 		
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
