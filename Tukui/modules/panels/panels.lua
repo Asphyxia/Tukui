@@ -64,7 +64,7 @@ TukuiBar7:SetAlpha(0)
 TukuiBar7:SetBackdrop(nil)
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
-petbg:CreatePanel("Invisible", (T.petbuttonsize * 10) + (T.petbuttonspacing * 9), T.petbuttonsize, "BOTTOM", TukuiBar1, "TOP", 0, 5)
+petbg:CreatePanel("Invisible", (T.petbuttonsize * 10) + (T.petbuttonspacing * 9), T.petbuttonsize, "BOTTOM", TukuiBar5, "TOP", 0, 4)
 petbg:SetBackdrop(nil)
 
 local ltpetbg1 = CreateFrame("Frame", "TukuiLineToPetActionBarBackground", petbg)
@@ -178,96 +178,70 @@ if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0)
 
 -- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
-ileft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "LEFT", ltoabl, "LEFT", 2 - movechat, -10)
---ileft:SetFrameLevel(2)
+ileft:CreatePanel("Overlay", T.InfoLeftRightWidth, 20, "LEFT", ltoabl, "LEFT", 14 - movechat, 0)
+ileft:SetFrameLevel(2)
+ileft:SetFrameStrata("BACKGROUND")
 ileft:CreateShadow("Default")
-ileft:SetFrameStrata("MEDIUM")
+ileft.Status = CreateFrame( "StatusBar", "TukuiInfoLeftStatus", ileft )
+ileft.Status:SetFrameLevel(2)
+ileft.Status:SetStatusBarTexture( C["media"].normTex )
+ileft.Status:SetStatusBarColor(.150, .150, .150)
+ileft.Status:Point( "TOPLEFT", ileft, "TOPLEFT", 2, -2 )
+ileft.Status:Point( "BOTTOMRIGHT", ileft, "BOTTOMRIGHT", -2, 2 )
 
 -- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "TukuiInfoRight", TukuiBar1)
-iright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "RIGHT", ltoabr, "RIGHT", -2 + movechat, -11)
+iright:CreatePanel("Overlay", T.InfoLeftRightWidth, 20, "RIGHT", ltoabr, "RIGHT", -14 + movechat, 0)
 iright:SetFrameLevel(2)
+iright:SetFrameStrata("BACKGROUND")
 iright:CreateShadow("Default")
-iright:SetFrameStrata("MEDIUM")
+iright.Status = CreateFrame( "StatusBar", "TukuiInfoRightStatus", iright )
+iright.Status:SetFrameLevel(2)
+iright.Status:SetStatusBarTexture( C["media"].normTex )
+iright.Status:SetStatusBarColor(.150, .150, .150)
+iright.Status:Point( "TOPLEFT", iright, "TOPLEFT", 2, -2 )
+iright.Status:Point( "BOTTOMRIGHT", iright, "BOTTOMRIGHT", -2, 2 )
 
--- Alpha horizontal lines because all panels is dependent on this frame.
-ltoabl:SetAlpha(0)
-ltoabr:SetAlpha(0)
-
--- CHAT BG LEFT
-local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 113, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, 21)
-chatleftbg:CreateShadow("Default")
+	-- Alpha horizontal lines because all panels is dependent on this frame.
+	ltoabl:SetAlpha(0)
+	ltoabr:SetAlpha(0)
 	
--- CHAT BG RIGHT
-local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 113, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, 21)
-chatrightbg:CreateShadow("default")
+	-- CHAT BG LEFT
+	local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
+	chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 177, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, -6)
+	chatleftbg:CreateShadow("")
+
+	-- CHAT BG RIGHT
+	local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
+	chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 177, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, -6)
+	chatrightbg:CreateShadow("")
 	
--- LEFT TAB PANEL
-local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
-tabsbgleft:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(4))
-tabsbgleft:SetFrameLevel(1)
-tabsbgleft:SetFrameStrata("BACKGROUND")
-tabsbgleft:CreateShadow("")
-
--- RIGHT TAB PANEL
-local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiChatBackgroundRight)
-tabsbgright:CreatePanel("Default", T.InfoLeftRightWidth + 12, 17, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(4))
-tabsbgright:SetFrameLevel(1)
-tabsbgright:SetFrameStrata("BACKGROUND")
-tabsbgright:CreateShadow("")
-
--- CHAT ANIMATION
-local chat = {"TukuiChatBackgroundLeft", "TukuiChatBackgroundRight"}
-local info = {"TukuiInfoLeft", "TukuiInfoRight", "TukuiInfoLeftBattleGround"}
-
-for i = 1, #chat do
-	_G[chat[i]]:Animate(0, -140, 0.4)
+	-- LEFT TAB PANEL
+	local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiChatBackgroundLeft)
+	tabsbgleft:CreatePanel("Overlay", T.InfoLeftRightWidth, 20, "TOP", chatleftbg, "TOP", 0, -6)
+	tabsbgleft:SetFrameLevel(2)
+	tabsbgleft:SetFrameStrata("BACKGROUND")
+	tabsbgleft:CreateShadow("Default")
+	tabsbgleft.Status = CreateFrame( "StatusBar", "TukuiTabsLeftStatus", tabsbgleft )
+	tabsbgleft.Status:SetFrameLevel( 2 )
+	tabsbgleft.Status:SetStatusBarTexture( C["media"].normTex )
+	tabsbgleft.Status:SetStatusBarColor(.125, .125, .125)
+	tabsbgleft.Status:Point( "TOPLEFT", tabsbgleft, "TOPLEFT", 2, -2 )
+	tabsbgleft.Status:Point( "BOTTOMRIGHT", tabsbgleft, "BOTTOMRIGHT", -2, 2 )
+		
+	-- RIGHT TAB PANEL
+	local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiChatBackgroundRight)
+	tabsbgright:CreatePanel("Overlay", T.InfoLeftRightWidth, 20, "TOP", chatrightbg, "TOP", 0, -6)
+	tabsbgright:SetFrameLevel(2)
+	tabsbgright:SetFrameStrata("BACKGROUND")
+	tabsbgright:CreateShadow("Default")
+	tabsbgright.Status = CreateFrame( "StatusBar", "TukuiTabsRightStatus", tabsbgright )
+	tabsbgright.Status:SetFrameLevel( 2 )
+	tabsbgright.Status:SetStatusBarTexture( C["media"].normTex )
+	tabsbgright.Status:SetStatusBarColor(.125, .125, .125)
+	tabsbgright.Status:Point( "TOPLEFT", tabsbgright, "TOPLEFT", 2, -2 )
+	tabsbgright.Status:Point( "BOTTOMRIGHT", tabsbgright, "BOTTOMRIGHT", -2, 2 )
 	
-	_G[info[i]]:EnableMouse(true)
-	_G[info[i]]:SetScript("OnMouseDown", function(self)
-		if _G[chat[i]]:IsVisible() then
-			_G[chat[i]]:SlideOut()
-		else
-			_G[chat[i]]:SlideIn()
-		end
-	end)
-end
-
--- COLOR INFO LEFT SHADOW IF WE HAVE A WHISPER
-local function ChatAlertSys(self)
-	local HydraChatAlert = CreateFrame("Frame")
-	HydraChatAlert:RegisterEvent("CHAT_MSG_BN_WHISPER")
-	HydraChatAlert:RegisterEvent("CHAT_MSG_WHISPER")
-	HydraChatAlert:RegisterEvent("CHAT_MSG_GUILD")
-	HydraChatAlert:RegisterEvent("CHAT_MSG_PARTY")
-	HydraChatAlert:SetScript("OnEvent", function(HydraChatAlert, event, msg)
-		if event == "CHAT_MSG_WHISPER" then
-			TukuiInfoLeft.shadow:SetBackdropBorderColor(ChatTypeInfo["WHISPER"].r,ChatTypeInfo["WHISPER"].g,ChatTypeInfo["WHISPER"].b, 0.8)
-		elseif event == "CHAT_MSG_BN_WHISPER" then
-			TukuiInfoLeft.shadow:SetBackdropBorderColor(ChatTypeInfo["BN_WHISPER"].r,ChatTypeInfo["BN_WHISPER"].g,ChatTypeInfo["BN_WHISPER"].b, 0.8)
-		end
-	end)
-end
-
-local LastUpdate = 1
-local ChatAlert = CreateFrame("Frame")
-
-local function UpdateChatAlert(self, elapsed)
-	LastUpdate = LastUpdate - elapsed
-	
-	if LastUpdate < 0 then
-		if not TukuiChatBackgroundLeft:IsVisible() then
-			ChatAlertSys()
-		elseif TukuiChatBackgroundLeft:IsVisible() then
-			TukuiInfoLeft.shadow:SetBackdropBorderColor(0,0,0,0.5)
-		end
-		LastUpdate = 1
-	end
-end
-ChatAlert:SetScript("OnUpdate", UpdateChatAlert)
-
 --[[
 if TukuiMinimap then
 	local minimapstatsleft = CreateFrame("Frame", "TukuiMinimapStatsLeft", TukuiMinimap)
@@ -280,19 +254,19 @@ end
 
 --RE-ANCHOR BAR5 & PETBAR ABOVE RIGHT CHAT
 TukuiBar5:ClearAllPoints()
-TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 5)
+TukuiBar5:Point("BOTTOM", chatrightbg, "TOP", 0, 4)
 
 petbg:ClearAllPoints()
-petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5)
+petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 
-TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
-TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar1, "TOP", 0, 5) end)
+TukuiBar5:SetScript("OnHide", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", chatrightbg, "TOP", 0, 4) end)
+TukuiBar5:SetScript("OnShow", function() petbg:ClearAllPoints() petbg:Point("BOTTOM", TukuiBar5, "TOP", 0, 4) end)
 
 --REPOSITION BAR5 & PETBAR (if chat right is not visible)
 local function UpdateBar5()
 	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
-		TukuiBar5:Point("BOTTOM", tabsbgright, "TOP", 0, 4)
+		TukuiBar5:Point("BOTTOM", chatrightbg, "TOP", 0, 4)
 	else
 		TukuiBar5:Point("BOTTOM", iright, "TOP", 0, 4)
 	end	
@@ -300,14 +274,13 @@ end
 
 CreateFrame("Frame"):SetScript("OnUpdate", UpdateBar5)
 
---[[
 local function UpdatePetbar()
 	if InCombatLockdown() then return end
 	if TukuiChatBackgroundRight:IsVisible() then
 		if TukuiBar5:IsVisible() then
 			TukuiPetBar:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
 		else
-			TukuiPetBar:Point("BOTTOM", tabsbgright, "TOP", 0, 4)
+			TukuiPetBar:Point("BOTTOM", chatrightbg, "TOP", 0, 4)
 		end
 	else
 		if TukuiBar5:IsVisible() then
@@ -318,7 +291,6 @@ local function UpdatePetbar()
 	end
 end
 CreateFrame("Frame"):SetScript("OnUpdate", UpdatePetbar)
---]]
 	
 --BATTLEGROUND STATS FRAME
 if C["datatext"].battleground == true then

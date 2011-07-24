@@ -24,18 +24,20 @@ local function chatsetup()
 		local chatName = FCF_GetChatWindowInfo(chatFrameId)
 		
 		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth + 1, 111)
+		frame:Size(T.InfoLeftRightWidth -5, 116)
 		
 		-- tell wow that we are using new size
-		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
+		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth -5), T.Scale(116))
 		
 		-- move general bottom left or Loot (if found) on right
 		if i == 1 then
 			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-		elseif i == 4 and chatName == LOOT then
+			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 5, 6)
+			frame:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", -5, 6)
+		elseif i == 4 and chatName == (LOOT.." & "..TRADE) then
 			frame:ClearAllPoints()
-			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+			frame:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 5, 6)
+			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", -5, 6)
 		end
 				
 		-- save new default position and dimension
@@ -45,23 +47,23 @@ local function chatsetup()
 		FCF_SetChatWindowFontSize(nil, frame, 12)
 		
 	-- rename windows general and combat log
-		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
-		if i == 2 then FCF_SetWindowName(frame, "Log") end
+		if i == 1 then FCF_SetWindowName(frame, "General Chat") end
+		if i == 2 then FCF_SetWindowName(frame, " Combat Log") end
+		
+		if i == 4 then FCF_SetWindowName(frame, LOOT.." & "..TRADE) end
 	end
 	
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
 	ChatFrame_RemoveChannel(ChatFrame1, L.chat_trade) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
+	ChatFrame_AddChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
+	ChatFrame_AddChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
+	ChatFrame_AddChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
+	ChatFrame_AddChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
 	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
 	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
 	ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
-	ChatFrame_AddMessageGroup(ChatFrame1, "WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_SAY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_EMOTE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_YELL")
@@ -84,16 +86,17 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
 	ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
 	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
 				
 	-- Setup the spam chat frame
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-	ChatFrame_AddChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_WHISPER")
+	ChatFrame_AddMessageGroup(ChatFrame3, "BN_CONVERSATION")
+	ChatFrame_AddMessageGroup(ChatFrame3, "WHISPER")
 			
 	-- Setup the right chat
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
@@ -102,6 +105,8 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
 	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
 	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "GUILD_ACHIEVEMENT")
+	ChatFrame_RemoveChannel(ChatFrame4, L.chat_trade) -- erf, it seem we need to localize this now
 			
 	-- enable classcolor automatically on login and on each character without doing /configure each time.
 	ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -124,6 +129,12 @@ local function chatsetup()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+
+	-- Chat Colors
+	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255) -- General
+	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255) -- Trade
+	ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255) -- Local Defense
+	ChangeChatColor("CHANNEL4", 255/255, 255/255, 1/255) -- LFG
 end
 
 local function cvarsetup()
@@ -134,10 +145,12 @@ local function cvarsetup()
 	SetCVar("screenshotQuality", 10)
 	SetCVar("chatMouseScroll", 1)
 	SetCVar("chatStyle", "im")
+	SetCVar("chatBubbles", 1)	
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("ConversationMode", "inline")
 	SetCVar("showTutorials", 0)
 	SetCVar("showNewbieTips", 0)
+	SetCVar("showGameTips", 0)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
 	SetCVar("UberTooltips", 1)
@@ -145,47 +158,19 @@ local function cvarsetup()
 	SetCVar("showVKeyCastbar", 1)
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
+	SetCVar("nameplateShowFriends", 0)
+	SetCVar("nameplateShowFriendlyPets", 0)
+	SetCVar("nameplateShowFriendlyGuardians", 0)
+	SetCVar("nameplateShowFriendlyTotems", 0)
+	SetCVar("nameplateShowEnemies", 1)
+	SetCVar("nameplateShowEnemyPets", 1)
+	SetCVar("nameplateShowEnemyGuardians", 1)
+	SetCVar("nameplateShowEnemyTotems", 1)	
 	SetCVar("showArenaEnemyFrames", 0)
-	
-	-- setting this the creator or tukui only, because a lot of people don't like this.		
-	if T.myname == "Tukz" then
-		SetCVar("Maxfps", 120)
-		SetCVar("autoDismountFlying", 1)
-		SetCVar("secureAbilityToggle", 0)
-		SetCVar("colorblindMode", 0)
-		SetCVar("showLootSpam", 1)
-		SetCVar("guildMemberNotify", 1)
-		SetCVar("chatBubblesParty", 0)
-		SetCVar("chatBubbles", 0)	
-		SetCVar("UnitNameOwn", 0)
-		SetCVar("UnitNameNPC", 0)
-		SetCVar("UnitNameNonCombatCreatureName", 0)
-		SetCVar("UnitNamePlayerGuild", 1)
-		SetCVar("UnitNamePlayerPVPTitle", 1)
-		SetCVar("UnitNameFriendlyPlayerName", 0)
-		SetCVar("UnitNameFriendlyPetName", 0)
-		SetCVar("UnitNameFriendlyGuardianName", 0)
-		SetCVar("UnitNameFriendlyTotemName", 0)
-		SetCVar("UnitNameEnemyPlayerName", 1)
-		SetCVar("UnitNameEnemyPetName", 1)
-		SetCVar("UnitNameEnemyGuardianName", 1)
-		SetCVar("UnitNameEnemyTotemName", 1)
-		SetCVar("CombatDamage", 1)
-		SetCVar("CombatHealing", 1)
-		SetCVar("nameplateShowFriends", 0)
-		SetCVar("nameplateShowFriendlyPets", 0)
-		SetCVar("nameplateShowFriendlyGuardians", 0)
-		SetCVar("nameplateShowFriendlyTotems", 0)
-		SetCVar("nameplateShowEnemies", 1)
-		SetCVar("nameplateShowEnemyPets", 1)
-		SetCVar("nameplateShowEnemyGuardians", 1)
-		SetCVar("nameplateShowEnemyTotems", 1)	
-		SetCVar("consolidateBuffs", 0)
-		SetCVar("lootUnderMouse", 1)
-		SetCVar("autoSelfCast", 1)
-		SetCVar("cameraDistanceMax", 50)
-		SetCVar("cameraDistanceMaxFactor", 3.4)
-	end
+	SetCVar("lootUnderMouse", 1)
+	SetCVar("autoSelfCast", 1)
+	SetCVar("cameraDistanceMax", 50)
+	SetCVar("cameraDistanceMaxFactor", 3.4)
 end
 
 local function positionsetup()
@@ -205,7 +190,7 @@ v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.8  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.9  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
