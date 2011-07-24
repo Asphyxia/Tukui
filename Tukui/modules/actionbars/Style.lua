@@ -37,7 +37,7 @@ local function style(self)
 		Btname:Kill()
 	else
 		Btname:SetAlphaGradient(0,Button:GetWidth())
-		BtName:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
+		Btname:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 	end
  
 	if not _G[name.."Panel"] then
@@ -61,7 +61,7 @@ local function style(self)
 
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	HotKey:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	HotKey:SetFont(C.media.pixelfont, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 	HotKey.ClearAllPoints = T.dummy
 	HotKey.SetPoint = T.dummy
  
