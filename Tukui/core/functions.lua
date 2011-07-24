@@ -57,49 +57,49 @@ T.PP = function(p, obj)
 	elseif p == 7 then
 		obj:SetParent(Tukuiwatch)
 		obj:Height(Tukuiwatch:GetHeight())
-		obj:Point("CENTER", Tukuiwatch, 0, 1)	
+		obj:Point("CENTER", Tukuiwatch, 1, 1)	
 	elseif p == 8 then
 		obj:SetParent(BattleStatTop)
 		obj:Height(BattleStatTop:GetHeight())
-		obj:Point("CENTER", BattleStatTop, 0, 1)
+		obj:Point("CENTER", BattleStatTop, 0, 0)
     elseif p == 9 then
 		obj:SetParent(BattleStatBottom)
 		obj:Height(BattleStatBottom:GetHeight())
-		obj:Point("CENTER", BattleStatBottom, 0, 1)
+		obj:Point("CENTER", BattleStatBottom, 0, 0)
     elseif p == 10 then
 		obj:SetParent(CurrencyStatTop)
 		obj:Height(CurrencyStatTop:GetHeight())
-		obj:Point("CENTER", CurrencyStatTop, 0, 1)
+		obj:Point("CENTER", CurrencyStatTop, 0, 0)
     elseif p == 11 then
 		obj:SetParent(CurrencyStatBottom)
 		obj:Height(CurrencyStatBottom:GetHeight())
-		obj:Point("CENTER", CurrencyStatBottom, 0, 1)		
+		obj:Point("CENTER", CurrencyStatBottom, 0, 0)		
 	elseif p == 12 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("LEFT", center, 30, 1)
-		obj:SetPoint('TOP', center, 0, 1)
+		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
 	elseif p == 13 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
-		obj:SetPoint('TOP', center, 0, 1)
+		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
 	elseif p ==14 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("RIGHT", center, -30, 1)
-		obj:SetPoint('TOP', center, 0, 1)
+		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
 	elseif p == 15 then
 		obj:SetParent(centerleft)
 		obj:SetHeight(centerleft:GetHeight())
-		obj:SetPoint('TOP', centerleft, 0, 1)
+		obj:SetPoint('TOP', centerleft, 1, 1)
 		obj:SetPoint('BOTTOM', centerleft)
 	elseif p == 16 then
 		obj:SetParent(centerright)
 		obj:SetHeight(centerright:GetHeight())
-		obj:SetPoint('TOP', centerright, 0, 1)
+		obj:SetPoint('TOP', centerright, 1, 1)
 		obj:SetPoint('BOTTOM', centerright)
 	end	
 end
@@ -499,6 +499,66 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		local r, g, b = oUF.ColorGradient(min/max, unpack(C["unitframes"].gradient))
 		health:SetStatusBarColor(r, g, b)
 	end
+	
+	T.AuraFilter = function(icons, unit, icon, name, rank, texture, count, dtype, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID)	
+	local inInstance, instanceType = IsInInstance()
+	icon.owner = caster
+	icon.isStealable = isStealable
+	
+	if (unit and unit:find("arena%d")) then --Arena frames
+		if dtype then
+			if T.DebuffWhiteList[name] then
+				return true
+			else
+				return false
+			end			
+		else
+			if T.ArenaBuffWhiteList[name] then
+				return true
+			else
+				return false
+			end		
+		end
+	elseif unit == "target" or (unit and unit:find("boss%d")) then --Target/Boss Only
+		if C["unitframes"].playerdebuffsonly == true then
+			-- Show all debuffs on friendly targets
+			if UnitIsFriend("player", "target") then return true end
+			
+			local isPlayer
+			
+			if(caster == 'player' or caster == 'vehicle') then
+				isPlayer = true
+			else
+				isPlayer = false
+			end
+
+			if isPlayer then
+				return true
+			elseif T.DebuffWhiteList[name] or (inInstance and ((instanceType == "pvp" or instanceType == "arena") and T.TargetPVPOnly[name])) then
+				return true
+			else
+				return false
+			end
+		else
+			return true
+		end
+	else --Everything else
+		if unit ~= "player" and unit ~= "targettarget" and unit ~= "focus" and inInstance and (instanceType == "pvp" or instanceType == "arena") then
+			if T.DebuffWhiteList[name] or T.TargetPVPOnly[name] then
+				return true
+			else
+				return false
+			end
+		else
+			if T.DebuffBlacklist[name] then
+				return false
+			else
+				return true
+			end
+		end
+	end
+end
+
 		
 		-- overwrite healthbar color for enemy player (a tukui option if enabled), target vehicle/pet too far away returning unitreaction nil and friend unit not a player. (mostly for overwrite tapped for friendly)
 		-- I don't know if we really need to call C["unitframes"].unicolor but anyway, it's safe this way.
