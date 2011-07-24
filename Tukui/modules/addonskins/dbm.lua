@@ -1,30 +1,15 @@
- --[[
-
-Tukui_DBM skin by Affli@RU-Howling Fjord
+--[[
+Author: Affli@RU-Howling Fjord, 
+Modified: Elv
 All rights reserved.
-Thanks ALZA, Shestak, Fernir, Tukz and everyone i've forgot to mention.
-
 ]]--
+local T, C, L, DB = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
--- little config
-----------------------------------------
-local croprwicons=true			-- crops blizz shitty borders from icons in RaidWarning messages
-local drawshadow=false			-- draw Tukui shadows around frames.
-local rwiconsize=18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
-----------------------------------------
+if not IsAddOnLoaded("DBM-Core") or not C.Addon_Skins.dbm then return end
 
-
--- Damn edits compatbility
-local UI
-if ElvUI then UI=ElvUI else UI=Tukui end
-local T, C, L = unpack(UI)
-local classcolor = RAID_CLASS_COLORS[T.myclass]
-local buttonsize
-if C.DBM_Skin.iconsize and type(C.DBM_Skin.iconsize)=="number" then
-	buttonsize = C.DBM_Skin.iconsize
-else
-	buttonsize = 20	-- just to be safe
-end
+local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
+local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+local buttonsize = 22
 
 local function SkinBars(self)
 	for bar in self:GetBarIterator() do
@@ -38,21 +23,27 @@ local function SkinBars(self)
 				local icon2 = _G[frame:GetName().."BarIcon2"]
 				local name = _G[frame:GetName().."BarName"]
 				local timer = _G[frame:GetName().."BarTimer"]
-
+				
 				if not (icon1.overlay) then
 					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-					icon1.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
-					if drawshadow then
-						icon1.overlay:CreateShadow()
-					end
+					icon1.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMRIGHT", tbar, "BOTTOMLEFT", -buttonsize/4, -2)
+					
+					local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
+					backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
+					backdroptex:Point("TOPLEFT", icon1.overlay, "TOPLEFT", 2, -2)
+					backdroptex:Point("BOTTOMRIGHT", icon1.overlay, "BOTTOMRIGHT", -2, 2)
+					backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 				end
 
 				if not (icon2.overlay) then
 					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-					icon2.overlay:CreatePanel("Default", buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", -buttonsize/4, -2)
-					if drawshadow then
-						icon2.overlay:CreateShadow()
-					end
+					icon2.overlay:CreatePanel(template, buttonsize, buttonsize, "BOTTOMLEFT", tbar, "BOTTOMRIGHT", buttonsize/4, -2)
+					
+					local backdroptex = icon2.overlay:CreateTexture(nil, "BORDER")
+					backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
+					backdroptex:Point("TOPLEFT", icon2.overlay, "TOPLEFT", 2, -2)
+					backdroptex:Point("BOTTOMRIGHT", icon2.overlay, "BOTTOMRIGHT", -2, 2)
+					backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)					
 				end
 
 				if bar.color then
@@ -61,20 +52,14 @@ local function SkinBars(self)
 					tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 				end
 				
-				tbar:SetWidth(C.DBM_Skin.barwidth)
-				frame:SetWidth(C.DBM_Skin.barwidth)
-				
-				-- if bar.enlarged then frame:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(T.Scale(bar.owner.options.Width)) end
-				-- if bar.enlarged then tbar:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(T.Scale(bar.owner.options.Width)) end
+				if bar.enlarged then frame:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else frame:SetWidth(T.Scale(bar.owner.options.Width)) end
+				if bar.enlarged then tbar:SetWidth(T.Scale(bar.owner.options.HugeWidth)) else tbar:SetWidth(T.Scale(bar.owner.options.Width)) end
 
 				if not frame.styled then
 					frame:SetScale(1)
-					frame.SetScale=T.dummy
-					frame:SetHeight(buttonsize/3)
+					frame.SetScale = T.dummy
+					frame:SetHeight(buttonsize)
 					frame:SetTemplate("Default")
-					if drawshadow then
-						frame:CreateShadow("Default")
-					end
 					frame.styled=true
 				end
 
@@ -104,16 +89,18 @@ local function SkinBars(self)
 					texture:SetTexture(C["media"].normTex)
 					texture.styled=true
 				end
-
+				
+				tbar:SetStatusBarTexture(C["media"].normTex)
 				if not tbar.styled then
 					tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
 					tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
+					
 					tbar.styled=true
 				end
 
 				if not name.styled then
 					name:ClearAllPoints()
-					name:Point("LEFT", frame, "LEFT", 5, 1)
+					name:Point("LEFT", frame, "LEFT", 4, 0)
 					name:SetWidth(165)
 					name:SetHeight(8)
 					name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
@@ -125,7 +112,7 @@ local function SkinBars(self)
 				
 				if not timer.styled then	
 					timer:ClearAllPoints()
-					timer:Point("RIGHT", frame, "RIGHT", -5, 1)
+					timer:Point("RIGHT", frame, "RIGHT", -4, 0)
 					timer:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 					timer:SetJustifyH("RIGHT")
 					timer:SetShadowColor(0, 0, 0, 0)
@@ -184,21 +171,17 @@ local SkinBoss=function()
 		else
 			bar:ClearAllPoints()
 			if DBM_SavedOptions.HealthFrameGrowUp then
-				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, buttonsize)
+				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, buttonsize+4)
 			else
-				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, -buttonsize)
+				bar:Point("TOPLEFT", prev, "TOPLEFT", 0, -(buttonsize+4))
 			end
 		end
 
 		if not bar.styled then
 			bar:SetHeight(buttonsize)
 			bar:SetTemplate("Default")
-			if drawshadow then
-				bar:CreateShadow()
-			end
 			background:SetNormalTexture(nil)
 			bar.styled=true
-			
 		end	
 		
 		if not progress.styled then
@@ -211,7 +194,7 @@ local SkinBoss=function()
 
 		if not name.styled then
 			name:ClearAllPoints()
-			name:Point("LEFT", progress, "LEFT", 5, 1)
+			name:Point("LEFT", bar, "LEFT", 4, 0)
 			name:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			name:SetJustifyH("LEFT")
 			name:SetShadowColor(0, 0, 0, 0)
@@ -220,7 +203,7 @@ local SkinBoss=function()
 		
 		if not timer.styled then
 			timer:ClearAllPoints()
-			timer:Point("RIGHT", progress, "RIGHT", -5, 1)
+			timer:Point("RIGHT", bar, "RIGHT", -4, 0)
 			timer:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			timer:SetJustifyH("RIGHT")
 			timer:SetShadowColor(0, 0, 0, 0)
@@ -238,84 +221,29 @@ hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
 DBM.RangeCheck:Show()
 DBM.RangeCheck:Hide()
 DBMRangeCheck:HookScript("OnShow",function(self)
-	self:SetTemplate("Default")
-	if drawshadow then
-		self:CreateShadow()
-	end
+	self:SetTemplate("Default", true)
 end)
-if (croprwicons) then
-	local replace=string.gsub
-	local old=RaidNotice_AddMessage
-	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
-		if textString:find(" |T") then
-			textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
-		end
-		return old(noticeFrame, textString, colorInfo)
+
+
+local RaidNotice_AddMessage_=RaidNotice_AddMessage
+RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
+	if textString:find(" |T") then
+		textString = string.gsub(textString,"(:12:12)",":18:18:0:0:64:64:5:59:5:59")
 	end
+	return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 end
 
-local UploadDBM = function()
+local ForceOptions = function()
 	DBM_SavedOptions.Enabled=true
-	DBM_SavedOptions.WarningIconLeft=false
-	DBM_SavedOptions.WarningIconRight=false
-	DBM_SavedOptions["WarningColors"] = {{["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},
-                             {["b"] = classcolor.b, ["g"] = classcolor.g, ["r"] = classcolor.r,},}
 
-	DBT_SavedOptions["DBM"].StartColorR=classcolor.r
-	DBT_SavedOptions["DBM"].StartColorG=classcolor.g
-	DBT_SavedOptions["DBM"].StartColorB=classcolor.b
-	DBT_SavedOptions["DBM"].EndColorR=classcolor.r
-	DBT_SavedOptions["DBM"].EndColorG=classcolor.g
-	DBT_SavedOptions["DBM"].EndColorB=classcolor.b
-	DBT_SavedOptions["DBM"].Scale=1
-	DBT_SavedOptions["DBM"].HugeScale=1
-	DBT_SavedOptions["DBM"].BarXOffset=0
-	DBT_SavedOptions["DBM"].BarYOffset=3
-	DBT_SavedOptions["DBM"].IconLeft=true
-	DBT_SavedOptions["DBM"].ExpandUpwards=true
-	DBT_SavedOptions["DBM"].Texture=C["media"].normTex
-	DBT_SavedOptions["DBM"].IconRight=false
+	DBT_SavedOptions["DBM"].Scale = 1
+	DBT_SavedOptions["DBM"].HugeScale = 1
+	DBT_SavedOptions["DBM"].BarXOffset = 0
+	DBT_SavedOptions["DBM"].BarYOffset = 9
+	DBT_SavedOptions["DBM"].Texture = "Tukui Norm"
+	DBT_SavedOptions["DBM"].Font = "Tukui Font"
 end
 
-local pr = function(msg)
-    print("|cffC495DDTukui DBM|r:", tostring(msg))
-end
-
-local function rt(i) return function() return i end end
-
-local function healthdemo()
-		DBM.BossHealth:Show("Scary bosses")
-		DBM.BossHealth:AddBoss(rt(25), "Sinestra")
-		DBM.BossHealth:AddBoss(rt(50), "Nefarian")
-		DBM.BossHealth:AddBoss(rt(75), "Gamon")
-		DBM.BossHealth:AddBoss(rt(100), "Hogger")
-end
-
-SLASH_TUKUIDBM1 = "/tukuidbm"
-SLASH_TUKUIDBM2 = "/dbmskin" -- backwards compatbility, to be removed in the future.
-SlashCmdList["TUKUIDBM"] = function(msg)
-	if(msg=="apply") then
-		StaticPopup_Show("TUKUIDBM")        
-	elseif(msg=="test") then
-		DBM:DemoMode()
-	elseif(msg=="bh")then
-		healthdemo()
-	else
-		pr("use |cffFF0000/tukuidbm apply|r to apply DBM settings.")
-		pr("use |cffFF0000/tukuidbm test|r to launch DBM testmode.")
-		pr("use |cffFF0000/tukuidbm bh|r to show test BossHealth frame.")
-	end
-end
-
-StaticPopupDialogs["TUKUIDBM"] = {
-	text = "We need to set some DBM options to apply Tukui DBM skin.\nMost of your settings will remain untouched.",
-	button1 = ACCEPT,
-	button2 = CANCEL,
-    OnAccept = function() UploadDBM() ReloadUI() end,
-    timeout = 0,
-    whileDead = 1,
-    hideOnEscape = true,
-}
-
+local loadOptions = CreateFrame("Frame")
+loadOptions:RegisterEvent("PLAYER_LOGIN")
+loadOptions:SetScript("OnEvent", ForceOptions)
