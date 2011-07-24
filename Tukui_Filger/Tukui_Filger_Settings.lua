@@ -19,13 +19,26 @@ ns.Filger_Settings = {
 
 ns.Filger_Spells = {
 	["DRUID"] = {
+	
+		{
+			Name = "COOLDOWN",
+			Direction = "RIGHT",
+			Interval = 4,
+			Mode = "ICON",
+			setPoint = { "CENTER", UIParent, "CENTER", 0, 195 },
+
+			-- Starsurge / Sternensog
+			{ spellID = 78674, size = 32, filter = "CD" },
+			-- Starfall / Sternenregen
+			{ spellID = 48505, size = 32, filter = "CD" },
+		},
 		{
 			Name = "P_BUFF_ICON",
 			Direction = "LEFT",
 			Interval = 4,
 			Opacity = 1,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -146 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -31 },
 
 			-- Lifebloom / Blühendes Leben
 			{ spellID = 33763, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
@@ -35,6 +48,8 @@ ns.Filger_Spells = {
 			{ spellID = 8936, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Wild Growth / Wildwuchs
 			{ spellID = 48438, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Starfall / Sternenregen
+			{ spellID = 48505, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "T_BUFF_ICON",
@@ -58,7 +73,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Eclipse (Lunar) / Mondfinsternis
 			{ spellID = 48518, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -78,6 +93,10 @@ ns.Filger_Spells = {
 			{ spellID = 29166, size = 36, unitId = "player", caster = "all", filter = "BUFF" },
 			-- Barkskin / Baumrinde
 			{ spellID = 22812, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Owlkin Frenzy / Eulkin Raserei
+			{ spellID = 48391, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Lunar Shower / Mondregen
+			{ spellID = 81192, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -85,8 +104,10 @@ ns.Filger_Spells = {
 			Interval = 4,
 			Mode = "ICON",
 			setPoint = { "LEFT", UIParent, "CENTER", 198, -134 },
-
-		-- Hibernate
+			
+			-- Maim
+			{ spellID = 22570, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
+			-- Hibernate
 			{ spellID = 2637, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
 			-- Entangling Roots
 			{ spellID = 339, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -149,7 +170,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Lock and Load / Sichern und Laden
 			{ spellID = 56342, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -211,7 +232,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Frostbite / Frostbite
 			--{ spellID = 11071, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
@@ -272,7 +293,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Sudden Death / Plötzlicher Tod
 			{ spellID = 52437, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -332,7 +353,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -146 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -31 },
 
 			-- Earth Shield / Erdschild
 			{ spellID = 974, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
@@ -360,7 +381,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Maelstorm Weapon / Waffe des Mahlstroms
 			{ spellID = 53817, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -414,7 +435,7 @@ ns.Filger_Spells = {
 			Interval = 4,
 			Opacity = 1,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -146 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -31 },
 
 			-- Beacon of Light / Flamme des Glaubens
 			{ spellID = 53563, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
@@ -435,7 +456,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Judgements of the Pure / Richturteile des Reinen
 			{ spellID = 53671, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -482,7 +503,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -146 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -31 },
 
 			-- Prayer of Mending / Gebet der Besserung
 			{ spellID = 41635, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
@@ -540,7 +561,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Surge of Light / Woge des Lichts
 			{ spellID = 88688, size = 36, unitId = "player", caster = "all", filter = "BUFF" },
@@ -599,7 +620,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Devious Minds / Teuflische Absichten
 			{ spellID = 70840, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -665,11 +686,11 @@ ns.Filger_Spells = {
 		
 		{
 			Name = "C_BUFF_ICON",
-			Direction = "UP",
+			Direction = "RIGHT",
 			Interval = 4,
 			Opacity = 1,
 			Mode = "ICON",
-			setPoint = { "CENTER", UIParent, "CENTER", 0, -190 },
+			setPoint = { "CENTER", UIParent, "CENTER", 0, 145 },
 
 			-- Soulfire
 			{ spellID = 85383, size = 50, unitId = "player", caster = "player", filter = "BUFF" },	
@@ -731,7 +752,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Sprint / Sprinten
 			{ spellID = 2983, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -806,7 +827,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "RIGHT", UIParent, "CENTER", -198, -134 },
+			setPoint = { "RIGHT", UIParent, "CENTER", -198, -76},
 
 			-- Blood Shield / Blutschild
 			{ spellID = 77513, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
@@ -873,6 +894,8 @@ ns.Filger_Spells = {
 			{ spellID = 91041, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Volcanic Destruction
 			{ spellID = 89091, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Soul Fragment / Seelenfragment (Necromatic Focus/Necrotischer Fokus)
+			{ spellID = 96962, size = 32, unitId = "player", caster = "player", filter = "BUFF" },
 
 
 		-- Item Enchants - Engineering
@@ -1224,6 +1247,8 @@ ns.Filger_Spells = {
 			{ spellID = 99532, size = 72, unitId = "player", caster = "all", filter = "DEBUFF" },
 			-- The Widow's Kiss (Beth'tilac)
 			{ spellID = 99476, size = 72, unitId = "player", caster = "all", filter = "DEBUFF" },
+			-- Fixate (Beth'tilac Heroic)
+			{ spellID = 99526, size = 72, unitId = "player", caster = "all", filter = "DEBUFF" },
 			-- Eruption (Lord Rhyolith)
 			{ spellID = 98492, size = 72, unitId = "player", caster = "all", filter = "DEBUFF" },
 			-- Molten Feather (Alysrazor)
