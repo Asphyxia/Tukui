@@ -31,16 +31,49 @@ icenter:CreateShadow("Default")
 icenter:SetFrameLevel(2)
 icenter:SetFrameStrata("BACKGROUND")
 
--- INFO CENTER LEFT (FOR STATS)
+--[[-- INFO CENTER LEFT (FOR STATS)
 local icenterleft = CreateFrame("Frame", "TukuiInfoCenterLeft", TukuiBar2)
 icenterleft:CreatePanel("Default", TukuiBar2:GetWidth(), 20, "TOP", TukuiBar2, "BOTTOM", 0, -3)
 icenterleft:CreateShadow("Default")
 icenterleft:SetFrameLevel(2)
-icenterleft:SetFrameStrata("BACKGROUND")
+icenterleft:SetFrameStrata("BACKGROUND")--]]
+
+-- SPECSWITCHER
+if C.datatext.enable_specswitcher then
+	local icenterbottom = CreateFrame("Frame", "TukuiSpecSwitcher", TukuiBar2)
+	icenterbottom:CreatePanel("Default", TukuiBar2:GetWidth() - 22, 20, "TOP", TukuiBar2, "BOTTOM", 11, -3)
+	icenterbottom:CreateShadow("Default")
+	icenterbottom:SetFrameLevel(0)
+	icenterbottom:SetFrameStrata("BACKGROUND")
+
+	local talenticon = CreateFrame("Frame", "TukuiTalentIcon", TukuiSpecSwitcher)
+	talenticon:CreatePanel("Default", 20, 20, "RIGHT", icenterbottom, "LEFT", -2, 0)
+	talenticon:CreateShadow("Default")
+	talenticon:SetFrameLevel(0)
+	talenticon:SetFrameStrata("BACKGROUND")
+
+	talenticon.tex = talenticon:CreateTexture(nil, "ARTWORK")
+	talenticon.tex:Point("TOPLEFT", 2, -2)
+	talenticon.tex:Point("BOTTOMRIGHT", -2, 2)
+	talenticon.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+
+	local UpdateTexture = function(self)
+		if not GetPrimaryTalentTree() then return end
+		local primary = GetPrimaryTalentTree()
+		local tex = select(4, GetTalentTabInfo(primary))
+
+		self.tex:SetTexture(tex)
+	end
+
+	talenticon:RegisterEvent("PLAYER_ENTERING_WORLD")
+	talenticon:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+	talenticon:RegisterEvent("PLAYER_TALENT_UPDATE")
+	talenticon:SetScript("OnEvent", UpdateTexture)
+end
 
 -- INFO CENTER RIGHT (FOR STATS)
 local icenterright = CreateFrame("Frame", "TukuiInfoCenterRight", TukuiBar3)
-icenterright:CreatePanel("Default", TukuiBar3:GetWidth(), 20, "TOP", TukuiBar3, "BOTTOM", 0, -3)
+icenterright:CreatePanel("Default", TukuiBar3:GetWidth() - 22, 20, "TOP", TukuiBar3, "BOTTOM", -11, -3)
 icenterright:CreateShadow("Default")
 icenterright:SetFrameLevel(2)
 icenterright:SetFrameStrata("BACKGROUND")
@@ -53,9 +86,9 @@ watch:SetFrameStrata("MEDIUM")
 watch:SetFrameLevel(2)
 
 -- SWITCH LAYOUT
-local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", UIParent, "SecureActionButtonTemplate")
-	swl:Size(20, 20)
-	swl:Point("LEFT", TukuiInfoLeft, "RIGHT", 8, 0)
+local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", icenterright)
+	swl:Size(75, TukuiInfoCenterRight:GetHeight())
+	swl:Point("CENTER", icenterright, "CENTER", 0, 0)
 	swl:SetFrameStrata("BACKGROUND")
 	swl:SetFrameLevel(2)
 	swl:RegisterForClicks("AnyUp") swl:SetScript("OnClick", function()
@@ -71,7 +104,11 @@ local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", UIParent, "SecureAc
 			EnableAddOn("Tukui_Raid")
 			ReloadUI()
 		end
-end)
+	end)
+
+	swl.Text = T.SetFontString(swl, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	swl.Text:Point("CENTER", swl, "CENTER", 0, 0)
+	swl.Text:SetText(T.StatColor..L.datatext_switch_layout)
 
 -- VERSION BUTTON
 local verbutton = CreateFrame("Button", "TukuiVersionButton", TukuiMinimap, "SecureActionButtonTemplate")
@@ -279,85 +316,6 @@ moveuibutton.Text:SetText(T.panelcolor.."Move UI")
 WorldStateAlwaysUpFrame:ClearAllPoints()
 WorldStateAlwaysUpFrame:SetPoint("TOP", UIParent, "TOP", 0, T.Scale(-35))
 
--- TALENT SPEC-SWITCHER (Advanced)
-if C["asphyxia_panels"].asphyxiatalent == true then
-if UnitLevel("player") <= 10 then return end
-
-local frame = CreateFrame("Frame", "AsphyxiaTalent", UIParent)
-frame:CreatePanel("Default", 20, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
-frame:CreateShadow("Default")
-frame:EnableMouse(true)
-frame:SetFrameStrata("MEDIUM")
-
-frame.tex = frame:CreateTexture(nil, "ARTWORK")
-frame.tex:Point("TOPLEFT", 2, -2)
-frame.tex:Point("BOTTOMRIGHT", -2, 2)
-frame.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-
-frame.highlight = frame:CreateTexture(nil, "ARTWORK")
-frame.highlight:Point("TOPLEFT", 2, -2)
-frame.highlight:Point("BOTTOMRIGHT", -2, 2)
-frame.highlight:SetTexture(1,1,1,.3)
-frame.highlight:Hide()
-
-local UpdateTexture = function(self)
-	local primary = GetPrimaryTalentTree()
-	local tex = select(4, GetTalentTabInfo(primary))
-	
-	self.tex:SetTexture(tex)
-end
-
-local ChangeSpec = function()
-	local spec = GetActiveTalentGroup()
-	
-	if spec == 1 then
-		SetActiveTalentGroup(2)
-	else
-		SetActiveTalentGroup(1)
-	end
-end
-
-local color = RAID_CLASS_COLORS[T.myclass]
-
-local StyleTooltip = function(self)
-	if not InCombatLockdown() then
-		local p1 = select(5, GetTalentTabInfo(1))
-		local p2 = select(5, GetTalentTabInfo(2))
-		local p3 = select(5, GetTalentTabInfo(3))
-		local name = select(2, GetTalentTabInfo(GetPrimaryTalentTree()))
-		local spec = GetActiveTalentGroup()
-		
-		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, 2)
-		GameTooltip:ClearLines()
-		
-		if spec == 1 then
-			GameTooltip:AddDoubleLine(format(T.panelcolor.."%s: %s/%s/%s - [%s]", name, p1, p2, p3, PRIMARY))
-		else
-			GameTooltip:AddDoubleLine(format(T.panelcolor.."%s: %s/%s/%s - [%s]", name, p1, p2, p3, SECONDARY))
-		end
-		
-		self.highlight:Show()
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-		GameTooltip:Show()
-	end
-end
-
-local OnLeave = function(self)
-	GameTooltip:Hide()
-	self.highlight:Hide()
-	self:SetBackdropBorderColor(unpack(C.media.bordercolor))
-end
-
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-frame:RegisterEvent("PLAYER_TALENT_UPDATE")
-frame:SetScript("OnEvent", UpdateTexture)
-frame:SetScript("OnMouseDown", ChangeSpec)
-frame:SetScript("OnEnter", StyleTooltip)
-frame:SetScript("OnLeave", OnLeave)
-end
-
-
 -- UNITFRAME SHOW/HIDE
 if C["unitframes"].hideunitframes == true then
 local HideUnitframes = function(self, event)
@@ -389,9 +347,9 @@ icb.f:SetFont(C["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
 icb.f:SetText(cp)
 icb.f:Point("CENTER", 1, 0)
 icb:SetScript("OnMouseDown", function(self)
-	ToggleFrame(icenter)
-	ToggleFrame(icenterleft)
-	ToggleFrame(icenterright)
+	ToggleFrame(TukuiInfoCenterRight)
+	ToggleFrame(TukuiSpecSwitcher)
+	ToggleFrame(TukuiInfoCenter)
 	if icenter:IsShown() then
 		self.f:SetText(cp)
 	else

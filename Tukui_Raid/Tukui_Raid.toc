@@ -7,3 +7,4 @@
 ## RequiredDeps: Tukui
 
 oUF_Tukz_Raid40.lua
+icon.lua

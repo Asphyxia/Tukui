@@ -281,7 +281,7 @@ local function Shared(self, unit)
 	return self
 end
 
-  -- switch layout
+ --[[ -- switch layout
 	local swlicon = CreateFrame("Frame", "TukuiSwitchLayoutIcon", UIParent)
 	swlicon:CreatePanel("Default", 20, 20, "LEFT", TukuiInfoLeft, "RIGHT", 8, 0)
 	swlicon:SetFrameStrata("BACKGROUND")
@@ -291,7 +291,7 @@ end
 	local tex = swlicon:CreateTexture(nil, "OVERLAY")
 	tex:SetTexture(C.media.switchlayoutheal)
 	tex:SetPoint("TOPLEFT", swlicon, "TOPLEFT", 2, -2)
-	tex:SetPoint("BOTTOMRIGHT", swlicon, "BOTTOMRIGHT", -2, 2)
+	tex:SetPoint("BOTTOMRIGHT", swlicon, "BOTTOMRIGHT", -2, 2)--]]
 
 oUF:RegisterStyle('TukuiHealR25R40', Shared)
 oUF:Factory(function(self)
@@ -361,6 +361,7 @@ oUF:Factory(function(self)
 		ShowPet:RegisterEvent("PARTY_LEADER_CHANGED")
 		ShowPet:RegisterEvent("PARTY_MEMBERS_CHANGED")
 		ShowPet:SetScript("OnEvent", function(self)
+		
 			if InCombatLockdown() then
 				self:RegisterEvent("PLAYER_REGEN_ENABLED")
 			else
