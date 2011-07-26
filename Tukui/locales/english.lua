@@ -199,7 +199,7 @@ L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
 L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
 L.core_uihelp100 = "(Scroll up for more commands ...)"
 
-L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 2.9 - Help."
+L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 2.10 - Help."
 L.core_uihelp21 = "\n\n|cffFF0000AsphyxiaUI slash commands:\n|cffEAC117/scp|r - Unlock sCombo bar to move."
 L.core_uihelp22 = "\n|cffEAC117/test|r -  Test mode for unitframes."
 L.core_uihelp23 = "\n|cffEAC117/testarena|r - Test mode for arena frames."

@@ -95,17 +95,7 @@
 	<Script file="modules\datatext\regen.lua"/>
 	<Script file="modules\datatext\profession.lua"/>
 	<Script file="modules\datatext\databars.lua"/>
-	
-	<Script file="modules\extras\addonmanager.lua"/>
-	<Script file="modules\extras\mail.lua"/>
-	<Script file="modules\extras\tooltipicon.lua"/>
-	<Script file="modules\extras\raidutility.lua"/>
-	<Script file="modules\extras\customactionbar.lua"/>	
-	<Script file="modules\extras\bgannouncer.lua"/>
-	<Script file="modules\extras\addons\addons.lua"/>
-	<Script file="modules\extras\addons\addons_toggle.lua"/>
-	<Script file="modules\extras\announce.lua"/>
-	
+		
 	<Script file="modules\buffs\raidbuffsreminder.lua"/>
 	
 	<Script file="modules\actionbars\Bind.lua"/>
@@ -233,6 +223,16 @@
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
 	<Script file="developer\test.lua"/>
+	
+	<Script file="modules\extras\addonmanager.lua"/>
+	<Script file="modules\extras\mail.lua"/>
+	<Script file="modules\extras\tooltipicon.lua"/>
+	<Script file="modules\extras\raidutility.lua"/>
+	<Script file="modules\extras\bgannouncer.lua"/>
+	<Script file="modules\extras\addons\addons.lua"/>
+	<Script file="modules\extras\addons\addons_toggle.lua"/>
+	<Script file="modules\extras\announce.lua"/>
+	<Script file="modules\extras\customactionbar.lua"/>	
 	
 	<Script file="modules\chat\blizzfixrealidlink.lua"/>	
 </Ui>

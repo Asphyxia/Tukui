@@ -438,7 +438,7 @@ local function OriginalBackdrop(self)
 end
 
 local toggle = CreateFrame("Frame", "CurrencyToggle", UIParent)
-toggle:CreatePanel("Default", 53, 20, "LEFT", TukuiInfoLeft, "RIGHT", 30, 0)
+toggle:CreatePanel("Default", 53, 20, "LEFT", TukuiInfoLeft, "RIGHT", 8, 0)
 toggle:EnableMouse(true)
 toggle:SetFrameStrata("MEDIUM")
 toggle:SetFrameLevel(2)

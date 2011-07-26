@@ -66,7 +66,7 @@ TukuiL.option_datatext_BG_Announcer = "Battleground defense announcer"
 TukuiL.option_datatext_color = "Default color"
 TukuiL.option_datatext_classcolored = "Class colored datatext"
 TukuiL.option_datatext_profession = "Profession (0 for disabled)"
-TukuiL.option_datatext_specswitcher = "Spec switcher (0 for disabled)"
+TukuiL.option_datatext_enable_specswitcher = " Enable specswitcher panel & icon"
  
 -- unit frames
 TukuiL.option_unitframes_unitframes = "Unit Frames"

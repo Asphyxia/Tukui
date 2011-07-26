@@ -79,7 +79,7 @@ local function SetChatStyle(frame)
 	if C["datatext"].classcolored then
 		Ctabcolor = {classcolortab.r,classcolortab.g,classcolortab.b, 1}
 	else
-		Ctabcolor = {0.5, 0.5, 0.7}
+		Ctabcolor = {0.4, 0.4, 0.5}
 	end
 	
 	hooksecurefunc("FCFTab_UpdateColors", function(chatTab, isSelected) 

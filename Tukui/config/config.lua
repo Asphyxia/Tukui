@@ -5,7 +5,7 @@ C["general"] = {
 	["uiscale"] = 0.71,                                			-- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                     	-- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      	-- i don't recommend this because of shitty border but, voila!
-	["backdropcolor"] = {0,0,0},         					-- default backdrop color of panels
+	["backdropcolor"] = {0, 0, 0},         					-- default backdrop color of panels
 	["bordercolor"] = {.125, .125, .125},               -- default border color of panels
 	["blizzardreskin"] = true								-- reskin all Blizzard frames
 }
@@ -152,30 +152,30 @@ C["cooldown"] = {
 C["datatext"] = {
 	["fps_ms"] = 0,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
-	["bags"] = 16,                                       -- show space used in bags on panels
+	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
-	["wowtime"] = 7,                                    -- show time on panels
+	["wowtime"] = 10,                                    -- show time on panels
 	["guild"] = 1,                                      -- show number on guildmate connected on panels
 	["dur"] = 0,                                        -- show your equipment durability on panels.
 	["friends"] = 2,                                    -- show number of friends connected.
 	["dps_text"] = 0,                                   -- show a dps meter on panels
 	["hps_text"] = 0,                                   -- show a heal meter on panels
-	["power"] = 12,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
-	["haste"] = 14,                                      -- show your haste rating on panels.
+	["power"] = 7,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
+	["haste"] = 9,                                      -- show your haste rating on panels.
 	["crit"] = 4,                                       -- show your crit rating on panels.
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                  -- show your tracked currency on panels
-	["hit"] = 13,                                        -- show hit rating
+	["hit"] = 8,                                        -- show hit rating
 	["mastery"] =5,                                    -- show mastery rating
 	["micromenu"] = 0,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
-	["specswitcher"] = 15,								-- show talents on panels
 	["profession"] = 3,									-- show profession
+	["enable_specswitcher"] = true, 			-- Show talents
 	
 	-- Color Datatext
 	["classcolored"] = false,							-- classcolored datatext
-	["color"] = {0.5, 0.5, 0.7},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
+	["color"] = {0.4, 0.4, 0.5},							-- datatext color (if classcolored = false) -- 0.15, 0.49, 0.69
 
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
