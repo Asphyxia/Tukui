@@ -301,3 +301,53 @@ if C["datatext"].battleground == true then
 	bgframe:SetFrameLevel(6)
 	bgframe:EnableMouse(true)
 end
+
+-- CHAT ANIMATION
+local chat = {"TukuiChatBackgroundLeft", "TukuiChatBackgroundRight"}
+local info = {"TukuiInfoLeft", "TukuiInfoRight", "TukuiInfoLeftBattleGround"}
+
+for i = 1, #chat do
+	_G[chat[i]]:Animate(0, -140, 0.4)
+	
+	_G[info[i]]:EnableMouse(true)
+	_G[info[i]]:SetScript("OnMouseDown", function(self)
+		if _G[chat[i]]:IsVisible() then
+			_G[chat[i]]:SlideOut()
+		else
+			_G[chat[i]]:SlideIn()
+		end
+	end)
+end
+
+-- COLOR INFO LEFT SHADOW IF WE HAVE A WHISPER
+local function ChatAlertSys(self)
+	local HydraChatAlert = CreateFrame("Frame")
+	HydraChatAlert:RegisterEvent("CHAT_MSG_BN_WHISPER")
+	HydraChatAlert:RegisterEvent("CHAT_MSG_WHISPER")
+	HydraChatAlert:RegisterEvent("CHAT_MSG_GUILD")
+	HydraChatAlert:RegisterEvent("CHAT_MSG_PARTY")
+	HydraChatAlert:SetScript("OnEvent", function(HydraChatAlert, event, msg)
+		if event == "CHAT_MSG_WHISPER" then
+			TukuiInfoLeft.shadow:SetBackdropBorderColor(ChatTypeInfo["WHISPER"].r,ChatTypeInfo["WHISPER"].g,ChatTypeInfo["WHISPER"].b, 0.8)
+		elseif event == "CHAT_MSG_BN_WHISPER" then
+			TukuiInfoLeft.shadow:SetBackdropBorderColor(ChatTypeInfo["BN_WHISPER"].r,ChatTypeInfo["BN_WHISPER"].g,ChatTypeInfo["BN_WHISPER"].b, 0.8)
+		end
+	end)
+end
+
+local LastUpdate = 1
+local ChatAlert = CreateFrame("Frame")
+
+local function UpdateChatAlert(self, elapsed)
+	LastUpdate = LastUpdate - elapsed
+	
+	if LastUpdate < 0 then
+		if not TukuiChatBackgroundLeft:IsVisible() then
+			ChatAlertSys()
+		elseif TukuiChatBackgroundLeft:IsVisible() then
+			--TukuiInfoLeft.shadow:SetBackdropBorderColor(0,0,0,0.5)
+		end
+		LastUpdate = 1
+	end
+end
+ChatAlert:SetScript("OnUpdate", UpdateChatAlert)
