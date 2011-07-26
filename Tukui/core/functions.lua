@@ -55,52 +55,26 @@ T.PP = function(p, obj)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
 	elseif p == 7 then
-		obj:SetParent(Tukuiwatch)
-		obj:Height(Tukuiwatch:GetHeight())
-		obj:Point("CENTER", Tukuiwatch, 1, 1)	
-	elseif p == 8 then
-		obj:SetParent(BattleStatTop)
-		obj:Height(BattleStatTop:GetHeight())
-		obj:Point("CENTER", BattleStatTop, 0, 0)
-    elseif p == 9 then
-		obj:SetParent(BattleStatBottom)
-		obj:Height(BattleStatBottom:GetHeight())
-		obj:Point("CENTER", BattleStatBottom, 0, 0)
-    elseif p == 10 then
-		obj:SetParent(CurrencyStatTop)
-		obj:Height(CurrencyStatTop:GetHeight())
-		obj:Point("CENTER", CurrencyStatTop, 0, 0)
-    elseif p == 11 then
-		obj:SetParent(CurrencyStatBottom)
-		obj:Height(CurrencyStatBottom:GetHeight())
-		obj:Point("CENTER", CurrencyStatBottom, 0, 0)		
-	elseif p == 12 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("LEFT", center, 30, 1)
 		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
-	elseif p == 13 then
+	elseif p == 8 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
-	elseif p ==14 then
+	elseif p ==9 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("RIGHT", center, -30, 1)
 		obj:SetPoint('TOP', center, 1, 1)
 		obj:SetPoint('BOTTOM', center)
-	elseif p == 15 then
-		obj:SetParent(centerleft)
-		obj:SetHeight(centerleft:GetHeight())
-		obj:SetPoint('TOP', centerleft, 1, 1)
-		obj:SetPoint('BOTTOM', centerleft)
-	elseif p == 16 then
-		obj:SetParent(centerright)
-		obj:SetHeight(centerright:GetHeight())
-		obj:SetPoint('TOP', centerright, 1, 1)
-		obj:SetPoint('BOTTOM', centerright)
+	elseif p == 10 then
+		obj:SetParent(Tukuiwatch)
+		obj:Height(Tukuiwatch:GetHeight())
+		obj:Point("CENTER", Tukuiwatch, 1, 1)		
 	end	
 end
 	
