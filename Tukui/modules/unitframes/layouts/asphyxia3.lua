@@ -301,7 +301,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -376,7 +376,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -531,7 +531,7 @@ local function Shared(self, unit)
 						if i == 1 then
 							Runes[i]:SetWidth(35)
 						else
-							Runes[i]:SetWidth(214/6)
+							Runes[i]:SetWidth(229/6)
 						end
 						if (i == 1) then
 							Runes[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 7)
@@ -615,7 +615,7 @@ local function Shared(self, unit)
 			Name:SetJustifyH("LEFT")
 			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 
-			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
+			self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
 			--self.Name = Name
 			
 			--combo points change to support sCombo
@@ -1116,7 +1116,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 
 		-- create debuff for arena units
@@ -1280,7 +1280,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 
 		-- create debuff for arena units
@@ -1448,7 +1448,7 @@ local function Shared(self, unit)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 		
 		if (unit and unit:find("boss%d")) then
@@ -1669,7 +1669,7 @@ local pet = oUF:Spawn('pet', "TukuiPet")
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 200, 400)
+focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 275, 500)
 focus:Size(200, 30)
 
 -- focus target
@@ -1751,21 +1751,6 @@ if C["unitframes"].mainassist == true then
 	end
 end
 
---------------------------
---custom AB move function
---------------------------
-CustomBar_UpdateInterval = .5
-TimeSinceLastUpdate = 0
-local function Update(self, elapsed)
-  TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
-
-	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
-		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, -5)
-	end
-    TimeSinceLastUpdate = 0
-end
-
-CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 

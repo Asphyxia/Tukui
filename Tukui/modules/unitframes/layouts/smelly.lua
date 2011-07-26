@@ -182,7 +182,7 @@ local function Shared(self, unit)
 		--[[
 		if (unit == "player") then
 			local Name = health:CreateFontString(nil, "OVERLAY")
-			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
+			self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
 			Name:SetPoint("CENTER", health, "CENTER", 0, 1)
 			Name:SetJustifyH("CENTER")
 			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
@@ -360,7 +360,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -435,7 +435,7 @@ local function Shared(self, unit)
 			end
 			
 			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -30, 0)
+			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
 			toggle:EnableMouse(true)
 			toggle:SetFrameStrata("MEDIUM")
 			toggle:SetFrameLevel(2)
@@ -675,7 +675,7 @@ local function Shared(self, unit)
 			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			Name:SetShadowOffset(1.25, -1.25)
 
-			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
+			self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
 			
 			-- combo points on target
@@ -1577,7 +1577,7 @@ local function Shared(self, unit)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 		
 		if (unit and unit:find("boss%d")) then
@@ -1800,14 +1800,14 @@ local pet = oUF:Spawn('pet', "TukuiPet")
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 200, 400)
-focus:Size(180, 28)
+focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 275, 500)
+focus:Size(200, 30)
 
 -- focus target
 if C.unitframes.showfocustarget then
 	local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
 	focustarget:SetPoint("BOTTOM", focus, "TOP", 0, 40)
-	focustarget:Size(180, 28)
+	focustarget:Size(200, 30)
 end
 
 if C.arena.unitframes then
@@ -1882,21 +1882,6 @@ if C["unitframes"].mainassist == true then
 	end
 end
 
---------------------------
---custom AB move function
---------------------------
-CustomBar_UpdateInterval = .5
-TimeSinceLastUpdate = 0
-local function Update(self, elapsed)
-  TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed	
-
-	if (TimeSinceLastUpdate > CustomBar_UpdateInterval) then
-		CustomTukuiActionBarAnchor:Point( "TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 40, 0)
-	end
-    TimeSinceLastUpdate = 0
-end
-
-CustomTukuiActionBarAnchor:SetScript("OnUpdate", Update)
 -- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
 local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 
