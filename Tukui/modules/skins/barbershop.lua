@@ -37,7 +37,7 @@ local function LoadSkin()
 	BarberShopFrameResetButton:Point("BOTTOM", 0, 12)
 
 	BarberShopFrame:StripTextures()
-	BarberShopFrame:SetTemplate("Default")
+	BarberShopFrame:SetTemplate("Transparent")
 	BarberShopFrame:Size(BarberShopFrame:GetWidth() - 30, BarberShopFrame:GetHeight() - 56)
 	
 	BarberShopFrameMoneyFrame:StripTextures()
@@ -50,7 +50,7 @@ local function LoadSkin()
 	BarberShopAltFormFrameBorder:StripTextures()
 	BarberShopAltFormFrame:Point( "BOTTOM", BarberShopFrame, "TOP", 0, 5 )
 	BarberShopAltFormFrame:StripTextures()
-	BarberShopAltFormFrame:CreateBackdrop("Default")
+	BarberShopAltFormFrame:CreateBackdrop("Transparent")
 end
 
 T.SkinFuncs["Blizzard_BarbershopUI"] = LoadSkin

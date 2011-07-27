@@ -9,7 +9,7 @@ local function LoadSkin()
 	-- skin main frames
 	for i = 1, #frames do
 		_G[frames[i]]:StripTextures(true)
-		_G[frames[i]]:CreateBackdrop("Default")
+		_G[frames[i]]:CreateBackdrop("Transparent")
 	end
 
 	MerchantBuyBackItem.backdrop:Point("TOPLEFT", -6, 6)
@@ -29,7 +29,7 @@ local function LoadSkin()
 		local t = _G["MerchantItem"..i.."ItemButtonIconTexture"]
 		local item_bar = _G["MerchantItem"..i]
 		item_bar:StripTextures(true)
-		item_bar:CreateBackdrop("Default")
+		item_bar:CreateBackdrop("Transparent")
 		
 		b:StripTextures()
 		b:StyleButton(false)

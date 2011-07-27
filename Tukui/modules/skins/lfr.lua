@@ -10,7 +10,7 @@ local function LoadSkin()
 	}
 
 	LFRParentFrame:StripTextures()
-	LFRParentFrame:SetTemplate("Default")
+	LFRParentFrame:SetTemplate("Transparent")
 	LFRQueueFrame:StripTextures()
 	LFRBrowseFrame:StripTextures()
 
@@ -43,7 +43,7 @@ local function LoadSkin()
 	  end
 	end
 
-	LFRQueueFrameCommentTextButton:CreateBackdrop("Default")
+	LFRQueueFrameCommentTextButton:CreateBackdrop("Transparent")
 	LFRQueueFrameCommentTextButton:Height(35)
 
 	for i=1, 7 do

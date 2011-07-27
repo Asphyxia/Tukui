@@ -33,7 +33,7 @@ local function LoadSkin()
 		T.SkinButton(_G[buttons[i]])
 	end
 	RaidInfoScrollFrame:StripTextures()
-	RaidInfoFrame:CreateBackdrop("Default")
+	RaidInfoFrame:CreateBackdrop("Transparent")
 	RaidInfoFrame.backdrop:Point( "TOPLEFT", RaidInfoFrame, "TOPLEFT")
 	RaidInfoFrame.backdrop:Point( "BOTTOMRIGHT", RaidInfoFrame, "BOTTOMRIGHT")
 	T.SkinCloseButton(RaidInfoCloseButton,RaidInfoFrame)

@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	TutorialFrame:StripTextures()
-	TutorialFrame:CreateBackdrop("Default")
+	TutorialFrame:CreateBackdrop("Transparent")
 	TutorialFrame.backdrop:CreateShadow("Default")
 	TutorialFrame.backdrop:Point("TOPLEFT", 6, 0)
 	TutorialFrame.backdrop:Point("BOTTOMRIGHT", 6, -6)

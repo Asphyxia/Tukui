@@ -13,7 +13,7 @@ local function LoadSkin()
 	ScriptErrorsFrame:SetBackdropColor(unpack(C.media.backdropcolor))
 	ScriptErrorsFrame:SetBackdropBorderColor(unpack(C.media.bordercolor))	
 
-	EventTraceFrame:SetTemplate("Default")
+	EventTraceFrame:SetTemplate("Transparent")
 	
 	local texs = {
 		"TopLeft",

@@ -2,8 +2,8 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	TaxiFrame:StripTextures()
-	TaxiFrame:CreateBackdrop("Default")
-	TaxiRouteMap:CreateBackdrop("Default")
+	TaxiFrame:CreateBackdrop("Transparent")
+	TaxiRouteMap:CreateBackdrop("Transparent")
 	TaxiRouteMap.backdrop:SetAllPoints()
 	T.SkinCloseButton(TaxiFrameCloseButton)
 end

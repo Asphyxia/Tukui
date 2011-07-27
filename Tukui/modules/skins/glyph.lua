@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	--GLYPHS TAB
-	GlyphFrameSparkleFrame:CreateBackdrop("Default")
+	GlyphFrameSparkleFrame:CreateBackdrop("Transparent")
 	GlyphFrameSparkleFrame.backdrop:Point( "TOPLEFT", GlyphFrameSparkleFrame, "TOPLEFT", 3, -3 )
 	GlyphFrameSparkleFrame.backdrop:Point( "BOTTOMRIGHT", GlyphFrameSparkleFrame, "BOTTOMRIGHT", -3, 3 )
 	T.SkinEditBox(GlyphFrameSearchBox)

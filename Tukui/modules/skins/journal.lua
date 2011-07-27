@@ -29,7 +29,7 @@ local function LoadSkin()
 	EncounterJournalNavBar:StripTextures(true)
 	EncounterJournalNavBarOverlay:StripTextures(true)
 		
-	EncounterJournalNavBar:CreateBackdrop("Default")
+	EncounterJournalNavBar:CreateBackdrop("Transparent")
 	EncounterJournalNavBar.backdrop:Point("TOPLEFT", -2, 0)
 	EncounterJournalNavBar.backdrop:SetPoint("BOTTOMRIGHT")
 	T.SkinButton(EncounterJournalNavBarHomeButton, true)

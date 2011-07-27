@@ -9,7 +9,7 @@ local function LoadSkin()
 				frame:SetAlpha(1)
 				frame.SetAlpha = T.dummy
 				if not frame.backdrop then
-					frame:CreateBackdrop("Default")
+					frame:CreateBackdrop("Transparent")
 					frame.backdrop:Point("TOPLEFT", _G[frame:GetName().."Background"], "TOPLEFT", -2, -6)
 					frame.backdrop:Point("BOTTOMRIGHT", _G[frame:GetName().."Background"], "BOTTOMRIGHT", -2, 6)		
 				end
@@ -35,7 +35,7 @@ local function LoadSkin()
 				if not _G["AchievementAlertFrame"..i.."IconTexture"].b then
 					_G["AchievementAlertFrame"..i.."IconTexture"].b = CreateFrame("Frame", nil, _G["AchievementAlertFrame"..i])
 					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetFrameLevel(0)
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetTemplate("Default")
+					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetTemplate("Transparent")
 					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("TOPLEFT", _G["AchievementAlertFrame"..i.."IconTexture"], "TOPLEFT", -2, 2)
 					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("BOTTOMRIGHT", _G["AchievementAlertFrame"..i.."IconTexture"], "BOTTOMRIGHT", 2, -2)
 				end
@@ -51,7 +51,7 @@ local function LoadSkin()
 				frame:SetAlpha(1)
 				frame.SetAlpha = T.dummy
 				if not frame.backdrop then
-					frame:CreateBackdrop("Default")
+					frame:CreateBackdrop("Transparent")
 					frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
 					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)		
 				end
@@ -80,7 +80,7 @@ local function LoadSkin()
 				if not _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b then
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b = CreateFrame("Frame", nil, _G["DungeonCompletionAlertFrame"..i])
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetFrameLevel(0)
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetTemplate("Default")
+					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetTemplate("Transparent")
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("TOPLEFT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "TOPLEFT", -2, 2)
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("BOTTOMRIGHT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "BOTTOMRIGHT", 2, -2)
 				end

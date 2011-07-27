@@ -33,7 +33,7 @@ local function LoadSkin()
 	end
 
 	GossipGreetingText:SetTextColor(1,1,1)
-	GossipFrame:CreateBackdrop("Default")
+	GossipFrame:CreateBackdrop("Transparent")
 	GossipFrame.backdrop:Point("TOPLEFT", GossipFrame, "TOPLEFT", 15, -20)
 	GossipFrame.backdrop:Point("BOTTOMRIGHT", GossipFrame, "BOTTOMRIGHT", -30, 65)
 	T.SkinCloseButton(GossipFrameCloseButton,GossipFrame.backdrop)

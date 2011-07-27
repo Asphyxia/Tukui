@@ -13,7 +13,7 @@ local function LoadSkin()
 
 	local x = CreateFrame("Frame", nil, GhostFrame)
 	x:SetFrameStrata("MEDIUM")
-	x:SetTemplate("Default")
+	x:SetTemplate("Transparent")
 	x:SetPoint("TOPLEFT", GhostFrameContentsFrameIcon, "TOPLEFT", -2, 2)
 	x:SetPoint("BOTTOMRIGHT", GhostFrameContentsFrameIcon, "BOTTOMRIGHT", 2, -2)
 

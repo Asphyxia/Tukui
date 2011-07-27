@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	GuildControlUI:StripTextures()
 	GuildControlUIHbar:StripTextures()
-	GuildControlUI:SetTemplate("Default")
+	GuildControlUI:SetTemplate("Transparent")
 	GuildControlUI:CreateShadow("Default")
 	
 	local function SkinGuildRanks()

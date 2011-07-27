@@ -40,7 +40,7 @@ local function LoadSkin()
 	for i=1,8 do
 		for j=1,5 do
 			_G["RaidGroup"..i.."Slot"..j]:StripTextures()
-			_G["RaidGroup"..i.."Slot"..j]:SetTemplate("Default")
+			_G["RaidGroup"..i.."Slot"..j]:SetTemplate("Transparent")
 		end
 	end
 end

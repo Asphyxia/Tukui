@@ -29,7 +29,7 @@ local function LoadSkin()
 	for i = 1, getn(frames) do
 		local SkinFrames = _G[frames[i]]
 		SkinFrames:StripTextures()
-		SkinFrames:SetTemplate("Default")
+		SkinFrames:SetTemplate("Transparent")
 	end
 	
 	local otherframe = {

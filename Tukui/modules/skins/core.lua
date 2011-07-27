@@ -10,7 +10,7 @@ function T.SetModifiedBackdrop(self)
 end
 
 function T.SetOriginalBackdrop(self)
-	self:SetTemplate("Default")
+	self:SetTemplate("Transparent")
 end
 
 function T.SkinButton(f, strip)
@@ -35,7 +35,7 @@ function T.SkinButton(f, strip)
 	
 	if strip then f:StripTextures() end
 	
-	f:SetTemplate("Default")
+	f:SetTemplate("Transparent")
 	f:HookScript("OnEnter", T.SetModifiedBackdrop)
 	f:HookScript("OnLeave", T.SetOriginalBackdrop)
 end
@@ -94,7 +94,7 @@ function T.SkinScrollBar(frame, thumbTrim)
 			frame.trackbg = CreateFrame("Frame", nil, frame)
 			frame.trackbg:Point("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
 			frame.trackbg:Point("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
-			frame.trackbg:SetTemplate("Default")
+			frame.trackbg:SetTemplate("Transparent")
 		end
 
 		if frame:GetThumbTexture() then
@@ -139,7 +139,7 @@ function T.SkinTab(tab)
 	end
 	
 	tab.backdrop = CreateFrame("Frame", nil, tab)
-	tab.backdrop:SetTemplate("Default")
+	tab.backdrop:SetTemplate("Transparent")
 	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 	tab.backdrop:Point("TOPLEFT", 10, -3)
 	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)
@@ -151,7 +151,7 @@ function T.SkinTab(tab)
 end
 
 function T.SkinNextPrevButton(btn, horizonal)
-	btn:SetTemplate("Default")
+	btn:SetTemplate("Transparent")
 	btn:Size(btn:GetWidth() - 7, btn:GetHeight() - 7)	
 	
 	if horizonal then
@@ -182,7 +182,7 @@ function T.SkinNextPrevButton(btn, horizonal)
 end
 
 function T.SkinRotateButton(btn)
-	btn:SetTemplate("Default")
+	btn:SetTemplate("Transparent")
 	btn:Size(btn:GetWidth() - 14, btn:GetHeight() - 14)	
 	
 	btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
@@ -202,7 +202,7 @@ function T.SkinEditBox(frame)
 	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
 	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
 	if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	
 	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
 		frame.backdrop:Point("BOTTOMRIGHT", -12, -2)
@@ -226,14 +226,14 @@ function T.SkinDropDownBox(frame, width)
 	
 	T.SkinNextPrevButton(button, true)
 	
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	frame.backdrop:Point("TOPLEFT", 20, -2)
 	frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 end
 
 function T.SkinCheckBox(frame)
 	frame:StripTextures()
-	frame:CreateBackdrop("Default")
+	frame:CreateBackdrop("Transparent")
 	frame.backdrop:Point("TOPLEFT", 4, -4)
 	frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
 	
