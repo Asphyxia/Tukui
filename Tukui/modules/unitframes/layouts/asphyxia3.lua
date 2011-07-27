@@ -88,7 +88,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(0, 0, 0)
 
 		health.value = T.SetFontString(health, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		health.value:Point("RIGHT", health, "RIGHT", -4, 1)
+		health.value:Point("RIGHT", health, "RIGHT", -4, 0)
 		health.PostUpdate = T.PostUpdateHealth
 
 		self.Health = health
@@ -161,11 +161,12 @@ local function Shared(self, unit)
 		end
 
 		-- portraits
-		if C["unitframes"].charportrait == true then
+		if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", nil, health)
-			portrait.PostUpdate = function(self) self:SetAlpha(0) self:SetAlpha(0.15) end
+			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
-			table.insert(self.__elements, T.HidePortrait)
+			portrait:SetAlpha(.15)
+			portrait.PostUpdate = T.PortraitUpdate 
 			self.Portrait = portrait
 		end
 		
@@ -1052,7 +1053,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(0, 0, 0)
 
 		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
-		health.value:Point("LEFT", 2, 1)
+		health.value:Point("LEFT", 2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
 		self.Health = health
@@ -1216,7 +1217,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(0, 0, 0)
 
 		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
-		health.value:Point("LEFT", 2, 1)
+		health.value:Point("LEFT", 2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
 		self.Health = health
@@ -1383,7 +1384,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(0, 0, 0)
 
 		health.value = T.SetFontString(health, font,  C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
-		health.value:Point("LEFT", 2, 0.5)
+		health.value:Point("LEFT", 2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
 		self.Health = health

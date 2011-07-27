@@ -205,6 +205,7 @@ local function Shared(self, unit)
 				portrait:SetPoint("TOP", health, "BOTTOM", 87, -5)
 			end
 			table.insert(self.__elements, T.HidePortrait)
+			portrait.PostUpdate = T.PortraitUpdate 
 			self.Portrait = portrait
 			
 			-- Border for Portrait

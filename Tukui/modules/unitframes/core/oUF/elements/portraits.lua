@@ -73,3 +73,4 @@ local Disable = function(self)
 end
 
 oUF:AddElement('Portrait', Path, Enable, Disable)
+

@@ -195,9 +195,10 @@ local function Shared(self, unit)
 		-- portraits
 		if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", nil, health)
-			portrait.PostUpdate = function(self) self:SetAlpha(0) self:SetAlpha(0.15) end -- edit the 0.15 to the alpha you want
+			portrait:SetFrameLevel(health:GetFrameLevel())
 			portrait:SetAllPoints(health)
-			table.insert(self.__elements, T.HidePortrait)
+			portrait:SetAlpha(.15)
+			portrait.PostUpdate = T.PortraitUpdate 
 			self.Portrait = portrait
 		end
 		
