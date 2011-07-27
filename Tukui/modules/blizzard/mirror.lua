@@ -9,7 +9,7 @@ local _, settings = ...
 local _DEFAULTS = {
 	width = T.Scale(220),
 	height = T.Scale(18),
-	texture = C["media"].blank,
+	texture = C["media"].normTex,
 
 	position = {
 		["BREATH"] = 'TOP#UIParent#TOP#0#-96';
