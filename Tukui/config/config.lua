@@ -112,8 +112,8 @@ C["castbar"] = {
 }
 
 C["Addon_Skins"] = {
-	["background"] = true,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
-	["combat_toggle"] = true,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
+	["background"] = false,								-- Create a Panel that has the exactly same size as the right chat, placed at the bottomright (for addon placement)
+	["combat_toggle"] = false,							-- Shows the Addon Background, Omen, Recount & Skada infight, hides out of fight
 	["addons_toggle"] = true,							-- Toggle buttons for Recount, Omen, Atlasloot, and Encounter journal.
 	["Recount"] = true,									-- Enable Recount Skin
 	["Skada"] = true,										-- Enable Skada Skin
@@ -170,7 +170,9 @@ C["datatext"] = {
 	["mastery"] =5,                                    -- show mastery rating
 	["micromenu"] = 0,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
-	["profession"] = 3,									-- show profession
+	["profession"] = 0,									-- show profession
+	["calltoarms"] = 3, 								-- Call to arms pvp
+	["expertise"] = 0, 									-- show your expertise rating
 	["enable_specswitcher"] = true, 			-- Show talents
 	
 	-- Color Datatext

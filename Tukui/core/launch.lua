@@ -108,7 +108,7 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
 	ChatFrame_AddMessageGroup(ChatFrame4, "CURRENCY")
 	ChatFrame_AddMessageGroup(ChatFrame4, "GUILD_ACHIEVEMENT")
-	ChatFrame_RemoveChannel(ChatFrame4, L.chat_trade) -- erf, it seem we need to localize this now
+	ChatFrame_AddChannel(ChatFrame4, L.chat_trade) -- erf, it seem we need to localize this now
 			
 	-- enable classcolor automatically on login and on each character without doing /configure each time.
 	ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -192,14 +192,14 @@ v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.10  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.11  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
 
 local ahelp = CreateFrame("Button", "TukuiAsphyxiaHelpFrame", UIParent)
-ahelp:SetSize(550, 325)
+ahelp:SetSize(550, 335)
 ahelp:SetPoint("CENTER")
 ahelp:SetTemplate("Transparent")
 ahelp:CreateShadow("Default")
