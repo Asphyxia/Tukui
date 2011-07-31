@@ -67,6 +67,8 @@ TukuiL.option_datatext_color = "Default color"
 TukuiL.option_datatext_classcolored = "Class colored datatext"
 TukuiL.option_datatext_profession = "Profession (0 for disabled)"
 TukuiL.option_datatext_enable_specswitcher = " Enable specswitcher panel & icon"
+TukuiL.option_datatext_calltoarms = "Call to arms position (0 for disabled)"
+TukuiL.option_datatext_expertise = "Expertise raitng position (0 for disabled)"
  
 -- unit frames
 TukuiL.option_unitframes_unitframes = "Unit Frames"

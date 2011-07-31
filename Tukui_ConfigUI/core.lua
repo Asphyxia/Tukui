@@ -96,6 +96,8 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatextclasscolored" then  o = TukuiL.option_datatext_classcolored end
 	if o == "TukuiConfigUIdatatextprofession" then o = TukuiL.option_datatext_profession end
 	if o == "TukuiConfigUIdatatextenable_specswitcher" then o = TukuiL.option_datatext_enable_specswitcher end
+	if o == "TukuiConfigUIdatatextcalltoarms" then o = TukuiL.option_datatext_calltoarms end
+	if o == "TukuiConfigUIdatatextexpertise" then o = TukuiL.option_datatext_expertise end
 
 	-- unit frames
 	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes_unitframes end
