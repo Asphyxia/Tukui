@@ -132,8 +132,8 @@ local function ChatCopyButtons()
 			end
 		else
 			if C.chat.leftchatbackground then
-				if i == 2 and GetChannelName("Log") then
-					button:Point("TOPRIGHT", 0, 48)
+				if i == 2 and GetChannelName(" Combat Log") then
+					button:Point("TOPRIGHT", 0, 22)
 				end
 				button:SetScript("OnLeave", function() buttontext:SetText(T.panelcolor.."Copy") end)
 			else

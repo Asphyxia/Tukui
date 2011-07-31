@@ -4,14 +4,14 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------------
 
 local anchor = CreateFrame("Frame", "TukuiVehicleAnchor", UIParent)
-anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 208)
+anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 168)
 anchor:Size(120, 20)
 anchor:SetMovable(true)
 anchor:SetClampedToScreen(true)
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(1,0,0)
 anchor:SetAlpha(0)
-anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
+anchor.text = T.SetFontString(anchor, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_vehicle)
 

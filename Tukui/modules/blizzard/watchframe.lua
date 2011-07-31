@@ -17,13 +17,13 @@ TukuiWatchFrameAnchor:EnableMouse(false)
 TukuiWatchFrameAnchor:SetTemplate("Default")
 TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
 TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
-TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, 12)
+TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 TukuiWatchFrameAnchor.text:SetPoint("CENTER")
 TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
 TukuiWatchFrameAnchor.text:Hide()
 
 -- set default position according to how many right bars we have
-TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -220)
+TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -250)
 
 -- width of the watchframe according to our Blizzard cVar.
 if wideFrame == "1" then

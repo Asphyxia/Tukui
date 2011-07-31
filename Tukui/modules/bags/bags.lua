@@ -769,7 +769,7 @@ function Stuffing:Layout(lb)
 				b.frame:SetPushedTexture("")
 				b.frame:SetNormalTexture("")
 				b.frame:Show()
-				b.frame:SetTemplate("Thin")
+				b.frame:SetTemplate("Default")
 				b.frame:SetBackdropColor(.05, .05, .05) -- we just need border with SetTemplate, not the backdrop. Hopefully this will fix invisible item that some users have.
 				b.frame:StyleButton()
 				
