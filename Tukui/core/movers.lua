@@ -2,6 +2,8 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 -- all the frame we want to move
 -- all our frames that we want being movable.
+-- Credits to Sapz for Filger movers
+
 T.MoverFrames = {
 	TukuiMinimap,
 	TukuiTooltipAnchor,
@@ -13,12 +15,22 @@ T.MoverFrames = {
 	TukuiWatchFrameAnchor,
 	TukuiGMFrameAnchor,
 	TukuiVehicleAnchor,
+	FilgerPlayerBuffs,
+	FilgerPlayerDebuffs,
+	FilgerPlayerProccs,
+	FilgerPlayerHealBuffs,
+	FilgerTargetDebuffs,
+	FilgerTargetHeals,
+	FilgerPvPBuffs,
+	FilgerWLBuffs,
+	FilgerDebuffBars,
+	FilgerCDBars,
 }
 
 -- used to exec various code if we enable or disable moving
 local function exec(self, enable)
 
-	if self == TukuiGMFrameAnchor then
+	if self == TukuiGMFrameAnchor or self == FilgerCDBars or self == FilgerDebuffBars or self == FilgerWLBuffs or self == FilgerPvPBuffs or self == FilgerTargetHeals or self == FilgerTargetDebuffs or self == FilgerPlayerBuffs or self == FilgerPlayerDebuffs or self == FilgerPlayerProccs or self == FilgerPlayerHealBuffs then
 		if enable then
 			self:Show()
 		else
