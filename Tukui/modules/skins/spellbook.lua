@@ -89,7 +89,7 @@ local function LoadSkin()
 			tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
 			tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 			
-			tab:CreateBackdrop("Transparent")
+			tab:CreateBackdrop("Default")
 			tab.backdrop:SetAllPoints()
 			tab:StyleButton(true)				
 			
@@ -111,7 +111,7 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs", SkinSkillLine)			
-	SpellBookFrame:SetTemplate("Transparent")
+	SpellBookFrame:SetTemplate("Default")
 	SpellBookFrame:CreateShadow("Default")
 
 	--Profession Tab
@@ -146,9 +146,11 @@ local function LoadSkin()
 
 	for _, button in pairs(professionbuttons) do
 		local icon = _G[button.."IconTexture"]
+		local rank = _G[button.."SubSpellName"]
 		local button = _G[button]
 		button:StripTextures()
-		
+
+		if rank then rank:SetTextColor(1, 1, 1) end
 		if icon then
 			icon:SetTexCoord(.08, .92, .08, .92)
 			icon:ClearAllPoints()
@@ -176,7 +178,7 @@ local function LoadSkin()
 		statusbar:StripTextures()
 		statusbar:SetStatusBarTexture(C["media"].normTex)
 		statusbar:SetStatusBarColor(0, 220/255, 0)
-		statusbar:CreateBackdrop("Transparent")
+		statusbar:CreateBackdrop("Default")
 		
 		statusbar.rankText:ClearAllPoints()
 		statusbar.rankText:SetPoint("CENTER")
@@ -206,7 +208,7 @@ local function LoadSkin()
 	SpellBookCompanionModelFrame:StripTextures()
 	SpellBookCompanionModelFrameShadowOverlay:StripTextures()
 	SpellBookCompanionsModelFrame:Kill()
-	SpellBookCompanionModelFrame:SetTemplate("Transparent")
+	SpellBookCompanionModelFrame:SetTemplate("Default")
 
 	T.SkinRotateButton(SpellBookCompanionModelFrameRotateRightButton)
 	T.SkinRotateButton(SpellBookCompanionModelFrameRotateLeftButton)

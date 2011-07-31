@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	T.SkinCloseButton(QuestLogFrameCloseButton)
 	QuestLogFrame:StripTextures()
-	QuestLogFrame:SetTemplate("Transparent")
+	QuestLogFrame:SetTemplate("Default")
 	QuestLogFrame:CreateShadow("Default")
 	QuestLogCount:StripTextures()
 
@@ -13,6 +13,9 @@ local function LoadSkin()
 	QuestLogFrameShowMapButton.text:ClearAllPoints()
 	QuestLogFrameShowMapButton.text:SetPoint("CENTER")
 	QuestLogFrameShowMapButton:Size(QuestLogFrameShowMapButton:GetWidth() - 30, QuestLogFrameShowMapButton:GetHeight(), - 40)
+	
+	QuestLogFrameCompleteButton:StripTextures()
+	T.SkinButton(QuestLogFrameCompleteButton)
 
 	local buttons = {
 		"QuestLogFrameAbandonButton",
@@ -36,7 +39,7 @@ local function LoadSkin()
 		_G["QuestInfoItem"..i.."IconTexture"]:SetDrawLayer("OVERLAY")
 		_G["QuestInfoItem"..i.."IconTexture"]:Point("TOPLEFT", 2, -2)
 		_G["QuestInfoItem"..i.."IconTexture"]:Size(_G["QuestInfoItem"..i.."IconTexture"]:GetWidth() - 2, _G["QuestInfoItem"..i.."IconTexture"]:GetHeight() - 2)
-		_G["QuestInfoItem"..i]:SetTemplate("Transparent")
+		_G["QuestInfoItem"..i]:SetTemplate("Default")
 		_G["QuestInfoItem"..i.."Count"]:SetDrawLayer("OVERLAY")
 	end
 
@@ -48,13 +51,13 @@ local function LoadSkin()
 	QuestInfoSkillPointFrameIconTexture:SetDrawLayer("OVERLAY")
 	QuestInfoSkillPointFrameIconTexture:Point("TOPLEFT", 2, -2)
 	QuestInfoSkillPointFrameIconTexture:Size(QuestInfoSkillPointFrameIconTexture:GetWidth() - 2, QuestInfoSkillPointFrameIconTexture:GetHeight() - 2)
-	QuestInfoSkillPointFrame:SetTemplate("Transparent")
+	QuestInfoSkillPointFrame:SetTemplate("Default")
 	QuestInfoSkillPointFrameCount:SetDrawLayer("OVERLAY")
 	QuestInfoSkillPointFramePoints:ClearAllPoints()
 	QuestInfoSkillPointFramePoints:Point("BOTTOMRIGHT", QuestInfoSkillPointFrameIconTexture, "BOTTOMRIGHT")
 
 	QuestInfoItemHighlight:StripTextures()
-	QuestInfoItemHighlight:SetTemplate("Transparent")
+	QuestInfoItemHighlight:SetTemplate("Default")
 	QuestInfoItemHighlight:SetBackdropBorderColor(1, 1, 0)
 	QuestInfoItemHighlight:SetBackdropColor(0, 0, 0, 0)
 	QuestInfoItemHighlight:Size(142, 40)
@@ -120,10 +123,9 @@ local function LoadSkin()
 	end)
 
 	QuestLogFrame:HookScript("OnShow", function()
-		QuestLogScrollFrame:Height(QuestLogScrollFrame:GetHeight() - 4)
 		QuestLogDetailScrollFrame:Height(QuestLogScrollFrame:GetHeight() - 4)
-		QuestLogScrollFrame:SetTemplate("Transparent")
-		QuestLogDetailScrollFrame:SetTemplate("Transparent")
+		QuestLogScrollFrame:SetTemplate("Default")
+		QuestLogDetailScrollFrame:SetTemplate("Default")
 	end)
 end	
 
