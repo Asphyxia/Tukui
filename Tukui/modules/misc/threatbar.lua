@@ -20,7 +20,7 @@ TukuiThreatBar:SetMinMaxValues(0, 100)
 TukuiThreatBar:SetOrientation("HORIZONTAL")
 
 local TukuiThreatBarBG = CreateFrame("Frame", nil, TukuiThreatBar)
-TukuiThreatBarBG:CreatePanel("Default", TukuiBar1:GetWidth(), 17, "TOP", TukuiBar1, "BOTTOM", 0, -3)
+TukuiThreatBarBG:CreatePanel("Default", TukuiBar1:GetWidth(), 20, "TOP", TukuiBar1, "BOTTOM", 0, -3)
 
 TukuiThreatBar:Point("TOPLEFT", TukuiThreatBarBG, 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", TukuiThreatBarBG, -2, 2)
