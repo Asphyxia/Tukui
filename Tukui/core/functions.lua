@@ -853,12 +853,14 @@ T.HidePortrait = function(self, unit)
 		end
 	end
 end
+
 T.PortraitUpdate = function(self, unit)
 	--Fucking Furries
 	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
 		self:SetCamera(1)
 	end
 end
+
 -- jasje castbar
 T.PostCastStart = function(self, unit, name, rank, castid)
 	if unit == "vehicle" then unit = "player" end
