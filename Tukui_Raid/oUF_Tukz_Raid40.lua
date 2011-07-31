@@ -106,7 +106,7 @@ local function Shared(self, unit)
 	local PowerBorder = CreateFrame("Frame", nil, power)
 	PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", T.Scale(-2), T.Scale(2))
 	PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-	PowerBorder:SetTemplate("Thin")
+	PowerBorder:SetTemplate("Default")
 	--PowerBorder:CreateShadow("Default")
 	PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
 	self.PowerBorder = PowerBorder
