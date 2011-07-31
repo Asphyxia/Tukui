@@ -36,7 +36,7 @@ local function LoadSkin()
 			local icon = _G["GuildBankColumn"..i.."Button"..x.."IconTexture"]
 			button:StripTextures()
 			button:StyleButton()
-			button:SetTemplate("Default", true)
+			button:SetTemplate("Transparent", true)
 			
 			icon:ClearAllPoints()
 			icon:Point("TOPLEFT", 2, -2)
@@ -52,7 +52,7 @@ local function LoadSkin()
 		
 		button:StripTextures()
 		button:StyleButton(true)
-		button:SetTemplate("Default", true)
+		button:SetTemplate("Transparent", true)
 		
 		texture:ClearAllPoints()
 		texture:Point("TOPLEFT", 2, -2)

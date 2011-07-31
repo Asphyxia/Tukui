@@ -3,8 +3,8 @@ local T, C, L = unpack(select(2, ...))
 local function LoadSkin()
 	T.SkinCloseButton(AuctionFrameCloseButton)
 	AuctionFrame:StripTextures(true)
-	AuctionFrame:SetTemplate("Default")
-	AuctionFrame:CreateShadow("Default")
+	AuctionFrame:SetTemplate("Transparent")
+	AuctionFrame:CreateShadow("Transparent")
 	
 	BrowseFilterScrollFrame:StripTextures()
 	BrowseScrollFrame:StripTextures()
@@ -22,7 +22,7 @@ local function LoadSkin()
 	
 	--Dress Up Frame
 	AuctionDressUpFrame:StripTextures()
-	AuctionDressUpFrame:SetTemplate("Default")
+	AuctionDressUpFrame:SetTemplate("Transparent")
 	AuctionDressUpFrame:Point("TOPLEFT", AuctionFrame, "TOPRIGHT", 2, 0)
 	T.SkinButton(AuctionDressUpFrameResetButton)
 	AuctionDressUpFrameCloseButton:StripTextures()
@@ -37,10 +37,10 @@ local function LoadSkin()
 	
 	--Progress Frame
 	AuctionProgressFrame:StripTextures()
-	AuctionProgressFrame:SetTemplate("Default")
-	AuctionProgressFrame:CreateShadow("Default")
+	AuctionProgressFrame:SetTemplate("Transparent")
+	AuctionProgressFrame:CreateShadow("Transparent")
 	AuctionProgressFrameCancelButton:StyleButton()
-	AuctionProgressFrameCancelButton:SetTemplate("Default")
+	AuctionProgressFrameCancelButton:SetTemplate("Transparent")
 	AuctionProgressFrameCancelButton:SetHitRectInsets(0, 0, 0, 0)
 	AuctionProgressFrameCancelButton:GetNormalTexture():ClearAllPoints()
 	AuctionProgressFrameCancelButton:GetNormalTexture():Point("TOPLEFT", 2, -2)
@@ -54,14 +54,14 @@ local function LoadSkin()
 	local backdrop = CreateFrame("Frame", nil, AuctionProgressBarIcon:GetParent())
 	backdrop:Point("TOPLEFT", AuctionProgressBarIcon, "TOPLEFT", -2, 2)
 	backdrop:Point("BOTTOMRIGHT", AuctionProgressBarIcon, "BOTTOMRIGHT", 2, -2)
-	backdrop:SetTemplate("Default")
+	backdrop:SetTemplate("Transparent")
 	AuctionProgressBarIcon:SetParent(backdrop)
 	
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
 	
 	AuctionProgressBar:StripTextures()
-	AuctionProgressBar:CreateBackdrop("Default")
+	AuctionProgressBar:CreateBackdrop("Transparent")
 	AuctionProgressBar:SetStatusBarTexture(C["media"].normTex)
 	AuctionProgressBar:SetStatusBarColor(1, 1, 0)
 	
@@ -97,7 +97,7 @@ local function LoadSkin()
 	BrowseBidButton:Point("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)		
 	AuctionsItemButton:StripTextures()
 	AuctionsItemButton:StyleButton()
-	AuctionsItemButton:SetTemplate("Default", true)
+	AuctionsItemButton:SetTemplate("Transparent", true)
 	BrowseResetButton:Point("TOPLEFT", AuctionFrameBrowse, "TOPLEFT", 81, -74)
 	BrowseSearchButton:Point("TOPRIGHT", AuctionFrameBrowse, "TOPRIGHT", 25, -34)
 	
@@ -185,7 +185,7 @@ local function LoadSkin()
 		--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 		
-		icon:CreateBackdrop("Default")
+		icon:CreateBackdrop("Transparent")
 		icon.backdrop:SetAllPoints()
 
 		button:StripTextures()
@@ -211,7 +211,7 @@ local function LoadSkin()
 		--TODO: Find a better method to ensure that the icon:GetNormalTexture doesn't return after clicking
 		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 		
-		icon:CreateBackdrop("Default")
+		icon:CreateBackdrop("Transparent")
 		icon.backdrop:SetAllPoints()
 
 		button:StripTextures()
@@ -235,7 +235,7 @@ local function LoadSkin()
 		icon:StyleButton()
 		icon:HookScript("OnUpdate", function() icon:GetNormalTexture():Kill() end)
 		
-		icon:CreateBackdrop("Default")
+		icon:CreateBackdrop("Transparent")
 		icon.backdrop:SetAllPoints()
 
 		button:StripTextures()
@@ -249,32 +249,32 @@ local function LoadSkin()
 	
 	--Custom Backdrops
 	AuctionFrameBrowse.bg1 = CreateFrame("Frame", nil, AuctionFrameBrowse)
-	AuctionFrameBrowse.bg1:SetTemplate("Default")
+	AuctionFrameBrowse.bg1:SetTemplate("Transparent")
 	AuctionFrameBrowse.bg1:Point("TOPLEFT", 20, -103)
 	AuctionFrameBrowse.bg1:Point("BOTTOMRIGHT", -575, 40)
 	BrowseFilterScrollFrame:Height(300) --Adjust scrollbar height a little off
 
 	AuctionFrameBrowse.bg2 = CreateFrame("Frame", nil, AuctionFrameBrowse)
-	AuctionFrameBrowse.bg2:SetTemplate("Default")
+	AuctionFrameBrowse.bg2:SetTemplate("Transparent")
 	AuctionFrameBrowse.bg2:Point("TOPLEFT", AuctionFrameBrowse.bg1, "TOPRIGHT", 4, 0)
 	AuctionFrameBrowse.bg2:Point("BOTTOMRIGHT", AuctionFrame, "BOTTOMRIGHT", -8, 40)
 	BrowseScrollFrame:Height(300) --Adjust scrollbar height a little off
 	
 	AuctionFrameBid.bg = CreateFrame("Frame", nil, AuctionFrameBid)
-	AuctionFrameBid.bg:SetTemplate("Default")
+	AuctionFrameBid.bg:SetTemplate("Transparent")
 	AuctionFrameBid.bg:Point("TOPLEFT", 22, -72)
 	AuctionFrameBid.bg:Point("BOTTOMRIGHT", 66, 39)
 	BidScrollFrame:Height(332)	
 
 	AuctionsScrollFrame:Height(336)	
 	AuctionFrameAuctions.bg1 = CreateFrame("Frame", nil, AuctionFrameAuctions)
-	AuctionFrameAuctions.bg1:SetTemplate("Default")
+	AuctionFrameAuctions.bg1:SetTemplate("Transparent")
 	AuctionFrameAuctions.bg1:Point("TOPLEFT", 15, -70)
 	AuctionFrameAuctions.bg1:Point("BOTTOMRIGHT", -545, 35)  
 	AuctionFrameAuctions.bg1:SetFrameLevel(AuctionFrameAuctions.bg1:GetFrameLevel() - 2)	
 	
 	AuctionFrameAuctions.bg2 = CreateFrame("Frame", nil, AuctionFrameAuctions)
-	AuctionFrameAuctions.bg2:SetTemplate("Default")
+	AuctionFrameAuctions.bg2:SetTemplate("Transparent")
 	AuctionFrameAuctions.bg2:Point("TOPLEFT", AuctionFrameAuctions.bg1, "TOPRIGHT", 3, 0)
 	AuctionFrameAuctions.bg2:Point("BOTTOMRIGHT", AuctionFrame, -8, 35)  
 	AuctionFrameAuctions.bg2:SetFrameLevel(AuctionFrameAuctions.bg2:GetFrameLevel() - 2)		

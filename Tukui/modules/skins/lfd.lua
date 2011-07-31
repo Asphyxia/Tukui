@@ -97,7 +97,7 @@ local function LoadSkin()
 	end)
 
 	LFDDungeonReadyDialog:SetTemplate("Transparent")
-	LFDDungeonReadyDialog:CreateShadow("Default")
+	LFDDungeonReadyDialog:CreateShadow("Transparent")
 	LFDQueueFrameSpecificListScrollFrame:StripTextures()
 	LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
 	LFDParentFrame:CreateBackdrop("Transparent")

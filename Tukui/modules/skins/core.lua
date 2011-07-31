@@ -52,7 +52,7 @@ function T.SkinScrollBar(frame, thumbTrim)
 	
 	if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
 		_G[frame:GetName().."ScrollUpButton"]:StripTextures()
-		_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Default", true)
+		_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Transparent", true)
 		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', T.SetModifiedBackdrop)
 		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', T.SetOriginalBackdrop)		
 		if not _G[frame:GetName().."ScrollUpButton"].texture then
@@ -71,7 +71,7 @@ function T.SkinScrollBar(frame, thumbTrim)
 		end)		
 
 		_G[frame:GetName().."ScrollDownButton"]:StripTextures()
-		_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Default", true)
+		_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Transparent", true)
 		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', T.SetModifiedBackdrop)
 		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', T.SetOriginalBackdrop)		
 		if not _G[frame:GetName().."ScrollDownButton"].texture then
@@ -104,7 +104,7 @@ function T.SkinScrollBar(frame, thumbTrim)
 				frame.thumbbg = CreateFrame("Frame", nil, frame)
 				frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
 				frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
-				frame.thumbbg:SetTemplate("Default", true)
+				frame.thumbbg:SetTemplate("Transparent", true)
 				if frame.trackbg then
 					frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
 				end
@@ -115,7 +115,7 @@ end
 
 function T.SkinSlideBar(frame,height,movetext)
 
-	frame:SetTemplate("Default")
+	frame:SetTemplate("Transparent")
 	frame:SetBackdropColor(0,0,0,.8)
 
 	if not height then height = frame:GetHeight() end

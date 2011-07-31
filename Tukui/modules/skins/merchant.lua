@@ -33,7 +33,7 @@ local function LoadSkin()
 		
 		b:StripTextures()
 		b:StyleButton(false)
-		b:SetTemplate("Default", true)
+		b:SetTemplate("Transparent", true)
 		b:Point("TOPLEFT", item_bar, "TOPLEFT", 4, -4)
 		t:SetTexCoord(.08, .92, .08, .92)
 		t:ClearAllPoints()
@@ -48,7 +48,7 @@ local function LoadSkin()
 	-- Skin buyback item frame + icon
 	MerchantBuyBackItemItemButton:StripTextures()
 	MerchantBuyBackItemItemButton:StyleButton(false)
-	MerchantBuyBackItemItemButton:SetTemplate("Default", true)
+	MerchantBuyBackItemItemButton:SetTemplate("Transparent", true)
 	MerchantBuyBackItemItemButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
 	MerchantBuyBackItemItemButtonIconTexture:ClearAllPoints()
 	MerchantBuyBackItemItemButtonIconTexture:Point("TOPLEFT", 2, -2)
@@ -56,7 +56,7 @@ local function LoadSkin()
 
 
 	MerchantRepairItemButton:StyleButton(false)
-	MerchantRepairItemButton:SetTemplate("Default", true)
+	MerchantRepairItemButton:SetTemplate("Transparent", true)
 	for i=1, MerchantRepairItemButton:GetNumRegions() do
 		local region = select(i, MerchantRepairItemButton:GetRegions())
 		if region:GetObjectType() == "Texture" and region:GetTexture() == "Interface\\MerchantFrame\\UI-Merchant-RepairIcons" then
@@ -68,14 +68,14 @@ local function LoadSkin()
 	end
 
 	MerchantGuildBankRepairButton:StyleButton()
-	MerchantGuildBankRepairButton:SetTemplate("Default", true)
+	MerchantGuildBankRepairButton:SetTemplate("Transparent", true)
 	MerchantGuildBankRepairButtonIcon:SetTexCoord(0.61, 0.82, 0.1, 0.52)
 	MerchantGuildBankRepairButtonIcon:ClearAllPoints()
 	MerchantGuildBankRepairButtonIcon:Point("TOPLEFT", 2, -2)
 	MerchantGuildBankRepairButtonIcon:Point("BOTTOMRIGHT", -2, 2)
 
 	MerchantRepairAllButton:StyleButton(false)
-	MerchantRepairAllButton:SetTemplate("Default", true)
+	MerchantRepairAllButton:SetTemplate("Transparent", true)
 	MerchantRepairAllIcon:SetTexCoord(0.34, 0.1, 0.34, 0.535, 0.535, 0.1, 0.535, 0.535)
 	MerchantRepairAllIcon:ClearAllPoints()
 	MerchantRepairAllIcon:Point("TOPLEFT", 2, -2)

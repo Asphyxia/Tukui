@@ -2,7 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	--GLYPHS TAB
-	GlyphFrameSparkleFrame:CreateBackdrop("Default")
+	GlyphFrameSparkleFrame:CreateBackdrop("Transparent")
 	GlyphFrameSparkleFrame.backdrop:Point( "TOPLEFT", GlyphFrameSparkleFrame, "TOPLEFT", 3, -3 )
 	GlyphFrameSparkleFrame.backdrop:Point( "BOTTOMRIGHT", GlyphFrameSparkleFrame, "BOTTOMRIGHT", -3, 3 )
 	T.SkinEditBox(GlyphFrameSearchBox)
@@ -43,7 +43,7 @@ local function LoadSkin()
 	GlyphFrameClearInfoFrameIcon:Point("TOPLEFT", 2, -2)
 	GlyphFrameClearInfoFrameIcon:Point("BOTTOMRIGHT", -2, 2)
 	
-	GlyphFrameClearInfoFrame:CreateBackdrop("Default", true)
+	GlyphFrameClearInfoFrame:CreateBackdrop("Transparent", true)
 	GlyphFrameClearInfoFrame.backdrop:SetAllPoints()
 	GlyphFrameClearInfoFrame:StyleButton()
 	GlyphFrameClearInfoFrame:Size(25, 25)

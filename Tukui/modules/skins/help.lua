@@ -94,7 +94,7 @@ local function LoadSkin()
 
 	--Hearth Stone Button
 	HelpFrameCharacterStuckHearthstone:StyleButton()
-	HelpFrameCharacterStuckHearthstone:SetTemplate("Default", true)
+	HelpFrameCharacterStuckHearthstone:SetTemplate("Transparent", true)
 	HelpFrameCharacterStuckHearthstone.IconTexture:ClearAllPoints()
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("TOPLEFT", 2, -2)
 	HelpFrameCharacterStuckHearthstone.IconTexture:Point("BOTTOMRIGHT", -2, 2)

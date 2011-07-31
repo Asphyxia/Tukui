@@ -10,7 +10,7 @@ local function LoadSkin()
 	
 	for _, v in pairs(buttons) do
 		_G[v]:StripTextures()
-		_G[v]:SetTemplate("Default", true)
+		_G[v]:SetTemplate("Transparent", true)
 	end
 	
 	T.SkinCheckBox(KeyBindingFrameCharacterButton)
@@ -24,10 +24,10 @@ local function LoadSkin()
 		local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
 		button1:StripTextures(true)
 		button1:StyleButton(false)
-		button1:SetTemplate("Default", true)
+		button1:SetTemplate("Transparent", true)
 		button2:StripTextures(true)
 		button2:StyleButton(false)
-		button2:SetTemplate("Default", true)
+		button2:SetTemplate("Transparent", true)
 	end
 	
 	KeyBindingFrameUnbindButton:Point("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)

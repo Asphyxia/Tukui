@@ -4,14 +4,14 @@ local function LoadSkin()
 	-- mac menu/option panel, made by affli.
 	if IsMacClient() then
 		-- Skin main frame and reposition the header
-		MacOptionsFrame:SetTemplate("Default", true)
+		MacOptionsFrame:SetTemplate("Transparent", true)
 		MacOptionsFrameHeader:SetTexture("")
 		MacOptionsFrameHeader:ClearAllPoints()
 		MacOptionsFrameHeader:SetPoint("TOP", MacOptionsFrame, 0, 0)
 
 		--Skin internal frames
-		MacOptionsFrameMovieRecording:SetTemplate("Default", true)
-		MacOptionsITunesRemote:SetTemplate("Default", true)
+		MacOptionsFrameMovieRecording:SetTemplate("Transparent", true)
+		MacOptionsITunesRemote:SetTemplate("Transparent", true)
 
 		--Skin buttons
 		T.SkinButton(_G["MacOptionsFrameCancel"])

@@ -59,7 +59,7 @@ local function LoadSkin()
 				icon:SetAllPoints()
 
 				if not button.backdrop then
-					button:CreateBackdrop("Default", true)	
+					button:CreateBackdrop("Transparent", true)	
 				end
 			end	
 			
@@ -89,7 +89,7 @@ local function LoadSkin()
 			tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
 			tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 			
-			tab:CreateBackdrop("Default")
+			tab:CreateBackdrop("Transparent")
 			tab.backdrop:SetAllPoints()
 			tab:StyleButton(true)				
 			
@@ -111,8 +111,8 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs", SkinSkillLine)			
-	SpellBookFrame:SetTemplate("Default")
-	SpellBookFrame:CreateShadow("Default")
+	SpellBookFrame:SetTemplate("Transparent")
+	SpellBookFrame:CreateShadow("Transparent")
 
 	--Profession Tab
 	local professionbuttons = {
@@ -158,7 +158,7 @@ local function LoadSkin()
 			icon:Point("BOTTOMRIGHT", -2, 2)
 
 			if not button.backdrop then
-				button:CreateBackdrop("Default", true)	
+				button:CreateBackdrop("Transparent", true)	
 				button.backdrop:SetAllPoints()
 			end
 		end					
@@ -178,7 +178,7 @@ local function LoadSkin()
 		statusbar:StripTextures()
 		statusbar:SetStatusBarTexture(C["media"].normTex)
 		statusbar:SetStatusBarColor(0, 220/255, 0)
-		statusbar:CreateBackdrop("Default")
+		statusbar:CreateBackdrop("Transparent")
 		
 		statusbar.rankText:ClearAllPoints()
 		statusbar.rankText:SetPoint("CENTER")
@@ -198,7 +198,7 @@ local function LoadSkin()
 			icon:Point("BOTTOMRIGHT", -2, 2)
 
 			if not button.backdrop then
-				button:CreateBackdrop("Default", true)	
+				button:CreateBackdrop("Transparent", true)	
 				button.backdrop:SetAllPoints()
 			end
 		end					
@@ -208,7 +208,7 @@ local function LoadSkin()
 	SpellBookCompanionModelFrame:StripTextures()
 	SpellBookCompanionModelFrameShadowOverlay:StripTextures()
 	SpellBookCompanionsModelFrame:Kill()
-	SpellBookCompanionModelFrame:SetTemplate("Default")
+	SpellBookCompanionModelFrame:SetTemplate("Transparent")
 
 	T.SkinRotateButton(SpellBookCompanionModelFrameRotateRightButton)
 	T.SkinRotateButton(SpellBookCompanionModelFrameRotateLeftButton)

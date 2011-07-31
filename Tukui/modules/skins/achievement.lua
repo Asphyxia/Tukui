@@ -127,7 +127,7 @@ local function LoadSkin()
 			_G["AchievementFrameSummaryAchievement"..i.."Description"]:SetTextColor(0.6, 0.6, 0.6)
 			
 			if not frame.backdrop then
-				frame:CreateBackdrop("Default", true)
+				frame:CreateBackdrop("Transparent", true)
 				frame.backdrop:Point("TOPLEFT", 2, -2)
 				frame.backdrop:Point("BOTTOMRIGHT", -2, 2)
 

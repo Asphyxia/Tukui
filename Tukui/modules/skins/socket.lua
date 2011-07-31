@@ -13,7 +13,7 @@ local function LoadSkin()
 		local button_icon = _G["ItemSocketingSocket"..i.."IconTexture"]
 		button:StripTextures()
 		button:StyleButton(false)
-		button:SetTemplate("Default", true)
+		button:SetTemplate("Transparent", true)
 		button_bracket:Kill()
 		button_bg:Kill()
 		button_icon:SetTexCoord(.08, .92, .08, .92)

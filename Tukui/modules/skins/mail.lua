@@ -5,7 +5,7 @@ local function LoadSkin()
 	MailFrame:CreateBackdrop("Transparent")
 	MailFrame.backdrop:Point("TOPLEFT", 4, 0)
 	MailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
-	MailFrame.backdrop:CreateShadow("Default")
+	MailFrame.backdrop:CreateShadow("Transparent")
 	MailFrame:SetWidth(360)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
@@ -17,7 +17,7 @@ local function LoadSkin()
 		
 		local b = _G["MailItem"..i.."Button"]
 		b:StripTextures()
-		b:SetTemplate("Default", true)
+		b:SetTemplate("Transparent", true)
 		b:StyleButton()
 
 		local t = _G["MailItem"..i.."ButtonIcon"]
@@ -57,7 +57,7 @@ local function LoadSkin()
 			local b = _G["SendMailAttachment"..i]
 			if not b.skinned then
 				b:StripTextures()
-				b:SetTemplate("Default", true)
+				b:SetTemplate("Transparent", true)
 				b:StyleButton()
 				b.skinned = true
 			end
@@ -80,7 +80,7 @@ local function LoadSkin()
 	OpenMailFrame:CreateBackdrop("Transparent")
 	OpenMailFrame.backdrop:Point("TOPLEFT", 4, 0)
 	OpenMailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
-	OpenMailFrame.backdrop:CreateShadow("Default")
+	OpenMailFrame.backdrop:CreateShadow("Transparent")
 	OpenMailFrame:SetWidth(360)
 
 	T.SkinCloseButton(OpenMailCloseButton)
@@ -102,7 +102,7 @@ local function LoadSkin()
 	OpenMailArithmeticLine:Kill()
 
 	OpenMailLetterButton:StripTextures()
-	OpenMailLetterButton:SetTemplate("Default", true)
+	OpenMailLetterButton:SetTemplate("Transparent", true)
 	OpenMailLetterButton:StyleButton()
 	OpenMailLetterButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
 	OpenMailLetterButtonIconTexture:ClearAllPoints()
@@ -110,7 +110,7 @@ local function LoadSkin()
 	OpenMailLetterButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
 
 	OpenMailMoneyButton:StripTextures()
-	OpenMailMoneyButton:SetTemplate("Default", true)
+	OpenMailMoneyButton:SetTemplate("Transparent", true)
 	OpenMailMoneyButton:StyleButton()
 	OpenMailMoneyButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
 	OpenMailMoneyButtonIconTexture:ClearAllPoints()
@@ -120,7 +120,7 @@ local function LoadSkin()
 	for i = 1, ATTACHMENTS_MAX_SEND do				
 		local b = _G["OpenMailAttachmentButton"..i]
 		b:StripTextures()
-		b:SetTemplate("Default", true)
+		b:SetTemplate("Transparent", true)
 		b:StyleButton()
 		
 		local t = _G["OpenMailAttachmentButton"..i.."IconTexture"]

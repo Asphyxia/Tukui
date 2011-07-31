@@ -15,7 +15,7 @@ local function LoadSkin()
 	T.SkinDropDownBox(ReforgingFrameFilterNewStat, 180)
 	
 	ReforgingFrameItemButton:StripTextures()
-	ReforgingFrameItemButton:SetTemplate("Default", true)
+	ReforgingFrameItemButton:SetTemplate("Transparent", true)
 	ReforgingFrameItemButton:StyleButton()
 	ReforgingFrameItemButtonIconTexture:ClearAllPoints()
 	ReforgingFrameItemButtonIconTexture:Point("TOPLEFT", 2, -2)
