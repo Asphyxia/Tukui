@@ -47,7 +47,7 @@ local function GatherTalents(isInspect)
 	-- Customise output. Use TipTac setting if it exists, otherwise just use formatting style one.
 	local talentFormat = (1);
 	if (current[primaryTree] == 0) then
-		current.format = L_TOOLTIP_NO_TALENT;
+		current.format = L.tooltip_no_talent;
 	elseif (talentFormat == 1) then
 		current.format = current.tree.." ("..current[1].."/"..current[2].."/"..current[3]..")";
 	elseif (talentFormat == 2) then
