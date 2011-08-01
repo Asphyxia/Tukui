@@ -229,7 +229,14 @@ local function Shared(self, unit)
 			PVP:SetWidth(32)
 			PVP:SetPoint("CENTER", 5, -6)
 			self.PvP = PVP
-
+			if(UnitIsPVP(unit) and factionGroup) then
+				if(factionGroup == 'Horde') then
+					pvp:SetTexture([[Interface\AddOns\Tukui\medias\textures\Horde]])
+				else
+					pvp:SetTexture([[Interface\AddOns\Tukui\medias\textures\Alliance]])
+				end
+			end
+			
 			-- leader icon
 			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
 			Leader:Height(14)
@@ -1018,6 +1025,105 @@ local function Shared(self, unit)
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
 		self:RegisterEvent("UNIT_PET", T.updateAllElements)
 	end
+	
+	------------------------------------------------------------------------
+	--	Pet target unit layout
+	------------------------------------------------------------------------
+	
+	if (unit == "pettarget") then
+		-- health bar
+		local health = CreateFrame('StatusBar', nil, self)
+		health:Height(15)
+		health:SetPoint("TOPLEFT")
+		health:SetPoint("TOPRIGHT")
+		health:SetStatusBarTexture(normTex)
+		
+		-- Border for ToT
+		local HealthBorder = CreateFrame("Frame", nil, health)
+		HealthBorder:SetPoint("TOPLEFT", health, "TOPLEFT", -2, 2)
+		HealthBorder:SetPoint("BOTTOMRIGHT", health, "BOTTOMRIGHT", 2, -2)
+		HealthBorder:SetTemplate("Default")
+		HealthBorder:CreateShadow("Default")
+		HealthBorder:SetFrameLevel(2)
+		self.HealthBorder = HealthBorder
+		
+		local healthBG = health:CreateTexture(nil, 'BORDER')
+		healthBG:SetAllPoints()
+		healthBG:SetTexture(0, 0, 0)
+		
+		self.Health = health
+		self.Health.bg = healthBG
+		
+		health.frequentUpdates = true
+		if C["unitframes"].showsmooth == true then
+			health.Smooth = true
+		end
+		
+		if C["unitframes"].unicolor == true then
+			health.colorDisconnected = false
+			health.colorClass = false
+			health:SetStatusBarColor(.150, .150, .150, 1)
+			healthBG:SetVertexColor(0, 0, 0, 1)		
+		else
+			health.colorDisconnected = true
+			health.colorClass = true
+			health.colorReaction = true			
+		end
+		
+		-- power
+		local power = CreateFrame('StatusBar', nil, self)
+		power:Size(128, 2)
+		power:Point("TOP", health, "BOTTOM", 0, -7)
+		power:SetStatusBarTexture(normTex)
+		
+		-- Border for Power
+		local PowerBorder = CreateFrame("Frame", nil, power)
+		PowerBorder:SetPoint("TOPLEFT", power, "TOPLEFT", -2, 2)
+		PowerBorder:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", 2, -2)
+		PowerBorder:SetTemplate("Default")
+		PowerBorder:CreateShadow("Default")
+		PowerBorder:SetFrameLevel(power:GetFrameLevel() - 1)
+		self.PowerBorder = PowerBorder
+		
+		power.frequentUpdates = true
+
+		if C["unitframes"].showsmooth == true then
+			power.Smooth = true
+		end
+
+		local powerBG = power:CreateTexture(nil, 'BORDER')
+		powerBG:SetAllPoints(power)
+		powerBG:SetTexture(normTex)
+		powerBG.multiplier = 0.3
+				
+		self.Power = power
+		self.Power.bg = powerBG
+
+		if C["unitframes"].showsmooth == true then
+			power.Smooth = true
+		end
+		
+		if C["unitframes"].unicolor == true then
+			power.colorTapping = true
+			power.colorClass = true
+			power.colorReaction = true
+			powerBG.multiplier = 0.1				
+		else
+			power.colorPower = true
+		end
+		
+		-- Unit name
+		local Name = health:CreateFontString(nil, "OVERLAY")
+		Name:SetPoint("CENTER", self.Health, "CENTER", 0, 1)
+		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
+		Name:SetJustifyH("CENTER")
+
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium]')
+		self.Name = Name
+		
+		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
+		self:RegisterEvent("UNIT_PET", T.updateAllElements)
+	end
 
 
 	------------------------------------------------------------------------
@@ -1667,6 +1773,13 @@ end
 local pet = oUF:Spawn('pet', "TukuiPet")
 	pet:SetPoint("TOPLEFT", player, "BOTTOMRIGHT", 0, -8)
 	pet:Size(128, 26)
+	
+-- pettarget
+if C["unitframes"].pettarget == true then
+local pettarget = oUF:Spawn('pettarget', "TukuiPetTarget")
+pettarget:SetPoint("BOTTOMRIGHT", player, "TOPRIGHT", 0,5)
+pettarget:Size(128, 26)
+end	
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
@@ -1786,10 +1899,10 @@ moveUFs:SetScript("OnEvent", function(self)
 	if not IsAddOnLoaded("Tukui_Raid_Healing") then return end
 
 	if TukuiGrid:IsVisible() then
-		TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13) + 2)
-		TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13) + 2)
-		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing+1, T.buttonspacing)
-		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing+1, -T.buttonspacing)
+		TukuiBar1:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
+		TukuiBar4:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
+		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
+		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing, -T.buttonspacing)
 		player:ClearAllPoints()
 		target:ClearAllPoints()
 		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -75, 75)

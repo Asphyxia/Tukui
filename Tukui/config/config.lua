@@ -44,6 +44,7 @@ C["unitframes"] = {
 	["showfocustarget"] = true,                         	-- show focus target
 	["bordercolor"] = { 0, 0, 0, 1 },                 		-- unit frames panel border color
 	["extendedpet"] = true,                         		-- extended pet frame
+	["pettarget"] = true, 										-- show pet target frame
 	["showsolo"] = true,                        				-- show raid frames when solo (DPS only)
 	["gradienthealth"] = true,                          	-- change raid health color based on health percent.
 	["gradient"] = {                                    			-- health gradient color if unicolor is true.

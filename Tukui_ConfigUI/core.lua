@@ -151,6 +151,7 @@ local function Local(o)
 	if o == "TukuiConfigUIunitframesshowsolo" then o = TukuiL.option_unitframes_show_solo end
 	if o == "TukuiConfigUIunitframesgradient" then o = TukuiL.option_unitframes_gradient end
 	if o == "TukuiConfigUIunitframesextendedpet" then o = TukuiL.option_unitframes_extended_pet end
+	if o == "TukuiConfigUIunitframespettarget" then o = TukuiL.option_unitframes_pet_target end
 	if o == "TukuiConfigUIunitframesgradienthealth" then o = TukuiL.option_unitframes_gradient_health end
 	if o == "TukuiConfigUIunitframescbspark" then o = TukuiL.option_unitframes_cbspark end
 	if o == "TukuiConfigUIunitframesclassicon" then o = TukuiL.option_unitframes_classicon end
