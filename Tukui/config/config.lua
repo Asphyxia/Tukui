@@ -117,7 +117,7 @@ C["Addon_Skins"] = {
 	["TinyDPS"] = true,									-- Enable TinyDPS Skin
 	["DBM"] = true,											-- skins DBM
 	["bigwigs"] = true,									-- skins BigWigs
-	["embedright"] = "None",				-- Addon to embed to the right frame ("Recount", & "Skada")
+	["embedright"] = "Recount",				-- Addon to embed to the right frame ("Recount", & "Skada")
 	["embedrighttoggle"] = true,
 }
 
