@@ -14,7 +14,7 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
      
 	local dText = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	dText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-	dText:SetText(L.datatext_dps,T.panelcolor, " 0.0 ")
+	dText:SetText(L.datatext_dps,T.datacolor, " 0.0 ")
 
 	T.PP(C["datatext"].dps_text, dText)
 
@@ -79,9 +79,9 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
      
 	function getDPS()
 		if (dmg_total == 0) then
-			return (L.datatext_dps..T.panelcolor.. " 0.0 ")
+			return (L.datatext_dps..T.datacolor.. " 0.0 ")
 		else
-			return string.format(L.datatext_dps..T.panelcolor.. "%.1f ", (dmg_total or 0) / (cmbt_time or 1))
+			return string.format(L.datatext_dps..T.datacolor.. "%.1f ", (dmg_total or 0) / (cmbt_time or 1))
 		end
 	end
 

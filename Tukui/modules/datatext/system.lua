@@ -19,8 +19,8 @@ T.PP(C["datatext"].system, Text)
 local bandwidthString = "%.2f Mbps"
 local percentageString = "%.2f%%"
 
-local kiloByteString = "%d"..T.panelcolor.." kb"
-local megaByteString = "%.2f"..T.panelcolor.." mb"
+local kiloByteString = "%d"..T.datacolor.." kb"
+local megaByteString = "%.2f"..T.datacolor.." mb"
 
 local function formatMem(memory)
 	local mult = 10^1

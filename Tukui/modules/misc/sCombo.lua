@@ -27,8 +27,8 @@ Anchor:SetMovable(true)
 Anchor:Hide()
 Anchor.text = Anchor:CreateFontString(nil, "OVERLAY")
 Anchor.text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-Anchor.text:SetPoint("CENTER")
-Anchor.text:SetText(T.panelcolor.."Move CP-Bar (sCombo)")
+Anchor.text:SetPoint("CENTER", 0, 1)
+Anchor.text:SetText(T.datacolor.."Move CP-Bar (sCombo)")
 
 local sCombo = CreateFrame("Frame", "sCombo", UIParent)
 for i = 1, 5 do

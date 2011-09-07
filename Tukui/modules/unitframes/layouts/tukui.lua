@@ -126,7 +126,7 @@ local function Shared(self, unit)
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(18)
-		power:Width(256)
+		power:Width(240)
 		if unit == "player" then
 			power:Point("TOP", health, "BOTTOM", 2, 9)
 			power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 5, -2)
@@ -206,19 +206,11 @@ local function Shared(self, unit)
 		local classicon = CreateFrame("Frame", self:GetName().."_ClassIconBorder", self)
 		classicon:CreateShadow("Default")
 		if unit == "player" then
-			if C.unitframes.charportrait then
-				classicon:CreatePanel("Default", 33, 33, "TOPLEFT", health, "TOPRIGHT", 8, 2)
-			else
-				classicon:CreatePanel("Default", 33, 33, "TOPRIGHT", health, "TOPLEFT", -8, 2)
-			end
+				classicon:CreatePanel("Default", 33, 33, "TOPRIGHT", health, "TOPLEFT", -10,2)
 		elseif unit == "target" then
-			if C.unitframes.charportrait then
-				classicon:CreatePanel("Default", 33, 33, "TOPRIGHT", health, "TOPLEFT", -8, 2)
-			else
-				classicon:CreatePanel("Default", 33, 33, "TOPLEFT", health, "TOPRIGHT", 8, 2)
-			end
+				classicon:CreatePanel("Default", 33, 33, "TOPLEFT", health, "TOPRIGHT", 10,2)
 		end
-
+		
 		local class = classicon:CreateTexture(self:GetName().."_ClassIcon", "ARTWORK")
 		class:Point("TOPLEFT", 2, -2)
 		class:Point("BOTTOMRIGHT", -2, 2)
@@ -268,7 +260,7 @@ local function Shared(self, unit)
 			local Combat = health:CreateTexture(nil, "OVERLAY")
 			Combat:Height(19)
 			Combat:Width(19)
-			Combat:SetPoint("LEFT",0,1)
+			Combat:SetPoint("CENTER",0,0)
 			Combat:SetVertexColor(0.69, 0.31, 0.31)
 			self.Combat = Combat
 
@@ -309,8 +301,8 @@ local function Shared(self, unit)
 				local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 				Experience:SetStatusBarTexture(normTex)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
-				Experience:Size(200, 13)
-				Experience:Point("LEFT", HydraData4, "RIGHT", 5, 0)
+				Experience:Size(TukuiChatBackgroundLeft:GetWidth() - 4, 2)
+				Experience:Point("BOTTOM", TukuiChatBackgroundLeft, "TOP", 0, 5)
 				Experience:SetFrameLevel(8)
 				Experience:SetFrameStrata("HIGH")
 				Experience.Tooltip = true
@@ -319,7 +311,7 @@ local function Shared(self, unit)
 				local ExperienceBG = Experience:CreateTexture(nil, 'BORDER')
 				ExperienceBG:SetAllPoints()
 				ExperienceBG:SetTexture(normTex)
-				ExperienceBG:SetVertexColor(.1,.1,.1,1)
+				ExperienceBG:SetVertexColor(0,0,0)
 
 				Experience.Text = self.Experience:CreateFontString(nil, 'OVERLAY')
 				Experience.Text:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
@@ -336,7 +328,7 @@ local function Shared(self, unit)
 				local Resting = self:CreateTexture(nil, "OVERLAY")
 				Resting:SetHeight(28)
 				Resting:SetWidth(28)
-				Resting:SetPoint("BOTTOMRIGHT", self, "TOPLEFT", 10, -4)
+				Resting:SetPoint("BOTTOMRIGHT", self, "TOPLEFT", 6, 7)
 				Resting:SetTexture([=[Interface\CharacterFrame\UI-StateIcon]=])
 				Resting:SetTexCoord(0, 0.5, 0, 0.421875)
 				self.Resting = Resting
@@ -344,7 +336,7 @@ local function Shared(self, unit)
 				local ExperienceFrame = CreateFrame("Frame", nil, self.Experience)
 				ExperienceFrame:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 				ExperienceFrame:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-				ExperienceFrame:SetTemplate("Default")
+				ExperienceFrame:SetTemplate("Transparent")
 				ExperienceFrame:CreateShadow("Default")
 				ExperienceFrame:SetFrameLevel(self.Experience:GetFrameLevel() - 1)
 			
@@ -358,51 +350,19 @@ local function Shared(self, unit)
 				self:SetBackdropColor(unpack(C["media"].backdropcolor))
 				self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 			end
-			
-			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
-			toggle:EnableMouse(true)
-			toggle:SetFrameStrata("MEDIUM")
-			toggle:SetFrameLevel(2)
-			toggle:CreateShadow("Default")
-			toggle:SetAlpha(0)
-			toggle:HookScript("OnEnter", ModifiedBackdrop) 
-			toggle:HookScript("OnLeave", OriginalBackdrop)
-			
-			toggle:SetScript("OnEnter", function()
-				if InCombatLockdown() then return end
-					toggle:FadeIn()
-				end)
-
-				toggle:SetScript("OnLeave", function()
-					toggle:FadeOut()
-				end)
-
-			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 0)
-			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
-			toggle:SetScript("OnMouseUp", function(self) 
-			Experience:Animate(0, 100, 0.4)
-				if Experience:IsVisible() then
-					Experience:SlideOut()
-				else
-					Experience:SlideIn()
-				end
-				end)
-			end
-			
+		end
+		
 			-- reputation bar for max level character
 			if T.level == MAX_PLAYER_LEVEL then
 				local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 				Reputation:SetStatusBarTexture(normTex)
-				Reputation:Size(200, 13)
-				Reputation:Point("LEFT", HydraData4, "RIGHT", 5, 0)
+				Reputation:Size(TukuiChatBackgroundLeft:GetWidth() - 4, 2)
+				Reputation:Point("BOTTOM", TukuiChatBackgroundLeft, "TOP", 0, 5)
 				Reputation:SetFrameLevel(10)
 				local ReputationBG = Reputation:CreateTexture(nil, 'BORDER')
 				ReputationBG:SetAllPoints()
 				ReputationBG:SetTexture(normTex)
-				ReputationBG:SetVertexColor(.1,.1,.1,1)
+				ReputationBG:SetVertexColor(0,0,0)
 
 				Reputation.Text = Reputation:CreateFontString(nil, 'OVERLAY')
 				Reputation.Text:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
@@ -419,7 +379,7 @@ local function Shared(self, unit)
 				local ReputationFrame = CreateFrame("Frame", nil, self.Reputation)
 				ReputationFrame:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 				ReputationFrame:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-				ReputationFrame:SetTemplate("Default")
+				ReputationFrame:SetTemplate("Transparent")
 				ReputationFrame:CreateShadow("Default")
 				ReputationFrame:SetFrameLevel(self.Reputation:GetFrameLevel() - 1)
 				
@@ -433,53 +393,54 @@ local function Shared(self, unit)
 				self:SetBackdropColor(unpack(C["media"].backdropcolor))
 				self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 			end
-			
-			local toggle = CreateFrame("Frame", "RepExpToggle", UIParent)
-			toggle:CreatePanel("Default", 52, 20, "RIGHT", TukuiInfoRight, "LEFT", -8, 0)
-			toggle:EnableMouse(true)
-			toggle:SetFrameStrata("MEDIUM")
-			toggle:SetFrameLevel(2)
-			toggle:CreateShadow("Default")
-			toggle:SetAlpha(0)
-			toggle:HookScript("OnEnter", ModifiedBackdrop) 
-			toggle:HookScript("OnLeave", OriginalBackdrop)
-			
-			toggle:SetScript("OnEnter", function()
-				if InCombatLockdown() then return end
-					toggle:FadeIn()
-				end)
-
-				toggle:SetScript("OnLeave", function()
-					toggle:FadeOut()
-				end)
-
-			toggle.Text = toggle:CreateFontString(nil, "OVERLAY")
-			toggle.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-			toggle.Text:Point("CENTER", toggle, "CENTER", 0, 0)
-			toggle.Text:SetText(T.panelcolor.."Rep/Exp")
-			toggle:SetScript("OnMouseUp", function(self) 
-			Reputation:Animate(0, 100, 0.4)
-			if Reputation:IsVisible() then
-				Reputation:SlideOut()
-			else
-				Reputation:SlideIn()
-			end
-			end)
 		end
 		
 			-- show druid mana when shapeshifted in bear, cat or whatever
+			if T.myclass == "DRUID" then
+				CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateDruidMana(self) end)
+				local DruidMana = T.SetFontString(health, font1, 12)
+				DruidMana:SetTextColor(1, 0.49, 0.04)
+				self.DruidManaText = DruidMana
+			end
+
 			if C["unitframes"].classbar then
 				if T.myclass == "DRUID" then
-
+					-- DRUID MANA BAR
+					local DruidManaBackground = CreateFrame("Frame", nil, self)
+					DruidManaBackground:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 6)
+					DruidManaBackground:Size(230, 5)
+					DruidManaBackground:SetFrameStrata("MEDIUM")
+					DruidManaBackground:SetFrameLevel(8)
+					DruidManaBackground:SetTemplate("Default")
+					DruidManaBackground:SetBackdropBorderColor(0,0,0,0)
+					
+					local DruidManaBarStatus = CreateFrame('StatusBar', nil, DruidManaBackground)
+					DruidManaBarStatus:SetPoint('LEFT', DruidManaBackground, 'LEFT', 0, 0)
+					DruidManaBarStatus:SetSize(DruidManaBackground:GetWidth(), DruidManaBackground:GetHeight())
+					DruidManaBarStatus:SetStatusBarTexture(normTex)
+					DruidManaBarStatus:SetStatusBarColor(.30, .52, .90)
+					
+					DruidManaBackground:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
+					DruidManaBackground:SetScript("OnUpdate", function() T.DruidBarDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
+					DruidManaBackground:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
+					
+					self.DruidManaBackground = DruidManaBackground
+					self.DruidMana = DruidManaBarStatus
+					
+					DruidManaBackground.FrameBackdrop = CreateFrame( "Frame", nil, DruidManaBackground )
+					DruidManaBackground.FrameBackdrop:SetTemplate( "Default" )
+					DruidManaBackground.FrameBackdrop:SetPoint( "TOPLEFT", -2, 2 )
+					DruidManaBackground.FrameBackdrop:SetPoint( "BOTTOMRIGHT", 2, -2 )
+					DruidManaBackground.FrameBackdrop:SetFrameLevel( DruidManaBackground:GetFrameLevel() - 1 )
+					
 					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 9, 6)
-					eclipseBar:Size(228, 5)
+					eclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 6)
+					eclipseBar:Size(230, 5)
 					eclipseBar:SetFrameStrata("MEDIUM")
 					eclipseBar:SetFrameLevel(8)
 					eclipseBar:SetBackdropBorderColor(0,0,0,0)
-					eclipseBar:SetScript("OnShow", function() T.EclipseDisplay(self, false) end)
-					eclipseBar:SetScript("OnUpdate", function() T.EclipseDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
-					eclipseBar:SetScript("OnHide", function() T.EclipseDisplay(self, false) end)
+					eclipseBar:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
+					eclipseBar:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
 					
 					local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
@@ -503,7 +464,7 @@ local function Shared(self, unit)
 					eclipseBarText:SetShadowColor(0, 0, 0, 0.4)
 					eclipseBar.PostUpdatePower = T.EclipseDirection
 					
-					-- hide "low mana" text on load if eclipseBar is show
+					-- hide "low mana" text on load if eclipseBar is shown
 					if eclipseBar and eclipseBar:IsShown() then FlashInfo.ManaLevel:SetAlpha(0) end
 
 					self.EclipseBar = eclipseBar
@@ -657,7 +618,7 @@ local function Shared(self, unit)
 				UnitFrame_OnEnter(self) 
 			end)
 			self:SetScript("OnLeave", function(self) 
-				if self.EclipseBar and self.EclipseBar:IsShown() then 
+				if self.EclipseBar and self.EclipseBar:IsShown() then  
 					self.EclipseBar.Text:Show()
 				end
 				FlashInfo.ManaLevel:Show()
@@ -668,19 +629,17 @@ local function Shared(self, unit)
 		if (unit == "target") then			
 			-- Unit name on target
 			local Name = health:CreateFontString(nil, "OVERLAY")
-			Name:Point("LEFT", health, "LEFT", 4, 0)
+			Name:Point("CENTER", health, "CENTER", 0, 1)
 			Name:SetJustifyH("LEFT")
 			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			Name:SetShadowOffset(1.25, -1.25)
 
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level] [shortclassification]')
-			self.Name = Name
+			--self.Name = Name
 			
-			-- combo points on target
-			
-			local cp = T.SetFontString(self, font2, 15, "THINOUTLINE")
+			--combo points change to support sCombo
+			local cp = T.SetFontString(self, font, 15, "MONOCHROMEOUTLINE")
 			cp:SetPoint("RIGHT", health.border, "LEFT", -5, 0)
-			
 			self.CPoints = cp
 		end
 
@@ -716,8 +675,8 @@ local function Shared(self, unit)
 			else				
 				buffs:SetHeight(26)
 				buffs:SetWidth(252)
-				buffs.size = 26
-				buffs.num = 9
+				buffs.size = 27.5
+				buffs.num = 8
 				
 				debuffs:SetHeight(26)
 				debuffs:SetWidth(252)
@@ -749,7 +708,6 @@ local function Shared(self, unit)
 		
 		-- cast bar for player and target
 		if (C["unitframes"].unitcastbar == true) then
-			-- castbar of player and target
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
 			
@@ -767,12 +725,12 @@ local function Shared(self, unit)
 				castbar:Point("BOTTOMRIGHT", TukuiBar1, "TOPRIGHT", -2, 5)
 			elseif unit == "target" then
 				if C["unitframes"].cbicons == true then
-					castbar:SetWidth(246 - 40)
+					castbar:SetWidth(225 - 28)
 				else
 					castbar:SetWidth(246)
 				end
-				castbar:SetHeight(17)
-				castbar:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, -8)
+				castbar:SetHeight(20)
+				castbar:Point("TOPRIGHT", self, "BOTTOMRIGHT", 0, 20)
 			end
 			castbar:SetFrameLevel(6)
 			
@@ -791,15 +749,15 @@ local function Shared(self, unit)
 			
 			castbar.CustomTimeText = T.CustomCastTimeText
 			castbar.CustomDelayText = T.CustomCastDelayText
-			castbar.PostCastStart =T.PostCastStart
-			castbar.PostChannelStart =T.PostCastStart
+			castbar.PostCastStart = T.PostCastStart
+			castbar.PostChannelStart = T.PostCastStart
 
-			castbar.time = T.SetFontString(castbar, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			castbar.time = T.SetFontString(castbar,font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			castbar.time:Point("RIGHT", castbar.bg, "RIGHT", -4, 0)
 			castbar.time:SetTextColor(0, 4, 0)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = T.SetFontString(castbar, font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			castbar.Text = T.SetFontString(castbar,font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 			castbar.Text:Point("LEFT", castbar.bg, "LEFT", 4, 0)
 			castbar.Text:SetTextColor(0.3, 0.2, 1)
 			castbar.Text:Width(100)
@@ -807,7 +765,7 @@ local function Shared(self, unit)
 			
 			if C["unitframes"].cbicons == true then
 				castbar.button = CreateFrame("Frame", nil, castbar)
-				castbar.button:Size(23)
+				castbar.button:Size(24)
 				castbar.button:SetTemplate("Default")
 				castbar.button:CreateShadow("Default")
 				castbar.button:SetPoint("RIGHT",castbar,"LEFT", -5, 0)
@@ -1866,57 +1824,75 @@ local function Shared(self, unit)
 	return self
 end
 
-
 ------------------------------------------------------------------------
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
-
-if C["unitframes"].totdebuffs then totdebuffs = 24 end
-
 oUF:RegisterStyle('Tukui', Shared)
+T.Player = 230
+T.Target  = 230
+T.ToT = 130
+T.Pet = 130
+T.Focus = 115 
+T.Focustarget = 115
+T.Boss = 200
+T.Pettarget = 130
 
--- player
+-----------------------------------------------------------------------
+-- Unitframe Spawn
+-----------------------------------------------------------------------
+
 local player = oUF:Spawn('player', "TukuiPlayer")
-player:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "BOTTOM", -134,175)
-player:Size(246, 44)
-
--- target
 local target = oUF:Spawn('target', "TukuiTarget")
-target:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 134,175)
-target:Size(246, 44)
-
--- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-if T.lowversion then
-	tot:SetPoint("TOPRIGHT", target, "BOTTOMLEFT", 0, -2)
-	tot:Size(186, 18)
-else
-	tot:SetPoint("TOPRIGHT", target, "BOTTOMLEFT", 0, -2)
-	tot:Size(129, 36)
-end
-
--- pet
 local pet = oUF:Spawn('pet', "TukuiPet")
-	pet:SetPoint("TOPLEFT", player, "BOTTOMRIGHT", 0, -2)
-	pet:Size(129, 36)
-	
+local focus = oUF:Spawn('focus', "TukuiFocus")
+
+-- Sizes
+player:Size(T.Player, player.Health:GetHeight() + player.Power:GetHeight() + player.panel:GetHeight() + 6)
+target:Size(T.Target, target.Health:GetHeight() + target.Power:GetHeight() + target.panel:GetHeight() + 6)
+tot:Size(T.ToT, tot.Health:GetHeight() + tot.Power:GetHeight() + tot.panel:GetHeight() + 6)
+pet:Size(T.Pet, pet.Health:GetHeight() + pet.Power:GetHeight() + pet.panel:GetHeight() + 6)	
+focus:Size(180, 25)
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self, event, addon)
+	player:ClearAllPoints()
+	target:ClearAllPoints()
+	tot:ClearAllPoints()
+	pet:ClearAllPoints()
+	focus:ClearAllPoints()
+if IsAddOnLoaded("Tukui_Raid") then
+
+	--[ DPS ]--
+		player:Point("TOP", UIParent, "BOTTOM", -170 , 250)
+		target:Point("TOP", UIParent, "BOTTOM", 170, 250)
+		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -20)
+		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -20)
+		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 422)
+elseif IsAddOnLoaded("Tukui_Raid_Healing") then
+
+	--[ HEAL ]--
+		player:Point("TOP", UIParent, "BOTTOM", -309 , 350)
+		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
+		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
+		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
+		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 430)
+	end
+end)
+
 -- pettarget
 if C["unitframes"].pettarget == true then
 local pettarget = oUF:Spawn('pettarget', "TukuiPetTarget")
 pettarget:SetPoint("BOTTOMRIGHT", player, "TOPRIGHT", 0,5)
 pettarget:Size(128, 26)
-end		
-
--- focus
-local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 275, 500)
-focus:Size(200, 30)
+end	
 
 -- focus target
 if C.unitframes.showfocustarget then
 	local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
-	focustarget:SetPoint("BOTTOM", focus, "TOP", 0, 40)
-	focustarget:Size(200, 30)
+	focustarget:SetPoint("TOP", TukuiFocus, "BOTTOM", 0 , -35)
+	focustarget:Size(180, 29)
 end
 
 if C.arena.unitframes then
@@ -1924,14 +1900,13 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700, 250)
+			arena[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
 		arena[i]:Size(200, 27)
 	end	
 end
-
 
 if C["unitframes"].showboss then
 	for i = 1,MAX_BOSS_FRAMES do
@@ -1941,16 +1916,16 @@ if C["unitframes"].showboss then
 		t_boss:Hide()
 		_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
 		_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()
-	end	
+	end
 end
 
 	local boss = {}
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "BOTTOM", 700, 250)
+			boss[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
 		else
-			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
+			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)               
 		end
 		boss[i]:Size(200, 27)	
 end
@@ -2001,9 +1976,13 @@ local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 -- Main Tank and Main Assist, use /maintank and /mainassist commands.
 ------------------------------------------------------------------------
 
+-- Hunter Dismiss Pet Taint (Blizzard issue)
+local PET_DISMISS = "PET_DISMISS"
+if T.myclass == "HUNTER" then PET_DISMISS = nil end
+
 do
 	UnitPopupMenus["SELF"] = { "PVP_FLAG", "LOOT_METHOD", "LOOT_THRESHOLD", "OPT_OUT_LOOT_TITLE", "LOOT_PROMOTE", "DUNGEON_DIFFICULTY", "RAID_DIFFICULTY", "RESET_INSTANCES", "RAID_TARGET_ICON", "SELECT_ROLE", "CONVERT_TO_PARTY", "CONVERT_TO_RAID", "LEAVE", "CANCEL" };
-	UnitPopupMenus["PET"] = { "PET_PAPERDOLL", "PET_RENAME", "PET_ABANDON", "PET_DISMISS", "CANCEL" };
+	UnitPopupMenus["PET"] = { "PET_PAPERDOLL", "PET_RENAME", "PET_ABANDON", PET_DISMISS, "CANCEL" };
 	UnitPopupMenus["PARTY"] = { "MUTE", "UNMUTE", "PARTY_SILENCE", "PARTY_UNSILENCE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "PROMOTE", "PROMOTE_GUIDE", "LOOT_PROMOTE", "VOTE_TO_KICK", "UNINVITE", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "CANCEL" }
 	UnitPopupMenus["PLAYER"] = { "WHISPER", "INSPECT", "INVITE", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "RAID_TARGET_ICON", "RAF_SUMMON", "RAF_GRANT_LEVEL", "CANCEL" }
 	UnitPopupMenus["RAID_PLAYER"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "RAID_REMOVE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "CANCEL" };
@@ -2014,35 +1993,3 @@ do
 	UnitPopupMenus["FOCUS"] = { "RAID_TARGET_ICON", "CANCEL" }
 	UnitPopupMenus["BOSS"] = { "RAID_TARGET_ICON", "CANCEL" }
 end
-
-local moveUFs = CreateFrame("Frame")
-moveUFs:RegisterEvent("PLAYER_ENTERING_WORLD")
-moveUFs:RegisterEvent("UNIT_NAME_UPDATE")
-moveUFs:RegisterEvent("RAID_ROSTER_UPDATE")
-moveUFs:RegisterEvent("RAID_TARGET_UPDATE")
-moveUFs:RegisterEvent("PARTY_MEMBERS_CHANGED")
-moveUFs:SetScript("OnEvent", function(self)
-	if not IsAddOnLoaded("Tukui_Raid_Healing") then return end
-
-	if TukuiGrid:IsVisible() then
-		TukuiBar1:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
-		TukuiBar4:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
-		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
-		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing, -T.buttonspacing)
-		player:ClearAllPoints()
-		target:ClearAllPoints()
-		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -75, 75)
-		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 75, 75)
-		tot:SetAlpha(1)
-	else
-		TukuiBar1:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
-		TukuiBar4:SetWidth((T.buttonsize * C.actionbar.mainbarWidth) + (T.buttonspacing * (C.actionbar.mainbarWidth+1)))
-		ActionButton1:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
-		MultiBarLeftButton1:SetPoint("TOPLEFT", TukuiBar4, T.buttonspacing, -T.buttonspacing)
-		player:ClearAllPoints()
-		target:ClearAllPoints()
-		player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -75, 75)
-		target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 75, 75)
-		tot:SetAlpha(1)
-	end
-end)

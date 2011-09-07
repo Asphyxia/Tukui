@@ -2,55 +2,58 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 local DataVisibility = 1
 
----------------------------------------------------------
----[[ ADDITIONAL Asphyxia PANELS ]]---
----------------------------------------------------------
-
---TOP DUMMY FRAME DOES NOTHING 
-if C["asphyxia_panels"].toppanel == true then 
-local toppanel = CreateFrame("Frame", "TukuiTopPanel", UIParent)
-toppanel:CreatePanel("Default", 2000, 20, "TOP", UIParent, "TOP", 0, 0)
-toppanel:SetFrameStrata("BACKGROUND")
-toppanel:SetFrameLevel(0)
-toppanel:CreateShadow("Default")
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
 end
 
---BOTTOM DUMMY FRAME DOES NOTHING 
-if C["asphyxia_panels"].bottompanel == true then 
-local bottompanel = CreateFrame("Frame", "TukuiBottomPanel", UIParent)
-bottompanel:CreatePanel("Default", 2000, 20, "BOTTOM", UIParent, "BOTTOM", 0, 0)
-bottompanel:SetFrameStrata("BACKGROUND")
-bottompanel:SetFrameLevel(0)
-bottompanel:CreateShadow("Default")
+local function OriginalBackdrop(self)
+	self:SetTemplate("Default")
 end
+
+---------------------------------------------------------
+---[[ ADDITIONAL (Asphyxia) PANELS ]]---
+---------------------------------------------------------
 
 -- INFO CENTER (FOR STATS)
 local icenter = CreateFrame("Frame", "TukuiInfoCenter", TukuiBar1)
 icenter:CreatePanel("Default", TukuiBar1:GetWidth(), 20, "TOP", TukuiBar1, "BOTTOM", 0, -3)
+icenter:CreateOverlay(icenter)
 icenter:CreateShadow("Default")
 icenter:SetFrameLevel(2)
 icenter:SetFrameStrata("BACKGROUND")
 
---[[-- INFO CENTER LEFT (FOR STATS)
+-- INFO CENTER LEFT (FOR STATS)
 local icenterleft = CreateFrame("Frame", "TukuiInfoCenterLeft", TukuiBar2)
 icenterleft:CreatePanel("Default", TukuiBar2:GetWidth(), 20, "TOP", TukuiBar2, "BOTTOM", 0, -3)
+icenterleft:CreateOverlay(icenterleft)
 icenterleft:CreateShadow("Default")
 icenterleft:SetFrameLevel(2)
-icenterleft:SetFrameStrata("BACKGROUND")--]]
+icenterleft:SetFrameStrata("BACKGROUND")
+
+-- INFO CENTER RIGHT (FOR STATS)
+local icenterright = CreateFrame("Frame", "TukuiInfoCenterRight", TukuiBar3)
+icenterright:CreatePanel("Default", TukuiBar3:GetWidth(), 20, "TOP", TukuiBar3, "BOTTOM", 0, -3)
+icenterright:CreateOverlay(icenterright)
+icenterright:CreateShadow("Default")
+icenterright:SetFrameLevel(2)
+icenterright:SetFrameStrata("BACKGROUND")
 
 -- SPECSWITCHER
 if C.datatext.enable_specswitcher then
-	local icenterbottom = CreateFrame("Frame", "TukuiSpecSwitcher", TukuiBar2)
-	icenterbottom:CreatePanel("Default", TukuiBar2:GetWidth() - 22, 20, "TOP", TukuiBar2, "BOTTOM", 11, -3)
-	icenterbottom:CreateShadow("Default")
-	icenterbottom:SetFrameLevel(0)
-	icenterbottom:SetFrameStrata("BACKGROUND")
+	local specswitcher = CreateFrame("Button", "TukuiSpecSwitcher", TukuiTabsLeftBackground)
+	specswitcher :Size(75, TukuiTabsLeftBackground:GetHeight())
+	specswitcher :Point("RIGHT", TukuiTabsLeftBackground, "RIGHT", -41, 0)
+	specswitcher :SetFrameStrata(TukuiTabsLeftBackground:GetFrameStrata())
+	specswitcher :SetFrameLevel(TukuiTabsLeftBackground:GetFrameLevel() + 1)
 
 	local talenticon = CreateFrame("Frame", "TukuiTalentIcon", TukuiSpecSwitcher)
-	talenticon:CreatePanel("Default", 20, 20, "RIGHT", icenterbottom, "LEFT", -2, 0)
-	talenticon:CreateShadow("Default")
-	talenticon:SetFrameLevel(0)
-	talenticon:SetFrameStrata("BACKGROUND")
+	--talenticon:CreatePanel("Default", 18, 18, "LEFT", specswitcher, "RIGHT", 20, 0)
+	talenticon:CreatePanel("Default", TukuiTabsLeftBackground:GetHeight()-4, TukuiTabsLeftBackground:GetHeight()-4, "LEFT", specswitcher, "RIGHT", 20, 0)
+	--talenticon:CreateShadow("Default")
+	talenticon:SetFrameLevel(2)
+	talenticon:SetFrameStrata("DIALOG")
 
 	talenticon.tex = talenticon:CreateTexture(nil, "ARTWORK")
 	talenticon.tex:Point("TOPLEFT", 2, -2)
@@ -71,26 +74,21 @@ if C.datatext.enable_specswitcher then
 	talenticon:SetScript("OnEvent", UpdateTexture)
 end
 
--- INFO CENTER RIGHT (FOR STATS)
-local icenterright = CreateFrame("Frame", "TukuiInfoCenterRight", TukuiBar3)
-icenterright:CreatePanel("Default", TukuiBar3:GetWidth() - 22, 20, "TOP", TukuiBar3, "BOTTOM", -11, -3)
-icenterright:CreateShadow("Default")
-icenterright:SetFrameLevel(2)
-icenterright:SetFrameStrata("BACKGROUND")
-
 -- TIME PANEL
-local watch = CreateFrame("Frame", "Tukuiwatch", UIParent)
+local watch = CreateFrame("Frame", "Tukuiwatch", Minimap)
 watch:CreatePanel("Default", 53, 17, "TOP", Minimap, "BOTTOM", T.Scale(0), 8)
 watch:CreateShadow("Default")
 watch:SetFrameStrata("MEDIUM")
+watch:CreateOverlay(watch)
 watch:SetFrameLevel(2)
 
 -- SWITCH LAYOUT
-local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", icenterright)
-	swl:Size(75, TukuiInfoCenterRight:GetHeight())
-	swl:Point("CENTER", icenterright, "CENTER", 0, 0)
-	swl:SetFrameStrata("BACKGROUND")
-	swl:SetFrameLevel(2)
+if C.chat.background then
+	local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", TukuiTabsRightBackground)
+	swl:Size(75, TukuiTabsRightBackground:GetHeight())
+	swl:Point("RIGHT", TukuiTabsRightBackground, "RIGHT", -21, 0)
+	swl:SetFrameStrata(TukuiTabsRightBackground:GetFrameStrata())
+	swl:SetFrameLevel(TukuiTabsRightBackground:GetFrameLevel() + 1)
 	swl:RegisterForClicks("AnyUp") swl:SetScript("OnClick", function()
 		if IsAddOnLoaded("Tukui_Raid") then
 			DisableAddOn("Tukui_Raid")
@@ -107,13 +105,15 @@ local swl = CreateFrame("Button", "TukuiSwitchLayoutButton", icenterright)
 	end)
 
 	swl.Text = T.SetFontString(swl, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-	swl.Text:Point("CENTER", swl, "CENTER", 0, 0)
-	swl.Text:SetText(T.StatColor..L.datatext_switch_layout)
+	swl.Text:Point("RIGHT", swl, "RIGHT", -5, 0.5)
+	swl.Text:SetText(T.datacolor..L.datatext_switch_layout)
+end
 
 -- VERSION BUTTON
 local verbutton = CreateFrame("Button", "TukuiVersionButton", TukuiMinimap, "SecureActionButtonTemplate")
 verbutton:CreatePanel("Default", 13, 17, "LEFT", Tukuiwatch, "RIGHT", 3, 0)
 verbutton:CreateShadow("Default")
+verbutton:CreateOverlay(verbutton)
 verbutton:SetAttribute("type", "macro")
 verbutton:SetAttribute("macrotext", "/version")
 verbutton:SetFrameStrata("MEDIUM")
@@ -121,26 +121,26 @@ verbutton:SetFrameLevel(2)
 
 verbutton.Text = T.SetFontString(verbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 verbutton.Text:Point("CENTER", verbutton, "CENTER", 2, 1)
-verbutton.Text:SetText(T.panelcolor.."V")
+verbutton.Text:SetText(T.datacolor.."V")
 
---[[verbutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		verbutton:FadeIn()
-	end)
-
-	verbutton:SetScript("OnLeave", function()
-		verbutton:FadeOut()
-	end)--]]
+verbutton:SetScript("OnMouseDown", function(self)
+if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
+	if not TukuiVersionFrame:IsShown() then
+		T.fadeIn(TukuiVersionFrame)
+	else
+		T.fadeOut(TukuiVersionFrame)
+	end
+end)
 
 -- VERSION LOGO (Asphyxia Avatar)
-	local avatar = CreateFrame("Frame", nil, TukuiVersionFrame)
+	local avatar = CreateFrame("Frame", "Avatar", TukuiVersionFrame)
 	avatar:CreatePanel(avatar, 58, 58, "BOTTOM", TukuiVersionFrame, "TOP", 0, 2)
 	avatar:SetFrameLevel(2)
 	avatar:SetFrameStrata("BACKGROUND")
 	avatar:SetTemplate("Default")
-	avatar:CreateShadow("")
+	avatar:CreateShadow("Default")
 	
-	local avatar_tex = avatar:CreateTexture(nil, "OVERLAY")
+local avatar_tex = avatar:CreateTexture(nil, "OVERLAY")
 avatar_tex:SetTexture(C.media.asphyxia)
 avatar_tex:SetPoint("TOPLEFT", avatar, "TOPLEFT", 2, -2)
 avatar_tex:SetPoint("BOTTOMRIGHT", avatar, "BOTTOMRIGHT", -2, 2)
@@ -149,6 +149,7 @@ avatar_tex:SetPoint("BOTTOMRIGHT", avatar, "BOTTOMRIGHT", -2, 2)
 local helpbutton = CreateFrame("Button", "TukuiHelpButton", TukuiMinimap, "SecureActionButtonTemplate")
 helpbutton:CreatePanel("Default", 13, 17, "RIGHT", Tukuiwatch, "LEFT", -3, 0)
 helpbutton:CreateShadow("Default")
+helpbutton:CreateOverlay(helpbutton)
 helpbutton:SetAttribute("type", "macro")
 helpbutton:SetAttribute("macrotext", "/ahelp")
 helpbutton:SetFrameStrata("MEDIUM")
@@ -156,9 +157,9 @@ helpbutton:SetFrameLevel(2)
 
 helpbutton.Text = T.SetFontString(helpbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 helpbutton.Text:Point("CENTER", helpbutton, "CENTER", 1.5, 1)
-helpbutton.Text:SetText(T.panelcolor.."H")
+helpbutton.Text:SetText(T.datacolor.."H")
 
--- Animate function
+-- ANIMATION FUNCTION [HELP FRAME]
 TukuiAsphyxiaHelpFrame:Animate( 0, 500, 0.8 )
 TukuiHelpButton:EnableMouse( true )
 TukuiHelpButton:SetScript("OnClick", function(self)
@@ -171,146 +172,40 @@ TukuiAsphyxiaHelpFrame:SlideIn()
 end
 end )
 
-local function ModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-end
-
-local function OriginalBackdrop(self)
-	self:SetBackdropColor(unpack(C["media"].backdropcolor))
-	self:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-end
-
--- ADDONS BUTTON
-local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureActionButtonTemplate")
-adbutton:CreatePanel("Default", 100, 17, "BOTTOM", UIParent, "BOTTOM", 0, 12)
-adbutton:SetFrameStrata("HIGH")
-adbutton:SetAlpha(0)
-adbutton:CreateShadow("Default")
-adbutton:SetAttribute("type", "macro")
-adbutton:SetAttribute("macrotext", "/am")
-adbutton:HookScript("OnEnter", ModifiedBackdrop)
-adbutton:HookScript("OnLeave", OriginalBackdrop)
-
-adbutton.Text = T.SetFontString(adbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-adbutton.Text:Point("CENTER", adbutton, "CENTER", 1, 1)
-adbutton.Text:SetText(T.panelcolor..ADDONS)
-adbutton.Text:SetShadowColor( 0, 0, 0 )
-adbutton.Text:SetShadowOffset(1.25, -1.25)
-
-adbutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		adbutton:FadeIn()
-	end)
-
-	adbutton:SetScript("OnLeave", function()
-		adbutton:FadeOut()
-	end)
-
---[[adbutton.Status = CreateFrame( "StatusBar", "HydraDataStatus", adbutton)
-adbutton.Status:SetFrameLevel(2)
-adbutton.Status:SetStatusBarTexture( C["media"].normTex)
-adbutton.Status:SetMinMaxValues( 0, 100 )
-adbutton.Status:SetStatusBarColor( 41/255,  79/255, 155/255)
-adbutton.Status:Point( "TOPLEFT", adbutton, "TOPLEFT", 2, -2)
-adbutton.Status:Point( "BOTTOMRIGHT", adbutton, "BOTTOMRIGHT", -2, 2)--]]
+-- INVISIBLE BUTTON (...Don't ask)
+local invisButton = CreateFrame("Frame", "invisButton", UIParent)
+invisButton:CreatePanel("Transparent", 100, 20, "BOTTOM", UIParent, "BOTTOM", 0, 2, true)
+invisButton:SetFrameLevel(0)
 
 -- RESETUI BUTTON
 local resetuibutton = CreateFrame("Button", "TukuiResetUIButton", UIParent, "SecureActionButtonTemplate")
-resetuibutton:CreatePanel("Default", 60, 17, "LEFT", TukuiAddonsButton, "RIGHT", 5, 0)
+resetuibutton:CreatePanel("Default", 26, 20, "RIGHT", invisButton, "LEFT", -3, 0)
 resetuibutton:SetFrameStrata("HIGH")
-resetuibutton:SetAlpha(0)
 resetuibutton:CreateShadow("Default")
+resetuibutton:CreateOverlay(resetuibutton)
 resetuibutton:SetAttribute("type", "macro")
 resetuibutton:SetAttribute("macrotext", "/resetui")
 resetuibutton:HookScript("OnEnter", ModifiedBackdrop)
 resetuibutton:HookScript("OnLeave", OriginalBackdrop)
 
-resetuibutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		resetuibutton:FadeIn()
-	end)
-
-	resetuibutton:SetScript("OnLeave", function()
-		resetuibutton:FadeOut()
-	end)
-
 resetuibutton.Text = T.SetFontString(resetuibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 resetuibutton.Text:Point("CENTER", resetuibutton, "CENTER", 1, 1)
-resetuibutton.Text:SetText(T.panelcolor.."Reset UI")
+resetuibutton.Text:SetText(T.datacolor.."RS")
 
 -- RELOADUI BUTTON
 local rluibutton = CreateFrame("Button", "TukuiReloadUIButton", UIParent, "SecureActionButtonTemplate")
-rluibutton:CreatePanel("Default", 60, 17, "LEFT", resetuibutton, "RIGHT", 5, 0)
+rluibutton:CreatePanel("Default", 26, 20, "LEFT", invisButton, "RIGHT", 3, 0)
 rluibutton:SetFrameStrata("HIGH")
-rluibutton:SetAlpha(0)
 rluibutton:CreateShadow("Default")
+rluibutton:CreateOverlay(rluibutton)
 rluibutton:SetAttribute("type", "macro")
 rluibutton:SetAttribute("macrotext", "/rl")
 rluibutton:HookScript("OnEnter", ModifiedBackdrop)
 rluibutton:HookScript("OnLeave", OriginalBackdrop)
 
-rluibutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		rluibutton:FadeIn()
-	end)
-
-	rluibutton:SetScript("OnLeave", function()
-		rluibutton:FadeOut()
-	end)
-
 rluibutton.Text = T.SetFontString(rluibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 rluibutton.Text:Point("CENTER", rluibutton, "CENTER", 1, 1)
-rluibutton.Text:SetText(T.panelcolor.."Reload UI")
-
--- CONFIG BUTTON
-local configbutton = CreateFrame("Button", "TukuiConfigButton", UIParent, "SecureActionButtonTemplate")
-configbutton:CreatePanel("Default", 60, 17, "RIGHT", TukuiAddonsButton, "LEFT", -5, 0)
-configbutton:SetFrameStrata("HIGH")
-configbutton:SetAlpha(0)
-configbutton:CreateShadow("Default")
-configbutton:SetAttribute("type", "macro")
-configbutton:SetAttribute("macrotext", "/tc")
-configbutton:HookScript("OnEnter", ModifiedBackdrop)
-configbutton:HookScript("OnLeave", OriginalBackdrop)
-
-configbutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		configbutton:FadeIn()
-	end)
-
-	configbutton:SetScript("OnLeave", function()
-		configbutton:FadeOut()
-	end)
-
-configbutton.Text = T.SetFontString(configbutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-configbutton.Text:Point("CENTER", configbutton, "CENTER", 1, 1)
-configbutton.Text:SetText(T.panelcolor.."Config UI")
-
--- MOVEUI BUTTON
-local moveuibutton = CreateFrame("Button", "TukuiMoveUIButton", UIParent, "SecureActionButtonTemplate")
-moveuibutton:CreatePanel("Default", 60, 17, "RIGHT", configbutton, "LEFT", -5, 0)
-moveuibutton:SetFrameStrata("HIGH")
-moveuibutton:SetAlpha(0)
-moveuibutton:CreateShadow("Default")
-moveuibutton:SetAttribute("type", "macro")
-moveuibutton:SetAttribute("macrotext", "/mtukui")
-moveuibutton:HookScript("OnEnter", ModifiedBackdrop)
-moveuibutton:HookScript("OnLeave", OriginalBackdrop)
-
-moveuibutton:SetScript("OnEnter", function()
-		if InCombatLockdown() then return end
-		moveuibutton:FadeIn()
-	end)
-
-	moveuibutton:SetScript("OnLeave", function()
-		moveuibutton:FadeOut()
-	end)
-
-moveuibutton.Text = T.SetFontString(moveuibutton, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-moveuibutton.Text:Point("CENTER", moveuibutton, "CENTER", 1, 1)
-moveuibutton.Text:SetText(T.panelcolor.."Move UI")
+rluibutton.Text:SetText(T.datacolor.."RL")
 
 -- WORLD STATE FRAME 
 WorldStateAlwaysUpFrame:ClearAllPoints()
@@ -337,18 +232,19 @@ end
 local cp = "|cff9a1212-|r" 
 local cm = "|cff9a1212+|r" 
 local icb = CreateFrame("Frame", "InfoCenterButton", TukuiChatBackgroundRight)
-icb:CreatePanel(nil, 30, 15, "RIGHT", TukuiTabsRightBackground, "RIGHT", -118, 0)
+icb:CreatePanel(nil, 30, 15, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -2, -68)
 icb:SetAlpha(0)
 icb:SetFrameStrata("MEDIUM")
+icb:CreateOverlay(icb)
 icb:EnableMouse(true)
 icb.f = icb:CreateFontString(nil, overlay)
 icb.f:SetPoint("CENTER")
-icb.f:SetFont(C["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
+icb.f:SetFont(C["media"].pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 icb.f:SetText(cp)
 icb.f:Point("CENTER", 1, 0)
 icb:SetScript("OnMouseDown", function(self)
 	ToggleFrame(TukuiInfoCenterRight)
-	ToggleFrame(TukuiSpecSwitcher)
+	ToggleFrame(TukuiInfoCenterLeft)
 	ToggleFrame(TukuiInfoCenter)
 	if icenter:IsShown() then
 		self.f:SetText(cp)
@@ -366,6 +262,74 @@ icb:SetScript("OnEnter", function()
 		icb:FadeOut()
 	end)
 	
+-- MINIMAP BUTTONS SKINNING [Credit Elv22 for the base code and Smelly for modification.]
+local function SkinButton(f)
+    if f:GetObjectType() ~= "Button" then return end
+	f:SetPushedTexture(nil)
+    f:SetHighlightTexture(nil)
+    f:SetDisabledTexture(nil)
+	f:SetSize(22, 22)
+	
+    for i=1, f:GetNumRegions() do
+        local region = select(i, f:GetRegions())
+        if region:GetObjectType() == "Texture" then
+            local tex = region:GetTexture()
+            if tex:find("Border") or tex:find("Background") then
+                region:SetTexture(nil)
+            else
+				region:SetDrawLayer("OVERLAY", 5)
+                region:ClearAllPoints()
+                region:Point("TOPLEFT", f, "TOPLEFT", 2, -2)
+                region:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
+                region:SetTexCoord(.08, .92, .08, .92)
+            end
+        end
+    end
+	f:SetTemplate("Default")
+	f:SetFrameLevel(f:GetFrameLevel() + 2)
+	
+end
+local x = CreateFrame("Frame")
+x:RegisterEvent("PLAYER_LOGIN")
+x:SetScript("OnEvent", function(self, event)
+    for i=1, Minimap:GetNumChildren() do
+        SkinButton(select(i, Minimap:GetChildren()))
+    end
+    self = nil
+end)
+
+-- WORLD STATE UP (move frame)
+MiniMapBattlefieldFrame:ClearAllPoints()
+MiniMapBattlefieldFrame:Point("BOTTOMRIGHT", TukuiMinimap, "BOTTOMRIGHT", -4, 4)
+
+-- MINIMAP TOGGLE
+local mToggle = CreateFrame("Button", "TukuiMinimapToggle", UIParent)
+mToggle:CreatePanel("Default", 11, 30, "TOPLEFT", TukuiPlayerBuffs, "TOPRIGHT", 5, 2)
+mToggle:CreateShadow("Default")
+mToggle:CreateOverlay(mToggle)
+mToggle:HookScript("OnEnter", ModifiedBackdrop)
+mToggle:HookScript("OnLeave", OriginalBackdrop)
+
+mToggle.Text = T.SetFontString(mToggle, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+mToggle.Text:Point("CENTER", mToggle, "CENTER", 2, 0.5)
+mToggle.Text:SetText("|cffFF0000-|r")
+
+mToggle:SetScript("OnMouseDown", function()
+    if TukuiMinimap:IsVisible() then
+		TukuiMinimap:Hide()
+		TukuiPlayerBuffs:ClearAllPoints()
+		TukuiPlayerBuffs:Point("TOPRIGHT", -20, -12)
+		TukuiPlayerDebuffs:Point("TOPRIGHT", -20, -150)
+		mToggle.Text:SetText("|cff00FF00+|r")
+    else
+		TukuiMinimap:Show()
+		TukuiPlayerBuffs:ClearAllPoints()
+		TukuiPlayerBuffs:Point("TOPRIGHT", -206, -12)
+		TukuiPlayerDebuffs:Point("TOPRIGHT", -206, -150)
+		mToggle.Text:SetText("|cffFF0000-|r")
+    end
+end)
+
 ------------------------------------------------------------------------
 	-- Filger Stuff Below (Credits to Sapz)
 ------------------------------------------------------------------------
@@ -459,43 +423,3 @@ CDBars.text = T.SetFontString(CDBars, C.media.pixelfont, C["datatext"].fontsize,
 CDBars.text:SetPoint("CENTER")
 CDBars.text:SetText("Move CD Bars")
 CDBars:Hide()	
-
--- MINIMAP BUTTONS SKINNING [Credit Elv22 for the base code and Smelly for modification.]
-local function SkinButton(f)
-    if f:GetObjectType() ~= "Button" then return end
-	f:SetPushedTexture(nil)
-    f:SetHighlightTexture(nil)
-    f:SetDisabledTexture(nil)
-	f:SetSize(22, 22)
-	
-    for i=1, f:GetNumRegions() do
-        local region = select(i, f:GetRegions())
-        if region:GetObjectType() == "Texture" then
-            local tex = region:GetTexture()
-            if tex:find("Border") or tex:find("Background") then
-                region:SetTexture(nil)
-            else
-				region:SetDrawLayer("OVERLAY", 5)
-                region:ClearAllPoints()
-                region:Point("TOPLEFT", f, "TOPLEFT", 2, -2)
-                region:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -2, 2)
-                region:SetTexCoord(.08, .92, .08, .92)
-            end
-        end
-    end
-	f:SetTemplate("Default")
-	f:SetFrameLevel(f:GetFrameLevel() + 2)
-	
-end
-local x = CreateFrame("Frame")
-x:RegisterEvent("PLAYER_LOGIN")
-x:SetScript("OnEvent", function(self, event)
-    for i=1, Minimap:GetNumChildren() do
-        SkinButton(select(i, Minimap:GetChildren()))
-    end
-    self = nil
-end)
-
--- move button
-MiniMapBattlefieldFrame:ClearAllPoints()
-MiniMapBattlefieldFrame:Point("BOTTOMRIGHT", TukuiMinimap, "BOTTOMRIGHT", -4, 4)

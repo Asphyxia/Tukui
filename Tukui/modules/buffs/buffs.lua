@@ -6,11 +6,11 @@ local font = C["media"].pixelfont
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
-		return format("|cffeeeeee%d"..T.panelcolor.." d|r", ceil(s / day))
+		return format("|cffeeeeee%d"..T.datacolor.." d|r", ceil(s / day))
 	elseif s >= hour then
-		return format("|cffeeeeee%d"..T.panelcolor.." h|r", ceil(s / hour))
+		return format("|cffeeeeee%d"..T.datacolor.." h|r", ceil(s / hour))
 	elseif s >= minute then
-		return format("|cffeeeeee%d"..T.panelcolor.." m|r", ceil(s / minute))
+		return format("|cffeeeeee%d"..T.datacolor.." m|r", ceil(s / minute))
 	elseif s >= minute / 12 then
 		return floor(s)
 	end
@@ -44,7 +44,7 @@ local function UpdateWeapons(button, slot, active, expiration)
 		
 		button.time = button:CreateFontString(nil, "ARTWORK")
 		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(font, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		button.time:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 				
 		button.bg = CreateFrame("Frame", nil, button)
 		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
@@ -181,7 +181,7 @@ local function CreateAuraHeader(filter, ...)
 	header:SetAttribute("minWidth", 300)
 	header:SetAttribute("minHeight", 94)
 	header:SetAttribute("xOffset", -36)
-	header:SetAttribute("wrapYOffset", -68)
+	header:SetAttribute("wrapYOffset", -38)
 	header:SetAttribute("wrapAfter", 11)
 	header:SetAttribute("maxWraps", 3)
 	
@@ -209,8 +209,8 @@ local function CreateAuraHeader(filter, ...)
 	return header
 end
 
-ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -205, -12))
-ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -205, -148))
+ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -206, -10))
+ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -206, -148))
 
 -- create our aura
 local start = CreateFrame("Frame")

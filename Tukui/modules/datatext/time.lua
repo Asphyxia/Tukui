@@ -5,14 +5,14 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 
 if not C["datatext"].wowtime or C["datatext"].wowtime == 0 then return end
 
-local europeDisplayFormat = string.join("", "%02d", T.panelcolor,":|r%02d")
-local ukDisplayFormat = string.join("", "", "%d", T.panelcolor, ":|r%02d", T.panelcolor, " %s|r")
+local europeDisplayFormat = string.join("", "%02d", T.datacolor,":|r%02d")
+local ukDisplayFormat = string.join("", "", "%d", T.datacolor, ":|r%02d", T.datacolor, " %s|r")
 local timerLongFormat = "%d:%02d:%02d"
 local timerShortFormat = "%d:%02d"
 local lockoutInfoFormat = "%s |cffaaaaaa(%s%s, %s/%s)"
 local formatBattleGroundInfo = "%s: "
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
-local difficultyInfo = { "N", "N", "H", "H" }
+local difficultyInfo = { L.datatext_normal_mode, L.datatext_normal_mode, L.datatext_heroic_mode, L.datatext_heroic_mode }
 local curHr, curMin, curAmPm
 
 local Stat = CreateFrame("Frame")
@@ -96,7 +96,7 @@ local function formatResetTime(sec,table)
 	local table = table or {}
 	local d,h,m,s = ChatFrame_TimeBreakDown(floor(sec))
 	local string = gsub(gsub(format(" %dd %dh %dm "..((d==0 and h==0) and "%ds" or ""),d,h,m,s)," 0[dhms]"," "),"%s+"," ")
-	local string = strtrim(gsub(string, "([dhms])", {d=table.days or "d",h=table.hours or "h",m=table.minutes or "m",s=table.seconds or "s"})," ")
+	local string = strtrim(gsub(string, "([dhms])", {d=table.days or L.datatext_time_day,h=table.hours or L.datatext_time_hour,m=table.minutes or L.datatext_time_min,s=table.seconds or L.datatext_time_sec})," ")
 	return strmatch(string,"^%s*$") and "0"..(table.seconds or L"s") or string
 end
 
@@ -107,10 +107,10 @@ local function Update(self, t)
 	
 	local Hr, Min, AmPm = CalculateTimeValues()
 	
-	if CalendarGetNumPendingInvites() > 0 then
-		Text:SetTextColor(1, 0, 0)
+	if GameTimeFrame.flashInvite then
+		T.Flash(Text, 0.4)
 	else
-		Text:SetTextColor(1, 1, 1)
+		T.StopFlash(Text)
 	end
 	
 	-- no update quick exit
@@ -163,9 +163,9 @@ Stat:SetScript("OnEnter", function(self)
 	local Hr, Min, AmPm = CalculateTimeValues(true)
 
 	if C["datatext"].localtime == true then
-		timeText = L.datatext_servertime
+		timeText = TIMEMANAGER_TOOLTIP_REALMTIME
 	else
-		timeText = L.datatext_localtime
+		timeText = TIMEMANAGER_TOOLTIP_LOCALTIME
 	end
 	
 	if AmPm == -1 then

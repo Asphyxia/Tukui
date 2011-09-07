@@ -11,7 +11,7 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
  
 	local hText = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	hText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-	hText:SetText(L.datatext_hps,T.panelcolor, " 0.0 ")
+	hText:SetText(L.datatext_hps,T.datacolor, " 0.0 ")
  
 	T.PP(C["datatext"].hps_text, hText)
  
@@ -81,9 +81,9 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
  
 	function get_hps()
 		if (actual_heals_total == 0) then
-			return (L.datatext_hps..T.panelcolor.. " 0.0 ")
+			return (L.datatext_hps..T.datacolor.. " 0.0 ")
 		else
-			return string.format(L.datatext_hps..T.panelcolor.. "%.1f ", (actual_heals_total or 0) / (cmbt_time or 1))
+			return string.format(L.datatext_hps..T.datacolor.. "%.1f ", (actual_heals_total or 0) / (cmbt_time or 1))
 		end
 	end
 

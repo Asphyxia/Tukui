@@ -6,6 +6,7 @@ local function LoadSkin()
 		"StaticPopup1",
 		"StaticPopup2",
 		"StaticPopup3",
+		"StaticPopup4",
 		"GameMenuFrame",
 		"InterfaceOptionsFrame",
 		"VideoOptionsFrame",
@@ -13,10 +14,6 @@ local function LoadSkin()
 		"LFDDungeonReadyStatus",
 		"BNToastFrame",
 		"TicketStatusFrameButton",
-		"DropDownList1MenuBackdrop",
-		"DropDownList2MenuBackdrop",
-		"DropDownList1Backdrop",
-		"DropDownList2Backdrop",
 		"LFDSearchStatus",
 		"AutoCompleteBox",
 		"ConsolidatedBuffsTooltip",
@@ -32,6 +29,19 @@ local function LoadSkin()
 		end
 	end
 
+	-- Skin all DropDownList[i]
+	local function SkinDropDownList(level, index)
+		for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+			local menubackdrop = _G["DropDownList"..i.."MenuBackdrop"]
+			local backdrop = _G["DropDownList"..i.."Backdrop"]
+			if not backdrop.isSkinned then
+				menubackdrop:SetTemplate("Transparent")
+				backdrop:SetTemplate("Transparent")
+				backdrop.isSkinned = true
+			end
+		end
+	end
+	hooksecurefunc("UIDropDownMenu_CreateFrames", SkinDropDownList)
 
 	local ChatMenus = {
 		"ChatMenu",
@@ -61,7 +71,7 @@ local function LoadSkin()
 	LFDRoleCheckPopupRoleButtonHealer:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer:GetChildren():GetFrameLevel() + 1)
 
 	-- reskin popup buttons
-	for i = 1, 2 do
+	for i = 1, 4 do
 		for j = 1, 3 do
 			T.SkinButton(_G["StaticPopup"..i.."Button"..j])
 			T.SkinEditBox(_G["StaticPopup"..i.."EditBox"])
@@ -145,8 +155,7 @@ local function LoadSkin()
 		"ReadyCheckFrameNoButton",
 		"StackSplitOkayButton",
 		"StackSplitCancelButton",
-		"RolePollPopupAcceptButton",
-		"InterfaceOptionsHelpPanelResetTutorials"
+		"RolePollPopupAcceptButton"
 	}
 
 	for i = 1, getn(BlizzardButtons) do
@@ -186,39 +195,6 @@ local function LoadSkin()
 	LFDDungeonReadyDialog:CreateShadow("Transparent")
 	T.SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
 	T.SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
-	
-	-- reskin sliders
-	local slides = {
-		"InterfaceOptionsCombatPanelSpellAlertOpacitySlider",
-		"InterfaceOptionsCombatPanelMaxSpellStartRecoveryOffset",
-		"InterfaceOptionsBattlenetPanelToastDurationSlider",
-		"InterfaceOptionsCameraPanelMaxDistanceSlider",
-		"InterfaceOptionsCameraPanelFollowSpeedSlider",
-		"InterfaceOptionsMousePanelMouseSensitivitySlider",
-		"InterfaceOptionsMousePanelMouseLookSpeedSlider",
-		"Advanced_MaxFPSSlider",
-		"Advanced_MaxFPSBKSlider",
-		"AudioOptionsSoundPanelSoundQuality",
-		"AudioOptionsSoundPanelMasterVolume",
-		"AudioOptionsSoundPanelSoundVolume",
-		"AudioOptionsSoundPanelMusicVolume",
-		"AudioOptionsSoundPanelAmbienceVolume",
-		"AudioOptionsVoicePanelMicrophoneVolume",
-		"AudioOptionsVoicePanelSpeakerVolume",
-		"AudioOptionsVoicePanelSoundFade",
-		"AudioOptionsVoicePanelMusicFade",
-		"AudioOptionsVoicePanelAmbienceFade",
-	}
-
-	for i = 1, getn(slides) do
-		if _G[slides[i]] then
-			if _G[slides[i]] ~= AudioOptionsSoundPanelSoundVolume then
-				T.SkinSlideBar(_G[slides[i]],8,true)
-			else
-				T.SkinSlideBar(_G[slides[i]],8)
-			end
-		end
-	end
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

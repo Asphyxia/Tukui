@@ -185,9 +185,9 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		local position = TukuiTooltipAnchor:GetPoint()
 		if position:match("TOP") then
-			self.text:Point("CENTER", GameTooltipStatusBar, 0, -6)
+			self.text:Point("CENTER", GameTooltipStatusBar, 2, 2)
 		else
-			self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
+			self.text:Point("CENTER", GameTooltipStatusBar, 2, 2)
 		end
 		
 		self.text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
@@ -223,7 +223,7 @@ end)
 
 local healthBar = GameTooltipStatusBar
 healthBar:ClearAllPoints()
-healthBar:Height(6)
+healthBar:Height(11)
 healthBar:Point("BOTTOMLEFT", healthBar:GetParent(), "TOPLEFT", 2, 5)
 healthBar:Point("BOTTOMRIGHT", healthBar:GetParent(), "TOPRIGHT", -2, 5)
 healthBar:SetStatusBarTexture(C.media.normTex)
@@ -233,6 +233,14 @@ healthBarBG:SetFrameLevel(healthBar:GetFrameLevel() - 1)
 healthBarBG:Point("TOPLEFT", -2, 2)
 healthBarBG:Point("BOTTOMRIGHT", 2, -2)
 healthBarBG:SetTemplate("Default")
+
+-- Add "Targeted By" line
+local targetedList = {}
+local ClassColors = {};
+local token
+for class, color in next, RAID_CLASS_COLORS do
+	ClassColors[class] = ("|cff%.2x%.2x%.2x"):format(color.r*255,color.g*255,color.b*255);
+end
 
 GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	local lines = self:NumLines()

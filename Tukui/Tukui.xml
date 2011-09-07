@@ -49,6 +49,7 @@
 	<Script file="modules\blizzard\timertracker.lua"/>
 	<Script file="modules\blizzard\ghostframe.lua"/>
 	<Script file="modules\misc\commands.lua"/>
+	<Script file="modules\misc\micromenu.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\misc\invite.lua"/>
 	<Script file="modules\misc\damage.lua"/>
@@ -57,10 +58,11 @@
 	<Script file="modules\loot\merchant.lua"/>
 	<Script file="modules\blizzard\error.lua"/>
 	<Script file="modules\chat\copyurl.lua"/>
+	
 	<Script file="modules\tooltip\itemidcount.lua"/>
-	<Script file="modules\tooltip\tekkompare.lua"/>
 	<Script file="modules\tooltip\tooltipicon.lua"/>
 	<Script file="modules\tooltip\talents.lua"/>
+	
 	<Script file="modules\blizzard\kill.lua"/>
 	<Script file="modules\chat\spam.lua"/>	
 	<Script file="modules\blizzard\font.lua"/>
@@ -73,6 +75,9 @@
 	
 	<Script file="modules\panels\panels.lua"/>
 	<Script file="modules\panels\asphyxia_panels.lua"/>
+	<Script file="modules\panels\control_panel.lua"/>
+	
+	<Script file="modules\databars\databars.lua"/>
 	
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
@@ -97,7 +102,6 @@
 	<Script file="modules\datatext\specswitcher.lua"/>
 	<Script file="modules\datatext\regen.lua"/>
 	<Script file="modules\datatext\profession.lua"/>
-	<Script file="modules\datatext\databars.lua"/>
 	<Script file="modules\datatext\calltoarms.lua"/>
 	<Script file="modules\datatext\expertise.lua"/>
 		
@@ -145,17 +149,14 @@
 	<Script file="modules\blizzard\mirror.lua"/>
 	<Script file="modules\notifications\selfbuffs.lua"/>
 	
-	<Script file="modules\addonskins\addons.lua"/>
-	<Script file="modules\addonskins\addons_toggle.lua"/>
-	<Script file="modules\addonskins\LoadSkins.lua"/>
-	<Script file="modules\addonskins\KLE.lua"/>
+	<Script file="modules\addonskins\combat_toggle.lua"/>
+	<Script file="modules\addonskins\Tukui_DBM.lua"/>
 	<Script file="modules\addonskins\Omen.lua"/>
 	<Script file="modules\addonskins\Recount.lua"/>
 	<Script file="modules\addonskins\Skada.lua"/>
 	<Script file="modules\addonskins\TinyDPS.lua"/>
-	<Script file="modules\addonskins\dbm.lua"/>
-	<Script file="modules\addonskins\dxe.lua"/>
 	<Script file="modules\addonskins\bigwigs.lua"/>
+	<Script file="modules\addonskins\balancepower.lua"/>
 	
 	<Script file="modules\skins\core.lua"/>
 	<Script file="modules\skins\achievement.lua"/>
@@ -217,9 +218,6 @@
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia.lua"/>
-	<Script file="modules\unitframes\layouts\asphyxia2.lua"/>
-	<Script file="modules\unitframes\layouts\asphyxia3.lua"/>
-	<Script file="modules\unitframes\layouts\asphyxia4.lua"/>
 	<Script file="modules\unitframes\layouts\smelly.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	

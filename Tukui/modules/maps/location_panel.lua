@@ -3,27 +3,22 @@ if not C.map.location_panel then return end
 local font, fsize, fstyle = C.media.pixelfont, C.datatext.fontsize, "MONOCHROMEOUTLINE"
 
 local locpanel = CreateFrame("Frame", "TukuiLocationPanel", UIParent)
-locpanel:CreatePanel("Default", 70, 23, "TOP", UIParent, "TOP", 0, -10)
+locpanel:CreatePanel("Default", 70, 23, "TOP", UIParent, "TOP", 0, -8)
 locpanel:CreateShadow("Default")
+locpanel:CreateOverlay(locpanel)
 locpanel:SetFrameLevel(4)
 locpanel:EnableMouse(true)
-
---[[locpanel .Status = CreateFrame( "StatusBar", "HydraDataStatus", locpanel  )
-locpanel .Status:SetFrameLevel( 12 )
-locpanel .Status:SetStatusBarTexture( C["media"].normTex )
-locpanel .Status:SetMinMaxValues( 0, 100 )
-locpanel .Status:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
-locpanel .Status:Point( "TOPLEFT", locpanel , "TOPLEFT", 2, -2 )
-locpanel .Status:Point( "BOTTOMRIGHT", locpanel , "BOTTOMRIGHT", -2, 2 )--]]
 
 local xcoords = CreateFrame("Frame", "TukuiXCoordsPanel", locpanel)
 xcoords:CreatePanel("Default", 35, 19, "RIGHT", locpanel, "LEFT", 1, 0)
 xcoords:CreateShadow("Default")
+xcoords:CreateOverlay(xcoords)
 xcoords:SetFrameLevel(2)
 
 local ycoords = CreateFrame("Frame", "TukuiYCoordsPanel", locpanel)
 ycoords:CreatePanel("Default", 35, 19, "LEFT", locpanel, "RIGHT", -1, 0)
 ycoords:CreateShadow("Default")
+ycoords:CreateOverlay(ycoords)
 ycoords:SetFrameLevel(2)
 
 -- Set font
@@ -64,13 +59,13 @@ end
 local function xUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posX = math.floor(100 * posX)
-	xFS:SetText(T.panelcolor..posX)
+	xFS:SetText(T.datacolor..posX)
 	xFS:SetPoint("CENTER", xcoords, "CENTER", 1, 1)
 end
 local function yUpdate()
 	posX, posY = GetPlayerMapPosition("player");
 	posY = math.floor(100 * posY)
-	yFS:SetText(T.panelcolor..posY)
+	yFS:SetText(T.datacolor..posY)
 	yFS:SetPoint("CENTER", ycoords, "CENTER", 1, 1)
 end
 locpanel:SetScript("OnMouseDown", function()

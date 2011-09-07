@@ -19,7 +19,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 			free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
 		end
 		used = total - free
-		Text:SetText("Bag Slots: "..T.panelcolor..free)
+		Text:SetText("Bag Slots: "..T.datacolor..free)
 		self:SetAllPoints(Text)
 		Stat:SetScript("OnEnter", function()
 		if not InCombatLockdown() then
@@ -28,8 +28,8 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L.datatext_bags)
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(T.panelcolor.."Total",total, 1, 1, 1, 1, 1, 1)
-			GameTooltip:AddDoubleLine(T.panelcolor.."Used",used, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(T.datacolor.."Total",total, 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(T.datacolor.."Used",used, 1, 1, 1, 1, 1, 1)
 		end
 		GameTooltip:Show()
 	end)

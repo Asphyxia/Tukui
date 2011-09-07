@@ -24,20 +24,18 @@ local function chatsetup()
 		local chatName = FCF_GetChatWindowInfo(chatFrameId)
 		
 		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth -5, 116)
+		frame:Size(T.InfoLeftRightWidth + 1, 111)
 		
 		-- tell wow that we are using new size
-		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth -5), T.Scale(116))
+		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
 		
 		-- move general bottom left or Loot (if found) on right
 		if i == 1 then
 			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 5, 6)
-			frame:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", -5, 6)
-		elseif i == 4 and chatName == (LOOT.." & "..TRADE) then
+			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
+		elseif i == 4 and chatName == LOOT then
 			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 5, 6)
-			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", -5, 6)
+			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
 		end
 				
 		-- save new default position and dimension
@@ -46,24 +44,24 @@ local function chatsetup()
 		-- set default tukui font size
 		FCF_SetChatWindowFontSize(nil, frame, 12)
 		
-	-- rename windows general and combat log
-		if i == 1 then FCF_SetWindowName(frame, "General Chat") end
-		if i == 2 then FCF_SetWindowName(frame, " Combat Log") end
-		
-		if i == 4 then FCF_SetWindowName(frame, LOOT.." & "..TRADE) end
+		-- rename windows general and combat log
+		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
+		if i == 2 then FCF_SetWindowName(frame, "Log") end
 	end
 	
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
 	ChatFrame_RemoveChannel(ChatFrame1, L.chat_trade) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
-	ChatFrame_AddChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
+	ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
 	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
 	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
 	ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
+	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
+	--ChatFrame_AddMessageGroup(ChatFrame1, "WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_SAY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_EMOTE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_YELL")
@@ -86,8 +84,10 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
 	ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
 	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
+	--ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
+	--ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
 				
-	-- Setup the spam chat frame
+	-- Setup the whisper chat frame
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
 	ChatFrame_RemoveChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
 	ChatFrame_RemoveChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
@@ -103,12 +103,8 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_GUILD_XP_GAIN")
 	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
 	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-	ChatFrame_AddMessageGroup(ChatFrame4, "CURRENCY")
-	ChatFrame_AddMessageGroup(ChatFrame4, "GUILD_ACHIEVEMENT")
-	ChatFrame_AddChannel(ChatFrame4, L.chat_trade) -- erf, it seem we need to localize this now
 			
 	-- enable classcolor automatically on login and on each character without doing /configure each time.
 	ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -131,7 +127,7 @@ local function chatsetup()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
-
+	
 	-- Chat Colors
 	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255) -- General
 	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255) -- Trade
@@ -185,19 +181,21 @@ local function positionsetup()
 	end
 end
 
+-- Version Frame
 local v = CreateFrame("Button", "TukuiVersionFrame", UIParent)
 v:SetSize(210, 34)
-v:SetPoint("CENTER", UIParent, "CENTER", 0, 184)
+v:SetPoint("CENTER", UIParent, "CENTER", 0, 188)
 v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 2.11  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 3.0  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
 
+--Help Frame
 local ahelp = CreateFrame("Button", "TukuiAsphyxiaHelpFrame", UIParent)
 ahelp:SetSize(550, 335)
 ahelp:SetPoint("CENTER")
@@ -205,7 +203,7 @@ ahelp:SetTemplate("Transparent")
 ahelp:CreateShadow("Default")
 ahelp:FontString("Text", C.media.font, 13)
 ahelp.Text:SetPoint("CENTER")
-ahelp.Text:SetText(L.core_uihelp20..L.core_uihelp21..L.core_uihelp22..L.core_uihelp23..L.core_uihelp24..L.core_uihelp25..L.core_uihelp26..L.core_uihelp27..L.core_uihelp28..L.core_uihelp29..L.core_uihelp30..L.core_uihelp31)
+ahelp.Text:SetText(L.core_uihelp20..L.core_uihelp21..L.core_uihelp22..L.core_uihelp23..L.core_uihelp24..L.core_uihelp25..L.core_uihelp26..L.core_uihelp27..L.core_uihelp28..L.core_uihelp29..L.core_uihelp30)
 ahelp:SetScript("OnClick", function()
 	ahelp:Hide()
 end)
@@ -529,6 +527,7 @@ StaticPopupDialogs["TUKUIDISABLE_UI"] = {
 	OnAccept = DisableTukui,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
@@ -539,6 +538,36 @@ StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
 	OnCancel = function() EnableAddOn("Tukui_Raid_Healing") DisableAddOn("Tukui_Raid") ReloadUI() end,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3
+}
+
+StaticPopupDialogs["TUKUIDISBAND_RAID"] = {
+	text = L.disband,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		if InCombatLockdown() then return end -- Prevent user error in combat
+		
+		SendChatMessage(ERR_GROUP_DISBANDED, "RAID" or "PARTY")
+		if UnitInRaid("player") then
+			for i = 1, GetNumRaidMembers() do
+				local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
+				if online and name ~= T.myname then
+					UninviteUnit(name)
+				end
+			end
+		else
+			for i = MAX_PARTY_MEMBERS, 1, -1 do
+				if GetPartyMember(i) then
+					UninviteUnit(UnitName("party"..i))
+				end
+			end
+		end
+		LeaveParty()	
+	end,
+	timeout = 0,
+	whileDead = 1,
+	preferredIndex = 3,
 }
 
 ------------------------------------------------------------------------
@@ -558,36 +587,6 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 			SetCVar("useUiScale", 0)
 			StaticPopup_Show("TUKUIDISABLE_UI")
 	else
-		SetCVar("useUiScale", 1)
-		if C["general"].multisampleprotect == true then
-			SetMultisampleFormat(1)
-		end
-		if C["general"].uiscale > 1 then C["general"].uiscale = 1 end
-		if C["general"].uiscale < 0.64 then C["general"].uiscale = 0.64 end
-
-		-- set our uiscale
-		SetCVar("uiScale", C["general"].uiscale)
-		
-		-- we adjust UIParent to screen #1 if Eyefinity is found
-		if T.eyefinity then
-			local width = T.eyefinity
-			local height = T.getscreenheight
-			
-			-- if autoscale is off, find a new width value of UIParent for screen #1.
-			if not C.general.autoscale or height > 1200 then
-				local h = UIParent:GetHeight()
-				local ratio = T.getscreenheight / h
-				local w = T.eyefinity / ratio
-				
-				width = w
-				height = h			
-			end
-			
-			UIParent:SetSize(width, height)
-			UIParent:ClearAllPoints()
-			UIParent:SetPoint("CENTER")		
-		end
-		
 		-- install default if we never ran Tukui on this character.
 		if not TukuiDataPerChar.install then			
 			install()
@@ -619,6 +618,5 @@ SlashCmdList.RESETUI = function() f:Show() step1() end
 SLASH_AHELP1 = "/ahelp"
 SlashCmdList.AHELP = function() if ahelp:IsShown() then ahelp:Hide() else ahelp:Show() end end
 
-local r, g, b = unpack(C["media"].statcolor)
-T.StatColor = ("|cff%.2x%.2x%.2x"):format(r * 255, g * 255, b * 255)
-T.StatColorEnd = "|r"
+--[[local r, g, b = unpack(C["media"].datacolor)
+T.datacolor = ("|cff%.2x%.2x%.2x"):format(r * 255, g * 255, b * 255)--]]

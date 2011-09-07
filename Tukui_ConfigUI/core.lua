@@ -280,6 +280,7 @@ StaticPopupDialogs["PERCHAR"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 StaticPopupDialogs["RESET_PERCHAR"] = {
@@ -293,6 +294,7 @@ StaticPopupDialogs["RESET_PERCHAR"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 StaticPopupDialogs["RESET_ALL"] = {
@@ -307,6 +309,7 @@ StaticPopupDialogs["RESET_ALL"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 -- We wanna make sure we have all needed tables when we try add values
@@ -411,7 +414,7 @@ function CreateTukuiConfigUI()
 	TukuiConfigUITitleBox:SetWidth(570)
 	TukuiConfigUITitleBox:SetHeight(24)
 	TukuiConfigUITitleBox:SetPoint("TOPLEFT", -10, 42)
-	TukuiConfigUITitleBox:SetTemplate("Transparent")
+	TukuiConfigUITitleBox:SetTemplate("Default")
 	TukuiConfigUITitleBox:CreateShadow("Default")
 	
 	local title = TukuiConfigUITitleBox:CreateFontString("TukuiConfigUITitle", "OVERLAY")
@@ -421,7 +424,7 @@ function CreateTukuiConfigUI()
 	local TukuiConfigUIBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
 	TukuiConfigUIBG:SetPoint("TOPLEFT", -10, 10)
 	TukuiConfigUIBG:SetPoint("BOTTOMRIGHT", 10, -10)
-	TukuiConfigUIBG:SetTemplate("Transparent")
+	TukuiConfigUIBG:SetTemplate("Default")
 	TukuiConfigUIBG:CreateShadow("Default")
 	
 	-- GROUP SELECTION ( LEFT SIDE )
@@ -433,7 +436,7 @@ function CreateTukuiConfigUI()
 	local groupsBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
 	groupsBG:SetPoint("TOPLEFT", groups, -10, 10)
 	groupsBG:SetPoint("BOTTOMRIGHT", groups, 10, -10)
-	groupsBG:SetTemplate("Transparent")
+	groupsBG:SetTemplate("Default")
 	groupsBG:CreateShadow("Default")
 	
 	--This is our frame we will use to prevent clicking on the config, before you choose a popup window
@@ -453,7 +456,7 @@ function CreateTukuiConfigUI()
 	slider:SetOrientation("VERTICAL")
 	slider:SetValueStep(20)
 	slider:SetScript("OnValueChanged", function(self,value) groups:SetVerticalScroll(value) end)
-	slider:SetTemplate("Transparent")
+	slider:SetTemplate("Default")
 	local r,g,b,a = unpack(C["media"].bordercolor)
 	slider:SetBackdropColor(r,g,b,0.2)
 	local child = CreateFrame("Frame",nil,groups)
@@ -488,6 +491,7 @@ function CreateTukuiConfigUI()
 			end
 		end
 	end)
+	
 	-- GROUP SCROLLFRAME ( RIGHT SIDE)
 	local group = CreateFrame("ScrollFrame", "TukuiConfigUIGroup", TukuiConfigUI)
 	group:SetPoint("TOPLEFT",0,5)
@@ -500,7 +504,7 @@ function CreateTukuiConfigUI()
 	slider:SetThumbTexture("Interface\\Buttons\\UI-ScrollBar-Knob")
 	slider:SetOrientation("VERTICAL")
 	slider:SetValueStep(20)
-	slider:SetTemplate("Transparent")
+	slider:SetTemplate("Default")
 	local r,g,b,a = unpack(C["media"].bordercolor)
 	slider:SetBackdropColor(r,g,b,0.2)
 	slider:SetScript("OnValueChanged", function(self,value) group:SetVerticalScroll(value) end)
@@ -553,12 +557,12 @@ function CreateTukuiConfigUI()
 				editbox:SetPoint("TOPLEFT", 5, -(offset+20))
 				editbox:SetText(value)
 				
-				editbox:SetTemplate("Transparent")
+				editbox:SetTemplate("Default")
 				
 				local okbutton = CreateFrame("Button", nil, frame)
 				okbutton:SetHeight(editbox:GetHeight())
 				okbutton:SetWidth(editbox:GetHeight())
-				okbutton:SetTemplate("Transparent")
+				okbutton:SetTemplate("Default")
 				okbutton:SetPoint("LEFT", editbox, "RIGHT", 2, 0)
 				
 				local oktext = okbutton:CreateFontString(nil,"OVERLAY",nil)
@@ -595,7 +599,7 @@ function CreateTukuiConfigUI()
 				local colorbutton = CreateFrame("Button", colorbuttonname, frame)
 				colorbutton:SetHeight(20)
 				colorbutton:SetWidth(50)
-				colorbutton:SetTemplate("Transparent")
+				colorbutton:SetTemplate("Default")
 				colorbutton:SetBackdropBorderColor(unpack(value))
 				colorbutton:SetPoint("LEFT", label, "RIGHT", 2, 0)
 				local colortext = colorbutton:CreateFontString(nil,"OVERLAY",nil)
@@ -664,7 +668,7 @@ function CreateTukuiConfigUI()
 			StaticPopup_Show("RESET_ALL")
 		end
 	end)
-	reset:SetTemplate("Transparent")
+	reset:SetTemplate("Default")
 	reset:CreateShadow("Default")
 	
 	local close = NewButton(TukuiL.option_button_close, TukuiConfigUI)
@@ -672,7 +676,7 @@ function CreateTukuiConfigUI()
 	close:SetHeight(20)
 	close:SetPoint("BOTTOMRIGHT", 10, -38)
 	close:SetScript("OnClick", function(self) TukuiConfigUI:Hide() end)
-	close:SetTemplate("Transparent")
+	close:SetTemplate("Default")
 	close:CreateShadow("Default")
 	
 	local load = NewButton(TukuiL.option_button_load, TukuiConfigUI)
@@ -680,7 +684,7 @@ function CreateTukuiConfigUI()
 	load:SetPoint("LEFT", reset, "RIGHT", 15, 0)
 	load:SetPoint("RIGHT", close, "LEFT", -15, 0)
 	load:SetScript("OnClick", function(self) ReloadUI() end)
-	load:SetTemplate("Transparent")
+	load:SetTemplate("Default")
 	load:CreateShadow("Default")
 	
 	if TukuiConfigAll then

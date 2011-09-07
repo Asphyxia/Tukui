@@ -17,7 +17,7 @@ local function Update(self)
 	for _, v in pairs({GetProfessions()}) do
 		if v ~= nil then
 			local name, texture, rank, maxRank = GetProfessionInfo(v)
-			Text:SetFormattedText(T.panelcolor.."Profession")
+			Text:SetFormattedText(T.datacolor.."Profession")
 		end
 	end
 	self:SetAllPoints(Text)

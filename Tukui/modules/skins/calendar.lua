@@ -33,7 +33,7 @@ local function LoadSkin()
 		
 		T.SkinNextPrevButton(button, true)
 		
-		frame:CreateBackdrop("Transparent")
+		frame:CreateBackdrop("Default")
 		frame.backdrop:Point("TOPLEFT", 20, 2)
 		frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 	end
@@ -41,17 +41,13 @@ local function LoadSkin()
 	
 	--backdrop
 	local bg = CreateFrame("Frame", "CalendarFrameBackdrop", CalendarFrame)
-	bg:SetTemplate("Transparent")
+	bg:SetTemplate("Default")
 	bg:Point("TOPLEFT", 10, -72)
 	bg:Point("BOTTOMRIGHT", -8, 3)
 	
-	CalendarContextMenu:SetTemplate("Transparent")
+	CalendarContextMenu:SetTemplate("Default")
 	CalendarContextMenu.SetBackdropColor = T.dummy
 	CalendarContextMenu.SetBackdropBorderColor = T.dummy
-	
-	CalendarInviteStatusContextMenu:SetTemplate("Transparent")
-	CalendarInviteStatusContextMenu.SetBackdropColor = T.dummy
-	CalendarInviteStatusContextMenu.SetBackdropBorderColor = T.dummy
 	
 	--Boost frame levels
 	for i=1, 42 do
@@ -71,14 +67,14 @@ local function LoadSkin()
 	CalendarCreateEventInviteEdit:Width(CalendarCreateEventInviteEdit:GetWidth() - 2)
 	
 	CalendarCreateEventInviteList:StripTextures()
-	CalendarCreateEventInviteList:SetTemplate("Transparent")
+	CalendarCreateEventInviteList:SetTemplate("Default")
 	
 	T.SkinEditBox(CalendarCreateEventInviteEdit)
 	T.SkinEditBox(CalendarCreateEventTitleEdit)
 	T.SkinDropDownBox(CalendarCreateEventTypeDropDown, 120)
 	
 	CalendarCreateEventDescriptionContainer:StripTextures()
-	CalendarCreateEventDescriptionContainer:SetTemplate("Transparent")
+	CalendarCreateEventDescriptionContainer:SetTemplate("Default")
 	
 	T.SkinCloseButton(CalendarCreateEventCloseButton)
 	
@@ -97,7 +93,7 @@ local function LoadSkin()
 		for i, class in ipairs(CLASS_SORT_ORDER) do
 			local button = _G["CalendarClassButton"..i]
 			button:StripTextures()
-			button:CreateBackdrop("Transparent")
+			button:CreateBackdrop("Default")
 			
 			local tcoords = CLASS_ICON_TCOORDS[class]
 			local buttonIcon = button:GetNormalTexture()
@@ -108,7 +104,7 @@ local function LoadSkin()
 		CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 5, 0)
 		
 		CalendarClassTotalsButton:StripTextures()
-		CalendarClassTotalsButton:CreateBackdrop("Transparent")
+		CalendarClassTotalsButton:CreateBackdrop("Default")
 	end)
 	
 	--Texture Picker Frame
@@ -163,9 +159,8 @@ local function LoadSkin()
 	CalendarViewEventInviteList:SetTemplate("Transparent")
 	CalendarViewEventInviteListSection:StripTextures()
 	T.SkinCloseButton(CalendarViewEventCloseButton)
-	
 	T.SkinScrollBar(CalendarViewEventInviteListScrollFrameScrollBar)
-
+	
 	local buttons = {
 		"CalendarViewEventAcceptButton",
 		"CalendarViewEventTentativeButton",
@@ -175,17 +170,7 @@ local function LoadSkin()
 
 	for _, button in pairs(buttons) do
 		T.SkinButton(_G[button])
-	end		
-	
-	-- too many event same day box
-    CalendarEventPickerFrame:StripTextures()
-	CalendarEventPickerFrame:SetTemplate("Transparent")
-	CalendarEventPickerTitleFrame:StripTextures()
-
-	T.SkinScrollBar(CalendarEventPickerScrollBar)
-
-	CalendarEventPickerCloseButton:StripTextures()
-	T.SkinButton(CalendarEventPickerCloseButton, true)
+	end	
 end
 
 T.SkinFuncs["Blizzard_Calendar"] = LoadSkin

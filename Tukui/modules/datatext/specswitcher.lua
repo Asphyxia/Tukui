@@ -13,7 +13,7 @@ if C.datatext.enable_specswitcher then
 	local int = 1
 	local function Update(self, t)
 		if not GetPrimaryTalentTree() then
-			Text:SetText(T.StatColor..L.datatext_notalents) 
+			Text:SetText(T.datacolor..L.datatext_notalents) 
 		return end
 		int = int - t
 		if int < 0 then
@@ -21,7 +21,7 @@ if C.datatext.enable_specswitcher then
 			local tree2num = select(5,GetTalentTabInfo(2))
 			local tree3num = select(5,GetTalentTabInfo(3))
 			local majorTree = GetPrimaryTalentTree()
-			Text:SetText(select(2,GetTalentTabInfo(majorTree))..": "..T.StatColor..tree1num.."/"..tree2num.."/"..tree3num)
+			Text:SetText(select(2,GetTalentTabInfo(majorTree))..": "..T.datacolor..tree1num.."/"..tree2num.."/"..tree3num)
 		end
 	end
  
@@ -54,12 +54,12 @@ if C.datatext.enable_specswitcher then
 				GameTooltip:ClearLines()
  
 				if(not GetPrimaryTalentTree()) then
-					GameTooltip:AddLine(T.StatColor..L.datatext_notalents)
+					GameTooltip:AddLine(T.datacolor..L.datatext_notalents)
 				elseif(hs) then
-					GameTooltip:AddLine(T.StatColor..(c == 1 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree1))..": "..T.StatColor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
-					GameTooltip:AddLine(T.StatColor..(c == 2 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree2))..": "..T.StatColor..group2tree1.."/"..group2tree2.."/"..group2tree3,1,1,1)
+					GameTooltip:AddLine(T.datacolor..(c == 1 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree1))..": "..T.datacolor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
+					GameTooltip:AddLine(T.datacolor..(c == 2 and "* " or "  ") .. "|r" .. select(2,GetTalentTabInfo(majorTree2))..": "..T.datacolor..group2tree1.."/"..group2tree2.."/"..group2tree3,1,1,1)
 				else
-					GameTooltip:AddLine(select(2,GetTalentTabInfo(majorTree1))..": "..T.StatColor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
+					GameTooltip:AddLine(select(2,GetTalentTabInfo(majorTree1))..": "..T.datacolor..group1tree1.."/"..group1tree2.."/"..group1tree3,1,1,1)
 				end
  
 				GameTooltip:Show()

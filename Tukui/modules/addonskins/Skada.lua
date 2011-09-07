@@ -1,108 +1,189 @@
-﻿--[[
-    Skada skin for Elvui by Darth Android / Telroth - Black Dragonflight
-    Skins all Skada windows to fit Tukui
-    All overridden options are removed from Skada's config to reduce confusion
-    
-    Window height is moved to the Bars config pane - it works a bit differently now.
-    If set to 0, window auto-sizes to the number of bars as before, with a minimum of 1 bar.
-    If set to 1, then it sizes to accomodate the number of bars defined by the "Max bars" setting
-    
-    TODO:
-     + Add Integration options
+﻿local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
-	(C)2010 Darth Android / Telroth - Black Dragonflight
-	File version v15.37
-]]
-local E, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 if not IsAddOnLoaded("Skada") or not C.Addon_Skins.Skada then return end
 local Skada = Skada
 
-AddonSkins_Mod:RegisterSkin("Skada",function(Skin,skin,Layout,layout,config)
-	Layout.PositionSkadaWindow = dummy
-	-- Used to strip unecessary options from the in-game config
-	local function StripOptions(options)
-		options.baroptions.args.bartexture = options.windowoptions.args.height
-		options.baroptions.args.bartexture.order = 12
-		options.baroptions.args.bartexture.max = 1
-		options.baroptions.args.barspacing = nil
-		options.titleoptions.args.texture = nil
-		options.titleoptions.args.bordertexture = nil
-		options.titleoptions.args.thickness = nil
-		options.titleoptions.args.margin = nil
-		options.titleoptions.args.color = nil
-		options.windowoptions = nil
-        options.baroptions.args.barfont = nil
-        options.titleoptions.args.font = nil
+local Skada = Skada
+local barSpacing = T.Scale(1, 1)
+local borderWidth = T.Scale(2, 2)
+
+local barmod = Skada.displays["bar"]
+
+-- Used to strip unecessary options from the in-game config
+local function StripOptions(options)
+	options.baroptions.args.barspacing = nil
+	options.titleoptions.args.texture = nil
+	options.titleoptions.args.bordertexture = nil
+	options.titleoptions.args.thickness = nil
+	options.titleoptions.args.margin = nil
+	options.titleoptions.args.color = nil
+	options.windowoptions = nil
+	options.baroptions.args.barfont = nil
+	options.titleoptions.args.font = nil
+end
+
+local barmod = Skada.displays["bar"]
+barmod.AddDisplayOptions_ = barmod.AddDisplayOptions
+barmod.AddDisplayOptions = function(self, win, options)
+	self:AddDisplayOptions_(win, options)
+	StripOptions(options)
+end
+
+for k, options in pairs(Skada.options.args.windows.args) do
+	if options.type == "group" then
+		StripOptions(options.args)
 	end
-	-- Hook the bar mod
-	local barmod = Skada.displays["bar"]
-	-- Strip options
-	barmod.AddDisplayOptions_ = barmod.AddDisplayOptions
-    barmod.AddDisplayOptions = function(self, win, options)
-        self:AddDisplayOptions_(win, options)
-        StripOptions(options)
+end
+
+local titleBG = {
+	bgFile = C["media"].normTex,
+	tile = false,
+	tileSize = 0
+}
+
+barmod.ApplySettings_ = barmod.ApplySettings
+barmod.ApplySettings = function(self, win)
+	barmod.ApplySettings_(self, win)
+
+	local skada = win.bargroup
+
+	if win.db.enabletitle then
+		skada.button:SetBackdrop(titleBG)
 	end
-	for k, options in pairs(Skada.options.args.windows.args) do
-        if options.type == "group" then
-            StripOptions(options.args)
-        end
-    end
-	-- Size height correctly
-	barmod.AdjustBackgroundHeight = function(self,win)
-	    local numbars = 0
-	    if win.bargroup:GetBars() ~= nil then
-		    if win.db.background.height == 0 then
-                for name, bar in pairs(win.bargroup:GetBars()) do if bar:IsShown() then numbars = numbars + 1 end end
-            else
-                numbars = win.db.barmax
-            end
-            if win.db.enabletitle then numbars = numbars + 1 end
-            if numbars < 1 then numbars = 1 end
-		    local height = numbars * (win.db.barheight + config.barSpacing) + config.barSpacing + config.borderWidth
-            --if win.db.enabletitle then height = height + 1 end
-		    if win.bargroup.bgframe:GetHeight() ~= height then
-			    win.bargroup.bgframe:SetHeight(height)
-		    end
-	    end
-    end
-	-- Override settings from in-game GUI
-	local titleBG = {
-		bgFile = config.normTexture,
-		tile = false,
-		tileSize = 0
-	}
-	barmod.ApplySettings_ = barmod.ApplySettings
-	barmod.ApplySettings = function(self, win)
-        win.db.enablebackground = true
-        win.db.background.borderthickness = config.borderWidth
-		barmod:ApplySettings_(win)
-		layout:PositionSkadaWindow(win)
-        if win.db.enabletitle then
-            win.bargroup.button:SetBackdrop(titleBG)
-        end
-        win.bargroup:SetTexture(config.normTexture)
-        win.bargroup:SetSpacing(config.barSpacing)
-		win.bargroup:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		local titlefont = CreateFont("TitleFont"..win.db.name)
-		titlefont:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		win.bargroup.button:SetNormalFontObject(titlefont)
-        local color = win.db.title.color
-	    win.bargroup.button:SetBackdropColor(unpack(C["media"].bordercolor))
-		if win.bargroup.bgframe then
-            win.bargroup.bgframe:SetTemplate("Transparent")
-			if win.db.reversegrowth then
-				win.bargroup.bgframe:SetPoint("BOTTOM", win.bargroup.button, "BOTTOM", 0, -1 * (win.db.enabletitle and 2 or 1))
-			else
-				win.bargroup.bgframe:SetPoint("TOP", win.bargroup.button, "TOP", 0,1 * (win.db.enabletitle and 2 or 1))
+
+	skada:SetTexture(C["media"].normTex)
+	skada:SetSpacing(barSpacing)
+	skada:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	skada:SetFrameLevel(5)
+	
+	local titlefont = CreateFont("TitleFont"..win.db.name)
+	titlefont:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	win.bargroup.button:SetNormalFontObject(titlefont)
+
+	local color = win.db.title.color
+	win.bargroup.button:SetBackdropColor(unpack(C["media"].bordercolor))
+
+	skada:SetBackdrop(nil)
+	if not skada.backdrop then
+		skada:CreateBackdrop("Default")
+	end
+	skada.backdrop:ClearAllPoints()
+	if win.db.enabletitle then
+		skada.backdrop:Point('TOPLEFT', win.bargroup.button, 'TOPLEFT', -2, 2)
+	else
+		skada.backdrop:Point('TOPLEFT', win.bargroup, 'TOPLEFT', -2, 2)
+	end
+	skada.backdrop:Point('BOTTOMRIGHT', win.bargroup, 'BOTTOMRIGHT', 2, -2)
+
+	if C["Addon_Skins"].embedright == "Skada" then
+		win.bargroup.button:SetFrameStrata("MEDIUM")
+		win.bargroup.button:SetFrameLevel(5)	
+		win.bargroup:SetFrameStrata("MEDIUM")
+	end
+end
+
+local function EmbedWindow(window, width, barheight, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+	window.db.barwidth = width
+	window.db.barheight = barheight
+	if window.db.enabletitle then 
+		height = height - barheight
+	end
+	window.db.background.height = height
+	window.db.spark = false
+	window.db.barslocked = true
+	window.bargroup:ClearAllPoints()
+	window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
+	
+	barmod.ApplySettings(barmod, window)
+end
+
+local windows = {}
+function EmbedSkada()
+	if #windows == 1 then
+		EmbedWindow(windows[1], TukuiChatBackgroundRight:GetWidth() - 4,   (TukuiChatBackgroundRight:GetHeight() - 4 - (barSpacing * 4)) / 10, (TukuiChatBackgroundRight:GetHeight() - 6), "BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMRIGHT", -2, 3)
+	elseif #windows == 2 then
+		EmbedWindow(windows[1], ((TukuiChatBackgroundRight:GetWidth() - 4) / 2) - (borderWidth + T.mult), (TukuiChatBackgroundRight:GetHeight() - 4 - (barSpacing * 4)) / 10, TukuiChatBackgroundRight:GetHeight() - 4,    "BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMRIGHT", -2, 3)
+		EmbedWindow(windows[2], ((TukuiChatBackgroundRight:GetWidth() - 4) / 2) - (borderWidth + T.mult), (TukuiChatBackgroundRight:GetHeight() - 4 - (barSpacing * 4)) / 10, TukuiChatBackgroundRight:GetHeight() - 4,    "BOTTOMLEFT", TukuiChatBackgroundRight, "BOTTOMLEFT", 2, 3)
+	elseif #windows > 2 then
+		EmbedWindow(windows[1], ((TukuiChatBackgroundRight:GetWidth() - 4) / 2) - (borderWidth + T.mult), (TukuiChatBackgroundRight:GetHeight() - 4 - (barSpacing * 4)) / 10, TukuiChatBackgroundRight:GetHeight() - 4,    "BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMRIGHT", -2, 3)
+		EmbedWindow(windows[2], ((TukuiChatBackgroundRight:GetWidth() - 4) / 2) - (borderWidth + T.mult), ((TukuiChatBackgroundRight:GetHeight() - 6 / 2) - (barSpacing * 4)) / 10, TukuiChatBackgroundRight:GetHeight() - 4 / 2 - 2,  "BOTTOMLEFT", TukuiChatBackgroundRight, "BOTTOMLEFT", 2, 3)
+		EmbedWindow(windows[3], windows[2].db.barwidth -1 , ((TukuiChatBackgroundRight:GetHeight() - 6 / 2) - (barSpacing * 4)) / 10, TukuiChatBackgroundRight:GetHeight() - 4 / 2 - 2,  "BOTTOMLEFT", windows[2].bargroup.backdrop, "TOPLEFT", 2, 4)
+	end
+end
+
+-- Update pre-existing displays
+for _, window in ipairs(Skada:GetWindows()) do
+	window:UpdateDisplay()
+end
+
+if C["Addon_Skins"].embedright == "Skada" then
+	Skada.CreateWindow_ = Skada.CreateWindow
+	function Skada:CreateWindow(name, db)
+		Skada:CreateWindow_(name, db)
+		
+		windows = {}
+		for _, window in ipairs(Skada:GetWindows()) do
+			tinsert(windows, window)
+		end	
+		
+		EmbedSkada()
+	end
+
+	Skada.DeleteWindow_ = Skada.DeleteWindow
+	function Skada:DeleteWindow(name)
+		Skada:DeleteWindow_(name)
+		
+		windows = {}
+		for _, window in ipairs(Skada:GetWindows()) do
+			tinsert(windows, window)
+		end	
+		
+		EmbedSkada()
+	end
+
+	local Skada_Skin = CreateFrame("Frame")
+	Skada_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Skada_Skin:SetScript("OnEvent", function(self)
+		self:UnregisterAllEvents()
+		self = nil
+		
+		EmbedSkada()
+	end)
+
+	if TukuiTabsRightBackground then
+		local button = CreateFrame('Button', 'SkadaToggleSwitch', TukuiTabsRightBackground)
+		button:Width(90)
+		button:Height(TukuiTabsRightBackground:GetHeight() - 4)
+		button:Point("CENTER", TukuiTabsRightBackground, "CENTER", 2, 0)
+		
+		button.tex = button:CreateTexture(nil, 'OVERLAY')
+		button.tex:SetTexture([[Interface\AddOns\Tukui\medias\textures\addons_toggle.tga]])
+		button.tex:Point('TOPRIGHT', -2, -2)
+		button.tex:Height(button:GetHeight() - 4)
+		button.tex:Width(16)
+		
+		button:FontString(nil, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		button.text:SetPoint('RIGHT', button.tex, 'LEFT')
+		button.text:SetTextColor(unpack(C["media"].datacolor))
+		
+		button:SetScript('OnEnter', function(self) button.text:SetText(L.addons_toggle..' Skada') end)
+		button:SetScript('OnLeave', function(self) self.tex:Point('TOPRIGHT', -2, -2); button.text:SetText(nil) end)
+		button:SetScript('OnMouseDown', function(self) self.tex:Point('TOPRIGHT', -4, -4) end)
+		button:SetScript('OnMouseUp', function(self) self.tex:Point('TOPRIGHT', -2, -2) end)
+		button:SetScript('OnClick', function(self) Skada:ToggleWindow() end)
+	end	
+	
+	if C["Addon_Skins"].embedrighttoggle == true then
+		TukuiChatBackgroundRight:HookScript("OnShow", function()
+			for _, window in ipairs(Skada:GetWindows()) do
+				window:Hide()
 			end
-		end
-        self:AdjustBackgroundHeight(win)
-        win.bargroup:SetMaxBars(win.db.barmax)
-        win.bargroup:SortBars()
+		end)
+		TukuiChatBackgroundRight:HookScript("OnHide", function()
+			for _, window in ipairs(Skada:GetWindows()) do
+				window:Show()
+			end
+		end)
 	end
-	-- Update pre-existing displays
-	for k, window in ipairs(Skada:GetWindows()) do
-		window:UpdateDisplay()
-	end
-end)
+end

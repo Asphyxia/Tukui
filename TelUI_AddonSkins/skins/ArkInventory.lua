@@ -83,20 +83,19 @@ Mod_AddonSkins:RegisterSkin("ArkInventory",function(Skin,skin,Layout,layout,conf
 		-- Status
 		ArkInventory.Const.Frame.Status.Height = config.fontSize + config.borderWidth * 4
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",config.borderWidth,0)
-		_G[status:GetName().."EmptyText"]:SetFont(config.font,config.fontSize,config.fontStyle)
+		_G[status:GetName().."EmptyText"]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		-- Restructure the gold display
 		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-config.borderWidth,0)
-		_G[status:GetName().."GoldCopperButtonText"]:SetFont(config.font,config.fontSize,config.fontStyle)
+		_G[status:GetName().."GoldCopperButtonText"]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		--_G[status:GetName().."GoldCopperButtonText"]:SetPoint("RIGHT",-13,1)
-		
+
 		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-config.borderWidth,0)
-		_G[status:GetName().."GoldSilverButtonText"]:SetFont(config.font,config.fontSize,config.fontStyle)
+		_G[status:GetName().."GoldSilverButtonText"]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		--_G[status:GetName().."GoldSilverButtonText"]:SetPoint("RIGHT",-13,1)
-		
+
 		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-config.borderWidth,0)
-		_G[status:GetName().."GoldGoldButtonText"]:SetFont(config.font,config.fontSize,config.fontStyle)
+		_G[status:GetName().."GoldGoldButtonText"]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		--_G[status:GetName().."GoldSilverButtonText"]:SetPoint("RIGHT",-13,1)
-		
 	end
 	
 	ArkInventory.Const.Frame.Title.Height2 = 32

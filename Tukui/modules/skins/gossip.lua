@@ -8,7 +8,7 @@ local function LoadSkin()
 	for _, object in pairs(StripAllTextures) do
 		_G[object]:StripTextures()
 	end
-
+	T.SkinScrollBar(GossipGreetingScrollFrameScrollBar, 5)
 	local KillTextures = {
 		"GossipFramePortrait",
 	}

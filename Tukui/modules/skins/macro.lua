@@ -8,10 +8,10 @@ local function LoadSkin()
 	local buttons = {
 		"MacroDeleteButton",
 		"MacroNewButton",
-		"MacroExitButton",
-		"MacroEditButton",
 		"MacroSaveButton",
 		"MacroCancelButton",
+		"MacroExitButton",
+		"MacroEditButton",
 		"MacroFrameTab1",
 		"MacroFrameTab2",
 		"MacroPopupOkayButton",
@@ -36,6 +36,7 @@ local function LoadSkin()
 	MacroFrame:SetTemplate("Transparent")
 	MacroFrameTextBackground:StripTextures()
 	MacroFrameTextBackground:CreateBackdrop()
+	MacroFrameTextBackground:SetTemplate("Transparent")
 	MacroButtonScrollFrame:CreateBackdrop()
 	MacroPopupFrame:StripTextures()
 	MacroPopupFrame:SetTemplate("Transparent")
@@ -52,6 +53,9 @@ local function LoadSkin()
 	
 	-- Regular scroll bar
 	T.SkinScrollBar(MacroButtonScrollFrame)
+	T.SkinScrollBar(MacroFrameScrollFrameScrollBar)
+	T.SkinScrollBar(MacroPopupScrollFrameScrollBar)
+	T.SkinScrollBar(MacroButtonScrollFrameScrollBar)
 	
 	MacroPopupFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
@@ -83,7 +87,7 @@ local function LoadSkin()
 			b:StripTextures()
 			b:StyleButton(true)
 			
-			b:SetTemplate("Transparent", true)
+			b:SetTemplate("Default", true)
 		end
 		
 		if t then

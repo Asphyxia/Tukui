@@ -29,7 +29,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 		
 		int = int - t
 		if int < 0 then
-			Text:SetText(SPELL_HASTE_ABBR..": "..T.panelcolor..haste)
+			Text:SetText(SPELL_HASTE_ABBR..": "..T.datacolor..haste)
 			int = 1
 		end     
 	end

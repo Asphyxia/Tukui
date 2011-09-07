@@ -39,7 +39,7 @@ local function LoadSkin()
 	  tile = false, tileSize = 0, edgeSize = noscalemult, 
 	  insets = { left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
 	}
-	
+	T.SkinScrollBar(ScriptErrorsFrameScrollFrameScrollBar)
 	for i=1, ScriptErrorsFrame:GetNumChildren() do
 		local child = select(i, ScriptErrorsFrame:GetChildren())
 		if child:GetObjectType() == "Button" and not child:GetName() then

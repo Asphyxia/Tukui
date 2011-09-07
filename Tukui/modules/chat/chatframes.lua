@@ -45,18 +45,6 @@ _G.CHAT_FLAG_GM = "|cff4154F5"..L.chat_FLAG_GM.."|r "
 _G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L.chat_ERR_FRIEND_ONLINE_SS.."!"
 _G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
 
-
---[[
--- Adding brackets to Blizzard timestamps
-_G.TIMESTAMP_FORMAT_HHMM = "[%I:%M] "
-_G.TIMESTAMP_FORMAT_HHMMSS = "[%I:%M:%S] "
-_G.TIMESTAMP_FORMAT_HHMMSS_24HR = "[%H:%M:%S] "
-_G.TIMESTAMP_FORMAT_HHMMSS_AMPM = "[%I:%M:%S %p] "
-_G.TIMESTAMP_FORMAT_HHMM_24HR = "[%H:%M] "
-_G.TIMESTAMP_FORMAT_HHMM_AMPM = "[%I:%M %p] "
-
---]]
-
 -- Hide friends micro button (added in 3.3.5)
 FriendsMicroButton:Kill()
 
@@ -72,7 +60,17 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
-	tab:GetFontString():SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+
+	--[[
+	if not C.chat.background and not frame.temp then
+		-- hide text when setting chat
+		_G[chat.."TabText"]:Hide()
+		
+		-- now show text if mouse is found over tab.
+		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
+		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
+	end
+	--]]
 	
 	-- color chat tabs, original by Elv, edited by Hydra
 	local classcolortab = RAID_CLASS_COLORS[T.myclass]
@@ -94,9 +92,8 @@ local function SetChatStyle(frame)
 	
 	ChatFrame4Tab:GetFontString():SetTextColor(unpack(Ctabcolor))
 	
-	-- mouse-over color tabs
-	_G[chat.."Tab"]:HookScript("OnEnter", function(self) self:GetFontString():SetTextColor(0.3, 0.2, 1) end)
-	_G[chat.."Tab"]:HookScript("OnLeave", function(self) self:GetFontString():SetTextColor(unpack(Ctabcolor)) end)
+	-- change tab font
+	_G[chat.."TabText"]:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
@@ -156,7 +153,6 @@ local function SetChatStyle(frame)
 	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions()) a:Kill() b:Kill() c:Kill()
 	
 	-- bubble tex & glow killing from privates
-	--if tab.glow then tab.glow:Kill() end
 	if tab.conversationIcon then tab.conversationIcon:Kill() end
 				
 	-- Disable alt key usage
@@ -213,8 +209,6 @@ local function SetupChat(self)
 		SetChatStyle(frame)
 		FCFTab_UpdateAlpha(frame)
 	end
-	
-	 --GeneralDockManager:SetParent(chatrightbg)
 				
 	-- Remember last channel
 	ChatTypeInfo.WHISPER.sticky = 1
@@ -244,19 +238,15 @@ local function SetupChatPosAndFont(self)
 		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
-			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 5, 6)
-			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", -5, 6)
-			chat:SetParent(TukuiChatBackgroundLeft)
+			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
+			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 0, 6)
 			FCF_SavePositionAndDimensions(chat)
-		elseif i == 2 or i == 3 then
-			chat:SetParent(TukuiChatBackgroundLeft)
-		elseif i == 4 then
+		elseif i == 4 and name == LOOT then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", -5, 6)
-				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 5, 6)
-				chat:SetJustifyH("LEFT") 
-				chat:SetParent(TukuiChatBackgroundRight)
+				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 6)
+				chat:SetJustifyH("RIGHT") 
 				FCF_SavePositionAndDimensions(chat)
 			end
 		end
@@ -266,9 +256,9 @@ local function SetupChatPosAndFont(self)
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
 		if C.chat.background and TukuiChatBackgroundLeft then
-			self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 2, 6)
+			self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
 		else
-			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 2, 6)
+			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
 		end
 	end)
 end
@@ -300,6 +290,3 @@ local function SetupTempChat()
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
-
-GeneralDockManager:SetParent(TukuiChatBackgroundLeft)
-ChatFrame4Tab:SetParent(TukuiChatBackgroundRight)

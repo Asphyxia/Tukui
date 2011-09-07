@@ -51,7 +51,7 @@ local function CreateButton(name, parent, template, width, height, point, relati
 		t:SetPoint("CENTER")
 		t:SetJustifyH("CENTER")
 		t:SetText(text)
-		t:SetTextColor(unpack(C["media"].statcolor))
+		t:SetTextColor(unpack(C["media"].datacolor))
 		b:SetFontString(t)
 	elseif texture then
 		local t = b:CreateTexture(nil,"OVERLAY",nil)

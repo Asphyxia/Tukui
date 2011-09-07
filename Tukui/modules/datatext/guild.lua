@@ -58,7 +58,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 		end
 	end
 
-	local displayString = string.join("", GUILD, ": ",T.panelcolor, "%d|r")
+	local displayString = string.join("", GUILD, ": ",T.datacolor, "%d|r")
 
 	local function Update(self, event, ...)	
 
@@ -84,7 +84,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 				Text:SetFormattedText(displayString, numOnline)
 				self:SetAllPoints(Text)
 			else
-				Text:SetText(T.panelcolor..L.datatext_noguild)
+				Text:SetText(T.datacolor..L.datatext_noguild)
 			end
 		end
 	end

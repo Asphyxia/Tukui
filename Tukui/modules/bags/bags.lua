@@ -414,8 +414,7 @@ function Stuffing:CreateBagFrame(w)
 	end
 	f:HookScript("OnUpdate", bagUpdate)
 	
-	-- CLOSE BUTTON
-	
+	-- CLOSE BUTTON	
 local function ModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[T.myclass]
 	self:SetBackdropColor(unpack(C["media"].backdropcolor))
@@ -448,7 +447,8 @@ end
 	f.b_text = f.b_close:CreateFontString(nil, "OVERLAY")
 	f.b_text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 	f.b_text:SetPoint("CENTER", 0, 0)
-	f.b_text:SetText(T.panelcolor.."Close")
+	f.b_text:SetText(T.datacolor.."Close")
+	f.b_close:CreateOverlay(f.b_close)
 	f.b_close:SetWidth(f.b_text:GetWidth() + 20)
 	
 	f.b_close:HookScript("OnEnter", ModifiedBackdrop)
@@ -530,7 +530,7 @@ function Stuffing:InitBags()
 	detail:Point("TOPLEFT", f, 12, -14)
 	detail:Point("RIGHT",-(16 + 24), 0)
 	detail:SetJustifyH("LEFT")
-	detail:SetText(T.panelcolor.. L.bags_search)
+	detail:SetText(T.datacolor.. L.bags_search)
 	editbox:SetAllPoints(detail)
 
 	local gold = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
@@ -638,7 +638,7 @@ function Stuffing:Layout(lb)
 
 	f:SetClampedToScreen(1)
 	f:SetBackdrop({
-		bgFile = C["media"].normTex,
+		bgFile = C["media"].blank,
 		edgeFile = C["media"].blank,
 		edgeSize = T.mult,
 		insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
@@ -652,7 +652,7 @@ function Stuffing:Layout(lb)
 	if bag_bars == 1 then
 		fb:SetClampedToScreen(1)
 		fb:SetBackdrop({
-			bgFile = C["media"].normTex,
+			bgFile = C["media"].blank,
 			edgeFile = C["media"].blank,
 			edgeSize = T.mult,
 			insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}

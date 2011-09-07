@@ -105,6 +105,34 @@ local function LoadSkin()
 			icon:SetTexCoord(.08, .92, .08, .92)
 		end
 	end		
+
+ -- color item by rarity on inspect frame.
+   local function ColorItemBorder()
+      if(not InspectFrame:IsShown()) then return end
+      for _, slot in pairs(slots) do
+         -- Color the equipment slots by rarity
+         local target = _G["Inspect"..slot]
+         local slotId, _, _ = GetInventorySlotInfo(slot)
+         local itemId = GetInventoryItemID("target", slotId)
+
+         if itemId then
+            local _, _, rarity, _, _, _, _, _, _, _, _ = GetItemInfo(itemId)
+            if rarity then
+               target.backdrop:SetBackdropBorderColor(GetItemQualityColor(rarity))
+            end
+         else
+            target.backdrop:SetBackdropBorderColor(unpack(C.media.bordercolor))
+         end
+      end
+   end
+
+   -- execute item coloring everytime we open character frame
+   InspectFrame:HookScript("OnShow", ColorItemBorder)
+
+   -- execute item coloring everytime an item is changed
+   local CheckItemBorderColor = CreateFrame("Frame")
+   CheckItemBorderColor:RegisterEvent("PLAYER_TARGET_CHANGED")
+   CheckItemBorderColor:SetScript("OnEvent", ColorItemBorder)
 end
 
 T.SkinFuncs["Blizzard_InspectUI"] = LoadSkin

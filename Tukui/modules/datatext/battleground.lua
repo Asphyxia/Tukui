@@ -35,6 +35,7 @@ bgframe:SetScript("OnEnter", function(self)
 				GameTooltip:AddDoubleLine(L.datatext_tthonorgain, format('%d', honorGained),1,1,1)
 				GameTooltip:AddDoubleLine(L.datatext_ttdmgdone, damageDone,1,1,1)
 				GameTooltip:AddDoubleLine(L.datatext_tthealdone, healingDone,1,1,1)
+				
 				--Add extra statistics to watch based on what BG you are in.
 				if curmapid == WSG or curmapid == TP then 
 					GameTooltip:AddDoubleLine(L.datatext_flagscaptured,GetBattlefieldStatData(i, 1),1,1,1)
@@ -88,15 +89,15 @@ local function Update(self, t)
 		for i=1, numScores do
 			local name, killingBlows, honorableKills, deaths, honorGained, faction, race, class, classToken, damageDone, healingDone, bgRating, ratingChange = GetBattlefieldScore(i)
 			if healingDone > damageDone then
-				dmgtxt = (L.datatext_healing..T.panelcolor..healingDone)
+				dmgtxt = (L.datatext_healing..T.datacolor..healingDone)
 			else
-				dmgtxt = (L.datatext_damage..T.panelcolor..damageDone)
+				dmgtxt = (L.datatext_damage..T.datacolor..damageDone)
 			end
 			if ( name ) then
 				if ( name == T.myname ) then
-					Text2:SetText(L.datatext_honor..T.panelcolor..format('%d', honorGained)..T.panelcolor)
+					Text2:SetText(L.datatext_honor..T.datacolor..format('%d', honorGained)..T.datacolor)
 					Text1:SetText(dmgtxt)
-					Text3:SetText(L.datatext_killingblows..T.panelcolor..killingBlows..T.panelcolor)
+					Text3:SetText(L.datatext_killingblows..T.datacolor..killingBlows..T.datacolor)
 				end   
 			end
 		end 

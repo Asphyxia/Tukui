@@ -344,7 +344,7 @@ oUF:Factory(function(self)
 			"columnAnchorPoint", "TOP",
 			"showSolo", C["unitframes"].showsolo
 		)
-		raid:SetPoint("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 2, 5)
+		raid:SetPoint("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 2, 12)
 	end
 end)
 

@@ -27,5 +27,5 @@ Stat:SetScript("OnEvent", function(self)
 		regen = floor(base*5)		
 	end
 	
-	Text:SetText(MANA_REGEN_ABBR.." "..T.panelcolor..regen)
+	Text:SetText(MANA_REGEN_ABBR.." "..T.datacolor..regen)
 end)

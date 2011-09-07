@@ -6,20 +6,27 @@ local TinyDPS = CreateFrame("Frame")
 TinyDPS:RegisterEvent("ADDON_LOADED")
 TinyDPS:SetScript("OnEvent", function(self, event, addon)
 	if not addon == "TinyDPS" then return end
-	tdps.width = TukuiMinimap:GetWidth()
-	tdps.barHeight = 14
-	tdps.spacing = 1
-	tdpsFont.name = C["media"].pixelfont
-	tdpsFont.size = 12
-	tdpsFont.outline = "MONOCHROMEOUTLINE"
 
+	if tdps then
+		tdps.width = TukuiMinimap:GetWidth()
+		tdps.spacing = 2
+		tdps.barHeight = 14
+		tdpsFont.name = C["media"].pixelfont
+		tdpsFont.size = 12
+		tdpsFont.outline = "MONOCHROMEOUTLINE"
+	end
+	
+	-- need 2 anchors for some reason, ask the author of TinyDPS why -_-"
 	tdpsPosition = {x = 0, y = -6}
-
-	tdpsFrame:SetHeight(tdps.barHeight + 4)
-	tdpsFrame:SetTemplate("Default")
+    tdpsAnchor:SetPoint('BOTTOMLEFT',TukuiMinimap, 'BOTTOMLEFT', 0, -40)
+		
+	tdpsFrame:SetTemplate("Transparent", true)
 	tdpsFrame:CreateShadow("Default")
-
-	tdpsAnchor:SetPoint('BOTTOMLEFT', TukuiMinimap, 'BOTTOMLEFT', 0, -44)
-
+	
+	if tdpsStatusBar then
+		tdpsStatusBar:SetBackdrop({bgFile = C["media"].normTex, edgeFile = C["media"].blank, tile = false, tileSize = 0, edgeSize = 1, insets = { left = 0, right = 0, top = 0, bottom = 0}})
+		tdpsStatusBar:SetStatusBarTexture(C["media"].normTex)
+	end
+	
 	self:UnregisterEvent("ADDON_LOADED")
 end)

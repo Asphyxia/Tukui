@@ -27,7 +27,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 			CritChance = meleecrit
 		end
 		if int < 0 then
-			Text:SetText(SPELL_CRIT_CHANCE..": "..T.panelcolor..format("%.2f", CritChance) .. "%")
+			Text:SetText(SPELL_CRIT_CHANCE..": "..T.datacolor..format("%.2f", CritChance) .. "%")
 			int = 1
 		end     
 	end

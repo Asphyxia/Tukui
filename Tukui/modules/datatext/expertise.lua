@@ -18,7 +18,7 @@ Stat:SetParent(Text:GetParent())
 
 local _G = getfenv(0)
 local format = string.format
-local displayModifierString = string.join("", "%s", T.panelcolor, "%d|r")
+local displayModifierString = string.join("", "%s", T.datacolor, "%d|r")
 
 -- initial delay for update (let the ui load)
 local int = 5

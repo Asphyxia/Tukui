@@ -21,7 +21,7 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
       		fps = floor(GetFramerate())
       		bw_in, bw_out, ms_home, ms_world = GetNetStats()
       		ms_combined = ms_home + ms_world
-			Text:SetText( FPS_ABBR .. ": " .. T.panelcolor .. fps .. "|r".. " / " .. MILLISECONDS_ABBR .. ": " .. T.panelcolor .. ms_home)
+			Text:SetText( FPS_ABBR .. ": " .. T.datacolor .. fps .. "|r".. " / " .. MILLISECONDS_ABBR .. ": " .. T.datacolor .. ms_home)
 			int = 1
 		end	
 	  

@@ -11,64 +11,63 @@ local function OriginalBackdrop(self)
 	self:SetTemplate("Default")
 end
 
-local loadf = CreateFrame("frame", "aLoadFrame", UIParent)
-loadf:Size(T.InfoLeftRightWidth, 514)
-loadf:SetPoint("CENTER")
-loadf:EnableMouse(true)
-loadf:SetMovable(true)
-loadf:SetUserPlaced(true)
-loadf:SetClampedToScreen(true)
-loadf:SetScript("OnMouseDown", function(self) self:StartMoving() end)
-loadf:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
-loadf:SetFrameStrata("DIALOG")
-tinsert(UISpecialFrames, "aLoadFrame")
+-- Create BG
+local addonBG = CreateFrame("Frame", "addonBG", UIParent)
+addonBG:CreatePanel("Default", T.InfoLeftRightWidth, 500, "CENTER", UIParent, "CENTER", 0, 0)
+addonBG:EnableMouse(true)
+addonBG:SetMovable(true)
+addonBG:SetUserPlaced(true)
+addonBG:SetClampedToScreen(true)
+addonBG:SetScript("OnMouseDown", function(self) self:StartMoving() end)
+addonBG:SetScript("OnMouseUp", function(self) self:StopMovingOrSizing() end)
+addonBG:SetFrameStrata("HIGH")
+addonBG:CreateShadow("Default")
+T.fadeIn(addonBG)
+addonBG:Hide()
 
-loadf.Text = T.SetFontString(loadf, font, fontsize, fontstyle)
-loadf.Text:SetPoint("TOPLEFT", 10, -8)
-loadf.Text:SetText(T.panelcolor..ADDONS..": "..T.panelcolor..T.myname)
+local addonHeader = CreateFrame("Frame", "addonHeader", addonBG)
+addonHeader:CreatePanel("Transparent", addonBG:GetWidth(), 23, "BOTTOM", addonBG, "TOP", 0, 3, true)
+addonHeader.Text = T.SetFontString(addonHeader, font, fontsize, fontstyle)
+addonHeader.Text:SetPoint("LEFT", 5, 1)
+addonHeader.Text:SetText(T.datacolor.."AddOns List"..": "..T.datacolor..T.myname)
 
-local savesetttings = CreateFrame("Button", "al_SaveSettings", aLoadFrame)
-savesetttings:CreatePanel("Default", 130, 23, "BOTTOMRIGHT", loadf, "BOTTOM", -2, 8)
-savesetttings:SetFrameStrata("TOOLTIP")
+-- Create scroll frame
+local scrollFrame = CreateFrame("ScrollFrame", "scrollFrame", addonBG, "UIPanelScrollFrameTemplate")
+scrollFrame:SetPoint("TOPLEFT", addonBG, "TOPLEFT", 10, -10)
+scrollFrame:SetPoint("BOTTOMRIGHT", addonBG, "BOTTOMRIGHT", -30, 40)
+T.SkinScrollBar(scrollFrameScrollBar)
 
-savesetttings.Text = T.SetFontString(savesetttings, font, fontsize, fontstyle)
-savesetttings.Text:Point("CENTER", savesetttings, "CENTER", 1, 0)
-savesetttings.Text:SetText(T.panelcolor..SAVE_CHANGES)
+-- Create inside BG (uses scroll frame)
+local buttonsBG = CreateFrame("Frame", "buttonsBG", scrollFrame)
+buttonsBG:SetPoint("TOPLEFT")
+buttonsBG:SetWidth(scrollFrame:GetWidth())
+buttonsBG:SetHeight(scrollFrame:GetHeight())
+scrollFrame:SetScrollChild(buttonsBG)
 
-savesetttings:SetScript("OnClick", function() ReloadUI() end)
-savesetttings:HookScript("OnEnter", ModifiedBackdrop)
-savesetttings:HookScript("OnLeave", OriginalBackdrop)
+local saveButton = CreateFrame("Button", "saveButton", addonBG)
+saveButton:CreatePanel("Default", 130, 20, "BOTTOMLEFT", addonBG, "BOTTOMLEFT", 10, 10, true)
+saveButton:SetFrameStrata("TOOLTIP")
+saveButton:CreateOverlay(saveButton)
+saveButton.text:SetText(T.datacolor.."Save Changes")
+saveButton:SetScript("OnClick", function() ReloadUI() end)
+saveButton:HookScript("OnEnter", ModifiedBackdrop)
+saveButton:HookScript("OnLeave", OriginalBackdrop)
 
-local closewindow = CreateFrame("Button", "al_Close", aLoadFrame)
-closewindow:CreatePanel("Default", 130, 23, "TOPLEFT", savesetttings, "TOPRIGHT", 4, 0)
-closewindow:SetFrameStrata("TOOLTIP")
+local closeButton = CreateFrame("Button", "closeButton", addonBG)
+closeButton:CreatePanel("Default", 130, 20, "BOTTOMRIGHT", addonBG, "BOTTOMRIGHT", -10, 10, true)
+closeButton.text:SetText(T.datacolor.."Cancel")
+closeButton:SetFrameStrata("TOOLTIP")
+closeButton:CreateOverlay(closeButton)
+closeButton:SetScript("OnClick", function() T.fadeOut(addonBG) end)
+closeButton:HookScript("OnEnter", ModifiedBackdrop)
+closeButton:HookScript("OnLeave", OriginalBackdrop)
 
-closewindow.Text = T.SetFontString(closewindow, font, fontsize, fontstyle)
-closewindow.Text:Point("CENTER", closewindow, "CENTER", 1, 0)
-closewindow.Text:SetText(T.panelcolor..CLOSE)
-
-closewindow:SetScript("OnClick", function() loadf:Hide() end)
-closewindow:HookScript("OnEnter", ModifiedBackdrop)
-closewindow:HookScript("OnLeave", OriginalBackdrop)
-
-loadf:SetTemplate("Default")
-loadf:CreateShadow("Default")
-loadf:Hide()
-loadf:SetScript("OnHide", function(self) end)
-
-local scrollf = CreateFrame("ScrollFrame", "a_Scroll", loadf, "UIPanelScrollFrameTemplate")
-local mainf = CreateFrame("frame", "aloadmainf", scrollf)
-
-scrollf:SetPoint("TOPLEFT", loadf, "TOPLEFT", 10, -30)
-scrollf:SetPoint("BOTTOMRIGHT", loadf, "BOTTOMRIGHT", -28, 40)
-scrollf:SetScrollChild(mainf)
-scrollf:CreateBackdrop("Default")
-
-local raid_addons = CreateFrame("Button", "TukuiEnableRaidButton", aLoadFrame)
-raid_addons:CreatePanel("Default", 60, 17, "TOPRIGHT", loadf, "TOPRIGHT", -26, -6)
+local raid_addons = CreateFrame("Button", "TukuiEnableRaidButton", addonHeader)
+raid_addons:CreatePanel("Transparent", 60, 17, "RIGHT", addonHeader, "RIGHT", -5, 0)
 raid_addons:CreateShadow("Default")
-raid_addons:SetFrameStrata(aLoadFrame:GetFrameStrata())
-raid_addons:SetFrameLevel(aLoadFrame:GetFrameLevel() + 1)
+raid_addons:CreateOverlay(raid_addons)
+raid_addons:SetFrameStrata(addonHeader:GetFrameStrata())
+raid_addons:SetFrameLevel(addonHeader:GetFrameLevel() + 1)
 raid_addons:RegisterForClicks("AnyUp") raid_addons:SetScript("OnClick", function()
 	EnableAddOn("DBM-Core")   -- change this to your bossmod "BigWigs"
 	EnableAddOn("Recount")    -- change this to your damage meters "TinyDPS" "Skada"
@@ -80,13 +79,14 @@ raid_addons:HookScript("OnLeave", OriginalBackdrop)
 
 raid_addons.Text = T.SetFontString(raid_addons, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 raid_addons.Text:Point("CENTER", raid_addons, "CENTER", 1, 1)
-raid_addons.Text:SetText(T.panelcolor..RAID)
+raid_addons.Text:SetText(T.datacolor..RAID)
 
-local solo_addons = CreateFrame("Button", "TukuiEnableSoloButton", aLoadFrame)
-solo_addons:CreatePanel("Default", 80, 17, "RIGHT", raid_addons, "LEFT", -3, 0)
+local solo_addons = CreateFrame("Button", "TukuiEnableSoloButton", addonHeader)
+solo_addons:CreatePanel("Transparent", 60, 17, "RIGHT", raid_addons, "LEFT", -3, 0)
 solo_addons:CreateShadow("Default")
-solo_addons:SetFrameStrata(aLoadFrame:GetFrameStrata())
-solo_addons:SetFrameLevel(aLoadFrame:GetFrameLevel() + 1)
+solo_addons:CreateOverlay(solo_addons)
+solo_addons:SetFrameStrata(addonHeader:GetFrameStrata())
+solo_addons:SetFrameLevel(addonHeader:GetFrameLevel() + 1)
 solo_addons:RegisterForClicks("AnyUp") solo_addons:SetScript("OnClick", function()
 	DisableAddOn("DBM-Core")     -- change this to your bossmod "BigWigs"
 	DisableAddOn("Recount")      -- change this to your damage meters "TinyDPS" "Skada"
@@ -98,87 +98,59 @@ solo_addons:HookScript("OnLeave", OriginalBackdrop)
 
 solo_addons.Text = T.SetFontString(solo_addons, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 solo_addons.Text:Point("CENTER", solo_addons, "CENTER", 1, 1)
-solo_addons.Text:SetText(T.panelcolor..SOLO)
+solo_addons.Text:SetText(T.datacolor..SOLO)
 
-local makeList = function()
-	local self = mainf
-	self:SetPoint("TOPLEFT")
-	self:SetWidth(scrollf:GetWidth())
-	self:SetHeight(scrollf:GetHeight())
-	self.addons = {}
+local function UpdateAddons()
+	local addons = {}
 	for i=1, GetNumAddOns() do
-		self.addons[i] = select(1, GetAddOnInfo(i))
+		addons[i] = select(1, GetAddOnInfo(i))
 	end
-	table.sort(self.addons)
-
+	table.sort(addons)
 	local oldb
-
-	for i,v in pairs(self.addons) do
+	for i,v in pairs(addons) do
 		local name, title, notes, enabled, loadable, reason, security = GetAddOnInfo(v)
+		local button = CreateFrame("Button", v.."_Button", buttonsBG, "SecureActionButtonTemplate")
+		button:SetFrameLevel(buttonsBG:GetFrameLevel() + 1)
+		button:Size(50, 16)
+		button:SetTemplate("Default")
+		button:CreateOverlay()
 
-		if name then
-			local bf = _G[v.."_cbf"] or CreateFrame("CheckButton", v.."_cbf", self, "OptionsCheckButtonTemplate")
-			bf:EnableMouse(true)
-			bf.title = title.."|n"
-			if notes then bf.title = bf.title.."|cffffffff"..notes.."|r|n" end
-			if (GetAddOnDependencies(v)) then
-				bf.title = L.addon_dep
-				for i=1, select("#", GetAddOnDependencies(v)) do
-					bf.title = bf.title..select(i,GetAddOnDependencies(v))
-					if (i>1) then bf.title=bf.title..", " end
-				end
-				bf.title = bf.title.."|r"
-			end
-				
-			if i==1 then
-				bf:SetPoint("TOPLEFT",self, "TOPLEFT", 6, -4)
-			else
-				bf:SetPoint("TOP", oldb, "BOTTOM", 0, -2)
-			end
-	
-			bf:SetScript("OnEnter", function(self)
-				GameTooltip:ClearLines()
-				GameTooltip:SetOwner(self, ANCHOR_TOPRIGHT)
-				GameTooltip:AddLine(self.title)
-				GameTooltip:Show()
-			end)
-			
-			bf:SetScript("OnLeave", function(self)
-				GameTooltip:Hide()
-			end)
-			
-			bf:SetScript("OnClick", function()
-				local _, _, _, enabled = GetAddOnInfo(name)
-				if enabled then
-					DisableAddOn(name)
-				else
-					EnableAddOn(name)
-				end
-			end)
-			bf:SetChecked(enabled)
-			
-			_G[v.."_cbf"]:StripTextures()
-			_G[v.."_cbf"]:SetTemplate("Default")
-			_G[v.."_cbf"]:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
-			_G[v.."_cbf"]:Size(18, 18)
-			_G[v.."_cbf"]:GetCheckedTexture():Point("TOPLEFT", -4, 4)
-			_G[v.."_cbf"]:GetCheckedTexture():Point("BOTTOMRIGHT", 4, -4)
-			
-			_G[v.."_cbfText"]:SetText(title)
-			_G[v.."_cbfText"]:SetFont(font, fontsize, fontstyle)
-			_G[v.."_cbfText"]:Point("LEFT", bf, "RIGHT", 5, 1)
-
-			oldb = bf
+		-- to make sure the border is colored the right color on reload 
+		if enabled then
+			button:SetBackdropBorderColor(0,1,0)
+		else
+			button:SetBackdropBorderColor(1,0,0)
 		end
+
+		if i==1 then
+			button:Point("TOPLEFT", buttonsBG, "TOPLEFT", 0, 0)
+		else
+			button:Point("TOP", oldb, "BOTTOM", 0, -7)
+		end
+		local text = T.SetFontString(button, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		text:Point("LEFT", button, "RIGHT", 8, 0)
+		text:SetText(title)
+	
+		 button:SetScript("OnMouseDown", function()
+            if enabled then
+                button:SetBackdropBorderColor(1,0,0)
+                DisableAddOn(name)
+                enabled = false
+            else
+                button:SetBackdropBorderColor(0,1,0)
+                EnableAddOn(name)
+                enabled = true
+            end
+        end)
+	
+		oldb = button
 	end
 end
 
-makeList()
-
---T.SkinScrollBar(a_ScrollScrollBar, 5)
+UpdateAddons()
 
 -- Slash commands
 SLASH_ALOAD1 = "/am"
 SlashCmdList.ALOAD = function (msg)
-	loadf:Show()
+	addonBG:Show()
 end

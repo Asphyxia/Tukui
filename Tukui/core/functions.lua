@@ -1,5 +1,13 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
+T.IsPTRVersion = function()
+	if T.toc > 40200 then
+		return true
+	else
+		return false
+	end
+end
+
 -- just for creating text
 T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
@@ -55,26 +63,34 @@ T.PP = function(p, obj)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
 	elseif p == 7 then
-		obj:SetParent(center)
-		obj:SetHeight(center:GetHeight())
-		obj:SetPoint("LEFT", center, 30, 1)
-		obj:SetPoint('TOP', center, 1, 1)
-		obj:SetPoint('BOTTOM', center)
+		obj:SetParent(TukuiInfoCenterLeft)
+		obj:Height(TukuiInfoCenterLeft:GetHeight())
+		obj:Point("CENTER", TukuiInfoCenterLeft, 0, 1)					
 	elseif p == 8 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
-		obj:SetPoint('TOP', center, 1, 1)
+		obj:SetPoint("LEFT", center, 30, 1)
+		obj:SetPoint('TOP', center, 0, 1)
 		obj:SetPoint('BOTTOM', center)
-	elseif p ==9 then
+	elseif p == 9 then
+		obj:SetParent(center)
+		obj:SetHeight(center:GetHeight())
+		obj:SetPoint('TOP', center, 0, 1)
+		obj:SetPoint('BOTTOM', center)
+	elseif p ==10 then
 		obj:SetParent(center)
 		obj:SetHeight(center:GetHeight())
 		obj:SetPoint("RIGHT", center, -30, 1)
-		obj:SetPoint('TOP', center, 1, 1)
+		obj:SetPoint('TOP', center, 0, 1)
 		obj:SetPoint('BOTTOM', center)
-	elseif p == 10 then
+	elseif p == 11 then
+		obj:SetParent(TukuiInfoCenterRight)
+		obj:Height(TukuiInfoCenterRight:GetHeight())
+		obj:Point("CENTER", TukuiInfoCenterRight, 0, 1)		
+	elseif p == 12 then
 		obj:SetParent(Tukuiwatch)
 		obj:Height(Tukuiwatch:GetHeight())
-		obj:Point("CENTER", Tukuiwatch, 1, 1)		
+		obj:Point("CENTER", Tukuiwatch, 0, 1)			
 	end	
 end
 	
@@ -91,15 +107,6 @@ end
 			obj:SetPoint('BOTTOM', mapright)
 		end
 	end--]]
-
--- Classcolored Datatext
-if C["datatext"].classcolored == true then
-	C["datatext"].color = T.oUF_colors.class[T.myclass]
-end
-
--- convert datatext color from rgb decimal to hex 
-local dr, dg, db = unpack(C["datatext"].color)
-T.panelcolor = ("|cff%.2x%.2x%.2x"):format(dr * 255, dg * 255, db * 255)
 
 T.DataTextTooltipAnchor = function(self)
 	local panel = self:GetParent()
@@ -130,22 +137,14 @@ T.DataTextTooltipAnchor = function(self)
 	return anchor, panel, xoff, yoff
 end
 
-T.DataBarPoint = function(p, obj)
-	obj:SetPoint("TOPRIGHT", T.databars[p], "TOPRIGHT", -2, -2)
-	obj:SetPoint("BOTTOMLEFT", T.databars[p], "BOTTOMLEFT", 2, 2)
+-- Classcolored Datatext
+if C["datatext"].classcolored == true then
+	C["datatext"].color = T.oUF_colors.class[T.myclass]
 end
 
-T.DataBarTooltipAnchor = function(barNum)
-	local xoff = -T.databars[barNum]:GetWidth()
-	local yoff = T.Scale(-5)
-	
-	if C.databars.settings.vertical then
-		xoff = T.Scale(5)
-		yoff = T.databars[barNum]:GetHeight()
-	end
-	
-	return xoff, yoff
-end
+-- convert datatext color from rgb decimal to hex 
+local dr, dg, db = unpack(C["datatext"].color)
+T.datacolor = ("|cff%.2x%.2x%.2x"):format(dr * 255, dg * 255, db * 255)
 
 T.TukuiShiftBarUpdate = function()
 	local numForms = GetNumShapeshiftForms()
@@ -275,6 +274,11 @@ T.Round = function(number, decimals)
     return (("%%.%df"):format(decimals)):format(number)
 end
 
+T.Round = function(number, decimals)
+	if not decimals then decimals = 0 end
+    return (("%%.%df"):format(decimals)):format(number)
+end
+
 T.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
 	g = g <= 1 and g >= 0 and g or 0
@@ -332,17 +336,6 @@ function T.ShortValue(v)
 	end
 end
 
-function T.CommaValue(amount)
-	local formatted = amount
-	while true do  
-		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-		if (k==0) then
-			break
-		end
-	end
-	return formatted
-end
-
 --Add time before calling a function
 --Usage T.Delay(seconds, functionToCall, ...)
 local waitTable = {}
@@ -374,6 +367,35 @@ function T.Delay(delay, func, ...)
 	tinsert(waitTable,{delay,func,{...}})
 	return true
 end
+
+function T.update_alpha(self)
+	if self.parent:GetAlpha() == 0 then 
+		self.parent:Hide()
+		self:Hide()
+	end
+end
+
+function T.fadeOut(self) 
+	UIFrameFadeOut(self,.4,1,0) 
+	self.frame:Show() 
+end
+
+function T.fadeIn(p)
+	p.frame = CreateFrame("Frame", nil , p)
+	p.frame:Hide()
+	p.frame.parent = p -- lol!
+	p.frame:SetScript("OnUpdate",T.update_alpha)
+	p:SetScript("OnShow", function() 
+		p.frame:Hide() 
+		UIFrameFadeIn(p,.4,0,1)
+	end)
+	p.fadeOut = T.fadeOut
+end
+
+--[[function T.ApplyHover(self)
+	self:HookScript("OnEnter", T.SetModifiedBackdrop)
+	self:HookScript("OnLeave", T.SetOriginalBackdrop)
+end--]]
 
 ------------------------------------------------------------------------
 --	unitframes Functions
@@ -438,9 +460,9 @@ end
 
 local ShortValue = function(value)
 	if value >= 1e6 then
-		return ("%.1fm"):format(value / 1e6):gsub("%.?1+([km])$", "%1")
+		return ("%.1fm"):format(value / 1e6):gsub("%.?0+([km])$", "%1")
 	elseif value >= 1e3 or value <= -1e3 then
-		return ("%.1fk"):format(value / 1e3):gsub("%.?1+([km])$", "%1")
+		return ("%.1fk"):format(value / 1e3):gsub("%.?0+([km])$", "%1")
 	else
 		return value
 	end
@@ -531,8 +553,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 			end
 		end
 	end
-end
-
+end	
 		
 		-- overwrite healthbar color for enemy player (a tukui option if enabled), target vehicle/pet too far away returning unitreaction nil and friend unit not a player. (mostly for overwrite tapped for friendly)
 		-- I don't know if we really need to call C["unitframes"].unicolor but anyway, it's safe this way.
@@ -581,7 +602,6 @@ end
 	end
 end
 
--- highlight on raidframes
 T.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -591,21 +611,14 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		elseif UnitIsGhost(unit) then
 			health.value:SetText("|cffD7BEA5"..L.unitframes_ouf_ghost.."|r")
 		end
-		--health:SetStatusBarColor(.8, .3, .3) -- Red health if offline/dead/dc'd
 	else
+		-- doing this here to force friendly unit (vehicle or pet) very far away from you to update color correcly
+		-- because if vehicle or pet is too far away, unitreaction return nil and color of health bar is white.
 		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
 			local c = T.oUF_colors.reaction[5]
 			local r, g, b = c[1], c[2], c[3]
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetTexture(.1, .1, .1)
-		end
-		
-		if C.unitframes.gradienthealth and C.unitframes.unicolor then
-			if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then return end
-			if not health.classcolored then
-				local r, g, b = oUF.ColorGradient(min/max, unpack(C["unitframes"].gradient))
-				health:SetStatusBarColor(r, g, b)
-			end
 		end
 		
 		if min ~= max then
@@ -628,29 +641,17 @@ T.PostUpdatePetColor = function(health, unit, min, max)
 	end
 end
 
-T.PostUpdatePetColor = function(health, unit, min, max)
-	-- doing this here to force friendly unit (vehicle or pet) very far away from you to update color correcly
-	-- because if vehicle or pet is too far away, unitreaction return nil and color of health bar is white.
-	if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
-		local c = T.oUF_colors.reaction[5]
-		local r, g, b = c[1], c[2], c[3]
-
-		if health then health:SetStatusBarColor(r, g, b) end
-		if health.bg then health.bg:SetTexture(.1, .1, .1) end
-	end
-end
-
 T.PostNamePosition = function(self)
-    self.Name:ClearAllPoints()
-    if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-        self.Name:SetPoint("CENTER", self.Health, "CENTER", 0, 1)
-        if C["unitframes"].style == "Smelly" then
+	self.Name:ClearAllPoints()
+	if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
+		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 3)
+		 if C["unitframes"].style == "Smelly" then
             self.Name:SetPoint("CENTER", self.Health, "CENTER", 0, 3)
         end
-    else
-        self.Power.value:SetAlpha(0)
-        self.Name:SetPoint("LEFT", self.Health, "LEFT", 4, 1)
-    end
+	else
+		self.Power.value:SetAlpha(0)
+		self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 3)
+	end
 end
 
 T.PreUpdatePower = function(power, unit)
@@ -836,11 +837,6 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 	icon.duration = duration
 	icon.timeLeft = expirationTime
 	icon.first = true
-	if T.ReverseTimer and T.ReverseTimer[spellID] then 
-		icon.reverse = true 
-	else
-		icon.reverse = false
-	end	
 	icon:SetScript("OnUpdate", CreateAuraTimer)
 end
 
@@ -927,28 +923,41 @@ T.EclipseDirection = function(self)
 	end
 end
 
-T.EclipseDisplay = function(self, login)
+T.DruidBarDisplay = function(self, login)
 	local eb = self.EclipseBar
+	local dm = self.DruidMana
 	local txt = self.EclipseBar.Text
+	local shadow = self.shadow
+	local bg = self.DruidManaBackground
+	local buffs = self.Buffs
+	local flash = self.FlashInfo
 
 	if login then
-		eb:SetScript("OnUpdate", nil)
+		dm:SetScript("OnUpdate", nil)
 	end
 	
-	if eb:IsShown() then
-		txt:Show()
-		self.FlashInfo:Hide()
+	if eb:IsShown() or dm:IsShown() then
+		if eb:IsShown() then
+			txt:Show()
+			flash:Hide()
+		end
 		--self.shadow:Point("TOPLEFT", -4, 12)
-		
-		if self.Buffs then self.Buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 38) end
-					
+		bg:SetAlpha(1)
+		if T.lowversion then
+			if buffs then buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 34) end
+		else
+			if buffs then buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 38) end
+		end				
 	else
 		txt:Hide()
-		self.FlashInfo:Show()
+		flash:Show()
 		--self.shadow:Point("TOPLEFT", -4, 4)
-		
-		if self.Buffs then self.Buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30) end
-		
+		bg:SetAlpha(0)
+		if T.lowversion then
+			if buffs then buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 26) end
+		else
+			if buffs then buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30) end
+		end
 	end
 end
 
@@ -1005,19 +1014,19 @@ T.UpdateDruidMana = function(self)
 
 		if min ~= max then
 			if self.Power.value:GetText() then
-				self.DruidMana:SetPoint("LEFT", self.Power.value, "RIGHT", 1, 0)
-				self.DruidMana:SetFormattedText("|cffD7BEA5-|r  |cff4693FF%d%%|r|r", floor(min / max * 100))
+				self.DruidManaText:SetPoint("LEFT", self.Power.value, "RIGHT", 1, 0)
+				self.DruidManaText:SetFormattedText("|cffD7BEA5-|r  |cff4693FF%d%%|r|r", floor(min / max * 100))
 			else
-				self.DruidMana:SetPoint("LEFT", self.panel, "LEFT", 4, 1)
-				self.DruidMana:SetFormattedText("%d%%", floor(min / max * 100))
+				self.DruidManaText:SetPoint("LEFT", self.panel,  "LEFT", 4, 1)
+				self.DruidManaText:SetFormattedText("%d%%", floor(min / max * 100))
 			end
 		else
-			self.DruidMana:SetText()
+			self.DruidManaText:SetText()
 		end
 
-		self.DruidMana:SetAlpha(1)
+		self.DruidManaText:SetAlpha(1)
 	else
-		self.DruidMana:SetAlpha(0)
+		self.DruidManaText:SetAlpha(0)
 	end
 end
 
@@ -1262,6 +1271,34 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			--Al'Akir
 			SpellName(93260), -- Ice Storm
 			SpellName(93295), -- Lightning Rod
+
+		-- Firelands, thanks Kaelhan :)
+			-- Beth'tilac
+				SpellName(99506),	-- Widows Kiss
+				SpellName(97202),	-- Fiery Web Spin
+				SpellName(49026),	-- Fixate
+				SpellName(97079),	-- Seeping Venom
+			-- Lord Rhyolith
+				-- none, hehe, fake boss
+			-- Alysrazor
+				SpellName(101296),	-- Fieroblast
+				SpellName(100723),	-- Gushing Wound
+				SpellName(99389),	-- Imprinted
+				SpellName(101729),	-- Blazing Claw
+			-- Shannox
+				SpellName(99837),	-- Crystal Prison
+				SpellName(99937),	-- Jagged Tear
+			-- Baleroc
+				SpellName(99256),	-- Torment
+				SpellName(99252),	-- Blaze of Glory
+				SpellName(99516),	-- Countdown
+			-- Majordomo Staghelm
+				SpellName(98450),	-- Searing Seeds
+			-- Ragnaros
+				SpellName(99399),	-- Burning Wound
+				SpellName(100293),	-- Lava Wave
+				SpellName(98313),	-- Magma Blast
+				SpellName(100675),	-- Dreadflame
 		}
 
 		T.ReverseTimer = {
