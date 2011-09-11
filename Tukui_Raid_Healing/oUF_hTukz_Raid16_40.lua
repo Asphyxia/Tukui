@@ -342,8 +342,7 @@ oUF:Factory(function(self)
 			"columnSpacing", T.Scale(3),
 			"columnAnchorPoint", "TOP"		
 		)
-		--raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
-		raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0, 75)
+		raid:SetPoint("TOP", UIParent, "BOTTOM", 0, 475)
 	end
 end)
 

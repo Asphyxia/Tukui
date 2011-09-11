@@ -264,11 +264,10 @@ end
 
 -- Define action bar buttons size
 T.buttonsize = T.Scale(C.actionbar.buttonsize)
-T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
-T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
-T.buttonoffset = 0
-if C.actionbar.bgPanel then T.buttonoffset = C.actionbar.buttonspacing end
+T.stancebuttonsize = T.Scale(C.actionbar.stancebuttonsize)
+T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
+
 T.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
     return (("%%.%df"):format(decimals)):format(number)
@@ -644,13 +643,13 @@ end
 T.PostNamePosition = function(self)
 	self.Name:ClearAllPoints()
 	if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 3)
+		self.Name:SetPoint("CENTER", health, "CENTER", 0, 3)
 		 if C["unitframes"].style == "Smelly" then
             self.Name:SetPoint("CENTER", self.Health, "CENTER", 0, 3)
         end
 	else
 		self.Power.value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 3)
+		self.Name:SetPoint("LEFT", self.Health, "LEFT", 4, 3)
 	end
 end
 

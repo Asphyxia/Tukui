@@ -10,7 +10,7 @@ local function style(self)
 	local name = self:GetName()
 	
 	--> fixing a taint issue while changing totem flyout button in combat.
-	if name:match("MultiCast") then return end 
+	if name:match("MultiCastActionButton") then return end 
 	
 	local action = self.action
 	local Button = self
@@ -43,20 +43,19 @@ local function style(self)
 	if not _G[name.."Panel"] then
 		-- resize all button not matching T.buttonsize
 		if self:GetHeight() ~= T.buttonsize and not InCombatLockdown() then --Taint fix for Flyout Buttons
-			self:SetSize(T.buttonsize, T.buttonsize)
+			self:Size(T.buttonsize, T.buttonsize)
 		end
 
 		-- create the bg/border panel
 		local panel = CreateFrame("Frame", name.."Panel", self)
-		panel:CreatePanel("Transparent", T.buttonsize, T.buttonsize, "CENTER", self, "CENTER", 0, 0)
-		if not C.actionbar.bgPanel then panel:CreateShadow() end
+		panel:CreatePanel("Default", T.buttonsize, T.buttonsize, "CENTER", self, "CENTER", 0, 0)
  
 		panel:SetFrameStrata(self:GetFrameStrata())
 		panel:SetFrameLevel(self:GetFrameLevel() - 1)
  
-		Icon:SetTexCoord(.08, .92, .08, .92)
-		Icon:Point("TOPLEFT", Button, 2, -2)
-		Icon:Point("BOTTOMRIGHT", Button, -2, 2)
+		Icon:SetTexCoord(.09, .91, .09, .91)
+		Icon:Point("TOPLEFT", 2, -2)
+		Icon:Point("BOTTOMRIGHT", -2, 2)
 	end
 
 	HotKey:ClearAllPoints()
@@ -72,8 +71,8 @@ local function style(self)
  
 	if normal then
 		normal:ClearAllPoints()
-		normal:SetPoint("TOPLEFT")
-		normal:SetPoint("BOTTOMRIGHT")
+		normal:Point("TOPLEFT")
+		normal:Point("BOTTOMRIGHT")
 	end
 end
 
@@ -87,34 +86,40 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 	Flash:SetTexture(media.buttonhover)
 	
 	if not _G[name.."Panel"] then
-		button:SetWidth(T.petbuttonsize)
-		button:SetHeight(T.petbuttonsize)
-		
-		local panel = CreateFrame("Frame", name.."Panel", button)
-		panel:CreatePanel("Transparent", T.petbuttonsize, T.petbuttonsize, "CENTER", button, "CENTER", 0, 0)
-		panel:SetBackdropColor(unpack(media.backdropcolor))
-		panel:SetFrameStrata(button:GetFrameStrata())
-		panel:SetFrameLevel(button:GetFrameLevel() - 1)
-
-		icon:SetTexCoord(.08, .92, .08, .92)
-		icon:ClearAllPoints()
 		if pet then
-			local autocast = _G[name.."AutoCastable"]
-			autocast:Size(41, 40)
-			autocast:ClearAllPoints()
-			autocast:SetPoint("CENTER", button, 0, 0)
-			icon:Point("TOPLEFT", button, T.Scale(2), T.Scale(-2))
-			icon:Point("BOTTOMRIGHT", button, T.Scale(-2), T.Scale(2))
+			button:Width(T.petbuttonsize)
+			button:Height(T.petbuttonsize)
+		
+			local panel = CreateFrame("Frame", name.."Panel", button)
+			panel:CreatePanel("Default", T.petbuttonsize, T.petbuttonsize, "CENTER", button, "CENTER", 0, 0)
+			panel:SetFrameStrata(button:GetFrameStrata())
+			panel:SetFrameLevel(button:GetFrameLevel() - 1)
+			
+			-- let's kill auto-castable triangles instead
+			_G[name.."AutoCastable"]:Kill()
+
+			local shine = _G[name.."Shine"]
+			shine:Size(T.petbuttonsize, T.petbuttonsize)
 		else
-			icon:Point("TOPLEFT", button, 2, -2)
-			icon:Point("BOTTOMRIGHT", button, -2, 2)
+			button:Width(T.stancebuttonsize)
+			button:Height(T.stancebuttonsize)
+
+			local panel = CreateFrame("Frame", name.."Panel", button)
+			panel:CreatePanel("Default", T.stancebuttonsize, T.stancebuttonsize, "CENTER", button, "CENTER", 0, 0)
+			panel:SetFrameStrata(button:GetFrameStrata())
+			panel:SetFrameLevel(button:GetFrameLevel() - 1)
 		end
+		
+		icon:SetTexCoord(.09, .91, .09, .91)
+		icon:ClearAllPoints()
+		icon:Point("TOPLEFT", 2, -2)
+		icon:Point("BOTTOMRIGHT", -2, 2)
 	end
 	
 	if normal then
 		normal:ClearAllPoints()
-		normal:SetPoint("TOPLEFT")
-		normal:SetPoint("BOTTOMRIGHT")
+		normal:Point("TOPLEFT")
+		normal:Point("BOTTOMRIGHT")
 	end
 end
 
@@ -138,6 +143,122 @@ function T.StylePet()
 	end
 end
 
+function T.TukuiShiftBarUpdate()
+	local numForms = GetNumShapeshiftForms()
+	local texture, name, isActive, isCastable
+	local button, icon, cooldown
+	local start, duration, enable
+	for i = 1, NUM_SHAPESHIFT_SLOTS do
+		button = _G["ShapeshiftButton"..i]
+		icon = _G["ShapeshiftButton"..i.."Icon"]
+		if i <= numForms then
+			texture, name, isActive, isCastable = GetShapeshiftFormInfo(i)
+			icon:SetTexture(texture)
+			
+			cooldown = _G["ShapeshiftButton"..i.."Cooldown"]
+			if texture then
+				cooldown:SetAlpha(1)
+			else
+				cooldown:SetAlpha(0)
+			end
+			
+			start, duration, enable = GetShapeshiftFormCooldown(i)
+			CooldownFrame_SetTimer(cooldown, start, duration, enable)
+			
+			if isActive then
+				ShapeshiftBarFrame.lastSelected = button:GetID()
+				button:SetChecked(1)
+			else
+				button:SetChecked(0)
+			end
+
+			if isCastable then
+				icon:SetVertexColor(1.0, 1.0, 1.0)
+			else
+				icon:SetVertexColor(0.4, 0.4, 0.4)
+			end
+		end
+	end
+end
+
+T.TukuiPetBarUpdate = function(self, event)
+	local petActionButton, petActionIcon, petAutoCastableTexture, petAutoCastShine
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+		local buttonName = "PetActionButton" .. i
+		petActionButton = _G[buttonName]
+		petActionIcon = _G[buttonName.."Icon"]
+		petAutoCastableTexture = _G[buttonName.."AutoCastable"]
+		petAutoCastShine = _G[buttonName.."Shine"]
+		local name, subtext, texture, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
+		
+		if not isToken then
+			petActionIcon:SetTexture(texture)
+			petActionButton.tooltipName = name
+		else
+			petActionIcon:SetTexture(_G[texture])
+			petActionButton.tooltipName = _G[name]
+		end
+		
+		petActionButton.isToken = isToken
+		petActionButton.tooltipSubtext = subtext
+
+		if isActive and name ~= "PET_ACTION_FOLLOW" then
+			petActionButton:SetChecked(1)
+			if IsPetAttackAction(i) then
+				PetActionButton_StartFlash(petActionButton)
+			end
+		else
+			petActionButton:SetChecked(0)
+			if IsPetAttackAction(i) then
+				PetActionButton_StopFlash(petActionButton)
+			end			
+		end
+		
+		if autoCastAllowed then
+			petAutoCastableTexture:Show()
+		else
+			petAutoCastableTexture:Hide()
+		end
+		
+		if autoCastEnabled then
+			AutoCastShine_AutoCastStart(petAutoCastShine)
+		else
+			AutoCastShine_AutoCastStop(petAutoCastShine)
+		end
+		
+		-- grid display
+		if name then
+			if not C["actionbar"].showgrid then
+				petActionButton:SetAlpha(1)
+			end			
+		else
+			if not C["actionbar"].showgrid then
+				petActionButton:SetAlpha(0)
+			end
+		end
+		
+		if texture then
+			if GetPetActionSlotUsable(i) then
+				SetDesaturation(petActionIcon, nil)
+			else
+				SetDesaturation(petActionIcon, 1)
+			end
+			petActionIcon:Show()
+		else
+			petActionIcon:Hide()
+		end
+		
+		-- between level 1 and 10 on cata, we don't have any control on Pet. (I lol'ed so hard)
+		-- Setting desaturation on button to true until you learn the control on class trainer.
+		-- you can at least control "follow" button.
+		if not PetHasActionBar() and texture and name ~= "PET_ACTION_FOLLOW" then
+			PetActionButton_StopFlash(petActionButton)
+			SetDesaturation(petActionIcon, 1)
+			petActionButton:SetChecked(0)
+		end
+	end
+end
+
 local function updatehotkey(self, actionButtonType)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
@@ -146,9 +267,9 @@ local function updatehotkey(self, actionButtonType)
 	text = replace(text, '(a%-)', 'A')
 	text = replace(text, '(c%-)', 'C')
 	text = replace(text, '(Mouse Button )', 'M')
+	text = replace(text, '(Middle Mouse)', 'M3')
 	text = replace(text, '(Mouse Wheel Up)', 'MU')
 	text = replace(text, '(Mouse Wheel Down)', 'MD')
-	text = replace(text, '(Middle Mouse)', 'M3')
 	text = replace(text, '(Num Pad )', 'N')
 	text = replace(text, '(Page Up)', 'PU')
 	text = replace(text, '(Page Down)', 'PD')
@@ -188,13 +309,16 @@ local function SetupFlyoutButton()
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
 			style(_G["SpellFlyoutButton"..i])
-			_G["SpellFlyoutButton"..i]:StyleButton(true)
-			_G["SpellFlyoutButton"..i]:SetFrameLevel(_G["SpellFlyoutButton"..i]:GetParent():GetFrameLevel() + 5)
+			
+			if _G["SpellFlyoutButton"..i]:GetChecked() then
+				_G["SpellFlyoutButton"..i]:SetChecked(nil)
+			end
 		end
 	end
 end
 SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
+ 
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
 local function styleflyout(self)
 	self.FlyoutBorder:SetAlpha(0)
@@ -222,9 +346,7 @@ local function styleflyout(self)
 	end
 	
 	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
-
 	
-
 	if self:GetAttribute("flyoutDirection") ~= nil then
 		local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
 		
@@ -308,15 +430,17 @@ local function StyleTotemFlyout(flyout)
 	local last = nil
 	
 	for _,button in ipairs(flyout.buttons) do
-		button:SetTemplate("Transparent")
+		button:SetTemplate("Default")
 		local icon = select(1,button:GetRegions())
 		icon:SetTexCoord(.09,.91,.09,.91)
 		icon:SetDrawLayer("ARTWORK")
 		icon:Point("TOPLEFT",button,"TOPLEFT",2,-2)
 		icon:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)			
-		button:Size(30,30)
-		button:ClearAllPoints()
-		button:Point("BOTTOM",last,"TOP",0,4)
+		if not InCombatLockdown() then
+			button:Size(T.stancebuttonsize)
+			button:ClearAllPoints()
+			button:Point("BOTTOM",last,"TOP",0,4)
+		end			
 		if button:IsVisible() then last = button end
 		button:SetBackdropBorderColor(flyout.parent:GetBackdropBorderColor())
 		button:StyleButton()
@@ -331,14 +455,14 @@ local function StyleTotemFlyout(flyout)
 	
 	-- Skin Close button
 	local close = MultiCastFlyoutFrameCloseButton
-	close:SetTemplate("Transparent")	
+	close:SetTemplate("Default")	
 	close:GetHighlightTexture():SetTexture([[Interface\Buttons\ButtonHilight-Square]])
 	close:GetHighlightTexture():Point("TOPLEFT",close,"TOPLEFT",1,-1)
 	close:GetHighlightTexture():Point("BOTTOMRIGHT",close,"BOTTOMRIGHT",-1,1)
 	close:GetNormalTexture():SetTexture(nil)
 	close:ClearAllPoints()
 	close:Point("BOTTOMLEFT",last,"TOPLEFT",0,4)
-	close:Point("BOTTOMRIGHT",last,"TOPRIGHT",0,4)  
+	close:Point("BOTTOMRIGHT",last,"TOPRIGHT",0,4)	
 	close:Height(8)
 	
 	close:SetBackdropBorderColor(last:GetBackdropBorderColor())
@@ -363,7 +487,7 @@ local function StyleTotemOpenButton(button, parent)
 		button.visibleBut.highlight:SetTexture([[Interface\Buttons\ButtonHilight-Square]])
 		button.visibleBut.highlight:Point("TOPLEFT",button.visibleBut,"TOPLEFT",1,-1)
 		button.visibleBut.highlight:Point("BOTTOMRIGHT",button.visibleBut,"BOTTOMRIGHT",-1,1)
-		button.visibleBut:SetTemplate("Transparent")
+		button.visibleBut:SetTemplate("Default")
 	end
 	
 	button.visibleBut:SetBackdropBorderColor(parent:GetBackdropBorderColor())
@@ -379,14 +503,15 @@ local bordercolors = {
 }
 
 local function StyleTotemSlotButton(button, index)
-	button:SetTemplate("Transparent")
+	button:SetTemplate("Default")
 	button.overlayTex:SetTexture(nil)
 	button.background:SetDrawLayer("ARTWORK")
 	button.background:ClearAllPoints()
-	button.background:SetPoint("TOPLEFT",button,"TOPLEFT",T.Scale(2),T.Scale(-2))
-	button.background:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",T.Scale(-2),T.Scale(2))
-	button:Size(30)
+	button.background:Point("TOPLEFT",button,"TOPLEFT",2,-2)
+	button.background:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
+	if not InCombatLockdown() then button:Size(T.stancebuttonsize) end
 	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
+	button:CreateShadow("Default")
 	button:StyleButton()
 end
 hooksecurefunc("MultiCastSlotButton_Update",function(self, slot) StyleTotemSlotButton(self,tonumber( string.match(self:GetName(),"MultiCastSlotButton(%d)"))) end)
@@ -401,7 +526,7 @@ local function StyleTotemActionButton(button, index)
 	button.overlayTex:SetTexture(nil)
 	button.overlayTex:Hide()
 	button:GetNormalTexture():SetTexCoord(0,0,0,0)
-	if button.slotButton then
+	if not InCombatLockdown() and button.slotButton then
 		button:ClearAllPoints()
 		button:SetAllPoints(button.slotButton)
 		button:SetFrameLevel(button.slotButton:GetFrameLevel()+1)
@@ -420,11 +545,12 @@ local function StyleTotemSpellButton(button, index)
 	icon:SetDrawLayer("ARTWORK")
 	icon:Point("TOPLEFT",button,"TOPLEFT",2,-2)
 	icon:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
-	button:SetTemplate("Transparent")
+	button:SetTemplate("Default")
 	button:GetNormalTexture():SetTexture(nil)
-	button:Size(30, 30)
+	if not InCombatLockdown() then button:Size(T.stancebuttonsize) end
 	_G[button:GetName().."Highlight"]:SetTexture(nil)
 	_G[button:GetName().."NormalTexture"]:SetTexture(nil)
+	button:CreateShadow("Default")
 	button:StyleButton()
 end
 hooksecurefunc("MultiCastSummonSpellButton_Update", function(self) StyleTotemSpellButton(self,0) end)

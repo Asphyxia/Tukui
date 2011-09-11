@@ -13,7 +13,6 @@ if not C["bags"].enable == true then return end
 
 local bags_BACKPACK = {0, 1, 2, 3, 4}
 local bags_BANK = {-1, 5, 6, 7, 8, 9, 10, 11}
-local BAGSFONT = C["media"].pixelfont
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -89,6 +88,9 @@ end
 local function Stuffing_Toggle()
 	if Stuffing.frame:IsShown() then
 		Stuffing.frame:Hide()
+		if ContainerFrame1:IsShown() then
+			ToggleKeyRing() -- we want keyring to close when we close bags :)
+		end
 	else
 		Stuffing.frame:Show()
 	end
@@ -183,7 +185,12 @@ function Stuffing:SlotUpdate(b)
 	SetItemButtonTexture(b.frame, texture)
 	SetItemButtonCount(b.frame, count)
 	SetItemButtonDesaturated(b.frame, locked, 0.5, 0.5, 0.5)
-		
+	
+	local scount = _G[b.frame:GetName() .. "Count"]
+	scount:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	scount:Point("BOTTOMRIGHT", 0, 2)
+	b.scount = scount
+
 	b.frame:Show()
 end
 
@@ -219,6 +226,11 @@ function Stuffing:BagFrameSlotNew (slot, p)
 		tpl = "BankItemButtonBagTemplate"
 		ret.frame = CreateFrame("CheckButton", "StuffingBBag" .. slot, p, tpl)
 		ret.frame:SetID(slot + 4)
+		ret.frame:SetNormalTexture("")
+		ret.frame:SetPushedTexture("")
+		ret.frame:SetHeight(30)
+		ret.frame:SetWidth(30)
+
 		table.insert(self.bagframe_buttons, ret)
 
 		BankFrameItemButton_Update(ret.frame)
@@ -230,6 +242,11 @@ function Stuffing:BagFrameSlotNew (slot, p)
 	else
 		tpl = "BagSlotButtonTemplate"
 		ret.frame = CreateFrame("CheckButton", "StuffingFBag" .. slot .. "Slot", p, tpl)
+		ret.frame:SetNormalTexture("")
+		ret.frame:SetPushedTexture("")
+		ret.frame:SetHeight(30)
+		ret.frame:SetWidth(30)
+
 		ret.slot = slot
 		table.insert(self.bagframe_buttons, ret)
 	end
@@ -388,6 +405,9 @@ end
 function Stuffing:CreateBagFrame(w)
 	local n = "Tukui"  .. w
 	local f = CreateFrame ("Frame", n, UIParent)
+	f:SetTemplate("Transparent")
+	f:CreateShadow("Default")
+	f:CreateBorder(true, true)
 	f:EnableMouse(1)
 	f:SetMovable(1)
 	f:SetToplevel(1)
@@ -396,25 +416,46 @@ function Stuffing:CreateBagFrame(w)
 
 	local function bagUpdate(f, ...)
 		if w == "Bank" then
-			f:Point("BOTTOM", TukuiTabsLeftBackground, "TOP", 0, 4)
+			if not C["chat"].background then
+				f:SetPoint("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 3)
+			else
+				f:SetPoint("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 3)
+			end
 		else
-			if HasPetUI() then
-				f:ClearAllPoints()
-				f:Point("BOTTOM", TukuiPetBar, "TOP", 0, 4)
-			elseif UnitHasVehicleUI("player") then
-				f:SetPoint("BOTTOMRIGHT", TukuiChatRight, "TOPRIGHT", 0, 4)
-			elseif TukuiBar5 and TukuiBar5:IsShown() then
-				f:ClearAllPoints()
-				f:Point("BOTTOM", TukuiBar5, "TOP", 0, 4)
-			elseif not TukuiBar5:IsShown() then
-				f:ClearAllPoints()
-				f:SetPoint("BOTTOM", TukuiTabsRightBackground, "TOP", 0, 4)
+			if not C["actionbar"].enable then
+				if not C["chat"].background then
+					f:SetPoint("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 3)
+				else
+					f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
+				end
+			else
+				if not C["chat"].background then
+					f:SetPoint("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 3)
+				elseif HasPetUI() then
+					if C["actionbar"].vertical_rightbars then
+						f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
+					else
+						f:SetPoint("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", 0, 3)
+					end
+				elseif UnitHasVehicleUI("player") then
+					f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
+				else
+					if C["actionbar"].vertical_rightbars then
+						f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
+					else
+						if TukuiSaved.rightbars >= 1 then
+							f:SetPoint("BOTTOMRIGHT", TukuiRightBar, "TOPRIGHT", 0, 3)
+						else
+							f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
+						end
+					end
+				end
 			end
 		end
 	end
 	f:HookScript("OnUpdate", bagUpdate)
 	
-	-- CLOSE BUTTON	
+		-- CLOSE BUTTON	
 local function ModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[T.myclass]
 	self:SetBackdropColor(unpack(C["media"].backdropcolor))
@@ -453,11 +494,14 @@ end
 	
 	f.b_close:HookScript("OnEnter", ModifiedBackdrop)
 	f.b_close:HookScript("OnLeave", OriginalBackdrop)
-	
+
 	-- create the bags frame
 	local fb = CreateFrame ("Frame", n .. "BagsFrame", f)
-	fb:Point("BOTTOMLEFT", f, "TOPLEFT", 0, 2)
+	fb:Point("BOTTOMLEFT", f, "TOPLEFT", 0, 3)
 	fb:SetFrameStrata("HIGH")
+	fb:SetTemplate("Transparent")
+	fb:CreateShadow("Default")
+	fb:CreateBorder(true, true)
 	f.bags_frame = fb
 
 	return f
@@ -527,15 +571,15 @@ function Stuffing:InitBags()
 
 
 	local detail = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
-	detail:Point("TOPLEFT", f, 12, -14)
+	detail:Point("TOPLEFT", f, 12, -10)
 	detail:Point("RIGHT",-(16 + 24), 0)
 	detail:SetJustifyH("LEFT")
-	detail:SetText(T.datacolor.. L.bags_search)
+	detail:SetText("|cff9999ff" .. "Search")
 	editbox:SetAllPoints(detail)
 
 	local gold = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightLarge")
 	gold:SetJustifyH("RIGHT")
-	gold:Point("RIGHT", f.b_key, "LEFT", -5, 0)
+	gold:Point("RIGHT", f.b_close, "LEFT", -20, 0)
 
 	f:SetScript("OnEvent", function (self, e)
 		self.gold:SetText(GetMoneyString(GetMoney(), 12))
@@ -600,30 +644,19 @@ function Stuffing:Layout(lb)
 	local cols
 	local f
 	local bs
-
+	
+	local bgvalue = 0
+	if not C["chat"].background then
+		bgvalue = 10
+	end
+	
 	if lb then
 		bs = bags_BANK
-		if T.InfoLeftRightWidth >= 405 then
-			cols = 11
-		elseif T.InfoLeftRightWidth >= 370 and T.InfoLeftRightWidth < 405 then
-			cols = 10
-		elseif T.InfoLeftRightWidth >= 335 and T.InfoLeftRightWidth < 370 then
-			cols = 9
-		else
-			cols = 8
-		end
+		cols = (floor((T.InfoLeftRightWidth - bgvalue)/370 * 10) + 1)
 		f = self.bankFrame
 	else
 		bs = bags_BACKPACK
-		if T.InfoLeftRightWidth >= 405 then
-			cols = 11
-		elseif T.InfoLeftRightWidth >= 370 and T.InfoLeftRightWidth < 405 then
-			cols = 10
-		elseif T.InfoLeftRightWidth >= 335 and T.InfoLeftRightWidth < 370 then
-			cols = 9
-		else
-			cols = 8
-		end
+		cols = (floor((T.InfoLeftRightWidth - bgvalue)/370 * 10) + 1)
 		f = self.frame
 
 		f.gold:SetText(GetMoneyString(GetMoney(), 12))
@@ -637,28 +670,11 @@ function Stuffing:Layout(lb)
 	end
 
 	f:SetClampedToScreen(1)
-	f:SetBackdrop({
-		bgFile = C["media"].blank,
-		edgeFile = C["media"].blank,
-		edgeSize = T.mult,
-		insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
-	})
-	f:SetBackdropColor(unpack(C["media"].backdropcolor))
-	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-
 
 	-- bag frame stuff
 	local fb = f.bags_frame
 	if bag_bars == 1 then
 		fb:SetClampedToScreen(1)
-		fb:SetBackdrop({
-			bgFile = C["media"].blank,
-			edgeFile = C["media"].blank,
-			edgeSize = T.mult,
-			insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
-		})
-		fb:SetBackdropColor(unpack(C["media"].backdropcolor))
-		fb:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 
 		local bsize = 24
 		if lb then bsize = 23.3 end
@@ -703,9 +719,9 @@ function Stuffing:Layout(lb)
 			b.iconTex = iconTex
 
 			b.frame:SetTemplate("Default")
-			b.frame:SetBackdropColor(.05, .05, .05)
+			b.frame:SetBackdropColor(0,0,0)
 			b.frame:StyleButton()
-			
+
 			idx = idx + 1
 		end
 	end
@@ -728,14 +744,15 @@ function Stuffing:Layout(lb)
 		rows = rows + 1
 	end
 	
-	f:Width(T.InfoLeftRightWidth + 12)
+	--f:Width(T.InfoLeftRightWidth + 8 - bgvalue)
+	f:Width(C["chat"].width - bgvalue)
 	f:Height(rows * 30 + (rows - 1) * 2 + off + 12 * 2)
 
 	local sf = CreateFrame("Frame", "SlotFrame", f)
 	sf:Width((31 + 1) * cols)
 	sf:Height(f:GetHeight() - (6))
 	sf:Point("BOTTOM", f, "BOTTOM")
-
+	
 	local idx = 0
 	for _, i in ipairs(bs) do
 		local bag_cnt = GetContainerNumSlots(i)
@@ -755,13 +772,13 @@ function Stuffing:Layout(lb)
 				if isnew then
 					table.insert(self.buttons, idx + 1, b)
 				end
-				
+
 				xoff = (x * 31) + (x * 1)
 
 				yoff = off + 12 + (y * 30) + ((y - 1) * 2)
 
 				yoff = yoff * -1
-				
+
 				b.frame:ClearAllPoints()
 				b.frame:Point("TOPLEFT", sf, "TOPLEFT", xoff, yoff)
 				b.frame:Height(29)
@@ -770,7 +787,7 @@ function Stuffing:Layout(lb)
 				b.frame:SetNormalTexture("")
 				b.frame:Show()
 				b.frame:SetTemplate("Default")
-				b.frame:SetBackdropColor(.05, .05, .05) -- we just need border with SetTemplate, not the backdrop. Hopefully this will fix invisible item that some users have.
+				b.frame:SetBackdropColor(0,0,0)
 				b.frame:StyleButton()
 				
 				-- color fish bag border slot to red
@@ -781,7 +798,7 @@ function Stuffing:Layout(lb)
 				self:SlotUpdate(b)
 				
 				local iconTex = _G[b.frame:GetName() .. "IconTexture"]
-				iconTex:SetTexCoord(.08, .92, .08, .92)
+				iconTex:SetTexCoord(.09, .91, .09, .91)
 				iconTex:Point("TOPLEFT", b.frame, 2, -2)
 				iconTex:Point("BOTTOMRIGHT", b.frame, -2, 2)
 
@@ -928,6 +945,44 @@ end
 function Stuffing:PLAYER_ENTERING_WORLD()
 	-- please don't do anything after 1 player_entering_world event.
 	Stuffing:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	
+	if T.toc >= 40200 then return end
+
+	-- hooking and setting key ring bag
+	-- this is just a reskin of Blizzard key bag to fit Tukui
+	-- hooking OnShow because sometime key max slot changes.
+	ContainerFrame1:HookScript("OnShow", function(self)
+		local keybackdrop = CreateFrame("Frame", nil, self)
+		keybackdrop:Point("TOPLEFT", 9, -40)
+		keybackdrop:Point("BOTTOMLEFT", 0, 0)
+		keybackdrop:Size(179,215)
+		keybackdrop:SetTemplate("Default")
+		ContainerFrame1CloseButton:Hide()
+		ContainerFrame1Portrait:Hide()
+		ContainerFrame1Name:Hide()
+		ContainerFrame1BackgroundTop:SetAlpha(0)
+		ContainerFrame1BackgroundMiddle1:SetAlpha(0)
+		ContainerFrame1BackgroundMiddle2:SetAlpha(0)
+		ContainerFrame1BackgroundBottom:SetAlpha(0)
+		for i=1, GetKeyRingSize() do
+			local slot = _G["ContainerFrame1Item"..i]
+			local t = _G["ContainerFrame1Item"..i.."IconTexture"]
+			slot:SetPushedTexture("")
+			slot:SetNormalTexture("")
+			t:SetTexCoord(.08, .92, .08, .92)
+			t:Point("TOPLEFT", slot, 2, -2)
+			t:Point("BOTTOMRIGHT", slot, -2, 2)
+			slot:SetTemplate("Default")
+			--slot.overlay:Kill()
+			slot:SetBackdropColor(0,0,0)
+			slot:StyleButton()
+		end		
+	end)
+	
+	ContainerFrame1:ClearAllPoints()
+	ContainerFrame1:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 4, 3)
+	ContainerFrame1.ClearAllPoints = T.dummy
+	ContainerFrame1.SetPoint = T.dummy
 end
 
 function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
@@ -1406,6 +1461,26 @@ function Stuffing.Menu(self, level)
 
 	end
 	UIDropDownMenu_AddButton(info, level)
+
+	if T.toc < 40200 then
+		wipe(info)
+		info.text = KEYRING
+		info.checked = function()
+			return key_ring == 1
+		end
+
+		info.func = function()
+			if key_ring == 1 then
+				key_ring = 0
+			else
+				key_ring = 1
+			end
+			Stuffing_Toggle()
+			ToggleKeyRing()
+			Stuffing:Layout()
+		end
+		UIDropDownMenu_AddButton(info, level)
+	end
 
 	wipe(info)
 	info.disabled = nil

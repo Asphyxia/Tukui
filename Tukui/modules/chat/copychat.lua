@@ -10,6 +10,13 @@ local frame = nil
 local editBox = nil
 local isf = nil
 
+local sizes = {
+	":14:14",
+	":16:16",
+	":12:20",
+	":14",
+}
+
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
 	frame:SetTemplate("Default")
@@ -42,7 +49,17 @@ local function CreatCopyFrame()
 	editBox:Height(250)
 	editBox:SetScript("OnEscapePressed", function() frame:Hide() end)
 
-	T.SkinScrollBar(CopyScrollScrollBar)
+	--EXTREME HACK..
+	editBox:SetScript("OnTextSet", function(self)
+		local text = self:GetText()
+
+		for _, size in pairs(sizes) do
+			if string.find(text, size) then
+				self:SetText(string.gsub(text, size, ":12:12"))
+			end		
+		end
+	end)
+	
 	scrollArea:SetScrollChild(editBox)
 
 	local close = CreateFrame("Button", "CopyCloseButton", frame, "UIPanelCloseButton")
@@ -80,9 +97,14 @@ local function ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
 		local button = CreateFrame("Button", format("TukuiButtonCF%d", i), cf)
-		button:SetPoint("TOPRIGHT", 0, 0)
-		button:Height(20)
-		button:Width(20)
+		if i == 2 then
+			button:Point("BOTTOMRIGHT", 0, 0)
+		elseif i == 4 then
+			button:Point("TOPLEFT", 0, 0)
+		else
+			button:Point("TOPRIGHT", 0, 0)
+		end
+		button:Size(20, 20)
 		button:SetNormalTexture(C.media.copyicon)
 		button:SetAlpha(0)
 		button:SetTemplate("Default")

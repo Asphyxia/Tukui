@@ -6,7 +6,6 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 local bar = TukuiPetBar
-bar:SetAlpha(0.8)
 	
 bar:RegisterEvent("PLAYER_LOGIN")
 bar:RegisterEvent("PLAYER_CONTROL_LOST")
@@ -33,13 +32,13 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 
 			button:SetSize(T.petbuttonsize, T.petbuttonsize)
 			if i == 1 then
-				if C.actionbar.bgPanel then
-					button:SetPoint("TOPLEFT", T.petbuttonspacing, -T.petbuttonspacing)
-				else
-					button:SetPoint("TOPLEFT")
-				end
+				button:SetPoint("TOPLEFT", 5, -5)
 			else
-				button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", T.buttonspacing, 0)
+				if C["actionbar"].vertical_rightbars == true then
+					button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, -T.buttonspacing)
+				else
+					button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", T.buttonspacing, 0)
+				end
 			end
 			button:Show()
 			self:SetAttribute("addchild", button)

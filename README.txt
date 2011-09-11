@@ -1,3 +1,16 @@
+-- [[AsphyxiaUI v3.1]] -- [09/11/2011]
+
+* Actionbars have been completely redone. (Eclipse's v12 setup) This setup should work better for low res users. [Cradit Eclipse]
+* Time datatext mouse over error fixed. 
+* Low resolution login error fixed for the unitframes (hopefully...i cant really test it since i dont have a row res monitor).
+* Chat frames can now be resizable via in game config.
+* BalancePower skin fixed (Thanks to Varuljin)
+* Unitframes will now spawn even if Tukui raidframes are disabled
+* Filger updated for the new version (Need low res testing) [Thanks to Varuljin]
+* Item Level will display on tooltip now. [Credit Gsuz]
+* Other minor changes...
+
+
 -- [[AsphyxiaUI v3.0]] -- [09/06/2011]
 
 * Texture redone on the entire UI.

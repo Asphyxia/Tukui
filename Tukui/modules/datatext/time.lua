@@ -12,7 +12,7 @@ local timerShortFormat = "%d:%02d"
 local lockoutInfoFormat = "%s |cffaaaaaa(%s%s, %s/%s)"
 local formatBattleGroundInfo = "%s: "
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
-local difficultyInfo = { L.datatext_normal_mode, L.datatext_normal_mode, L.datatext_heroic_mode, L.datatext_heroic_mode }
+local difficultyInfo = { "N", "N", "H", "H" }
 local curHr, curMin, curAmPm
 
 local Stat = CreateFrame("Frame")

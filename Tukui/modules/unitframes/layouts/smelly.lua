@@ -630,7 +630,8 @@ local function Shared(self, unit)
 		-- Unit name on target
 		if (unit == "target") then			
 			local Name = health:CreateFontString(nil, "OVERLAY")
-			Name:Point("LEFT", health, "LEFT", 4, 3)
+			--Name:Point("LEFT", health, "LEFT", 4, 3)
+			Name:Point("CENTER", health, "CENTER", 0, 12)
 			Name:SetJustifyH("LEFT")
 			Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 			Name:SetShadowOffset(1.25, -1.25)
@@ -856,9 +857,17 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "targettarget") then
-		-- create panel if higher version
+		
+		-- create panel for both high and low version
 		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
+		if T.lowversion then
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
+			panel:SetFrameLevel(2)
+			panel:SetFrameStrata("MEDIUM")
+			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			panel:SetAlpha(0)
+			self.panel = panel
+		else
 			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
@@ -983,10 +992,18 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "pet") then
-		-- create panel if higher version
+	
+		-- create panel for both high and low version
 		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
-			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, 0)
+		if T.lowversion then
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
+			panel:SetFrameLevel(2)
+			panel:SetFrameStrata("MEDIUM")
+			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			panel:SetAlpha(0)
+			self.panel = panel
+		else
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
 			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
@@ -1076,7 +1093,7 @@ local function Shared(self, unit)
 		
 		-- Unit name
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("CENTER", self.Health, "CENTER", 1, 5)
+		Name:Point("CENTER", health, "CENTER", 0, 5)
 		Name:SetFont(font, C["datatext"].fontsize+1, "MONOCHROMEOUTLINE")
 		Name:SetJustifyH("CENTER")
 		Name:SetShadowOffset(1.25, -1.25)
@@ -1654,9 +1671,9 @@ local function Shared(self, unit)
 			-- create buff at left of unit if they are boss units
 			local buffs = CreateFrame("Frame", nil, self)
 			buffs:SetHeight(34)
-			buffs:SetWidth(252)
+			buffs:SetWidth(102)
 			buffs:Point("TOPRIGHT", self, "TOPLEFT", -5, 2)
-			buffs.size = 26
+			buffs.size = 34
 			buffs.num = 3
 			buffs.spacing = 3
 			buffs.initialAnchor = 'RIGHT'
@@ -1672,9 +1689,9 @@ local function Shared(self, unit)
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
 		debuffs:SetHeight(34)
-		debuffs:SetWidth(200)
+		debuffs:SetWidth(102)
 		debuffs:SetPoint('TOPLEFT', self, 'TOPRIGHT', T.Scale(5), 2)
-		debuffs.size = 26
+		debuffs.size = 34
 		debuffs.num = 0
 		debuffs.spacing = 3
 		debuffs.initialAnchor = 'LEFT'
@@ -1858,11 +1875,11 @@ f:SetScript("OnEvent", function(self, event, addon)
 if IsAddOnLoaded("Tukui_Raid") then
 
 	--[ DPS ]--
-		player:Point("TOP", UIParent, "BOTTOM", -170 , 250)
-		target:Point("TOP", UIParent, "BOTTOM", 170, 250)
+		player:Point("TOP", UIParent, "BOTTOM", -170 , 260)
+		target:Point("TOP", UIParent, "BOTTOM", 170, 260)
 		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -20)
 		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -20)
-		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 422)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)
 elseif IsAddOnLoaded("Tukui_Raid_Healing") then
 
 	--[ HEAL ]--
@@ -1870,7 +1887,15 @@ elseif IsAddOnLoaded("Tukui_Raid_Healing") then
 		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
 		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
 		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
-		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 430)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)
+	else
+	
+	--[ NONE ]--
+		player:Point("TOP", UIParent, "BOTTOM", -309 , 350)
+		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
+		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
+		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)	
 	end
 end)
 
@@ -1893,7 +1918,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
+			arena[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 550)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1916,7 +1941,7 @@ end
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
+			boss[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 550)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)               
 		end

@@ -31,10 +31,10 @@ Mod_AddonSkins:RegisterSkin("Quartz",function(Skin, skin, Layout, layout, config
 			bar.IconBorder:Show()
 		end
 		-- Fonts
-		bar.Text:SetFont(font, 12, "MONOCHROMEOUTLINE")
-		bar.TimeText:SetFont(font, 12, "MONOCHROMEOUTLINE")
+		bar.Text:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		bar.TimeText:SetFont(C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		-- Bar Texture
-		bar.Bar:SetStatusBarTexture(config.normTexture)
+		bar.Bar:SetStatusBarTexture(C.media.normTex)
 	end
 	
 	Layout.PositionQuartzBar = dummy

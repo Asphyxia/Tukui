@@ -203,7 +203,7 @@ L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
 L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
 L.core_uihelp100 = "(Scroll up for more commands ...)"
 
-L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 3.0 - Help."
+L.core_uihelp20 = "|cff00AAFFAsphyxiaUI - version:|r 3.1 - Help."
 L.core_uihelp21 = "\n\n|cffFF0000AsphyxiaUI slash commands:\n|cffEAC117/scp|r - Unlock sCombo bar to move."
 L.core_uihelp22 = "\n|cffEAC117/test|r -  Test mode for unitframes."
 L.core_uihelp23 = "\n|cffEAC117/testarena|r - Test mode for arena frames.\n|cffEAC117/ali|r - Alignment grid."
@@ -213,7 +213,7 @@ L.core_uihelp26 = "\nBrings up an ingame menu to access Actionbar configuration,
 L.core_uihelp27 = "\nButtons order from top to bottom: Actionbar Config - AddOns - Config UI - Move UI."
 L.core_uihelp28 = "\n\n|cffFF0000AsphyxiaUI mouse over buttons:|r \nMouseover buttons underneath the right chat copy icon:\nCurrency - Reputation - Actionbar Datatext Panel Toggle."
 L.core_uihelp29 = "\n\n|cffFF0000AsphyxiaUI minimap toggle:|r \nButton next to minimap buffs toggles the minimap on and off."
-L.core_uihelp30 ="\n\n|cffFF0000FIRST TIME USERS PLEASE WATCH THE (v2.7 TUTORIAL VIDEO) FOR GENERAL IDEA ABOUT THE UI.|r"
+L.core_uihelp30 ="\n\n|cffFF0000FIRST TIME USERS PLEASE WATCH THE (v2.7 TUTORIAL VIDEO) FOR GENERAL IDEA ABOUT THE UI.)|r"
 
 L.symbol_CLEAR = "Clear"
 L.symbol_SKULL = "Skull"
@@ -246,6 +246,9 @@ L.move_shapeshift = "Move Shapeshift/Totem"
 L.move_achievements = "Move Achievements"
 L.move_roll = "Move Loot Roll Frame"
 L.move_vehicle = "Move Vehicle Seat"
+
+L.actionbars_locked = "Actionbars |cffe45050Locked|r"
+L.actionbars_unlocked = "Actionbars |cff50e468Unlocked|r"
 
 -------------------------------------------------
 -- INSTALLATION

@@ -40,3 +40,26 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		end
 	end
 end)
+
+local function ModifiedBackdrop(self)
+	local color = RAID_CLASS_COLORS[T.myclass]
+	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
+	self:SetBackdropBorderColor(color.r, color.g, color.b)
+end
+
+local function OriginalBackdrop(self)
+	self:SetTemplate("Default")
+end
+
+local vehicle = CreateFrame("Button", "TukuiExitVehicleButton", UIParent, "SecureHandlerClickTemplate")
+vehicle:CreatePanel("Default", T.buttonsize * 2, T.buttonsize + 1, "BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", -3, 0)
+vehicle:CreateOverlay(vehicle)
+vehicle:RegisterForClicks("AnyUp")
+vehicle:SetScript("OnClick", function() VehicleExit() end)
+vehicle.text = T.SetFontString(vehicle, C.media.pixelfont, C["datatext"].fontsize, "MONOCHROMEOUTLINE")
+vehicle.text:Point("CENTER", 1, 1)
+vehicle.text:SetText(T.datacolor.."Exit")
+RegisterStateDriver(vehicle, "visibility", "[target=vehicle,exists] show;hide")
+
+vehicle:HookScript("OnEnter", ModifiedBackdrop)
+vehicle:HookScript("OnLeave", OriginalBackdrop)

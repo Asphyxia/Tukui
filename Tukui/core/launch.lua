@@ -4,137 +4,133 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 local function chatsetup()
-	-- setting chat frames if using Tukui chats.					
+	-- setting chat frames if using Tukui chats.
 	FCF_ResetChatWindows()
-	FCF_SetLocked(ChatFrame1, 1)
-	FCF_DockFrame(ChatFrame2)
-	FCF_SetLocked(ChatFrame2, 1)
-	FCF_OpenNewWindow(L.chat_general)
-	FCF_SetLocked(ChatFrame3, 1)
-	FCF_DockFrame(ChatFrame3)
+		FCF_SetLocked(ChatFrame1, 1)
+		FCF_DockFrame(ChatFrame2)
+		FCF_SetLocked(ChatFrame2, 1)
+		FCF_OpenNewWindow(L.chat_general)
+		FCF_SetLocked(ChatFrame3, 1)
+		FCF_DockFrame(ChatFrame3)
 
-	FCF_OpenNewWindow(LOOT)
-	FCF_UnDockFrame(ChatFrame4)
-	FCF_SetLocked(ChatFrame4, 1)
-	ChatFrame4:Show()
+		FCF_OpenNewWindow(LOOT)
+		FCF_UnDockFrame(ChatFrame4)
+		FCF_SetLocked(ChatFrame4, 1)
+		ChatFrame4:Show()
 
-	for i = 1, NUM_CHAT_WINDOWS do
-		local frame = _G[format("ChatFrame%s", i)]
-		local chatFrameId = frame:GetID()
-		local chatName = FCF_GetChatWindowInfo(chatFrameId)
-		
-		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth + 1, 111)
-		
-		-- tell wow that we are using new size
-		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
-		
-		-- move general bottom left or Loot (if found) on right
-		if i == 1 then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-		elseif i == 4 and chatName == LOOT then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+		for i = 1, NUM_CHAT_WINDOWS do
+			local chat = _G[format("ChatFrame%s", i)]
+			local id = chat:GetID()
+			local _, fontSize = FCF_GetChatWindowInfo(id)
+					
+			-- set default tukui font size
+			FCF_SetChatWindowFontSize(nil, chat, fontSize)
+			
+			if i == 1 then
+				chat:ClearAllPoints()
+				chat:Point("TOPLEFT", TukuiTabsLeftBackground, "BOTTOMLEFT", 0, -4)
+				chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 0, 4)
+				FCF_SavePositionAndDimensions(chat)
+			elseif i == 4 then
+				if not chat.isDocked then
+					chat:ClearAllPoints()
+					chat:Point("TOPLEFT", TukuiTabsRightBackground, "BOTTOMLEFT", 0, -4)
+					chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 4)
+					FCF_SavePositionAndDimensions(chat)
+					
+					if C["chat"].justifyRight == true then
+						chat:SetJustifyH("RIGHT") 
+					end
+				end
+			end
+			chat:SetHeight(0)
+			chat:SetWidth(0)
+
+			-- rename windows general and combat log
+			if i == 1 then FCF_SetWindowName(chat, "G, S, W") end
+			if i == 2 then FCF_SetWindowName(chat, "Log") end
 		end
-				
-		-- save new default position and dimension
-		FCF_SavePositionAndDimensions(frame)
-		
-		-- set default tukui font size
-		FCF_SetChatWindowFontSize(nil, frame, 12)
-		
-		-- rename windows general and combat log
-		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
-		if i == 2 then FCF_SetWindowName(frame, "Log") end
-	end
 	
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_trade) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
-	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
-	ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
-	ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
-	--ChatFrame_AddMessageGroup(ChatFrame1, "WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_SAY")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_YELL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_EMOTE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY")
-	ChatFrame_AddMessageGroup(ChatFrame1, "PARTY_LEADER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "RAID")
-	ChatFrame_AddMessageGroup(ChatFrame1, "RAID_LEADER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "RAID_WARNING")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BATTLEGROUND")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BATTLEGROUND_LEADER")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BG_HORDE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BG_ALLIANCE")
-	ChatFrame_AddMessageGroup(ChatFrame1, "BG_NEUTRAL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "SYSTEM")
-	ChatFrame_AddMessageGroup(ChatFrame1, "ERRORS")
-	ChatFrame_AddMessageGroup(ChatFrame1, "AFK")
-	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
-	ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
-	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
-	--ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
-	--ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
+		ChatFrame_RemoveChannel(ChatFrame1, L.chat_trade) -- erf, it seem we need to localize this now
+		ChatFrame_RemoveChannel(ChatFrame1, L.chat_general) -- erf, it seem we need to localize this now
+		ChatFrame_RemoveChannel(ChatFrame1, L.chat_defense) -- erf, it seem we need to localize this now
+		ChatFrame_RemoveChannel(ChatFrame1, L.chat_recrutment) -- erf, it seem we need to localize this now
+		ChatFrame_RemoveChannel(ChatFrame1, L.chat_lfg) -- erf, it seem we need to localize this now
+		ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
+		ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
+		ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
+		ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
+		ChatFrame_AddMessageGroup(ChatFrame1, "OFFICER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "GUILD_ACHIEVEMENT")
+		ChatFrame_AddMessageGroup(ChatFrame1, "WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_SAY")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_EMOTE")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_YELL")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_EMOTE")
+		ChatFrame_AddMessageGroup(ChatFrame1, "MONSTER_BOSS_WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "PARTY")
+		ChatFrame_AddMessageGroup(ChatFrame1, "PARTY_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "RAID")
+		ChatFrame_AddMessageGroup(ChatFrame1, "RAID_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "RAID_WARNING")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BATTLEGROUND")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BATTLEGROUND_LEADER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BG_HORDE")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BG_ALLIANCE")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BG_NEUTRAL")
+		ChatFrame_AddMessageGroup(ChatFrame1, "SYSTEM")
+		ChatFrame_AddMessageGroup(ChatFrame1, "ERRORS")
+		ChatFrame_AddMessageGroup(ChatFrame1, "AFK")
+		ChatFrame_AddMessageGroup(ChatFrame1, "DND")
+		ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
+		ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
+		ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
+					
+		-- Setup the spam chat frame
+		ChatFrame_RemoveAllMessageGroups(ChatFrame3)
+		ChatFrame_AddChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
 				
-	-- Setup the whisper chat frame
-	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-	ChatFrame_RemoveChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
-	ChatFrame_RemoveChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
-	ChatFrame_AddMessageGroup(ChatFrame3, "BN_WHISPER")
-	ChatFrame_AddMessageGroup(ChatFrame3, "BN_CONVERSATION")
-	ChatFrame_AddMessageGroup(ChatFrame3, "WHISPER")
-			
-	-- Setup the right chat
-	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-			
-	-- enable classcolor automatically on login and on each character without doing /configure each time.
-	ToggleChatColorNamesByClassGroup(true, "SAY")
-	ToggleChatColorNamesByClassGroup(true, "EMOTE")
-	ToggleChatColorNamesByClassGroup(true, "YELL")
-	ToggleChatColorNamesByClassGroup(true, "GUILD")
-	ToggleChatColorNamesByClassGroup(true, "OFFICER")
-	ToggleChatColorNamesByClassGroup(true, "GUILD_ACHIEVEMENT")
-	ToggleChatColorNamesByClassGroup(true, "ACHIEVEMENT")
-	ToggleChatColorNamesByClassGroup(true, "WHISPER")
-	ToggleChatColorNamesByClassGroup(true, "PARTY")
-	ToggleChatColorNamesByClassGroup(true, "PARTY_LEADER")
-	ToggleChatColorNamesByClassGroup(true, "RAID")
-	ToggleChatColorNamesByClassGroup(true, "RAID_LEADER")
-	ToggleChatColorNamesByClassGroup(true, "RAID_WARNING")
-	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND")
-	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND_LEADER")	
-	ToggleChatColorNamesByClassGroup(true, "CHANNEL1")
-	ToggleChatColorNamesByClassGroup(true, "CHANNEL2")
-	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
-	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
-	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+		-- Setup the right chat
+		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+		ChatFrame_AddMessageGroup(ChatFrame4, "CURRENCY")
+		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_GUILD_XP_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame4, "SKILL")
+				
+		-- enable classcolor automatically on login and on each character without doing /configure each time.
+		ToggleChatColorNamesByClassGroup(true, "SAY")
+		ToggleChatColorNamesByClassGroup(true, "EMOTE")
+		ToggleChatColorNamesByClassGroup(true, "YELL")
+		ToggleChatColorNamesByClassGroup(true, "GUILD")
+		ToggleChatColorNamesByClassGroup(true, "OFFICER")
+		ToggleChatColorNamesByClassGroup(true, "GUILD_ACHIEVEMENT")
+		ToggleChatColorNamesByClassGroup(true, "ACHIEVEMENT")
+		ToggleChatColorNamesByClassGroup(true, "WHISPER")
+		ToggleChatColorNamesByClassGroup(true, "PARTY")
+		ToggleChatColorNamesByClassGroup(true, "PARTY_LEADER")
+		ToggleChatColorNamesByClassGroup(true, "RAID")
+		ToggleChatColorNamesByClassGroup(true, "RAID_LEADER")
+		ToggleChatColorNamesByClassGroup(true, "RAID_WARNING")
+		ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND")
+		ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND_LEADER")	
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL1")
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL2")
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
+		ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+	end	
 	
-	-- Chat Colors
-	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255) -- General
-	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255) -- Trade
-	ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255) -- Local Defense
-	ChangeChatColor("CHANNEL4", 255/255, 255/255, 1/255) -- LFG
-end
-
 local function cvarsetup()
 	SetCVar("buffDurations", 1)
 	SetCVar("mapQuestDifficulty", 1)
@@ -143,12 +139,11 @@ local function cvarsetup()
 	SetCVar("screenshotQuality", 10)
 	SetCVar("chatMouseScroll", 1)
 	SetCVar("chatStyle", "im")
-	SetCVar("chatBubbles", 1)	
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("ConversationMode", "inline")
 	SetCVar("showTutorials", 0)
 	SetCVar("showNewbieTips", 0)
-	SetCVar("showGameTips", 0)
+	SetCVar("autoDismountFlying", 0)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
 	SetCVar("UberTooltips", 1)
@@ -156,19 +151,7 @@ local function cvarsetup()
 	SetCVar("showVKeyCastbar", 1)
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
-	SetCVar("nameplateShowFriends", 0)
-	SetCVar("nameplateShowFriendlyPets", 0)
-	SetCVar("nameplateShowFriendlyGuardians", 0)
-	SetCVar("nameplateShowFriendlyTotems", 0)
-	SetCVar("nameplateShowEnemies", 1)
-	SetCVar("nameplateShowEnemyPets", 1)
-	SetCVar("nameplateShowEnemyGuardians", 1)
-	SetCVar("nameplateShowEnemyTotems", 1)	
 	SetCVar("showArenaEnemyFrames", 0)
-	SetCVar("lootUnderMouse", 1)
-	SetCVar("autoSelfCast", 1)
-	SetCVar("cameraDistanceMax", 50)
-	SetCVar("cameraDistanceMaxFactor", 3.4)
 end
 
 local function positionsetup()
@@ -189,7 +172,7 @@ v:SetTemplate("Transparent")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 3.0  www.tukui.org")
+v.Text:SetText("|cffFF6347AsphyxiaUI - version:|r 3.1  www.tukui.org")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
@@ -253,7 +236,7 @@ sb:SetFrameLevel(6)
 sb:Hide()
 
 local sbd = CreateFrame("Frame", nil, sb)
-sbd:SetTemplate("Transparent")
+sbd:SetTemplate("Default")
 sbd:SetPoint("TOPLEFT", sb, -2, 2)
 sbd:SetPoint("BOTTOMRIGHT", sb, 2, -2)
 sbd:SetFrameStrata("HIGH")
@@ -299,14 +282,14 @@ sbt:SetPoint("CENTER", sb)
 local option1 = CreateFrame("Button", "TukuiInstallOption1", f)
 option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
 option1:SetSize(128, 25)
-option1:SetTemplate("Transparent")
+option1:SetTemplate("Default")
 option1:FontString("Text", C.media.font, 12)
 option1.Text:SetPoint("CENTER")
 
 local option2 = CreateFrame("Button", "TukuiInstallOption2", f)
 option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
 option2:SetSize(128, 25)
-option2:SetTemplate("Transparent")
+option2:SetTemplate("Default")
 option2:FontString("Text", C.media.font, 12)
 option2.Text:SetPoint("CENTER")
 
@@ -317,7 +300,18 @@ close:SetScript("OnClick", function()
 end)
 
 local step4 = function()
+-- tell savedvariable that we installed Tukui perfectly
 	TukuiDataPerChar.install = true
+
+	-- we can reset this shit here :)
+	TukuiSaved = {} -- make sure we clear the table first, don't want any unnecessary values
+	TukuiSaved = {
+		["bottomrows"] = 1,
+		["rightbars"] = 1,
+		["splitbars"] = false,
+		["actionbarsLocked"] = false,
+	}
+	
 	sb:SetValue(4)
 	PlaySoundFile("Sound\\interface\\LevelUp.wav")
 	header:SetText(L.install_header_11)
@@ -395,7 +389,7 @@ local step1 = function()
 		cvarsetup()
 		step2()
 	end)
-	
+
 	-- this is really essential, whatever if skipped or not
 	SetActionBarToggles(1, 1, 1, 1, 0)
 	SetCVar("alwaysShowActionBars", 0)
@@ -587,6 +581,36 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 			SetCVar("useUiScale", 0)
 			StaticPopup_Show("TUKUIDISABLE_UI")
 	else
+		SetCVar("useUiScale", 1)
+		if C["general"].multisampleprotect == true then
+			SetMultisampleFormat(1)
+		end
+		if C["general"].uiscale > 1 then C["general"].uiscale = 1 end
+		if C["general"].uiscale < 0.64 then C["general"].uiscale = 0.64 end
+
+		-- set our uiscale
+		SetCVar("uiScale", C["general"].uiscale)
+		
+		-- we adjust UIParent to screen #1 if Eyefinity is found
+		if T.eyefinity then
+			local width = T.eyefinity
+			local height = T.getscreenheight
+			
+			-- if autoscale is off, find a new width value of UIParent for screen #1.
+			if not C.general.autoscale or height > 1200 then
+				local h = UIParent:GetHeight()
+				local ratio = T.getscreenheight / h
+				local w = T.eyefinity / ratio
+				
+				width = w
+				height = h			
+			end
+			
+			UIParent:SetSize(width, height)
+			UIParent:ClearAllPoints()
+			UIParent:SetPoint("CENTER")		
+		end
+		
 		-- install default if we never ran Tukui on this character.
 		if not TukuiDataPerChar.install then			
 			install()

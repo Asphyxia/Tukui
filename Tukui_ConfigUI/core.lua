@@ -206,10 +206,10 @@ local function Local(o)
 	if o == "TukuiConfigUIactionbarbuttonsize" then o = TukuiL.option_actionbar_buttonsize end
 	if o == "TukuiConfigUIactionbarbuttonspacing" then o = TukuiL.option_actionbar_buttonspacing end
 	if o == "TukuiConfigUIactionbarpetbuttonsize" then o = TukuiL.option_actionbar_petbuttonsize end
-	if o == "TukuiConfigUIactionbarmainbarWidth" then o = TukuiL.option_actionbar_mainbar_Width end
-	if o == "TukuiConfigUIactionbarverticalshapeshift" then o = TukuiL.option_actionbar_vertical_shapeshift end
-	if o == "TukuiConfigUIactionbarsidebarWidth" then o = TukuiL.option_actionbar_sidebar_Width end
-	if o == "TukuiConfigUIactionbarbgPanel" then o = TukuiL.option_actionbar_bgPanel end
+	if o == "TukuiConfigUIactionbarvertical_rightbars" then o = TukuiL.option_actionbar_vertical_rightbars end
+	if o == "TukuiConfigUIactionbarstancebuttonsize" then o = TukuiL.option_actionbar_stancebuttonsize end
+	if o == "TukuiConfigUIactionbarvertical_shapeshift" then o = TukuiL.option_actionbar_vertical_shapeshift end
+	if o == "TukuiConfigUIactionbarmainswap" then o = TukuiL.option_actionbar_mainswap end
 	if o == "TukuiConfigUIactionbarmacrotext" then o = TukuiL.option_actionbar_macrotext end
 	
 	-- quest watch frame
@@ -233,9 +233,14 @@ local function Local(o)
 	-- chat
 	if o == "TukuiConfigUIchat" then o = TukuiL.option_chat end
 	if o == "TukuiConfigUIchatenable" then o = TukuiL.option_chat_enable end
+	if o == "TukuiConfigUIchatwidth" then o = TukuiL.option_chat_width end
+	if o == "TukuiConfigUIchatheight" then o = TukuiL.option_chat_height end
 	if o == "TukuiConfigUIchatwhispersound" then o = TukuiL.option_chat_whispersound end
+	if o == "TukuiConfigUIchatjustifyRight" then o = TukuiL.option_chat_justify_Right end
 	if o == "TukuiConfigUIchatbackground" then o = TukuiL.option_chat_background end
+	if o == "TukuiConfigUIchatrightchat" then o = TukuiL.option_chat_rightchat end
 	if o == "TukuiConfigUIchatrightchatnumber" then o = TukuiL.option_chat_rightchat_number end
+
 	
 	-- aura
 	if o == "TukuiConfigUIauras" then o = TukuiL.option_auras end

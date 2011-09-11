@@ -810,9 +810,17 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "targettarget") then
-		-- create panel if higher version
+	
+		-- create panel for both high and low version
 		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
+		if T.lowversion then
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
+			panel:SetFrameLevel(2)
+			panel:SetFrameStrata("MEDIUM")
+			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			panel:SetAlpha(0)
+			self.panel = panel
+		else
 			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
@@ -933,10 +941,18 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "pet") then
-		-- create panel if higher version
+	
+		-- create panel for both high and low version
 		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
-			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, 0)
+		if T.lowversion then
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
+			panel:SetFrameLevel(2)
+			panel:SetFrameStrata("MEDIUM")
+			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+			panel:SetAlpha(0)
+			self.panel = panel
+		else
+			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
 			panel:SetBackdropBorderColor(unpack(C["media"].bordercolor))
@@ -1792,11 +1808,11 @@ f:SetScript("OnEvent", function(self, event, addon)
 if IsAddOnLoaded("Tukui_Raid") then
 
 	--[ DPS ]--
-		player:Point("TOP", UIParent, "BOTTOM", -170 , 250)
-		target:Point("TOP", UIParent, "BOTTOM", 170, 250)
+		player:Point("TOP", UIParent, "BOTTOM", -170 , 260)
+		target:Point("TOP", UIParent, "BOTTOM", 170, 260)
 		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -20)
 		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -20)
-		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 422)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)
 elseif IsAddOnLoaded("Tukui_Raid_Healing") then
 
 	--[ HEAL ]--
@@ -1804,7 +1820,15 @@ elseif IsAddOnLoaded("Tukui_Raid_Healing") then
 		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
 		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
 		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
-		focus:Point("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -150, 430)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)
+	else
+	
+	--[ NONE ]--
+		player:Point("TOP", UIParent, "BOTTOM", -309 , 350)
+		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
+		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
+		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
+		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)	
 	end
 end)
 
@@ -1827,7 +1851,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
+			arena[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 550)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1850,7 +1874,7 @@ end
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 510)
+			boss[i]:SetPoint("TOP", UIParent, "BOTTOM", 500, 550)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)               
 		end

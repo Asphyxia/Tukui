@@ -15,3 +15,12 @@ T.patch, T.build, T.releasedate, T.toc = GetBuildInfo()
 T.level = UnitLevel("player")
 T.myrealm = GetRealmName()
 T.InfoLeftRightWidth = 370
+
+if not TukuiSaved then
+	TukuiSaved = {	
+		["bottomrows"] = 1,
+		["rightbars"] = 1,
+		["splitbars"] = false,
+		["actionbarsLocked"] = false,
+	}
+end

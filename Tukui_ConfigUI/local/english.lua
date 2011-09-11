@@ -174,10 +174,10 @@ TukuiL.option_actionbar_rn = "Number of action bars on right (0, 1, 2 or 3)"
 TukuiL.option_actionbar_buttonsize = "Size of the main action buttons"
 TukuiL.option_actionbar_buttonspacing = "Spacing of the main action buttons"
 TukuiL.option_actionbar_petbuttonsize = "Size of pet/shapeshift buttons"
-TukuiL.option_actionbar_mainbar_Width = "Amount of buttons per row on main bar (set between 1-12)"
-TukuiL.option_actionbar_vertical_shapeshift = "Set shapeshift bar to show vertically"
-TukuiL.option_actionbar_sidebar_Width = "Amount of buttons per row on splitbars (set between 0-6, 0 = disabled)"
-TukuiL.option_actionbar_bgPanel = "Enable background panels for actionbars"
+TukuiL.option_actionbar_vertical_rightbars = "Enable the vertical Rightbars"
+TukuiL.option_actionbar_stancebuttonsize = "Choose the size of the stancebar buttons"
+TukuiL.option_actionbar_vertical_shapeshift = "Enable the vertical stancebar"
+TukuiL.option_actionbar_mainswap = "Swap mainbar with topbar"
 TukuiL.option_actionbar_macrotext = "Display macro text on buttons"
 
 -- quest watch frame
@@ -197,14 +197,18 @@ TukuiL.option_pvp_ii = "Enable Interrupt Icons"
 TukuiL.option_cooldown = "Cooldowns"
 TukuiL.option_cooldown_enable = "Enable cooldown number on buttons"
 TukuiL.option_cooldown_th = "Turn cooldown number red at X value"
- 
+
 -- chat
 TukuiL.option_chat = "Social"
 TukuiL.option_chat_enable = "Enable Tukui Chat"
+TukuiL.option_chat_width = "Choose the width of the chat"
+TukuiL.option_chat_height = "Choose the height of the chat"
 TukuiL.option_chat_whispersound = "Play sound when receiving private message"
-TukuiL.option_chat_background = "Enable chat panel background"
+TukuiL.option_chat_justify_Right = "Right justify chat text"
+TukuiL.option_chat_background = "Enable chat background"
+TukuiL.option_chat_rightchat = "Set Loot window to right chat frame"
 TukuiL.option_chat_rightchat_number = "Rightchat-background is attached to ChatFrameX ..X = value"
-
+ 
 -- buff
 TukuiL.option_auras = "Auras"
 TukuiL.option_auras_player = "Enable Tukui Buff/Debuff Frames"

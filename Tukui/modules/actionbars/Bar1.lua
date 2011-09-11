@@ -68,21 +68,25 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			
 		RegisterStateDriver(self, "page", GetBar())
 	elseif event == "PLAYER_ENTERING_WORLD" then
+		if T.toc < 40200 then MainMenuBar_UpdateKeyRing() end
+		
 		local button
 		for i = 1, 12 do
 			button = _G["ActionButton"..i]
-			button:SetSize(T.buttonsize, T.buttonsize)
+			button:Size(T.buttonsize, T.buttonsize)
 			button:ClearAllPoints()
 			button:SetParent(bar)
 			button:SetFrameStrata("BACKGROUND")
 			button:SetFrameLevel(15)
 			if i == 1 then
-				button:SetPoint("BOTTOMLEFT", T.buttonoffset, T.buttonoffset)
-			elseif i == (C.actionbar.mainbarWidth+1) then
-				button:SetPoint("TOP", UIParent, "BOTTOM", 0, -20)
+				if C["actionbar"].mainswap then
+					button:Point("TOPLEFT", 5, -5)
+				else
+					button:Point("BOTTOMLEFT", 5, 5)
+				end
 			else
 				local previous = _G["ActionButton"..i-1]
-				button:SetPoint("LEFT", previous, "RIGHT", T.buttonspacing, 0)
+				button:Point("LEFT", previous, "RIGHT", T.buttonspacing, 0)
 			end
 		end
 	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then

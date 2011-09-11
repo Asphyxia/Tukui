@@ -12,8 +12,8 @@ if T.myclass == "SHAMAN" then
 		MultiCastActionBarFrame:SetScript("OnHide", nil)
 		MultiCastActionBarFrame:SetParent(TukuiShiftBar)
 		MultiCastActionBarFrame:ClearAllPoints()
-		MultiCastActionBarFrame:Point("LEFT", TukuiShiftBar, -3, 0)
-		
+		MultiCastActionBarFrame:Point("BOTTOMLEFT", 2, 2)
+
 		hooksecurefunc("MultiCastActionButton_Update",function(actionbutton) if not InCombatLockdown() then actionbutton:SetAllPoints(actionbutton.slotButton) end end)
  
 		MultiCastActionBarFrame.SetParent = T.dummy

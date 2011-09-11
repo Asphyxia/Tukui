@@ -25,7 +25,7 @@ for i = 1, 4 do
 		if C["datatext"].classcolored then
 			HydraData[i].Status:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
 		else
-			HydraData[i].Status:SetStatusBarColor(0.4, 0.4, 0.5)
+			HydraData[i].Status:SetStatusBarColor(0.3, 0.2, 0.8)
 	end
 	
 	HydraData[i].Status:Point("TOPLEFT", HydraData[i], "TOPLEFT", 2, -2)
@@ -67,17 +67,19 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 		local max = GetCVar("MaxFPS")
 		self:SetValue(value)
 		HydraData[1].Text:SetText("FPS: "..value)
-		
-	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
-	if C["datatext"].classcolored then
+		local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+		if C["datatext"].classcolored then
 		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
-	else
-		self:SetStatusBarColor(0.4, 0.4, 0.5)
-	end
-		
+		elseif value * 100 / max >= 75 then
+			self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+		elseif value * 100 / max < 75 and value * 100 / max > 40 then
+			self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
+		else
+			self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+		end
 		LastUpdate = 1
 	end
-end)
+end )
 
 -- MS 
 HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
@@ -88,18 +90,20 @@ HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 		local value = (select(3, GetNetStats()))
 		local max = 200
 		self:SetValue(value)
-		HydraData[2].Text:SetText("MS: "..value)			
-		
-	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
-	if C["datatext"].classcolored then
-		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
-	else
-		self:SetStatusBarColor(0.4, 0.4, 0.5)
-	end
-		
+		HydraData[2].Text:SetText("MS: "..value)
+		local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+		if C["datatext"].classcolored then
+		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)	
+		elseif value * 100 / max <= 35 then
+			self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+		elseif value * 100 / max > 35 and value * 100 / max < 75 then
+			self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
+		else
+			self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
+		end
 		LastUpdate = 1
 	end
-end)
+end )
 
 -- MEMORY
 local f = HydraData[3]
@@ -175,6 +179,7 @@ Stat:SetScript("OnEnter", function(self) collectgarbage("collect") end)
 Stat:SetScript("OnUpdate", UpdateMem)
 UpdateMem(Stat, 10)
 
+
 -- DURABILITY
 HydraData[4].Status:SetScript("OnEvent", function(self)
 	local Total = 0
@@ -194,16 +199,18 @@ HydraData[4].Status:SetScript("OnEvent", function(self)
 
 	self:SetMinMaxValues(0, 100)
 	self:SetValue(value)
-	HydraData[4].Text:SetText("Durability: "..value.."%")			
-
-	local classcolorbar = RAID_CLASS_COLORS[T.myclass]
+	HydraData[4].Text:SetText("Durability: "..value.."%")
+		local classcolorbar = RAID_CLASS_COLORS[T.myclass]
 	if C["datatext"].classcolored then
 		self:SetStatusBarColor(classcolorbar.r,classcolorbar.g,classcolorbar.b)
+	elseif value >= 75 then
+		self:SetStatusBarColor( 30 / 255, 1, 30 / 255 , .8 )
+	elseif value < 75 and value > 40 then
+		self:SetStatusBarColor( 1, 180 / 255, 0, .8 )
 	else
-		self:SetStatusBarColor(0.4, 0.4, 0.5)
+		self:SetStatusBarColor( 1, 75 / 255, 75 / 255, 0.5, .8 )
 	end
-	
-end)
+end )
 HydraData[4].Status:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
 HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -310,7 +317,7 @@ end
 local toggle = CreateFrame("Frame", "RepToggle", TukuiChatBackgroundRight)
 toggle:CreatePanel(nil, 30, 15, "TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -2, -52)
 toggle:EnableMouse(true)
-toggle:SetFrameStrata("HIGH")
+toggle:SetFrameStrata("MEDIUM")
 toggle:SetFrameLevel(10)
 toggle:CreateShadow("Default")
 toggle:CreateOverlay(toggle)

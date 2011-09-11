@@ -4,7 +4,7 @@ C["media"] = {
 	-- fonts (ENGLISH, SPANISH)
 	["font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
 	["uffont"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]], -- general font of unitframes
-	["pixelfont"] = [=[Interface\Addons\Tukui\medias\fonts\pixelfont.ttf]=], -- pixel font of tukui
+	["pixelfont"] = [[Interface\Addons\Tukui\medias\fonts\pixelfont.ttf]], -- pixel font of tukui
 	["dmgfont"] = [[Interface\AddOns\Tukui\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
 	
 	-- fonts (DEUTSCH)
