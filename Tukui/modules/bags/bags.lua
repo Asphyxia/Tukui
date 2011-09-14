@@ -435,7 +435,7 @@ function Stuffing:CreateBagFrame(w)
 					if C["actionbar"].vertical_rightbars then
 						f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
 					else
-						f:SetPoint("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", 0, 3)
+						f:SetPoint("BOTTOM", TukuiPetBar, "TOP", 0, 3)
 					end
 				elseif UnitHasVehicleUI("player") then
 					f:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 3)
