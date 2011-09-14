@@ -100,7 +100,7 @@ local function ChatCopyButtons()
 		if i == 2 then
 			button:Point("BOTTOMRIGHT", 0, 0)
 		elseif i == 4 then
-			button:Point("TOPLEFT", 0, 0)
+			button:Point("TOPRIGHT", 0, 0)
 		else
 			button:Point("TOPRIGHT", 0, 0)
 		end

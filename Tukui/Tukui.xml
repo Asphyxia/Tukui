@@ -139,7 +139,6 @@
 	<Script file="modules\nameplates\blacklist.lua"/>
 	<Script file="modules\nameplates\raid.lua"/>
 	
-	
 	<Script file="modules\bags\bags.lua"/>
 	
 	<Script file="modules\loot\lootframe.lua"/>
@@ -238,9 +237,7 @@
 	<Script file="modules\extras\addons\addons.lua"/>
 	<Script file="modules\extras\addons\addons_toggle.lua"/>
 	<Script file="modules\extras\announce.lua"/>
-	<Script file="modules\extras\customactionbar.lua"/>
 	<Script file="modules\extras\technicolor.lua"/>
-	<Script file="modules\extras\balancepower.lua"/>
-	
+		
 	<Script file="modules\chat\blizzfixrealidlink.lua"/>	
 </Ui>
