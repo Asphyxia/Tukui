@@ -70,7 +70,7 @@ local function StyleChat(frame)
 	end
 	tabtext:SetShadowOffset(0, 0)
 	tabtext:ClearAllPoints()
-	tabtext:Point("CENTER", tab, "CENTER", 0, -3)
+	tabtext:Point("CENTER", tab, "CENTER", 0, -2)
 	
 	--_G[chat]:SetFont(C.media.pixelfont, C["datatext"].fontsize +1, "MONOCHROMEOUTLINE")
 	_G[chat]:SetClampRectInsets(0,0,0,0)
@@ -190,7 +190,7 @@ hooksecurefunc("FCF_UnDockFrame", ChatPosition)
 local function ToastFramePosition(self)
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
-		self:Point("BOTTOMLEFT", TukuiChatLeft, "TOPLEFT", 0, 3)
+		self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 3)
 	end)
 end
 
