@@ -58,6 +58,9 @@ for i = 1, 4 do
 end
 
 -- FPS
+
+local LastUpdate = 1
+
 HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 	LastUpdate = LastUpdate - elapsed
 	
@@ -82,6 +85,9 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 end )
 
 -- MS 
+
+local LastUpdate = 1
+
 HydraData[2].Status:SetScript("OnUpdate", function(self, elapsed)
 	LastUpdate = LastUpdate - elapsed
 	
