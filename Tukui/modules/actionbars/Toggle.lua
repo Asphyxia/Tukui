@@ -20,7 +20,7 @@ local TukuiBar3 = TukuiBar3
 local TukuiBar4 = TukuiBar4
 local TukuiSplitBarLeft = TukuiSplitBarLeft
 local TukuiSplitBarRight = TukuiSplitBarRight
-local TukuiTukuiRightBar = TukuiTukuiRightBar
+local TukuiRightBar = TukuiRightBar
 local TukuiPetBar = TukuiPetBar
 
 local Toggle = CreateFrame("Frame", "TukuiToggleActionbar", actionBarBG)
