@@ -67,7 +67,7 @@ HydraData[1].Status:SetScript("OnUpdate", function(self, elapsed)
 	if LastUpdate < 0 then
 		self:SetMinMaxValues(0, 200)
 		local value = floor(GetFramerate())
-		local max = GetCVar("MaxFPS")
+		local max = 200 --GetCVar("MaxFPS")
 		self:SetValue(value)
 		HydraData[1].Text:SetText("FPS: "..value)
 		local classcolorbar = RAID_CLASS_COLORS[T.myclass]
