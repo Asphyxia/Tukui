@@ -620,6 +620,14 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 			health.bg:SetTexture(.1, .1, .1)
 		end
 		
+		if C.unitframes.gradienthealth and C.unitframes.unicolor then
+			if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then return end
+			if not health.classcolored then
+				local r, g, b = oUF.ColorGradient(min/max, unpack(C["unitframes"].gradient))
+				health:SetStatusBarColor(r, g, b)
+			end
+		end
+		
 		if min ~= max then
 			health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")
 		else
@@ -1289,6 +1297,7 @@ if C["unitframes"].raidunitdebuffwatch == true then
 				SpellName(99937),	-- Jagged Tear
 			-- Baleroc
 				SpellName(99256),	-- Torment
+				SpellName(99403),	-- Tormented
 				SpellName(99252),	-- Blaze of Glory
 				SpellName(99516),	-- Countdown
 			-- Majordomo Staghelm
