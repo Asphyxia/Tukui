@@ -76,7 +76,7 @@
 	<Script file="modules\panels\panels.lua"/>
 	<Script file="modules\panels\asphyxia_panels.lua"/>
 	<Script file="modules\panels\control_panel.lua"/>
-	
+		
 	<Script file="modules\databars\databars.lua"/>
 	
 	<Script file="modules\datatext\armor.lua"/>
@@ -164,6 +164,7 @@
 	<Script file="modules\skins\achievementpopup.lua"/>
 	<Script file="modules\skins\archeology.lua"/>
 	<Script file="modules\skins\auction.lua"/>
+	<Script file="modules\skins\bags.lua"/>
 	<Script file="modules\skins\barbershop.lua"/>
 	<Script file="modules\skins\bgscore.lua"/>
 	<Script file="modules\skins\binding.lua"/>
@@ -219,6 +220,7 @@
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\asphyxia.lua"/>
+	<Script file="modules\unitframes\layouts\asphyxia2.lua"/>
 	<Script file="modules\unitframes\layouts\smelly.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	
