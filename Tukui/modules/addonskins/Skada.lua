@@ -159,7 +159,7 @@ if C["Addon_Skins"].embedright == "Skada" then
 		
 		button.tex = button:CreateTexture(nil, 'OVERLAY')
 		button.tex:SetTexture([[Interface\AddOns\Tukui\medias\textures\addons_toggle.tga]])
-		button.tex:Point('TOPRIGHT', -2, -2)
+		button.tex:Point('TOPRIGHT', -2, 0)
 		button.tex:Height(button:GetHeight() - 4)
 		button.tex:Width(16)
 		
@@ -168,7 +168,7 @@ if C["Addon_Skins"].embedright == "Skada" then
 		button.text:SetTextColor(unpack(C["media"].datacolor))
 		
 		button:SetScript('OnEnter', function(self) button.text:SetText(L.addons_toggle..' Skada') end)
-		button:SetScript('OnLeave', function(self) self.tex:Point('TOPRIGHT', -2, -2); button.text:SetText(nil) end)
+		button:SetScript('OnLeave', function(self) self.tex:Point('TOPRIGHT', -2, 0); button.text:SetText(nil) end)
 		button:SetScript('OnMouseDown', function(self) self.tex:Point('TOPRIGHT', -4, -4) end)
 		button:SetScript('OnMouseUp', function(self) self.tex:Point('TOPRIGHT', -2, -2) end)
 		button:SetScript('OnClick', function(self) Skada:ToggleWindow() end)

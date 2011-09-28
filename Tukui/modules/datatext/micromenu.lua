@@ -32,7 +32,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 		
 		local xoff = 0
 		local position = TukuiMinimap:GetPoint()
-		if position:match("RIGHT") then xoff = T.Scale(-14) end
+		if position:match("CENTER") then xoff = T.Scale(-14) end
 		
 		ToggleDropDownMenu(1, nil, TukuiMicroMenu, TukuiMinimap, xoff, T.Scale(-2))
 	end

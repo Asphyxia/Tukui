@@ -20,7 +20,7 @@ buttonframe:SetTemplate("Default")
 
 -- Button 1
 local button1 = CreateFrame("Button", "BGAnnouncerButton1", buttonframe, "SecureActionButtonTemplate")
-button1:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(), "BOTTOMLEFT", buttonframe, "BOTTOMLEFT", 0,0)
+button1:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(), "BOTTOMLEFT", buttonframe, "BOTTOMLEFT", 0,0)
 button1:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button1:SetFrameStrata("DIALOG")
 button1:CreateOverlay(button1)
@@ -36,7 +36,7 @@ button1:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C
 	
 --Button 2
 local button2 = CreateFrame("Button", "BGAnnouncerButton2", buttonframe, "SecureActionButtonTemplate")
-button2:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(), "LEFT", button1, "RIGHT", 2,0)
+button2:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(), "LEFT", button1, "RIGHT", 2,0)
 button2:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button2:SetFrameStrata("DIALOG")
 button2:CreateOverlay(button2)
@@ -52,7 +52,7 @@ button2:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C
 	
 -- Button 3
 local button3 = CreateFrame("Button", "BGAnnouncerButton3", buttonframe, "SecureActionButtonTemplate")
-button3:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(),"LEFT", button2, "RIGHT", 2,0)
+button3:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(),"LEFT", button2, "RIGHT", 2,0)
 button3:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button3:SetFrameStrata("DIALOG")
 button3:CreateOverlay(button3)
@@ -68,7 +68,7 @@ button3:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C
 
 -- Button 4
 local button4 = CreateFrame("Button", "BGAnnouncerButton4", buttonframe, "SecureActionButtonTemplate")
-button4:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(), "LEFT", button3, "RIGHT", 2,0)
+button4:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(), "LEFT", button3, "RIGHT", 2,0)
 button4:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button4:SetFrameStrata("DIALOG")
 button4:CreateOverlay(button4)
@@ -84,7 +84,7 @@ button4:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C
 
 -- Button 5
 local button5 = CreateFrame("Button", "BGAnnouncerButton5", buttonframe, "SecureActionButtonTemplate")
-button5:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(), "LEFT", button4, "RIGHT", 2,0)
+button5:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(), "LEFT", button4, "RIGHT", 2,0)
 button5:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button5:SetFrameStrata("DIALOG")
 button5:CreateOverlay(button5)
@@ -100,7 +100,7 @@ button5:SetScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(C
 	
 -- Button 6
 local button6 = CreateFrame("Button", "BGAnnouncerButton5", buttonframe, "SecureActionButtonTemplate")
-button6:CreatePanel("pron", (TukuiInfoRight:GetWidth()-12)/6, TukuiInfoRight:GetHeight(), "LEFT", button5, "RIGHT", 2,0)
+button6:CreatePanel("pron", (TukuiInfoRight:GetWidth()-11)/6, TukuiInfoRight:GetHeight(), "LEFT", button5, "RIGHT", 2,0)
 button6:SetFrameLevel(buttonframe:GetFrameLevel() + 1)
 button6:SetFrameStrata("DIALOG")
 button6:CreateOverlay(button6)

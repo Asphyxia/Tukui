@@ -613,7 +613,7 @@ local function Shared(self, unit)
 				if T.lowversion then
 					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 26)
 				else
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 30)
+					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 32)
 				end
 			end
 			

@@ -1,4 +1,6 @@
-﻿--[[
+﻿local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
+
+--[[
     Quartz3 skin by Darth Android / Telroth-The Venture Co.
 	
 	Todo:

@@ -18,7 +18,7 @@ TinyDPS:SetScript("OnEvent", function(self, event, addon)
 	
 	-- need 2 anchors for some reason, ask the author of TinyDPS why -_-"
 	tdpsPosition = {x = 0, y = -6}
-    tdpsAnchor:SetPoint('BOTTOMLEFT',TukuiMinimap, 'BOTTOMLEFT', 0, -40)
+    tdpsAnchor:SetPoint('BOTTOMLEFT',TukuiMinimap, 'BOTTOMLEFT', 0, -14)
 		
 	tdpsFrame:SetTemplate("Transparent", true)
 	tdpsFrame:CreateShadow("Default")

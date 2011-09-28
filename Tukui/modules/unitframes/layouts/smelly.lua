@@ -282,7 +282,7 @@ local function Shared(self, unit)
 			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
 			Leader:Height(14)
 			Leader:Width(14)
-			Leader:Point("TOPLEFT", 2, 8)
+			Leader:Point("TOPLEFT", -8, 10)
 			self.Leader = Leader
 			
 			-- master looter
@@ -660,7 +660,7 @@ local function Shared(self, unit)
 				if T.lowversion then
 					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 26)
 				else
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 30)
+					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 32)
 				end
 			end
 			

@@ -6,6 +6,7 @@ C["media"] = {
 	["uffont"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]], -- general font of unitframes
 	["pixelfont"] = [[Interface\Addons\Tukui\medias\fonts\pixelfont.ttf]], -- pixel font of tukui
 	["dmgfont"] = [[Interface\AddOns\Tukui\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
+	["chatfont"] = [[Interface\AddOns\Tukui\medias\fonts\chat_font.ttf]], -- chat font
 	
 	-- fonts (DEUTSCH)
 	["de_font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui

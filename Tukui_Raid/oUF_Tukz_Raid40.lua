@@ -305,8 +305,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-		'initial-width', T.Scale(70*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),	
+		'initial-width', T.Scale(69*C["unitframes"].gridscale*T.raidscale),
+'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale), 	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-5),
@@ -327,8 +327,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(70*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),
+			'initial-width', T.Scale(69*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale), 
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
