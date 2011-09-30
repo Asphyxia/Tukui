@@ -1841,8 +1841,8 @@ if IsAddOnLoaded("Tukui_Raid") then
 elseif IsAddOnLoaded("Tukui_Raid_Healing") then
 
 	--[ HEAL ]--
-		player:Point("TOP", UIParent, "BOTTOM", -309 , 350)
-		target:Point("TOP", UIParent, "BOTTOM", 309, 350)
+		player:Point("TOP", UIParent, "BOTTOM", -312 , 350)
+		target:Point("TOP", UIParent, "BOTTOM", 312, 350)
 		tot:Point("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", 0, -25)
 		pet:Point("TOPLEFT", TukuiPlayer, "BOTTOMLEFT", 0, -25)
 		focus:Point("TOP", UIParent, "BOTTOM", -450, 602)
