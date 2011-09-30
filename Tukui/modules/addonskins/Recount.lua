@@ -1,6 +1,7 @@
 ﻿
 --[[ Credit Tukz ]]--
 local T, C, L = unpack(Tukui)
+if not IsAddOnLoaded("Recount") or not C.Addon_Skins.Recount then return end
 local Recount = _G.Recount
 
 local function SkinFrame(frame)
@@ -150,7 +151,7 @@ if C["Addon_Skins"].embedright == "Recount" then
 		Recount_MainWindow:SetPoint("TOPLEFT", TukuiChatBackgroundRight,"TOPLEFT", 0, 7)
 		Recount_MainWindow:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight,"BOTTOMRIGHT", 0, 0)
 		Recount.db.profile.FrameStrata = "3-MEDIUM"
-		Recount.db.profile.MainWindowWidth = (TukuiChatBackgroundLeft:GetWidth() - 4)	
+		Recount.db.profile.MainWindowWidth = (TukuiChatBackgroundRight:GetWidth() - 4)	
 	end)
 	
 	if TukuiTabsRightBackground then
