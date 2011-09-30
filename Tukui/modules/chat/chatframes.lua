@@ -72,7 +72,7 @@ local function StyleChat(frame)
 	tabtext:ClearAllPoints()
 	tabtext:Point("CENTER", tab, "CENTER", 0, -2)
 	
-	_G[chat]:SetFont(C.media.chatfont, 13, "THINOUTLINE")
+	_G[chat]:SetFont(C.media.font, 12)
 	_G[chat]:SetClampRectInsets(0,0,0,0)
 	_G[chat]:SetClampedToScreen(false)
 	_G[chat]:SetFading(false)
