@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-if not C["databars"].enable and C["databars"].reputation then return end
+if not C["databars"].enable then return end
 
 local HydraData = {}
 local LastUpdate = 1
@@ -222,6 +222,8 @@ HydraData[4].Status:RegisterEvent("MERCHANT_SHOW")
 HydraData[4].Status:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 -- REPUTATION DATABARS
+
+if C["databars"].reputation == true then return end
 local RepData = {}
 local db = C["databars"].reps
 
@@ -361,6 +363,8 @@ updater:RegisterEvent("UPDATE_FACTION")
 updater:SetScript("OnEvent", update)
 
 -- CURRENCY DATA BARS
+
+if C["databars"].currency == true then return end
 local CurrencyData = {}
 local tokens = {
 	{61, 250},	 -- Dalaran Jewelcrafter's Token
