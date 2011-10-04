@@ -177,18 +177,25 @@ C["datatext"] = {
 
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
-	["bgannouncer"] = true,                			-- enable an announcer mod for BGs.
+	["bgannouncer"] = false,                			-- enable an announcer mod for BGs.
 	["time24"] = false,                                 -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
 	["fontsize"] = 12,                                  -- font size for panels.
 }
 
 C["databars"] = {
-	["enable"] = true,                                 -- enable Databars in the top left of the screen.
-	["width"] = 100,                                   -- enable Databars in the top left of the screen.
-	["height"] = 17,                                   -- enable Databars in the top left of the screen.
-	["point"] = {"TOPLEFT",UIParent,"TOPLEFT",8,-10},   -- where the bars will anchor
-	["currency"] = true,                               -- show bars with currency
+	["settings"] = {
+		["vertical"] = false,								-- decend vertically...why?! it's so GAY!!!
+		["height"] = 17,									-- set the height of the bars
+		["width"] = 100,									-- set the width of the bars
+		["spacing"] = 3,									-- amount of spacing between bars
+		["padding"] = 3,									-- amount of space between sections (skip a number to make a new "section", e.g. fps:3, latency:4, memory:5, bags:7)
+	},
+	["framerate"] = 1,
+	["latency"] = 2,
+	["memory"] = 3,
+	["durability"] = 4,
+	["currency"] = true,
 	["reputation"] = true,                             -- show bars with reputation 
 	["reps"] = {                                       -- Show 5 factions of your choice, including your guild.
 		"Hellscream's Reach",

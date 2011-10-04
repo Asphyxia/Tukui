@@ -77,8 +77,15 @@
 	<Script file="modules\panels\asphyxia_panels.lua"/>
 	<Script file="modules\panels\control_panel.lua"/>
 		
-	<Script file="modules\databars\databars.lua"/>
-	
+	<Script file="modules\databars\barPanels.lua" /> 
+	<Script file="modules\databars\fps.lua" /> 
+	<Script file="modules\databars\latency.lua" /> 
+	<Script file="modules\databars\memory.lua" /> 
+	<Script file="modules\databars\currency.lua" /> 
+	<Script file="modules\databars\durability.lua" /> 
+	<Script file="modules\databars\reputation.lua" /> 
+	<Script file="modules\databars\postCreation.lua" /> 
+
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
 	<Script file="modules\datatext\bags.lua"/>
