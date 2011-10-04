@@ -98,7 +98,7 @@ Mod_AddonSkins:RegisterSkin("DXE",function(Skin, skin, Layout, layout, config)
 	function Skin:SkinDXEBar(bar)
 		-- The main bar
 		self:SkinBackgroundFrame(bar)
-		bar.bg:SetTexture(nil)
+		--bar.bg:SetTexture(nil)
 		kill(bar.border)
 		bar.statusbar:SetStatusBarTexture(config.barTexture)
 		bar.statusbar:ClearAllPoints()
