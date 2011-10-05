@@ -146,6 +146,23 @@ end
 local dr, dg, db = unpack(C["datatext"].color)
 T.datacolor = ("|cff%.2x%.2x%.2x"):format(dr * 255, dg * 255, db * 255)
 
+T.DataBarPoint = function(p, obj)
+	obj:SetPoint("TOPRIGHT", T.databars[p], "TOPRIGHT", -2, -2)
+	obj:SetPoint("BOTTOMLEFT", T.databars[p], "BOTTOMLEFT", 2, 2)
+end
+
+T.DataBarTooltipAnchor = function(barNum)
+	local xoff = -T.databars[barNum]:GetWidth()
+	local yoff = T.Scale(-5)
+	
+	if C.databars.settings.vertical then
+		xoff = T.Scale(5)
+		yoff = T.databars[barNum]:GetHeight()
+	end
+	
+	return xoff, yoff
+end
+
 T.TukuiShiftBarUpdate = function()
 	local numForms = GetNumShapeshiftForms()
 	local texture, name, isActive, isCastable
